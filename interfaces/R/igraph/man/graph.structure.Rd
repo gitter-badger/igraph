@@ -272,7 +272,7 @@ delete.vertices(graph, v)
     two graphs is calculated, see \code{\link{graph.difference}}.
   \item If it is a numeric or character vector, then it is interpreted
     as a vector of vertex ids and the specified vertices will be
-    deleted from the graph. Example: \preformatted{  g <- graph.ring(10)
+    deleted from the graph. Example: \preformatted{  g <- g_ring(10)
   V(g)$name <- letters[1:10]
   g <- g - c("a", "b")}
   \item If \code{e2} is a vertex sequence (e.g. created by the
@@ -288,7 +288,7 @@ delete.vertices(graph, v)
     \code{edges}) function, then all arguments of \code{edges} are
     concatenated and then interpreted as edges to be removed from the
     graph.
-    Example: \preformatted{  g <- graph.ring(10)
+    Example: \preformatted{  g <- g_ring(10)
   V(g)$name <- letters[1:10]
   E(g)$name <- LETTERS[1:10]
   g <- g - edge("e|f")
@@ -296,7 +296,7 @@ delete.vertices(graph, v)
   \item If it is an object created with the \code{path} function,
     then all \code{path} arguments are concatenated and then interpreted
     as a path along which edges will be removed from the graph.
-    Example: \preformatted{  g <- graph.ring(10)
+    Example: \preformatted{  g <- g_ring(10)
   V(g)$name <- letters[1:10]
   g <- g - path("a", "b", "c", "d")}
   }
@@ -343,7 +343,7 @@ if (interactive()) {
 }
 
 # The old-style operations
-g <- graph.ring(10)
+g <- g_ring(10)
 add.edges(g, c(2,6,3,7) )
 delete.edges(g, E(g, P=c(1,10, 2,3)) )
 delete.vertices(g, c(2,7,8) )

@@ -20,7 +20,7 @@ test_that("iterators work", {
 test_that("complex attributes work", {
   library(igraph)
 
-  g <- graph.ring(10)
+  g <- g_ring(10)
   foo <- lapply(1:vcount(g), seq, from=1)
   V(g)$foo <- foo
 

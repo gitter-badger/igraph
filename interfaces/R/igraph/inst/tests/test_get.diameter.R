@@ -5,7 +5,7 @@ test_that("get.diameter works", {
 
   library(igraph)
 
-  g <- graph.ring(10)
+  g <- g_ring(10)
   E(g)$weight <- sample(seq_len(ecount(g)))
   d <- diameter(g)
   gd <- get.diameter(g)

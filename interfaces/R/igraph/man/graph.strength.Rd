@@ -38,7 +38,7 @@ graph.strength(g, mode="out")
 graph.strength(g, mode="in")
 
 # No weights, a warning is given
-g <- graph.ring(10)
+g <- g_ring(10)
 graph.strength(g)
 }
 \keyword{graphs}

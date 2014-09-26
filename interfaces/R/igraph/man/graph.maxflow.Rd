@@ -117,7 +117,7 @@ colnames(E) <- c("from", "to", "capacity")
 g1 <- graph.data.frame(as.data.frame(E))
 graph.maxflow(g1, source=V(g1)["1"], target=V(g1)["2"])
 
-g <- graph.ring(100)
+g <- g_ring(100)
 graph.mincut(g, capacity=rep(1,vcount(g)))
 graph.mincut(g, value.only=FALSE, capacity=rep(1,vcount(g)))
 

@@ -58,14 +58,14 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' g2 <- delete.edges(g, c(1,2,1,10))
 #' diameter(g2, unconnected=TRUE)
 #' diameter(g2, unconnected=FALSE)
 #' 
 #' ## Weighted diameter
 #' set.seed(1)
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' E(g)$weight <- sample(seq_len(ecount(g)))
 #' diameter(g)
 #' get.diameter(g)
@@ -181,7 +181,7 @@ average.path.length <- function(graph, directed=TRUE, unconnected=TRUE) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' degree(g)
 #' g2 <- erdos.renyi.game(1000, 10/1000)
 #' degree.distribution(g2)
@@ -347,7 +347,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' shortest.paths(g)
 #' get.shortest.paths(g, 5)
 #' get.all.shortest.paths(g, 1, 6:8)
@@ -584,7 +584,7 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' g2 <- induced.subgraph(g, 1:7)
 #' g3 <- subgraph.edges(g, 1:5, 1:5)
 #' 
@@ -854,7 +854,7 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' transitivity(g)
 #' g2 <- erdos.renyi.game(1000, 10/1000)
 #' transitivity(g2)   # this is about 10/1000
@@ -1178,7 +1178,7 @@ reciprocity <- function(graph, ignore.loops=TRUE,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(20)
+#' g <- g_ring(20)
 #' g2 <- rewire(g, niter=3)
 #' 
 rewire <- function(graph, mode=c("simple", "loops"), niter=100) {
@@ -1650,7 +1650,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' neighborhood.size(g, 0, 1:3)
 #' neighborhood.size(g, 1, 1:3)
 #' neighborhood.size(g, 2, 1:3)
@@ -1663,7 +1663,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' graph.neighborhood(g, 2, 1:3)
 #' 
 #' # connecting to the neighborhood
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' g <- connect.neighborhood(g, 2)
 #' 
 neighborhood <- function(graph, order, nodes=V(graph),
@@ -1734,7 +1734,7 @@ graph.neighborhood <- function(graph, order, nodes=V(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' g <- add.edges(g, c(1,2, 2,3, 1,3))
 #' graph.coreness(g) 		# small core triangle in a ring
 #' 
@@ -1830,7 +1830,7 @@ topological.sort <- function(graph, mode=c("out", "all", "in")) {
 #' girth(g)
 #' 
 #' # The worst case running time is for a ring
-#' g <- graph.ring(100)
+#' g <- g_ring(100)
 #' girth(g)
 #' 
 #' # What about a random graph?
@@ -2005,7 +2005,7 @@ count.multiple <- function(graph, eids=E(graph)) {
 #' @examples
 #' 
 #' ## Two rings
-#' graph.bfs(graph.ring(10) %du% graph.ring(10), root=1, "out",
+#' graph.bfs(g_ring(10) %du% g_ring(10), root=1, "out",
 #'           order=TRUE, rank=TRUE, father=TRUE, pred=TRUE,
 #'           succ=TRUE, dist=TRUE)
 #' 
@@ -2014,7 +2014,7 @@ count.multiple <- function(graph, eids=E(graph)) {
 #'   print(data)
 #'   FALSE
 #' }
-#' tmp <- graph.bfs(graph.ring(10) %du% graph.ring(10), root=1, "out",
+#' tmp <- graph.bfs(g_ring(10) %du% g_ring(10), root=1, "out",
 #'                  callback=f)
 #' 
 #' ## How to use a callback to stop the search
@@ -2022,7 +2022,7 @@ count.multiple <- function(graph, eids=E(graph)) {
 #' f <- function(graph, data, extra) {
 #'  data['succ'] == -1
 #' }
-#' graph.bfs(graph.ring(10) %du% graph.ring(10), root=1, callback=f)
+#' graph.bfs(g_ring(10) %du% g_ring(10), root=1, callback=f)
 #' 
 #' 
 graph.bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
@@ -2380,7 +2380,7 @@ unfold.tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' g2 <- graph.star(10)
 #' closeness(g)
 #' closeness(g2, mode="in")
@@ -2479,7 +2479,7 @@ closeness.estimate <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' graph.laplacian(g)
 #' graph.laplacian(g, norm=TRUE)
 #' graph.laplacian(g, norm=TRUE, sparse=FALSE)

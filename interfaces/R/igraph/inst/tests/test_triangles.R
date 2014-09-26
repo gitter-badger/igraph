@@ -19,8 +19,8 @@ test_that("Listing triangles works", {
   expect_that(triangles(g5), equals(numeric()))
   expect_that(triangles(g6), equals(numeric()))
   
-  g7 <- graph.ring(3, directed=FALSE)
-  g8 <- graph.ring(3, directed=TRUE)
+  g7 <- g_ring(3, directed=FALSE)
+  g8 <- g_ring(3, directed=TRUE)
   g9 <- graph.formula(A-+B:C, B-+C)
   expect_that(sort(triangles(g7)), equals(1:3))
   expect_that(sort(triangles(g8)), equals(1:3))

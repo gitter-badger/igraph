@@ -102,7 +102,7 @@ igraph.par(parid, parvalue = NULL)
 \examples{
 oldval <- getIgraphOpt("verbose")
 igraph.options(verbose=TRUE)
-layout.kamada.kawai(graph.ring(10))
+layout.kamada.kawai(g_ring(10))
 igraph.options(verbose=oldval)
 }
 \keyword{graphs}

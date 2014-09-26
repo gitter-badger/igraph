@@ -1046,7 +1046,7 @@ layout.sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' g <- set.graph.attribute(g, "name", "RING")
 #' # It is the same as
 #' g$name <- "RING"
@@ -1425,7 +1425,7 @@ layout.fruchterman.reingold <- function(graph, coords=NULL, dim=2,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' E(g)$weight <- rep(1:2, length.out=ecount(g))
 #' plot(g, layout=layout.kamada.kawai, edge.label=E(g)$weight)
 #' 
@@ -1526,7 +1526,7 @@ layout.kamada.kawai <- function(graph, coords=NULL, dim=2,
 #' @examples
 #' 
 #' set.seed(42)
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' plot(g, layout=layout.gem)
 #' 
 layout.gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
@@ -1623,10 +1623,10 @@ layout.gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' g_4 <- graph.empty(n=70, directed=FALSE) + edges(1:70)
 #' plot(g_4, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_5a <- graph.ring(24)
+#' g_5a <- g_ring(24)
 #' plot(g_5a, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_5b <- graph.ring(40)
+#' g_5b <- g_ring(40)
 #' plot(g_5b, layout=L, vertex.size=5, vertex.label=NA)
 #' 
 #' g_6 <- graph.lattice(c(2,2,2))
@@ -1635,7 +1635,7 @@ layout.gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' g_7 <- graph.formula(1:3:5 -- 2:4:6)
 #' plot(g_7, layout=L, vertex.label=V(g_7)$name)
 #' 
-#' g_8 <- graph.ring(5) + graph.ring(10) + graph.ring(5) +
+#' g_8 <- g_ring(5) + g_ring(10) + g_ring(5) +
 #'   edges(1,6, 2,8, 3, 10, 4,12, 5,14,
 #'         7,16, 9,17, 11,18, 13,19, 15,20)
 #' plot(g_8, layout=L, vertex.size=5, vertex.label=NA)

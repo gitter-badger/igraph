@@ -279,7 +279,7 @@ remove.edge.attribute <- function(graph, name) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' is.named(g)
 #' V(g)$name <- letters[1:10]
 #' is.named(g)
@@ -316,7 +316,7 @@ is.named <- function(graph) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' get.shortest.paths(g, 8, 2)
 #' E(g)$weight <- seq_len(ecount(g))
 #' get.shortest.paths(g, 8, 2)

@@ -67,7 +67,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
   for which the number is less than 50. We set the color of these
   vertices to red.
   \preformatted{
-    g <- graph.ring(10)
+    g <- g_ring(10)
     V(g)$number <- sample(1:100, vcount(g), replace=TRUE)
     V(g)$color <- "grey"
     V(g)[ number < 50 ]$color <- "red"
@@ -79,7 +79,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
   from the \sQuote{\code{g}} graph. Edge sequences can be also indexed
   with logical expressions containing edge attributes:
   \preformatted{
-    g <- graph.ring(10)
+    g <- g_ring(10)
     E(g)$weight <- runif(ecount(g))
     E(g)$width <- 1
     E(g)[ weight >= 0.5 ]$width <- 3
@@ -91,7 +91,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
   example half of the vertices will be black, the other half red, in an
   alternated way.
   \preformatted{
-    g <- graph.ring(10)
+    g <- g_ring(10)
     V(g)$color <- c("black", "red")
     plot(g, layout=layout.circle)
   }

@@ -5,15 +5,15 @@ test_that("dyad.census works", {
 
   library(igraph)
 
-  g1 <- graph.ring(10)
+  g1 <- g_ring(10)
   expect_that(dc1 <- dyad.census(g1), gives_warning("undirected"))
   expect_that(dc1, equals(list(mut=10, asym=0, null=35)))
 
-  g2 <- graph.ring(10, directed=TRUE, mutual=TRUE)
+  g2 <- g_ring(10, directed=TRUE, mutual=TRUE)
   dc2 <- dyad.census(g2)
   expect_that(dc2, equals(list(mut=10, asym=0, null=35)))
 
-  g3 <- graph.ring(10, directed=TRUE, mutual=FALSE)
+  g3 <- g_ring(10, directed=TRUE, mutual=FALSE)
   dc3 <- dyad.census(g3)
   expect_that(dc3, equals(list(mut=0, asym=10, null=35)))
 

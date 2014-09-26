@@ -97,7 +97,7 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' ## A star and a ring
 #' g1 <- graph.star(10, mode="undirected")
 #' V(g1)$name <- letters[1:10]
-#' g2 <- graph.ring(10)
+#' g2 <- g_ring(10)
 #' V(g2)$name <- letters[11:20]
 #' str(g1 %du% g2)
 #' 
@@ -410,7 +410,7 @@ graph.intersection <- function(..., byname="auto",
 #' @examples
 #' 
 #' ## Create a wheel graph
-#' wheel <- graph.union(graph.ring(10),
+#' wheel <- graph.union(g_ring(10),
 #'                      graph.star(11, center=11, mode="undirected"))
 #' V(wheel)$name <- letters[seq_len(vcount(wheel))]
 #' 
@@ -490,11 +490,11 @@ graph.difference <- function(big, small, byname="auto") {
 #' @examples
 #' 
 #' ## Complementer of a ring
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' graph.complementer(g)
 #' 
 #' ## A graph and its complementer give together the full graph
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' gc <- graph.complementer(g)
 #' gu <- graph.union(g, gc)
 #' gu
@@ -565,7 +565,7 @@ graph.complementer <- function(graph, loops=FALSE) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g1 <- graph.ring(10)
+#' g1 <- g_ring(10)
 #' g2 <- graph.star(10, mode="undirected")
 #' gc <- graph.compose(g1, g2)
 #' str(gc)

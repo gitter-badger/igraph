@@ -52,7 +52,7 @@ graph.automorphisms(graph, sh="fm")
 \examples{
 ## A ring has n*2 automorphisms, you can "turn" it by 0-9 vertices
 ## and each of these graphs can be "flipped"
-g <- graph.ring(10)
+g <- g_ring(10)
 graph.automorphisms(g)
 }
 \keyword{graphs}

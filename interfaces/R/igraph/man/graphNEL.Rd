@@ -55,7 +55,7 @@ igraph.to.graphNEL(graph)
 }
 \examples{
 ## Undirected
-g <- graph.ring(10)
+g <- g_ring(10)
 V(g)$name <- letters[1:10]
 GNEL <- igraph.to.graphNEL(g)
 g2 <- igraph.from.graphNEL(GNEL)

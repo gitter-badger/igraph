@@ -122,7 +122,7 @@ g2 <- graph.star(10)
 page.rank(g2)$vector
 
 # Personalized PageRank
-g3 <- graph.ring(10)
+g3 <- g_ring(10)
 page.rank(g3)$vector
 reset <- seq(vcount(g3))
 page.rank(g3, personalized=reset)$vector

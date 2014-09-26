@@ -145,7 +145,7 @@ edge.attributes(graph)
   \code{\link{attribute.combination}} for details on how igraph combines
   attributes if several vertices or edges are mapped into one.}
 \examples{
-g <- graph.ring(10)
+g <- g_ring(10)
 g <- set.graph.attribute(g, "name", "RING")
 # It is the same as
 g$name <- "RING"

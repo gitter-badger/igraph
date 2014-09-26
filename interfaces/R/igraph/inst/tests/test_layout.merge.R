@@ -6,7 +6,7 @@ test_that("layout.merge works", {
   library(igraph)
   set.seed(42)
 
-  g <- list(graph.ring(10), graph.ring(5))
+  g <- list(g_ring(10), g_ring(5))
   l <- lapply(g, layout.mds)
   l
 

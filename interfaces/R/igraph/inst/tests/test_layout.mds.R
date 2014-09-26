@@ -26,7 +26,7 @@ test_that("layout.mds works", {
   ## A graph with multiple components, just test that it runs
 
   set.seed(42)
-  g <- graph.ring(10) + graph.ring(3)
+  g <- g_ring(10) + g_ring(3)
   expect_that(ncol(layout.mds(g)), equals(2))
   
   ## Small stress test

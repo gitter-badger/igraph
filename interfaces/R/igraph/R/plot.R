@@ -69,7 +69,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' \dontrun{plot(g, layout=layout.kamada.kawai, vertex.color="green")}
 #' 
 plot.igraph <- function(x, 

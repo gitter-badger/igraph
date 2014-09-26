@@ -984,7 +984,7 @@ tkigraph <- function() {
   read <- .tkigraph.dialogbox(TITLE="Regular ring",
                               n=list(name="Vertices", type="numeric",
                                 default=100, min=0))
-  g <- graph.ring(n=read$n)
+  g <- g_ring(n=read$n)
   g <- set.graph.attribute(g, "layout", layout.circle)
   g <- set.graph.attribute(g, "name", "Regular ring")
   .tkigraph.add.graph(g)

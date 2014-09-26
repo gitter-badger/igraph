@@ -14,7 +14,7 @@
 \section{Igraph graphs}{
   Igraph graphs have a class \sQuote{\code{igraph}}. They are printed to
   the screen in a special format, here is an example, a ring graph
-  created using \code{\link{graph.ring}}: \preformatted{    IGRAPH U--- 10 10 -- Ring graph
+  created using \code{\link{g_ring}}: \preformatted{    IGRAPH U--- 10 10 -- Ring graph
     + attr: name (g/c), mutual (g/x), circular (g/x)  }
   The \sQuote{\code{IGRAPH}} denotes that this is an igraph graph. Then
   come four bits that denote the kind of the graph: the first is

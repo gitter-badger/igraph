@@ -27,7 +27,7 @@ test_that("decompose.graph works for many components and attributes", {
 
 test_that("decompose.graph keeps attributes", {
   library(igraph)
-  g <- graph.ring(10) + graph.ring(5)
+  g <- g_ring(10) + g_ring(5)
   V(g)$name <- letters[1:(10+5)]
   E(g)$name <- apply(get.edgelist(g), 1, paste, collapse="-")
   d <- decompose.graph(g)

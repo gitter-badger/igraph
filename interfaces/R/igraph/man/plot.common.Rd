@@ -434,7 +434,7 @@
 \dontrun{
 
 # plotting a simple ring graph, all default parameters, except the layout
-g <- graph.ring(10)
+g <- g_ring(10)
 g$layout <- layout.circle
 plot(g)
 tkplot(g)

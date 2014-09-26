@@ -41,7 +41,7 @@ bipartite.mapping(graph)
 % \seealso{}
 \examples{
 ## A ring has just one loop, so it is fine
-g <- graph.ring(10)
+g <- g_ring(10)
 bipartite.mapping(g)
 
 ## A star is fine, too
@@ -49,7 +49,7 @@ g2 <- graph.star(10)
 bipartite.mapping(g2)
 
 ## A graph containing a triangle is not fine
-g3 <- graph.ring(10)
+g3 <- g_ring(10)
 g3 <- add.edges(g3, c(1,3))
 bipartite.mapping(g3)
 }

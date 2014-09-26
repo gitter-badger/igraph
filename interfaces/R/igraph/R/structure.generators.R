@@ -814,8 +814,9 @@ graph.lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case
-#' of \code{\link{graph.lattice}}.
+#' of \code{\link{g_lattice}}.
 #'
+#' @aliases g_ring graph.ring
 #' @param n Number of vertices.
 #' @param directed Whether the graph is directed.
 #' @param mutual Whether directed edges are mutual. It is ignored in
@@ -828,10 +829,10 @@ graph.lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' str(graph.ring(10))
-#' str(graph.ring(10, directed = TRUE, mutual = TRUE))
+#' str(g_ring(10))
+#' str(g_ring(10, directed = TRUE, mutual = TRUE))
 
-graph.ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
+g_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_ring", as.numeric(n), as.logical(directed),
                as.logical(mutual), as.logical(circular),
@@ -843,6 +844,8 @@ graph.ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
   }
   res
 }
+
+deprecated("graph.ring", g_ring)
 
 ###################################################################
 # Trees, regular

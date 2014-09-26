@@ -38,7 +38,7 @@ g <- graph.famous("Zachary")
 fgc <- fastgreedy.community(g)
 groups(fgc)
 
-g2 <- graph.ring(10) + graph.full(5)
+g2 <- g_ring(10) + graph.full(5)
 groups(clusters(g2))
 }
 \keyword{graphs}

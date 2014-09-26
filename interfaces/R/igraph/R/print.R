@@ -319,7 +319,7 @@ str.igraph <- function(object, ...) {
 #' @method print igraph
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' g
 #' summary(g)
 #' 

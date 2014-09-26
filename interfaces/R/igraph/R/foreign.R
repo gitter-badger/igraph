@@ -155,7 +155,7 @@ read.graph <- function(file, format=c("edgelist", "pajek", "ncol", "lgl",
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' \dontrun{write.graph(g, "/tmp/g.txt", "edgelist")}
 #' 
 write.graph <- function(graph, file, format=c("edgelist", "pajek", "ncol", "lgl",

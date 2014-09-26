@@ -5,7 +5,7 @@ test_that("contract.vertices works", {
   library(igraph)
   set.seed(42)
 
-  g <- graph.ring(10)
+  g <- g_ring(10)
   g$name <- "Ring"
   V(g)$name <- letters[1:vcount(g)]
   E(g)$weight <- sample(ecount(g))

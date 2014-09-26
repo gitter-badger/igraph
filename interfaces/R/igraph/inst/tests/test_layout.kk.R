@@ -4,7 +4,7 @@ context("Kamada-Kawai layouts")
 test_that("Kamada-Kawai layout generator works", {
 
   library(igraph)
-  g <- graph.ring(10)
+  g <- g_ring(10)
   l <- layout.kamada.kawai(g, maxiter=50)
   if (Sys.info()["sysname"] == "Darwin") {
     expect_that(sum(l), equals(-1.13071769106689))
@@ -28,7 +28,7 @@ test_that("Kamada-Kawai layout generator works", {
     expect_that(sum(l), equals(-85.142223229617))
   }
 
-  g <- graph.ring(10)
+  g <- g_ring(10)
   E(g)$weight <- rep(1:2, length.out=ecount(g))
   l <- layout.kamada.kawai(g, maxiter=500)
   if (Sys.info()["sysname"] == "Darwin") {

@@ -6,7 +6,7 @@ test_that("graph.knn works", {
   set.seed(42)
 
   ## Some trivial ones
-  g <- graph.ring(10)
+  g <- g_ring(10)
   expect_that(graph.knn(g), equals(list(knn=rep(2,10), knnk=c(NaN, 2))))
 
   g2 <- graph.star(10)

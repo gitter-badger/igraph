@@ -44,13 +44,13 @@ graph.adjlist(adjlist, mode = c("out", "in", "all", "total"),
 \seealso{ \code{\link{get.edgelist}} }
 \examples{
 ## Directed
-g <- graph.ring(10, dir=TRUE)
+g <- g_ring(10, dir=TRUE)
 al <- get.adjlist(g, mode="out")
 g2 <- graph.adjlist(al)
 graph.isomorphic(g, g2)
 
 ## Undirected
-g <- graph.ring(10)
+g <- g_ring(10)
 al <- get.adjlist(g)
 g2 <- graph.adjlist(al, mode="all")
 graph.isomorphic(g, g2)

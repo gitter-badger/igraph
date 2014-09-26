@@ -76,7 +76,7 @@ get.edges(graph, es)
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{\code{\link{graph}}}
 \examples{
-g <- graph.ring(10)
+g <- g_ring(10)
 vcount(g)
 ecount(g)
 neighbors(g, 5)

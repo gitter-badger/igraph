@@ -58,7 +58,7 @@ hub.score(g)$vector
 authority.score(g)$vector
 
 ## A ring
-g2 <- graph.ring(10)
+g2 <- g_ring(10)
 hub.score(g2)$vector
 authority.score(g2)$vector
 }

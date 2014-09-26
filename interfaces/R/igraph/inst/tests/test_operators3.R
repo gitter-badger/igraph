@@ -5,7 +5,7 @@ test_that("infix operators work", {
 
   library(igraph)
 
-  g <- graph.ring(10)
+  g <- g_ring(10)
   V(g)$name <- letters[1:10]
   E(g)$name <- LETTERS[1:10]
 
@@ -22,7 +22,7 @@ test_that("infix operators work", {
   expect_that(graph.isomorphic(g, graph.formula(a-b-c, d-e-f, g-h)),
               is_true())
 
-  g <- graph.ring(10)
+  g <- g_ring(10)
   V(g)$name <- letters[1:10]
 
   g <- g - path("a", "b", "c", "d")

@@ -122,7 +122,7 @@ igraph.shape.noplot (coords, v = NULL, params)
 #################################################################
 # all vertex shapes, minus "raster", that might not be available
 shapes <- setdiff(vertex.shapes(), "")
-g <- graph.ring(length(shapes))
+g <- g_ring(length(shapes))
 set.seed(42)
 plot(g, vertex.shape=shapes, vertex.label=shapes, vertex.label.dist=1,
      vertex.size=15, vertex.size2=15,

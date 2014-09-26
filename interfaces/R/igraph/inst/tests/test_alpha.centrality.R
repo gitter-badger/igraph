@@ -71,7 +71,7 @@ test_that("weighted sparse alpha.centrality works", {
 test_that("undirected, alpha centrality works, #653", {
   if (require("Matrix", quietly = TRUE)) {
     library(igraph)
-    g <- graph.ring(10)
+    g <- g_ring(10)
 
     ac1 <- alpha.centrality(g, sparse = TRUE)
     ac2 <- alpha.centrality(g, sparse = FALSE)

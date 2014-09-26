@@ -5,7 +5,7 @@ test_that("", {
 
   library(igraph)
   set.seed(42)
-  g <- graph.ring(10)
+  g <- g_ring(10)
   l <- layout.fruchterman.reingold(g, niter=50, start.temp=sqrt(10)/10)
   if (.Machine$sizeof.pointer == 4) {
     expect_that(sum(l), equals(10.794223604849))

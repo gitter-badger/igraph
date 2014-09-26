@@ -207,13 +207,13 @@ get.edgelist <- function(graph, names=TRUE) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' as.directed(g, "mutual")
 #' g2 <- graph.star(10)
 #' as.undirected(g)
 #' 
 #' # Combining edge attributes
-#' g3 <- graph.ring(10, directed=TRUE, mutual=TRUE)
+#' g3 <- g_ring(10, directed=TRUE, mutual=TRUE)
 #' E(g3)$weight <- seq_len(ecount(g3))
 #' ug3 <- as.undirected(g3)
 #' print(ug3, e=TRUE)
@@ -292,7 +292,7 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' get.adjlist(g)
 #' get.adjedgelist(g)
 #' 

@@ -5,8 +5,8 @@ test_that("add.edges keeps edge id order", {
   library(igraph)
   g <- graph.empty(10)
   g2 <- add.edges(g, (edges <- c(1,2, 2,3, 3,4, 1,6, 1,7, 9,10)) )
-  expect_that(ecount(g2), equals(length(edges)/2))
-  expect_that(get.edge.ids(g2, edges), equals(seq_len(length(edges)/2)))
+  expect_equal(ecount(g2), length(edges)/2)
+  expect_equal(get.edge.ids(g2, edges), seq_len(length(edges)/2))
 })
 
 test_that("add.edges adds attributes", {

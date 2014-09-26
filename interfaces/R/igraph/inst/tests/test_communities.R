@@ -83,7 +83,7 @@ test_that("communities function works", {
      26L, 28L, 29L, 32L)), .Dim = 4L, .Dimnames = list(c("1", "2",
      "3", "4")))))
 
-  g <- graph.ring(5) + graph.ring(5)
+  g <- g_ring(5) + g_ring(5)
   V(g)$name <- letters[1:10]
   oc <- optimal.community(g)
   gr <- communities(oc)

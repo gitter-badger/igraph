@@ -34,7 +34,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.ring(10)
+#' g <- g_ring(10)
 #' is.igraph(g)
 #' is.igraph(numeric(10))
 #' 

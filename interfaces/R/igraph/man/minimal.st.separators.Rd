@@ -34,7 +34,7 @@ minimal.st.separators(graph)
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 %\seealso{}
 \examples{
-ring <- graph.ring(4)
+ring <- g_ring(4)
 minimal.st.separators(ring)
 
 chvatal <- graph.famous("chvatal")

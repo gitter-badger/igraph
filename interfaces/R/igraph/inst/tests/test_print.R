@@ -7,7 +7,7 @@ test_that("print.igraph works", {
   igraph.options(print.full=TRUE)
   options(width=76)
 
-  g <- graph.ring(5)
+  g <- g_ring(5)
   expect_that(summary(g), prints_text("attr:.* name[ ]*[(]g/c[)]"))
   expect_that(g, prints_text("attr:.* name[ ]*[(]g/c[)]"))
   expect_that(g, prints_text("1--2"))

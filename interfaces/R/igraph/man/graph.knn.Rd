@@ -42,7 +42,7 @@ graph.knn(graph, vids=V(graph), weights=NULL)
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \examples{
 # Some trivial ones
-g <- graph.ring(10)
+g <- g_ring(10)
 graph.knn(g)
 g2 <- graph.star(10)
 graph.knn(g2)

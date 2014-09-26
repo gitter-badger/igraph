@@ -44,7 +44,7 @@ test_that("neighborhood works", {
 test_that("mindist works", {
 
   library(igraph)
-  g <- graph.ring(10)
+  g <- g_ring(10)
   expect_that(neighborhood.size(g, order=2, mindist=0), equals(rep(5, 10)))
   expect_that(neighborhood.size(g, order=2, mindist=1), equals(rep(4, 10)))
   expect_that(neighborhood.size(g, order=2, mindist=2), equals(rep(2, 10)))
