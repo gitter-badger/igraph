@@ -43,7 +43,7 @@ radius(graph, mode=c("all", "out", "in", "total"))
 \seealso{\code{\link{shortest.paths}} for general shortest path
   calculations.}
 \examples{
-g <- graph.star(10, mode="undirected")
+g <- g_star(10, mode="undirected")
 eccentricity(g)
 radius(g)
 }

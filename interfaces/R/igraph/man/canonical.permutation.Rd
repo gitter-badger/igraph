@@ -69,7 +69,7 @@ canonical.permutation(graph, sh="fm")
   possibly based on canonical labels.}
 \examples{
 ## Calculate the canonical form of a random graph
-g1 <- erdos.renyi.game(10, 20, type="gnm")
+g1 <- g_nm(10, 20)
 cp1 <- canonical.permutation(g1)
 cf1 <- permute.vertices(g1, cp1$labeling)
 

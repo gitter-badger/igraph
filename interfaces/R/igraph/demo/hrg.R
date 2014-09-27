@@ -64,7 +64,7 @@ pause()
 
 ### Make a very hierarchical graph
 
-g1 <- graph.full(5)
+g1 <- g_full(5)
 g2 <- graph.ring(5)
 
 g <- g1 + g2

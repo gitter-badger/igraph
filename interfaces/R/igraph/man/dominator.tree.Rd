@@ -62,9 +62,9 @@ dominator.tree (graph, root, mode = c("out", "in"))
 % \seealso{}
 \examples{
 ## The example from the paper
-g <- graph.formula(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
-                   E-+H, F-+I, G-+I:J, H-+E:K, I-+K, J-+I,
-                   K-+I:R, L-+H)
+g <- g_formula(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
+               E-+H, F-+I, G-+I:J, H-+E:K, I-+K, J-+I,
+               K-+I:R, L-+H)
 dtree <- dominator.tree(g, root="R")
 layout <- layout.reingold.tilford(dtree$domtree, root="R")
 layout[,2] <- -layout[,2]

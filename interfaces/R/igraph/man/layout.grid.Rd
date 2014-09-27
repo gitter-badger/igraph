@@ -33,10 +33,10 @@ layout.grid.3d (graph, width = 0, height = 0)
 \author{ Tamas Nepusz \email{ntamas@gmail.com} }
 \seealso{ \code{\link{layout}} for other layout generators }
 \examples{
-g <- graph.lattice( c(3,3) )
+g <- g_lattice( c(3,3) )
 layout.grid(g)
 
-g2 <- graph.lattice( c(3,3,3) )
+g2 <- g_lattice( c(3,3,3) )
 layout.grid.3d(g2)
 
 \dontrun{

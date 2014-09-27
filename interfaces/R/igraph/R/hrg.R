@@ -117,7 +117,7 @@ hrg.predict <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.full(5) + graph.full(5)
+#' g <- g_full(5) + g_full(5)
 #' hrg <- hrg.fit(g)
 #' as.igraph(hrg)
 #' 
@@ -353,7 +353,7 @@ asPhylo.igraphHRG <- function(x, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.full(5) + graph.full(5)
+#' g <- g_full(5) + g_full(5)
 #' hrg <- hrg.fit(g)
 #' dendPlot(hrg)
 #' 

@@ -56,8 +56,8 @@ stMincuts(graph, source, target, capacity = NULL)
 }
 \examples{
 # A difficult graph, from the Provan-Shier paper
-g <- graph.formula(s --+ a:b, a:b --+ t,
-                   a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b)
+g <- g_formula(s --+ a:b, a:b --+ t,
+               a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b)
 stMincuts(g, source="s", target="t")
 }
 \keyword{graphs}

@@ -30,7 +30,7 @@ is.mutual(graph, es = E(graph))
 \seealso{ \code{\link{reciprocity}}, \code{\link{dyad.census}} if you
   just want some statistics about mutual edges.}
 \examples{
-g <- erdos.renyi.game(10,50,type="gnm",directed=TRUE)
+g <- g_nm(10, 50, directed=TRUE)
 reciprocity(g)
 dyad.census(g)
 is.mutual(g)

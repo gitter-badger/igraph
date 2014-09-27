@@ -7,7 +7,7 @@ test_that("SCG functions work", {
 
   library(igraph)
 
-  tree <- graph.tree(10, 3, "undirected")
+  tree <- g_tree(10, 3, "undirected")
   treeM <- get.adjacency(tree, sparse=TRUE)
   treeM2 <- get.adjacency(tree, sparse=FALSE)
 

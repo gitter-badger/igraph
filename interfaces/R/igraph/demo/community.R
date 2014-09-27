@@ -8,7 +8,7 @@ pause <- function() {
 }
 
 ### A modular graph has dense subgraphs
-mod <- graph.full(10) %du% graph.full(10) %du% graph.full(10)
+mod <- g_full(10) %du% g_full(10) %du% g_full(10)
 perfect <- c(rep(1,10), rep(2,10), rep(3,10))
 perfect
 
@@ -62,7 +62,7 @@ diag(pref.mat) <- diag(pref.mat) + 10/31
 pause()
 
 ### Create the network with the given vertex preferences
-G <- preference.game(128*4, types=16, pref.matrix=pref.mat)
+G <- g_pref(128*4, types=16, pref.matrix=pref.mat)
 
 pause()
 
@@ -181,13 +181,13 @@ pause()
 
 ### Apply it to a graph, this is the example graph from
 ##  the original publication
-g <- graph.formula(A-B:F:C:E:D, B-A:D:C:E:F:G, C-A:B:F:E:D, D-A:B:C:F:E,
-                   E-D:A:C:B:F:V:W:U, F-H:B:A:C:D:E, G-B:J:K:L:H,
-                   H-F:G:I:J:K:L, I-J:L:H, J-I:G:H:L, K-G:H:L:M,
-                   L-H:G:I:J:K:M, M-K:L:Q:R:S:P:O:N, N-M:Q:R:P:S:O,
-                   O-N:M:P, P-Q:M:N:O:S, Q-M:N:P:V:U:W:R, R-M:N:V:W:Q,
-                   S-N:P:M:U:W:T, T-S:V:W:U, U-E:V:Q:S:W:T,
-                   V-E:U:W:T:R:Q, W-U:E:V:Q:R:S:T)
+g <- g_formula(A-B:F:C:E:D, B-A:D:C:E:F:G, C-A:B:F:E:D, D-A:B:C:F:E,
+               E-D:A:C:B:F:V:W:U, F-H:B:A:C:D:E, G-B:J:K:L:H,
+               H-F:G:I:J:K:L, I-J:L:H, J-I:G:H:L, K-G:H:L:M,
+               L-H:G:I:J:K:M, M-K:L:Q:R:S:P:O:N, N-M:Q:R:P:S:O,
+               O-N:M:P, P-Q:M:N:O:S, Q-M:N:P:V:U:W:R, R-M:N:V:W:Q,
+               S-N:P:M:U:W:T, T-S:V:W:U, U-E:V:Q:S:W:T,
+               V-E:U:W:T:R:Q, W-U:E:V:Q:R:S:T)
 
 pause()
 

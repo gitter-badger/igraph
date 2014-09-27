@@ -38,7 +38,7 @@ test_that("sparse alpha.centrality works", {
 
 test_that("weighted dense alpha.centrality works", {
   library(igraph)
-  star <- graph.star(10)
+  star <- g_star(10)
   E(star)$weight <- sample(ecount(star))
 
   ac1 <- alpha.centrality(star, sparse=FALSE)
@@ -54,7 +54,7 @@ test_that("weighted dense alpha.centrality works", {
 test_that("weighted sparse alpha.centrality works", {
   if (require("Matrix", quietly=TRUE)) {
     library(igraph)
-    star <- graph.star(10)
+    star <- g_star(10)
     E(star)$weight <- sample(ecount(star))
     
     ac1 <- alpha.centrality(star, sparse=TRUE)

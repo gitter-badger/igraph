@@ -40,7 +40,7 @@ biconnected.components(graph)
 \seealso{\code{\link{articulation.points}}, \code{\link{clusters}},
   \code{\link{is.connected}}, \code{\link{vertex.connectivity}}}
 \examples{
-g <- graph.disjoint.union( graph.full(5), graph.full(5) )
+g <- graph.disjoint.union( g_full(5), g_full(5) )
 clu <- clusters(g)$membership
 g <- add.edges(g, c(which(clu==1), which(clu==2)))
 bc <- biconnected.components(g)

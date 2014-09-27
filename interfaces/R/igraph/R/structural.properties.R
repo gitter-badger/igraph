@@ -183,7 +183,7 @@ average.path.length <- function(graph, directed=TRUE, unconnected=TRUE) {
 #' 
 #' g <- g_ring(10)
 #' degree(g)
-#' g2 <- erdos.renyi.game(1000, 10/1000)
+#' g2 <- g_np(1000, 10/1000)
 #' degree.distribution(g2)
 #' 
 degree <- function(graph, v=V(graph),
@@ -357,7 +357,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #'              c(1,2,0, 1,3,2, 1,4,1, 2,3,0, 2,5,5, 2,6,2, 3,2,1, 3,4,1,
 #'                3,7,1, 4,3,0, 4,7,2, 5,6,2, 5,8,8, 6,3,2, 6,7,1, 6,9,1,
 #'                6,10,3, 8,6,1, 8,9,1, 9,10,4) )
-#' g2 <- add.edges(graph.empty(10), t(el[,1:2]), weight=el[,3])
+#' g2 <- add.edges(g_empty(10), t(el[,1:2]), weight=el[,3])
 #' shortest.paths(g2, mode="out")
 #' 
 shortest.paths <- function(graph, v=V(graph), to=V(graph),
@@ -536,7 +536,7 @@ get.all.shortest.paths <- function(graph, from,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- erdos.renyi.game(100, 1/200)
+#' g <- g_np(100, 1/200)
 #' subcomponent(g, 1, "in")
 #' subcomponent(g, 1, "out")
 #' subcomponent(g, 1, "all")
@@ -743,7 +743,7 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- random.graph.game(10, 3/10)
+#' g <- g_np(10, 3/10)
 #' betweenness(g)
 #' edge.betweenness(g)
 #' 
@@ -856,18 +856,18 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
 #' 
 #' g <- g_ring(10)
 #' transitivity(g)
-#' g2 <- erdos.renyi.game(1000, 10/1000)
+#' g2 <- g_np(1000, 10/1000)
 #' transitivity(g2)   # this is about 10/1000
 #' 
 #' # Weighted version, the figure from the Barrat paper
-#' gw <- graph.formula(A-B:C:D:E, B-C:D, C-D)
+#' gw <- g_formula(A-B:C:D:E, B-C:D, C-D)
 #' E(gw)$weight <- 1
 #' E(gw)[ V(gw)[name == "A"] %--% V(gw)[name == "E" ] ]$weight <- 5
 #' transitivity(gw, vids="A", type="local")
 #' transitivity(gw, vids="A", type="weighted")
 #' 
 #' # Weighted reduces to "local" if weights are the same
-#' gw2 <- erdos.renyi.game(1000, 10/1000)
+#' gw2 <- g_np(1000, 10/1000)
 #' E(gw2)$weight <- 1
 #' t1 <- transitivity(gw2, type="local")
 #' t2 <- transitivity(gw2, type="weighted")
@@ -1082,7 +1082,7 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- erdos.renyi.game(20, 5/20)
+#' g <- g_np(20, 5/20)
 #' constraint(g)
 #' 
 constraint <- function(graph, nodes=V(graph), weights=NULL) {
@@ -1138,7 +1138,7 @@ constraint <- function(graph, nodes=V(graph), weights=NULL) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- random.graph.game(20, 5/20, directed=TRUE)
+#' g <- g_np(20, 5/20, directed=TRUE)
 #' reciprocity(g)
 #' 
 reciprocity <- function(graph, ignore.loops=TRUE,
@@ -1174,7 +1174,7 @@ reciprocity <- function(graph, ignore.loops=TRUE,
 #' @return A new graph object.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{degree.sequence.game}}
+#' @seealso \code{\link{g_degseq}}
 #' @keywords graphs
 #' @examples
 #' 
@@ -1563,9 +1563,9 @@ alpha.centrality <- function(graph, nodes=V(graph), alpha=1,
 #' @keywords graphs
 #' @examples
 #' 
-#' g1 <- graph.empty(n=10)
-#' g2 <- graph.full(n=10)
-#' g3 <- erdos.renyi.game(n=10, 0.4)
+#' g1 <- g_empty(n=10)
+#' g2 <- g_full(n=10)
+#' g3 <- g_np(n=10, 0.4)
 #' 
 #' # loop edges
 #' g <- graph( c(1,2, 2,2, 2,3) )
@@ -1618,14 +1618,14 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' \code{neighborhood} calculates the neighborhoods of the given vertices with
 #' the given order parameter.
 #' 
-#' \code{graph.neighborhood} is creates (sub)graphs from all neighborhoods of
+#' \code{g_ego} is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves
 #' the vertex, edge and graph attributes.
 #' 
 #' \code{connect.neighborhood} creates a new graph by connecting each vertex to
 #' all other vertices in its neighborhood.
 #' 
-#' @aliases neighborhood neighborhood.size graph.neighborhood
+#' @aliases neighborhood neighborhood.size graph.neighborhood g_ego
 #' connect.neighborhood
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood.
@@ -1642,7 +1642,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' 
 #' \code{neighborhood} returns with a list of integer vectors.
 #' 
-#' \code{graph.neighborhood} returns with a list of graphs.
+#' \code{g_ego} returns with a list of graphs.
 #' 
 #' \code{connect.neighborhood} returns with a new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
@@ -1660,7 +1660,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' 
 #' # attributes are preserved
 #' V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
-#' graph.neighborhood(g, 2, 1:3)
+#' g_ego(g, 2, 1:3)
 #' 
 #' # connecting to the neighborhood
 #' g <- g_ring(10)
@@ -1685,8 +1685,10 @@ neighborhood <- function(graph, order, nodes=V(graph),
   res
 }
 
-graph.neighborhood <- function(graph, order, nodes=V(graph),
-                               mode=c("all", "out", "in"), mindist=0) {
+#' @rdname neighborhood
+
+g_ego <- function(graph, order, nodes=V(graph),
+                  mode=c("all", "out", "in"), mindist=0) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -1826,7 +1828,7 @@ topological.sort <- function(graph, mode=c("out", "all", "in")) {
 #' @examples
 #' 
 #' # No circle in a tree
-#' g <- graph.tree(1000, 3)
+#' g <- g_tree(1000, 3)
 #' girth(g)
 #' 
 #' # The worst case running time is for a ring
@@ -1834,7 +1836,7 @@ topological.sort <- function(graph, mode=c("out", "all", "in")) {
 #' girth(g)
 #' 
 #' # What about a random graph?
-#' g <- erdos.renyi.game(1000, 1/1000)
+#' g <- g_np(1000, 1/1000)
 #' girth(g)
 #' 
 girth <- function(graph, circle=TRUE) {
@@ -2122,7 +2124,7 @@ graph.bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #' @examples
 #' 
 #' ## A graph with two separate trees
-#' graph.dfs(graph.tree(10) %du% graph.tree(10), root=1, "out",
+#' graph.dfs(g_tree(10) %du% g_tree(10), root=1, "out",
 #'           TRUE, TRUE, TRUE, TRUE)
 #' 
 #' ## How to use a callback
@@ -2134,14 +2136,14 @@ graph.bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #'   cat("out:", paste(collapse=", ", data), "\n")
 #'   FALSE
 #' }
-#' tmp <- graph.dfs(graph.tree(10), root=1, "out",
+#' tmp <- graph.dfs(g_tree(10), root=1, "out",
 #'                  in.callback=f.in, out.callback=f.out)
 #' 
 #' ## Terminate after the first component, using a callback
 #' f.out <- function(graph, data, extra) {
 #'  data['vid'] == 1
 #' }
-#' tmp <- graph.dfs(graph.tree(10) %du% graph.tree(10), root=1,
+#' tmp <- graph.dfs(g_tree(10) %du% g_tree(10), root=1,
 #'                  out.callback=f.out)
 #' 
 #' 
@@ -2269,7 +2271,7 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- erdos.renyi.game(20, 1/20)
+#' g <- g_np(20, 1/20)
 #' clu <- clusters(g)
 #' groups(clu)
 #' 
@@ -2316,7 +2318,7 @@ clusters <- function(graph, mode=c("weak", "strong")) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.tree(10) %du% graph.tree(10)
+#' g <- g_tree(10) %du% g_tree(10)
 #' V(g)$id <- seq_len(vcount(g))-1
 #' roots <- sapply(decompose.graph(g), function(x) {
 #'             V(x)$id[ topological.sort(x)[1]+1 ] })
@@ -2381,7 +2383,7 @@ unfold.tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' g2 <- graph.star(10)
+#' g2 <- g_star(10)
 #' closeness(g)
 #' closeness(g2, mode="in")
 #' closeness(g2, mode="out")

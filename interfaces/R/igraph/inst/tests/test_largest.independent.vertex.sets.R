@@ -5,7 +5,7 @@ test_that("largest.independent.vertex.sets works", {
 
   library(igraph)
 
-  g <- erdos.renyi.game(50, 0.8)
+  g <- g_np(50, 0.8)
   livs <- largest.independent.vertex.sets(g)
   expect_that(unique(sapply(livs, length)),
               equals(independence.number(g)))

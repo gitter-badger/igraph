@@ -180,7 +180,7 @@ delete.vertices(graph, v)
   logical indices and negative indices as well, with the usual R
   semantics. E.g. \preformatted{  graph[degree(graph)==0, 1] <- 1}
   adds an edge from every isolate vertex to vertex one,
-  and \preformatted{  G <- graph.empty(10)
+  and \preformatted{  G <- g_empty(10)
   G[-1,1] <- TRUE}
   creates a star graph.
 
@@ -232,7 +232,7 @@ delete.vertices(graph, v)
     as vertex ids of the end points of the new edges. The named
     arguments will be added as edge attributes.
 
-    Examples: \preformatted{  g <- graph.empty() + vertices(letters[1:10]) +
+    Examples: \preformatted{  g <- g_empty() + vertices(letters[1:10]) +
   vertices("foo", "bar", "bar2", "foobar2")
   g <- g + edge("a", "b")
   g <- g + edges("foo", "bar", "bar2", "foobar2")
@@ -250,18 +250,18 @@ delete.vertices(graph, v)
     as the vertex ids along the path. The remaining arguments are added
     as edge attributes.
 
-    Examples: \preformatted{  g <- graph.empty() + vertices(letters[1:10])
+    Examples: \preformatted{  g <- g_empty() + vertices(letters[1:10])
   g <- g + path("a", "b", "c", "d")
   g <- g + path("e", "f", "g", weight=1:2, color="red")
   g <- g + path(c("f", "c", "j", "d"), width=1:3, color="green")}
   }
 
   It is important to note that, although the plus operator is
-  commutative, i.e. is possible to write \preformatted{  graph <- "foo" + graph.empty()}
-  it is not associative, e.g. \preformatted{  graph <- "foo" + "bar" + graph.empty()}
-  results a syntax error, unless parentheses are used: \preformatted{  graph <- "foo" + ( "bar" + graph.empty() )}
+  commutative, i.e. is possible to write \preformatted{  graph <- "foo" + g_empty()}
+  it is not associative, e.g. \preformatted{  graph <- "foo" + "bar" + g_empty()}
+  results a syntax error, unless parentheses are used: \preformatted{  graph <- "foo" + ( "bar" + g_empty() )}
   For clarity, we suggest to always put the graph object on the left
-  hand side of the operator: \preformatted{  graph <- graph.empty() + "foo" + "bar"}  
+  hand side of the operator: \preformatted{  graph <- g_empty() + "foo" + "bar"}  
 }
 \section{The minus operator for deleting vertices and edges}{
   The minus operator (\sQuote{\code{-}}) can be used to remove vertices
@@ -330,7 +330,7 @@ delete.vertices(graph, v)
 % \seealso{}
 \examples{
 # 10 vertices named a,b,c,... and no edges
-g <- graph.empty() + vertices(letters[1:10])
+g <- g_empty() + vertices(letters[1:10])
 
 # Add edges to make it a ring
 g <- g + path(letters[1:10], letters[1], color="grey")

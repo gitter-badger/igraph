@@ -1,12 +1,12 @@
 
-context("graph.de.bruijn")
+context("g_de_bruijn")
 
-test_that("graph.de.bruijn works", {
+test_that("g_de_bruijn works", {
 
   library(igraph)
-  g <- graph.de.bruijn(2,1)
-  g2 <- graph.de.bruijn(2,2)
-  g3 <- line.graph(g)
+  g <- g_de_bruijn(2,1)
+  g2 <- g_de_bruijn(2,2)
+  g3 <- g_line(g)
 
   expect_that(graph.isomorphic(g3, graph(c(1,1,3,1,1,2,3,2,2,3,
                                            4,3,2,4,4,4))), is_true())

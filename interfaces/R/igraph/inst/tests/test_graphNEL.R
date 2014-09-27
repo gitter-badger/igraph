@@ -6,7 +6,7 @@ test_that("graphNEL conversion works", {
   library(igraph)
   library(graph, warn.conflicts=FALSE)
 
-  g <- erdos.renyi.game(100, 5/100)
+  g <- g_np(100, 5/100)
   N <- igraph.to.graphNEL(g)
   g2 <- igraph.from.graphNEL(N)
   gi <- graph.isomorphic.vf2(g, g2)

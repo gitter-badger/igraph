@@ -53,7 +53,7 @@ hub.score (graph, scale = TRUE, weights=NULL, options = igraph.arpack.default)
 }
 \examples{
 ## An in-star
-g <- graph.star(10)
+g <- g_star(10)
 hub.score(g)$vector
 authority.score(g)$vector
 

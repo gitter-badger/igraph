@@ -43,9 +43,9 @@ graph.diversity(graph, weights = NULL, vids = V(graph))
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 % \seealso{}
 \examples{
-g1 <- erdos.renyi.game(20, 2/20)
-g2 <- erdos.renyi.game(20, 2/20)
-g3 <- erdos.renyi.game(20, 5/20)
+g1 <- g_np(20, 2/20)
+g2 <- g_np(20, 2/20)
+g3 <- g_np(20, 5/20)
 E(g1)$weight <- 1
 E(g2)$weight <- runif(ecount(g2))
 E(g3)$weight <- runif(ecount(g3))

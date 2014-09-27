@@ -70,7 +70,7 @@ D1[1:3, 1:3] <- 2
 D2[3:5, 3:5] <- 3
 D3[2:5, 2:5] <- 1
   
-g <- simplify(graph.adjacency(D1 + D2 + D3, mode="undirected", weighted=TRUE))
+g <- simplify(g_adj_matrix(D1 + D2 + D3, mode="undirected", weighted=TRUE))
 V(g)$color <- "white"
 E(g)$label <- E(g)$weight
 E(g)$label.cex <- 2

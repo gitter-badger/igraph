@@ -213,7 +213,7 @@ g3 -> g1 g2}
 
 \dontrun{
 ## A graph with two dense groups
-g <- erdos.renyi.game(10, p=1/2) + erdos.renyi.game(10, p=1/2)
+g <- g_np(10, p=1/2) + g_np(10, p=1/2)
 hrg <- hrg.fit(g)
 hrg
 
@@ -221,7 +221,7 @@ hrg
 hrg.consensus(g, hrg=hrg, start=TRUE)
 
 ## Prediction of missing edges
-g2 <- graph.full(4) + (graph.full(4) - path(1,2))
+g2 <- g_full(4) + (g_full(4) - path(1,2))
 hrg.predict(g2)
 }
 }

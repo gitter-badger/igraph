@@ -6,8 +6,8 @@ test_that("graph.subisomorphic.vf2 works", {
   library(igraph)
   set.seed(42)
 
-  g1 <- erdos.renyi.game(20,6/20)
-  g2 <- erdos.renyi.game(20,6/20)
+  g1 <- g_np(20,6/20)
+  g2 <- g_np(20,6/20)
   g <- g1 %du% g2
 
   ig1 <- graph.subisomorphic.vf2(g, g1)

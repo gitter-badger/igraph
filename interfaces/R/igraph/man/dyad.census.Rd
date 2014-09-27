@@ -32,7 +32,7 @@ dyad.census(graph)
   \code{\link{triad.census}} for the same classification, but with triples.
 }
 \examples{
-g <- ba.game(100)
+g <- g_pa(100)
 dyad.census(g)
 }
 \keyword{graphs}

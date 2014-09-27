@@ -4,7 +4,7 @@ context("Graphlets")
 test_that("Getting subcliques works", {
   library(igraph)
   set.seed(42*42)
-  g <- erdos.renyi.game(10, 4/10)
+  g <- g_np(10, 4/10)
   E(g)$weight <- as.double(sample(1:10, ecount(g), replace=TRUE))
   ids <- 1:vcount(g)
 
@@ -43,7 +43,7 @@ sortgl <- function(x) {
 test_that("Graphlets work for some simple graphs", {
   library(igraph)
 
-  g <- graph.full(5)
+  g <- g_full(5)
   E(g)$weight <- 1
   gl <- graphlets.candidate.basis(g)
 
@@ -52,7 +52,7 @@ test_that("Graphlets work for some simple graphs", {
   expect_that(sort(gl$cliques[[1]]), equals(1:vcount(g)))
   expect_that(gl$thresholds, equals(1))
 
-  g2 <- graph.full(5)
+  g2 <- g_full(5)
   E(g2)$weight <- 1
   E(g2)[1%--%2]$weight <- 2
   gl2 <- sortgl(graphlets.candidate.basis(g2))
@@ -66,7 +66,7 @@ test_that("Graphlets filtering works", {
                    to    =c("B", "C", "C", "D", "E", "D", "E", "E"),
                    weight=c( 8 ,  8 ,  8 ,  5 ,  5 ,  5 ,  5 ,  5 ))
 
-  g <- graph.data.frame(gt, directed=FALSE, vertices=data.frame(LETTERS[1:5]))
+  g <- g_df(gt, directed=FALSE, vertices=data.frame(LETTERS[1:5]))
   gl <- sortgl(graphlets.candidate.basis(g))
 
   expect_that(gl$cliques, equals(list(1:3, 2:5)))
@@ -194,7 +194,7 @@ test_that("Graphlet projection works", {
   D1[1:3, 1:3] <- 2
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
-  g <- graph.adjacency(D1 + D2 + D3, mode="undirected", weighted=TRUE)
+  g <- g_adj_matrix(D1 + D2 + D3, mode="undirected", weighted=TRUE)
   g <- simplify(g)
 
   gl <- graphlets.candidate.basis(g)

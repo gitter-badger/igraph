@@ -28,7 +28,7 @@ permute.vertices(graph, permutation)
 \seealso{\code{\link{canonical.permutation}}}
 \examples{
 # Random permutation of a random graph
-g <- random.graph.game(20, 50, type="gnm")
+g <- g_nm(20, 50)
 g2 <- permute.vertices(g, sample(vcount(g)))
 graph.isomorphic(g, g2)
 

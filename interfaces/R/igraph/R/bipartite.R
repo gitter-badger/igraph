@@ -69,10 +69,10 @@
 #' @examples
 #' 
 #' ## Projection of a full bipartite graph is a full graph
-#' g <- graph.full.bipartite(10,5)
+#' g <- g_full_bip(10,5)
 #' proj <- bipartite.projection(g)
-#' graph.isomorphic(proj[[1]], graph.full(10))
-#' graph.isomorphic(proj[[2]], graph.full(5))
+#' graph.isomorphic(proj[[1]], g_full(10))
+#' graph.isomorphic(proj[[2]], g_full(5))
 #' 
 #' ## The projection keeps the vertex attributes
 #' M <- matrix(0, nr=5, nc=3)
@@ -80,7 +80,7 @@
 #' colnames(M) <- c("Party", "Skiing", "Badminton")
 #' M[] <- sample(0:1, length(M), replace=TRUE)
 #' M
-#' g2 <- graph.incidence(M)
+#' g2 <- g_incidence(M)
 #' g2$name <- "Event network"
 #' proj2 <- bipartite.projection(g2)
 #' print(proj2[[1]], g=TRUE, e=TRUE)

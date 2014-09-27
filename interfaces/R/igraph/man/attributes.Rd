@@ -158,7 +158,7 @@ g <- set.edge.attribute(g, "weight", value=runif(ecount(g)))
 get.edge.attribute(g, "weight")
 
 # The following notation is more convenient
-g <- graph.star(10)
+g <- g_star(10)
 
 V(g)$color <- c("red", "green")
 V(g)$color
@@ -169,7 +169,7 @@ E(g)$weight
 str(g, g=TRUE, v=TRUE, e=TRUE)
 
 # Setting all attributes at once
-g2 <- graph.empty(10)
+g2 <- g_empty(10)
 g2
 
 graph.attributes(g2) <- graph.attributes(g)

@@ -17,7 +17,7 @@ test_that("dyad.census works", {
   dc3 <- dyad.census(g3)
   expect_that(dc3, equals(list(mut=0, asym=10, null=35)))
 
-  g4 <- graph.empty(2000000)
+  g4 <- g_empty(2000000)
   expect_that(dc4 <- dyad.census(g4), gives_warning("Integer overflow"))
   expect_that(dc4, equals(list(mut=0, asym=0, null=0)))
   

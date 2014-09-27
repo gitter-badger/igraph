@@ -69,9 +69,9 @@ get.edgelist(graph, names=TRUE)
 }
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{graph.adjacency}}, \code{\link{read.graph}}}
+\seealso{\code{\link{g_adj_matrix}}, \code{\link{read.graph}}}
 \examples{
-g <- erdos.renyi.game(10, 2/10)
+g <- g_np(10, 2/10)
 get.edgelist(g)
 get.adjacency(g)
 V(g)$name <- letters[1:vcount(g)]

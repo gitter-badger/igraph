@@ -4,16 +4,16 @@ context("closeness")
 test_that("closeness works", {
   library(igraph)
 
-  kite <- graph.formula(Andre    - Beverly:Carol:Diane:Fernando,
-                        Beverly  - Andre:Diane:Ed:Garth,
-                        Carol    - Andre:Diane:Fernando,
-                        Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,
-                        Ed       - Beverly:Diane:Garth,
-                        Fernando - Andre:Carol:Diane:Garth:Heather,
-                        Garth    - Beverly:Diane:Ed:Fernando:Heather,
-                        Heather  - Fernando:Garth:Ike,
-                        Ike      - Heather:Jane,
-                        Jane     - Ike)
+  kite <- g_formula(Andre    - Beverly:Carol:Diane:Fernando,
+                    Beverly  - Andre:Diane:Ed:Garth,
+                    Carol    - Andre:Diane:Fernando,
+                    Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,
+                    Ed       - Beverly:Diane:Garth,
+                    Fernando - Andre:Carol:Diane:Garth:Heather,
+                    Garth    - Beverly:Diane:Ed:Fernando:Heather,
+                    Heather  - Fernando:Garth:Ike,
+                    Ike      - Heather:Jane,
+                    Jane     - Ike)
 
   clo <- closeness(kite) * (vcount(kite)-1)
   expect_that(round(sort(clo, decreasing=TRUE), 3),
@@ -30,16 +30,16 @@ test_that("closeness works", {
 test_that("closeness centralization works", {
 
   library(igraph)
-  kite <- graph.formula(Andre    - Beverly:Carol:Diane:Fernando,
-                        Beverly  - Andre:Diane:Ed:Garth,
-                        Carol    - Andre:Diane:Fernando,
-                        Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,
-                        Ed       - Beverly:Diane:Garth,
-                        Fernando - Andre:Carol:Diane:Garth:Heather,
-                        Garth    - Beverly:Diane:Ed:Fernando:Heather,
-                        Heather  - Fernando:Garth:Ike,
-                        Ike      - Heather:Jane,
-                        Jane     - Ike)
+  kite <- g_formula(Andre    - Beverly:Carol:Diane:Fernando,
+                    Beverly  - Andre:Diane:Ed:Garth,
+                    Carol    - Andre:Diane:Fernando,
+                    Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,
+                    Ed       - Beverly:Diane:Garth,
+                    Fernando - Andre:Carol:Diane:Garth:Heather,
+                    Garth    - Beverly:Diane:Ed:Fernando:Heather,
+                    Heather  - Fernando:Garth:Ike,
+                    Ike      - Heather:Jane,
+                    Jane     - Ike)
 
   c1 <- closeness(kite, normalized=TRUE)
   c2 <- centralization.closeness(kite)

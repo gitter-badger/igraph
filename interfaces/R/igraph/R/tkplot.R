@@ -138,7 +138,7 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' \dontrun{
 #' ## Saving a tkplot() to a file programatically
-#' g <- graph.star(10, center=10) %u% g_ring(9, directed=TRUE)
+#' g <- g_star(10, center=10) %u% g_ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
 #' lay <- layout.auto(g)
 #' 

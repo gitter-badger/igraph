@@ -3,7 +3,7 @@ context("decompose.graph")
 
 test_that("decompose.graph works", {
   library(igraph)
-  g <- erdos.renyi.game(1000, 1/1500)
+  g <- g_np(1000, 1/1500)
   G <- decompose.graph(g)
   clu <- clusters(g)
   Gsizes <- sapply(G, vcount)
@@ -12,14 +12,14 @@ test_that("decompose.graph works", {
 
 test_that("decompose.graph works for many components", {
   library(igraph)
-  g <- graph.empty(50001)
+  g <- g_empty(50001)
   tmp <- decompose.graph(g)
   expect_that(1, equals(1))
 })
 
 test_that("decompose.graph works for many components and attributes", {
   library(igraph)
-  g <- graph.empty(50001)
+  g <- g_empty(50001)
   V(g)$name <- 1:vcount(g)
   tmp <- decompose.graph(g)
   expect_that(1, equals(1))

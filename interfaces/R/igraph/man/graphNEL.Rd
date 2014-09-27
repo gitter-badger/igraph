@@ -50,7 +50,7 @@ igraph.to.graphNEL(graph)
 }
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{ \code{\link{get.adjacency}}, \code{\link{graph.adjacency}},
+\seealso{ \code{\link{get.adjacency}}, \code{\link{g_adj_matrix}},
   \code{\link{get.adjlist}} and \code{\link{graph.adjlist}}.
 }
 \examples{
@@ -62,7 +62,7 @@ g2 <- igraph.from.graphNEL(GNEL)
 g2
 
 ## Directed
-g3 <- graph.star(10, mode="in")
+g3 <- g_star(10, mode="in")
 V(g3)$name <- letters[1:10]
 GNEL2 <- igraph.to.graphNEL(g3)
 g4 <- igraph.from.graphNEL(GNEL2)

@@ -384,7 +384,7 @@ modularity <- function(x, ...)
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
+#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
 #' g <- add.edges(g, c(1,6, 1,11, 6, 11))
 #' wtc <- walktrap.community(g)
 #' modularity(wtc)
@@ -872,7 +872,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' @keywords graphs
 #' @examples
 #' 
-#'   g <- erdos.renyi.game(10, 5/10) %du% erdos.renyi.game(9, 5/9)
+#'   g <- g_np(10, 5/10) %du% g_np(9, 5/9)
 #'   g <- add.edges(g, c(1, 12))
 #'   g <- induced.subgraph(g, subcomponent(g, 1))
 #'   spinglass.community(g, spins=2)
@@ -969,7 +969,7 @@ spinglass.community <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
+#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
 #' g <- add.edges(g, c(1,6, 1,11, 6, 11))
 #' walktrap.community(g)
 #' 
@@ -1076,7 +1076,7 @@ walktrap.community <- function(graph, weights=E(graph)$weight, steps=4,
 #' g <- barabasi.game(100,m=2)
 #' eb <- edge.betweenness.community(g)
 #' 
-#' g <- graph.full(10) %du% graph.full(10)
+#' g <- g_full(10) %du% g_full(10)
 #' g <- add.edges(g, c(1,11))
 #' eb <- edge.betweenness.community(g)
 #' eb
@@ -1164,7 +1164,7 @@ edge.betweenness.community.merges <- function(graph, edges) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
+#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
 #' g <- add.edges(g, c(1,6, 1,11, 6, 11))
 #' fc <- fastgreedy.community(g)
 #' membership(fc)
@@ -1294,7 +1294,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
+#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
 #' g <- add.edges(g, c(1,6, 1,11, 6, 11))
 #' lec <- leading.eigenvector.community(g)
 #' lec
@@ -1405,7 +1405,7 @@ community.le.to.membership <- function(merges, steps, membership) {
 #' @keywords graphs
 #' @examples
 #' 
-#'   g <- erdos.renyi.game(10, 5/10) %du% erdos.renyi.game(9, 5/9)
+#'   g <- g_np(10, 5/10) %du% g_np(9, 5/9)
 #'   g <- add.edges(g, c(1, 12))
 #'   label.propagation.community(g)
 #' 
@@ -1486,7 +1486,7 @@ label.propagation.community <- function(graph, weights=NULL, initial=NULL,
 #' @examples
 #' 
 #' # This is so simple that we will have only one level
-#' g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
+#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
 #' g <- add.edges(g, c(1,6, 1,11, 6, 11))
 #' multilevel.community(g)
 #' 

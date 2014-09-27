@@ -94,7 +94,7 @@ sir(graph, beta, gamma, no.sim=100)
 }
 \seealso{\code{\link{plot.sir}} to conveniently plot the results}
 \examples{
-g <- erdos.renyi.game(100, 100, type="gnm")
+g <- g_nm(100, 100)
 sm <- sir(g, beta=5, gamma=1)
 plot(sm)
 }

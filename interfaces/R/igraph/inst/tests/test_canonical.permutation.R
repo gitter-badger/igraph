@@ -4,7 +4,7 @@ context("canonical.permutation")
 test_that("canonical.permutation works", {
   library(igraph)
 
-  g1 <- erdos.renyi.game(10, 20, type="gnm")
+  g1 <- g_nm(10, 20)
   cp1 <- canonical.permutation(g1)
   cf1 <- permute.vertices(g1, cp1$labeling)
      

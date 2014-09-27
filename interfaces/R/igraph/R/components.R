@@ -101,7 +101,7 @@ is.connected <- function(graph, mode=c("weak", "strong")) {
 #' @examples
 #' 
 #' # the diameter of each component in a random graph
-#' g <- erdos.renyi.game(1000, 1/1000)
+#' g <- g_np(1000, 1/1000)
 #' comps <- decompose.graph(g, min.vertices=2)
 #' sapply(comps, diameter)
 #' 

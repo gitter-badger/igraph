@@ -1,6 +1,7 @@
 \name{graph-isomorphism}
 \alias{graph.isoclass}
 \alias{graph.isocreate}
+\alias{g_isoclass}
 \alias{graph.isomorphic}
 \alias{graph.isomorphic.vf2}
 \alias{graph.count.isomorphisms.vf2}
@@ -48,7 +49,7 @@ graph.subisomorphic.lad (pattern, target, domains = NULL,
 
 graph.isoclass(graph)
 graph.isoclass.subgraph(graph, vids)
-graph.isocreate(size, number, directed=TRUE)
+g_isoclass(size, number, directed=TRUE)
 }
 \arguments{
   \item{graph}{A graph object.}
@@ -164,12 +165,12 @@ graph.isocreate(size, number, directed=TRUE)
   subgraph of the input graph. Currently it only works for subgraphs
   with 3 or 4 vertices.
   
-  \code{graph.isocreate} create a graph from the given isomorphic
+  \code{g_isoclass} create a graph from the given isomorphic
   class. Currently it can handle only graphs with 3 or 4 vertices.
 }
 \note{
   Functions \code{graph.isoclass}, \code{graph.isoclass.subgraph} and
-  \code{graph.isocreate} are considered experimental and might be
+  \code{g_isoclass} are considered experimental and might be
   reorganized/rewritten later.
 }
 \value{
@@ -250,7 +251,7 @@ graph.isocreate(size, number, directed=TRUE)
   \code{graph.isoclass} and \code{graph.isoclass.subgraph} return a
   non-negative integer number. 
 
-  \code{graph.isocreate} returns a graph object.
+  \code{g_isoclass} returns a graph object.
 }
 \references{
   Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -270,8 +271,8 @@ graph.isocreate(size, number, directed=TRUE)
 \seealso{\code{\link{graph.motifs}}}
 \examples{
 # create some non-isomorphic graphs
-g1 <- graph.isocreate(3, 10)
-g2 <- graph.isocreate(3, 11)
+g1 <- g_isoclass(3, 10)
+g2 <- g_isoclass(3, 11)
 graph.isoclass(g1)
 graph.isoclass(g2)
 graph.isomorphic(g1, g2)
@@ -307,12 +308,12 @@ graph.isomorphic.vf2(g2, g2, vertex.color1=NULL,
     vertex.color2=NULL)
 
 # The LAD example
-pattern <- graph.formula(1:2:3:4:5,
-                         1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1)
-target <- graph.formula(1:2:3:4:5:6:7:8:9,
-                        1 - 2:5:7, 2 - 1:5:3, 3 - 2:4, 4 - 3:5:6:8:9,
-                        5 - 1:2:4:6:7, 6 - 7:5:4:9, 7 - 1:5:6,
-                        8 - 4:9, 9 - 6:4:8)
+pattern <- g_formula(1:2:3:4:5,
+                     1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1)
+target <- g_formula(1:2:3:4:5:6:7:8:9,
+                    1 - 2:5:7, 2 - 1:5:3, 3 - 2:4, 4 - 3:5:6:8:9,
+                    5 - 1:2:4:6:7, 6 - 7:5:4:9, 7 - 1:5:6,
+                    8 - 4:9, 9 - 6:4:8)
 domains <- list(`1` = c(1,3,9), `2` = c(5,6,7,8), `3` = c(2,4,6,7,8,9),
                 `4` = c(1,3,9), `5` = c(2,4,8,9))
 graph.subisomorphic.lad(pattern, target, all.maps=TRUE)
@@ -320,7 +321,7 @@ graph.subisomorphic.lad(pattern, target, induced=TRUE, all.maps=TRUE)
 graph.subisomorphic.lad(pattern, target, domains=domains, all.maps=TRUE)
 
 # Directed LAD example
-pattern <- graph.formula(1:2:3, 1 -+ 2:3)
+pattern <- g_formula(1:2:3, 1 -+ 2:3)
 uring <- g_ring(10)
 dring <- g_ring(10, directed=TRUE)
 graph.subisomorphic.lad(pattern, uring)

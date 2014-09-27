@@ -115,10 +115,10 @@ page.rank.old (graph, vids = V(graph), directed = TRUE, niter = 1000,
 \seealso{Other centrality scores: \code{\link{closeness}},
   \code{\link{betweenness}}, \code{\link{degree}}}
 \examples{
-g <- random.graph.game(20, 5/20, directed=TRUE)
+g <- g_np(20, 5/20, directed=TRUE)
 page.rank(g)$vector
 
-g2 <- graph.star(10)
+g2 <- g_star(10)
 page.rank(g2)$vector
 
 # Personalized PageRank

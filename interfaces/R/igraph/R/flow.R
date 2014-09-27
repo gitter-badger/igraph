@@ -133,7 +133,7 @@ graph.mincut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' vertex.connectivity(g2, 100, 1)
 #' vertex.disjoint.paths(g2, 100, 1)
 #' 
-#' g <- erdos.renyi.game(50, 5/50)
+#' g <- g_np(50, 5/50)
 #' g <- as.directed(g)
 #' g <- induced.subgraph(g, subcomponent(g, 1))
 #' graph.cohesion(g)
@@ -216,7 +216,7 @@ vertex.connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' edge.connectivity(g2, 100, 1)
 #' edge.disjoint.paths(g2, 100, 1)
 #' 
-#' g <- erdos.renyi.game(50, 5/50)
+#' g <- g_np(50, 5/50)
 #' g <- as.directed(g)
 #' g <- induced.subgraph(g, subcomponent(g, 1))
 #' graph.adhesion(g)

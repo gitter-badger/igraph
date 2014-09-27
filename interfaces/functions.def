@@ -156,13 +156,13 @@ igraph_famous:
 
 igraph_lcf_vector:
         PARAMS: OUT GRAPH graph, INTEGER n, VECTOR shifts, INTEGER repeats=1
-        NAME-R: graph.lcf
+        NAME-R: g_lcf
         GATTR-R: name IS LCF graph
 
 igraph_adjlist:
         PARAMS: OUT GRAPH graph, ADJLIST adjlist, NEIMODE mode=OUT, \
                 BOOLEAN duplicate=True
-        NAME-R: graph.adjlist
+        NAME-R: g_adj_list
 
 igraph_full_bipartite:
         PARAMS: OUT GRAPH graph, OUT VECTOR_BOOL_OR_0 types, INTEGER n1, \
@@ -273,7 +273,7 @@ igraph_citing_cited_type_game:
 igraph_forest_fire_game:
         PARAMS: OUT GRAPH graph, INTEGER nodes, REAL fw_prob, REAL bw_factor=1, \
                 INTEGER ambs=1, BOOLEAN directed=True
-        NAME-R: forest.fire.game
+        NAME-R: g_forestfire
         GATTR-R: name IS Forest fire model
         GATTR-PARAM-R: fw_prob, bw_factor, ambs
         FLAGS: PROGRESS
@@ -281,7 +281,7 @@ igraph_forest_fire_game:
 igraph_simple_interconnected_islands_game:
         PARAMS: OUT GRAPH graph, INTEGER islands_n, INTEGER islands_size, \
                 REAL islands_pin, INTEGER n_inter
-        NAME-R: interconnected.islands.game
+        NAME-R: g_islands
         GATTR-R: name IS Interconnected islands model
         GATTR-PARAM-R: islands_n, islands_size, islands_pin, n_inter
         IGNORE: RC
@@ -290,7 +290,7 @@ igraph_static_fitness_game:
         PARAMS: OUT GRAPH graph, INTEGER no_of_edges, VECTOR fitness_out, \
                 VECTOR_OR_0 fitness_in=NULL, BOOLEAN loops=False, \
                 BOOLEAN multiple=False
-        NAME-R: static.fitness.game
+        NAME-R: g_fitness
         GATTR-R: name IS Static fitness model
         GATTR-PARAM-R: loops, multiple
         FLAGS: PROGRESS
@@ -300,7 +300,7 @@ igraph_static_power_law_game:
                 REAL exponent_out, REAL exponent_in=-1, \
                 BOOLEAN loops=False, BOOLEAN multiple=False, \
 		BOOLEAN finite_size_correction=True
-        NAME-R: static.power.law.game
+        NAME-R: g_fitness_pl
         GATTR-R: name IS Static power law model
         GATTR-PARAM-R: exponent_out, exponent_in, loops, multiple, \
                        finite_size_correction
@@ -309,7 +309,7 @@ igraph_static_power_law_game:
 igraph_k_regular_game:
         PARAMS: OUT GRAPH graph, INTEGER no_of_nodes, INTEGER k, \
                 BOOLEAN directed=False, BOOLEAN multiple=False
-        NAME-R: k.regular.game
+        NAME-R: g_k_reg
         GATTR-R: name IS k-regular graph
         GATTR-PARAM-R: k
 
@@ -317,7 +317,7 @@ igraph_sbm_game:
         PARAMS: OUT GRAPH graph, INTEGER n, MATRIX pref_matrix, \
                 VECTOR_INT block_sizes, BOOLEAN directed=False, \
                 BOOLEAN loops=False
-        NAME-R: sbm.game
+        NAME-R: g_sbm
         GATTR-R: name IS Stochastic block-model
         GATTR-PARAM-R: loops
 
@@ -853,7 +853,7 @@ igraph_bipartite_projection:
 igraph_create_bipartite:
         PARAMS: OUT GRAPH graph, IN VECTOR_BOOL types, \
                 VECTORM1 edges, BOOLEAN directed=False
-        NAME-R: graph.bipartite
+        NAME-R: g_bip
         IGNORE: RR
 
 igraph_incidence:
@@ -1710,7 +1710,7 @@ igraph_isoclass_subgraph:
 
 igraph_isoclass_create:
         PARAMS: OUT GRAPH graph, INTEGER size, INTEGER number, BOOLEAN directed=True
-        NAME-R: graph.isocreate
+        NAME-R: g_isoclass
 
 igraph_isomorphic_vf2:
         PARAMS: GRAPH graph1, GRAPH graph2, \

@@ -25,7 +25,7 @@ articulation.points(graph)
 \seealso{\code{\link{biconnected.components}}, \code{\link{clusters}},
   \code{\link{is.connected}}, \code{\link{vertex.connectivity}}}
 \examples{
-g <- graph.disjoint.union( graph.full(5), graph.full(5) )
+g <- graph.disjoint.union( g_full(5), g_full(5) )
 clu <- clusters(g)$membership
 g <- add.edges(g, c(match(1, clu), match(2, clu)) )
 articulation.points(g)

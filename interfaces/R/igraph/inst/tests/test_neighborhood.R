@@ -13,10 +13,10 @@ test_that("neighborhood works", {
     induced.subgraph(graph, c(v,vertices))
   }
 
-  g <- erdos.renyi.game(50, 5/50)
+  g <- g_np(50, 5/50)
 
   v <- sample(vcount(g), 1)
-  g1 <- graph.neighborhood(g, 2, v)[[1]]
+  g1 <- g_ego(g, 2, v)[[1]]
   g2 <- neig(g, 2, v)
   expect_that(graph.isomorphic(g1, g2), is_true())
 
@@ -57,9 +57,9 @@ test_that("mindist works", {
   expect_that(lapply(n1, sort), equals(list(c(3,4,6,7), c(4,5,7,8))))
   expect_that(lapply(n2, sort), equals(list(c(3,7), c(4,8))))
 
-  ng0 <- graph.neighborhood(g, order=2, 5:6, mindist=0)
-  ng1 <- graph.neighborhood(g, order=2, 5:6, mindist=1)
-  ng2 <- graph.neighborhood(g, order=2, 5:6, mindist=2)
+  ng0 <- g_ego(g, order=2, 5:6, mindist=0)
+  ng1 <- g_ego(g, order=2, 5:6, mindist=1)
+  ng2 <- g_ego(g, order=2, 5:6, mindist=2)
 
   expect_that(sapply(ng0, vcount), equals(c(5,5)))
   expect_that(sapply(ng1, vcount), equals(c(4,4)))

@@ -132,8 +132,8 @@ arp(M, nev=3, ncv=7, sym=FALSE)$values
 ## Components
 
 cc <- function(x) {
-  g1 <- erdos.renyi.game(10, 2/10, directed=TRUE)
-  g2 <- erdos.renyi.game(10, 2/10, directed=TRUE)
+  g1 <- g_np(10, 2/10, directed=TRUE)
+  g2 <- g_np(10, 2/10, directed=TRUE)
   g <- g1 %du% g2
   
   e1 <- eigen(get.adjacency(g1))$values

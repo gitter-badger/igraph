@@ -83,8 +83,8 @@ bk4 <- function(graph, min=0, max=Inf) {
 test_that("Maximal cliques work", {
   library(igraph)
   set.seed(42)
-  G <- erdos.renyi.game(1000, 1000, type="gnm")
-  cli <- graph.full(10)
+  G <- g_np(1000, 1000, type="gnm")
+  cli <- g_full(10)
   for (i in 1:10) {
     G <- permute.vertices(G, sample(vcount(G)))
     G <- G %u% cli
@@ -100,7 +100,7 @@ test_that("Maximal cliques work", {
 test_that("Maximal cliques work for subsets", {
   library(igraph)
   set.seed(42)
-  G <- erdos.renyi.game(100, .5)
+  G <- g_np(100, .5)
 
   cl1  <- mysort(maximal.cliques(G, min=8))
 
@@ -114,7 +114,7 @@ test_that("Maximal cliques work for subsets", {
 test_that("Counting maximal cliques works", {
   library(igraph)
   set.seed(42)
-  G <- erdos.renyi.game(100, .5)
+  G <- g_np(100, .5)
 
   cl1  <- maximal.cliques.count(G, min=8)
           

@@ -106,7 +106,7 @@ tkigraph <- function() {
   })
   tkadd(create.menu, "separator")
   tkadd(create.menu, "command", label="Moody-White network", command=function() {
-    g <- graph.adjacency(.tkigraph.net.moody.white, mode="undirected")
+    g <- g_adj_matrix(.tkigraph.net.moody.white, mode="undirected")
     g <- set.graph.attribute(g, "name", "Moody-White network")
     .tkigraph.add.graph(g)
   })
@@ -533,13 +533,13 @@ tkigraph <- function() {
 
 .tkigraph.graph.adjacency <- function(adjmatrix, mode, weighted) {
   if (is.null(weighted)) {
-    g <- graph.adjacency(adjmatrix, mode=mode)
+    g <- g_adj_matrix(adjmatrix, mode=mode)
   } else {
     ## there is bug in the currect igraph version, this is a workaround
     if (mode=="undirected") {
       adjmatrix[ lower.tri(adjmatrix) ] <- 0
     }
-    g <- graph.adjacency(adjmatrix, mode=mode, weighted=weighted)
+    g <- g_adj_matrix(adjmatrix, mode=mode, weighted=weighted)
   }
   g
 }
@@ -557,7 +557,7 @@ tkigraph <- function() {
   read <- .tkigraph.dialogbox(TITLE="Importing an edge list",
                               directed=list(name="Directed", type="boolean",
                                 default="FALSE"))
-  g <- graph.data.frame(tab, directed=read$directed)
+  g <- g_df(tab, directed=read$directed)
   g <- set.graph.attribute(g, "name", "Imported edge list")
   .tkigraph.add.graph(g)
 }
@@ -938,7 +938,7 @@ tkigraph <- function() {
     read <- .tkigraph.dialogbox(TITLE="Creating a graph by hand",
                                 directed=list(name="Directed", type="boolean",
                                   default="FALSE"))
-    g <- graph.data.frame(newdf, directed=read$directed)
+    g <- g_df(newdf, directed=read$directed)
     g <- set.graph.attribute(g, "name", "New graph")
     .tkigraph.add.graph(g)
   } else {
@@ -956,8 +956,7 @@ tkigraph <- function() {
     if (ncol(df) > 2) {
       colnames(df) <- c("from", "to", "weight")
     }
-    graphs[[gnos]] <- graph.data.frame(df,
-                                       directed=is.directed(graphs[[gnos]]))
+    graphs[[gnos]] <- g_df(df, directed=is.directed(graphs[[gnos]]))
     assign("graphs", graphs, .tkigraph.env)
   }
   invisible(NULL)
@@ -973,7 +972,7 @@ tkigraph <- function() {
                                 values=c("Directed (out)", "Directed (in)",
                                   "Undirected"), default="2"))
   read$mode <- c("out", "in", "undirected")[read$mode+1]
-  g <- graph.tree(n=read$n, children=read$b, mode=read$mode)
+  g <- g_tree(n=read$n, children=read$b, mode=read$mode)
   lay <- layout.reingold.tilford(g, root=1, mode="all")
   g <- set.graph.attribute(g, "layout", lay)
   g <- set.graph.attribute(g, "name", "Regular tree")
@@ -1006,7 +1005,7 @@ tkigraph <- function() {
                                 default=10, min=1))
   if (read$dim > 5) { read$dim <- 5 }
   dimv <- c(read$s1, read$s2, read$s3, read$s4, read$s5)[1:read$dim]
-  g <- graph.lattice(dimvector=dimv)
+  g <- g_lattice(dimvector=dimv)
   g <- set.graph.attribute(g, "name", "Regular Lattice")
   .tkigraph.add.graph(g)
 }
@@ -1019,7 +1018,7 @@ tkigraph <- function() {
                                 values=c("Directed (out)", "Directed (in)",
                                   "Undirected"), default="2"))
   read$mode <- c("out", "in", "undirected")[read$mode+1]
-  g <- graph.star(read$n, mode=read$mode)
+  g <- g_star(read$n, mode=read$mode)
   g <- set.graph.attribute(g, "name", "Star graph")
   .tkigraph.add.graph(g)
 }
@@ -1032,7 +1031,7 @@ tkigraph <- function() {
                                 default="FALSE"),
                               loops=list(name="Loops", type="boolean",
                                 default="FALSE"))
-  g <- graph.full(read$n, read$directed, read$loops)
+  g <- g_full(read$n, read$directed, read$loops)
   g <- set.graph.attribute(g, "name", "Full graph")
   .tkigraph.add.graph(g)
 }                             
@@ -1056,7 +1055,7 @@ tkigraph <- function() {
                               directed=list(name="Directed",
                                 type="boolean", default="FALSE"))
   
-  g <- erdos.renyi.game(read$n,read$p,directed=read$directed)
+  g <- g_np(read$n,read$p,directed=read$directed)
   g <- set.graph.attribute(g, "name", "Random graph (Erdos-Renyi G(n,p))")
   .tkigraph.add.graph(g)
 }
@@ -1070,7 +1069,7 @@ tkigraph <- function() {
                               directed=list(name="Directed",
                                 type="boolean", default="FALSE"))
 
-  g <- erdos.renyi.game(read$n, read$m, type="gnm", directed=read$directed)
+  g <- g_nm(read$n, read$m, directed=read$directed)
   g <- set.graph.attribute(g, "name", "Random graph (Erdos-Renyi G(n,m))")
   .tkigraph.add.graph(g)
 }
@@ -1100,10 +1099,10 @@ tkigraph <- function() {
     if (is.directed(graphs[[i]])) {
       indeg <- degree(graphs[[i]], mode="in")
       outdeg <- degree(graphs[[i]], mode="out")
-      g <- degree.sequence.game(out.deg=outdeg, in.deg=indeg)
+      g <- g_degseq(out.deg=outdeg, in.deg=indeg)
     } else {
       deg <- degree(graphs[[i]])
-      g <- degree.sequence.game(deg)
+      g <- g_degseq(deg)
     }
     g <- set.graph.attribute(g, "name",
                              paste(sep="", "Configuration model (#", i,")"))
@@ -1121,7 +1120,7 @@ tkigraph <- function() {
                                 default=5, min=1),
                               p=list(name="Rewiring probability",
                                 type="numeric", default=0.01, min=0, max=1))
-  g <- watts.strogatz.game(dim=read$dim, size=read$size, nei=read$nei,
+  g <- g_smallworld(dim=read$dim, size=read$size, nei=read$nei,
                            p=read$p)
   g <- set.graph.attribute(g, "name", "Watts-Strogatz small-world graph")
   if (read$dim == 1) { 
@@ -1592,7 +1591,7 @@ tkigraph <- function() {
   layout( matrix(1:(rows*cols), nrow=rows, byrow=TRUE) )
   layout.show(rows*cols)
   for (i in seq(no)) {
-    g <- graph.isocreate(read$size, i-1, directed=read$dir)
+    g <- g_isoclass(read$size, i-1, directed=read$dir)
     par(mai=c(0,0,0,0), mar=c(0,0,0,0))
     par(cex=2)
     plot(g, layout=co, vertex.color="red", vertex.label=NA, frame=TRUE,
@@ -1650,7 +1649,7 @@ tkigraph <- function() {
   layout( matrix(1:(rows*cols), nrow=rows, byrow=TRUE) )
   layout.show(rows*cols)
   for (i in seq(no)) {
-    g <- graph.isocreate(read$size, i-1,
+    g <- g_isoclass(read$size, i-1,
                          directed=is.directed(graphs[[gnos]]))
     par(mai=c(0,0,0,0), mar=c(0,0,0,0))
     par(cex=2)

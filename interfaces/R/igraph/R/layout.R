@@ -283,12 +283,12 @@ layout.lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' tree <- graph.tree(20, 3)
+#' tree <- g_tree(20, 3)
 #' plot(tree, layout=layout.reingold.tilford)
 #' plot(tree, layout=layout.reingold.tilford(tree, flip.y=FALSE))
 #' plot(tree, layout=layout.reingold.tilford(tree, circular=TRUE))
 #' 
-#' tree2 <- graph.tree(10, 3) + graph.tree(10, 2)
+#' tree2 <- g_tree(10, 3) + g_tree(10, 2)
 #' plot(tree2, layout=layout.reingold.tilford)
 #' plot(tree2, layout=layout.reingold.tilford(tree2, root=c(1,11),
 #'                                            rootlevel=c(2,1)))
@@ -529,7 +529,7 @@ piecewise.layout <- function(graph, layout=layout.kamada.kawai, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- as.undirected(ba.game(100, m=1))
+#' g <- as.undirected(g_pa(100, m=1))
 #' l <- layout.drl(g, options=list(simmer.attraction=0))
 #' \dontrun{
 #' plot(g, layout=l, vertex.size=3, vertex.label=NA)
@@ -820,7 +820,7 @@ layout.auto <- function(graph, dim=2, ...) {
 #' @examples
 #' 
 #' ## Data taken from http://tehnick-8.narod.ru/dc_clients/
-#' DC <- graph.formula("DC++" -+
+#' DC <- g_formula("DC++" -+
 #'                 "LinuxDC++":"BCDC++":"EiskaltDC++":"StrongDC++":"DiCe!++",
 #'                 "LinuxDC++" -+ "FreeDC++", "BCDC++" -+ "StrongDC++",
 #'                 "FreeDC++" -+ "BMDC++":"EiskaltDC++",
@@ -889,36 +889,36 @@ layout.auto <- function(graph, dim=2, ...) {
 #' ## Layered Graph Drawing, Journal of Graph Algorithms and
 #' ## Applications 9, 305--325 (2005).
 #' 
-#' ex <- graph.formula( 0 -+ 29: 6: 5:20: 4,
-#'                      1 -+ 12,
-#'                      2 -+ 23: 8,
-#'                      3 -+  4,
-#'                      4,
-#'                      5 -+  2:10:14:26: 4: 3,
-#'                      6 -+  9:29:25:21:13,
-#'                      7,
-#'                      8 -+ 20:16,
-#'                      9 -+ 28: 4,
-#'                     10 -+ 27,
-#'                     11 -+  9:16,
-#'                     12 -+  9:19,
-#'                     13 -+ 20,
-#'                     14 -+ 10,
-#'                     15 -+ 16:27,
-#'                     16 -+ 27,
-#'                     17 -+  3,
-#'                     18 -+ 13,
-#'                     19 -+  9,
-#'                     20 -+  4,
-#'                     21 -+ 22,
-#'                     22 -+  8: 9,
-#'                     23 -+  9:24,
-#'                     24 -+ 12:15:28,
-#'                     25 -+ 11,
-#'                     26 -+ 18,
-#'                     27 -+ 13:19,
-#'                     28 -+  7,
-#'                     29 -+ 25                    )
+#' ex <- g_formula( 0 -+ 29: 6: 5:20: 4,
+#'                  1 -+ 12,
+#'                  2 -+ 23: 8,
+#'                  3 -+  4,
+#'                  4,
+#'                  5 -+  2:10:14:26: 4: 3,
+#'                  6 -+  9:29:25:21:13,
+#'                  7,
+#'                  8 -+ 20:16,
+#'                  9 -+ 28: 4,
+#'                 10 -+ 27,
+#'                 11 -+  9:16,
+#'                 12 -+  9:19,
+#'                 13 -+ 20,
+#'                 14 -+ 10,
+#'                 15 -+ 16:27,
+#'                 16 -+ 27,
+#'                 17 -+  3,
+#'                 18 -+ 13,
+#'                 19 -+  9,
+#'                 20 -+  4,
+#'                 21 -+ 22,
+#'                 22 -+  8: 9,
+#'                 23 -+  9:24,
+#'                 24 -+ 12:15:28,
+#'                 25 -+ 11,
+#'                 26 -+ 18,
+#'                 27 -+ 13:19,
+#'                 28 -+  7,
+#'                 29 -+ 25                    )
 #' 
 #' layers <- list( 0, c(5, 17), c(2, 14, 26, 3), c(23, 10, 18), c(1, 24),
 #'                 12, 6, c(29,21), c(25,22), c(11,8,15), 16, 27, c(13,19),
@@ -1059,7 +1059,7 @@ layout.sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
 #' get.edge.attribute(g, "weight")
 #' 
 #' # The following notation is more convenient
-#' g <- graph.star(10)
+#' g <- g_star(10)
 #' 
 #' V(g)$color <- c("red", "green")
 #' V(g)$color
@@ -1070,7 +1070,7 @@ layout.sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
 #' str(g, g=TRUE, v=TRUE, e=TRUE)
 #' 
 #' # Setting all attributes at once
-#' g2 <- graph.empty(10)
+#' g2 <- g_empty(10)
 #' g2
 #' 
 #' graph.attributes(g2) <- graph.attributes(g)
@@ -1221,7 +1221,7 @@ layout.sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- erdos.renyi.game(100, 2/100)
+#' g <- g_np(100, 2/100)
 #' l <- layout.mds(g)
 #' plot(g, layout=l, vertex.label=NA, vertex.size=3)
 #' 
@@ -1296,7 +1296,7 @@ layout.mds <- function(graph, dist=NULL, dim=2,
 #' @examples
 #' 
 #' # Fixing ego
-#' g <- ba.game(20, m=2)
+#' g <- g_pa(20, m=2)
 #' minC <- rep(-Inf, vcount(g))
 #' maxC <- rep(Inf, vcount(g))
 #' minC[1] <- maxC[1] <- 0
@@ -1610,17 +1610,17 @@ layout.gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' set.seed(42)
 #' L <- layout.davidson.harel
 #' ## Figures from the paper
-#' g_1b <- graph.star(19, mode="undirected") + path(c(2:19, 2)) +
+#' g_1b <- g_star(19, mode="undirected") + path(c(2:19, 2)) +
 #'   path(c(seq(2, 18, by=2), 2))
 #' plot(g_1b, layout=L)
 #' 
-#' g_2 <- graph.lattice(c(8, 3)) + edges(1,8, 9,16, 17,24)
+#' g_2 <- g_lattice(c(8, 3)) + edges(1,8, 9,16, 17,24)
 #' plot(g_2, layout=L)
 #' 
-#' g_3 <- graph.empty(n=70)
+#' g_3 <- g_empty(n=70)
 #' plot(g_3, layout=L)
 #' 
-#' g_4 <- graph.empty(n=70, directed=FALSE) + edges(1:70)
+#' g_4 <- g_empty(n=70, directed=FALSE) + edges(1:70)
 #' plot(g_4, layout=L, vertex.size=5, vertex.label=NA)
 #' 
 #' g_5a <- g_ring(24)
@@ -1629,10 +1629,10 @@ layout.gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' g_5b <- g_ring(40)
 #' plot(g_5b, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_6 <- graph.lattice(c(2,2,2))
+#' g_6 <- g_lattice(c(2,2,2))
 #' plot(g_6, layout=L)
 #' 
-#' g_7 <- graph.formula(1:3:5 -- 2:4:6)
+#' g_7 <- g_formula(1:3:5 -- 2:4:6)
 #' plot(g_7, layout=L, vertex.label=V(g_7)$name)
 #' 
 #' g_8 <- g_ring(5) + g_ring(10) + g_ring(5) +
@@ -1640,19 +1640,19 @@ layout.gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #'         7,16, 9,17, 11,18, 13,19, 15,20)
 #' plot(g_8, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_9 <- graph.lattice(c(3,2,2))
+#' g_9 <- g_lattice(c(3,2,2))
 #' plot(g_9, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_10 <- graph.lattice(c(6,6))
+#' g_10 <- g_lattice(c(6,6))
 #' plot(g_10, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_11a <- graph.tree(31, 2, mode="undirected")
+#' g_11a <- g_tree(31, 2, mode="undirected")
 #' plot(g_11a, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_11b <- graph.tree(21, 4, mode="undirected")
+#' g_11b <- g_tree(21, 4, mode="undirected")
 #' plot(g_11b, layout=L, vertex.size=5, vertex.label=NA)
 #' 
-#' g_12 <- graph.empty(n=37, directed=FALSE) +
+#' g_12 <- g_empty(n=37, directed=FALSE) +
 #'   path(1:5,10,22,31,37:33,27,16,6,1) + path(6,7,11,9,10) + path(16:22) +
 #'   path(27:31) + path(2,7,18,28,34) + path(3,8,11,19,29,32,35) +
 #'   path(4,9,20,30,36) + path(1,7,12,14,19,24,26,30,37) +

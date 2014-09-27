@@ -73,13 +73,13 @@
 #' @examples
 #' 
 #' # this usually contains cliques of size six
-#' g <- erdos.renyi.game(100, 0.3)
+#' g <- g_np(100, 0.3)
 #' clique.number(g)
 #' cliques(g, min=6)
 #' largest.cliques(g)
 #' 
 #' # To have a bit less maximal cliques, about 100-200 usually
-#' g <- erdos.renyi.game(100, 0.03)
+#' g <- g_np(100, 0.03)
 #' maximal.cliques(g)
 #' 
 #' 
@@ -250,7 +250,7 @@ clique.number <- function(graph) {
 #' 
 #' # A quite dense graph
 #' set.seed(42)
-#' g <- erdos.renyi.game(100, 0.9)
+#' g <- g_np(100, 0.9)
 #' independence.number(g)
 #' independent.vertex.sets(g, min=independence.number(g))
 #' largest.independent.vertex.sets(g)

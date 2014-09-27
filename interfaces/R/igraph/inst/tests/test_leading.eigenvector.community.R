@@ -62,7 +62,7 @@ test_that("leading.eigenvector.community works", {
   ## Stress-test
 
   for (i in 1:100) {
-    g <- erdos.renyi.game(20, sample(5:40, 1), type="gnm")
+    g <- g_np(20, sample(5:40, 1), type="gnm")
     lec1 <- leading.eigenvector.community(g)
     lec2 <- leading.eigenvector.community(g)
     expect_that(membership(lec1), equals(membership(lec2)))

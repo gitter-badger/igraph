@@ -31,7 +31,7 @@ graph.strength (graph, vids = V(graph), mode = c("all", "out", "in", "total"),
 \author{ Gabor Csardi \email{csardi.gabor@gmail.com} }
 \seealso{\code{\link{degree}} for the unweighted version.}
 \examples{
-g <- graph.star(10)
+g <- g_star(10)
 E(g)$weight <- seq(ecount(g))
 graph.strength(g)
 graph.strength(g, mode="out")

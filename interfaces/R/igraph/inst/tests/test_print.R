@@ -26,22 +26,22 @@ test_that("print.igraph works", {
   expect_that(print(g, e=T), prints_text("edges [(]vertex names[)] and"))
 
   set.seed(42)
-  g2 <- erdos.renyi.game(13, p=0.6, directed=TRUE)
+  g2 <- g_np(13, p=0.6, directed=TRUE)
   expect_that(g2, prints_text("1 ->"))
 
-  g3 <- erdos.renyi.game(20, p=0.8)
+  g3 <- g_np(20, p=0.8)
   expect_that(g3, prints_text("1 --"))
 
-  g4 <- graph.star(100)
+  g4 <- g_star(100)
   expect_that(g4, prints_text("2->1"))
 
-  g5 <- graph.star(100, mode="out")
+  g5 <- g_star(100, mode="out")
   expect_that(g5, prints_text("1->"))
 
-  g6 <- ba.game(100, m=6, directed=FALSE)
+  g6 <- g_pa(100, m=6, directed=FALSE)
   expect_that(g6, prints_text("     "))
 
-  kite <- graph.empty(directed=FALSE) + LETTERS[1:10]
+  kite <- g_empty(directed=FALSE) + LETTERS[1:10]
   kite <- kite + edges('A','B','A','C','A','D','A','F',
                        'B','D','B','E','B','G', 'C','D','C','F', 
                        'D','E','D','F','D','G', 'E','G', 

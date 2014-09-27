@@ -45,7 +45,7 @@ g <- g_ring(10)
 bipartite.mapping(g)
 
 ## A star is fine, too
-g2 <- graph.star(10)
+g2 <- g_star(10)
 bipartite.mapping(g2)
 
 ## A graph containing a triangle is not fine

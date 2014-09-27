@@ -328,6 +328,8 @@ is.weighted <- function(graph) {
   "weight" %in% list.edge.attributes(graph)
 }
 
+#' @rdname g_bip
+
 is.bipartite <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")

@@ -40,11 +40,11 @@ stCuts(graph, source, target)
 }
 \examples{
 # A very simple graph
-g <- graph.formula(a -+ b -+ c -+ d -+ e)
+g <- g_formula(a -+ b -+ c -+ d -+ e)
 stCuts(g, source="a", target="e")
 
 # A somewhat more difficult graph
-g2 <- graph.formula(s --+ a:b, a:b --+ t,
+g2 <- g_formula(s --+ a:b, a:b --+ t,
                    a --+ 1:2:3, 1:2:3 --+ b)
 stCuts(g2, source="s", target="t")
 }

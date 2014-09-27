@@ -37,7 +37,7 @@ layout.bipartite (graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
 \examples{
 # Random bipartite graph
 inc <- matrix(sample(0:1, 50, replace=TRUE, prob=c(2,1)), 10, 5)
-g <- graph.incidence(inc)
+g <- g_incidence(inc)
 plot(g, layout=layout.bipartite,
      vertex.color=c("green","cyan")[V(g)$type+1])
 

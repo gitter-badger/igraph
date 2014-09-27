@@ -39,7 +39,7 @@ to.edgelist <- function(num, nodes=n) {
   }
   
   A [ A != -1 ] <- rev(v)
-  g <- graph.adjacency(A)
+  g <- g_adj_matrix(A)
   get.edgelist(g)
 }
   
@@ -116,7 +116,7 @@ to.edgelist <- function(num, nodes=n) {
   }
   
   A [ A != -1 ] <- rev(v)
-  g <- graph.adjacency(A)
+  g <- g_adj_matrix(A)
   get.edgelist(g)
 }
 
@@ -191,7 +191,7 @@ to.edgelist <- function(num, nodes=n) {
   }
   
   A [ A != -1 ] <- rev(v)
-  g <- graph.adjacency(A, mode="upper")
+  g <- g_adj_matrix(A, mode="upper")
   get.edgelist(g)
 }
   

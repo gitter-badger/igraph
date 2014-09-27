@@ -236,7 +236,7 @@ if (loadIfYouCan("XML") && loadIfYouCan("png") &&
   edges <- edges3[ edges3[,1] \%in\% c(ego$name, ego$similar) &
                    edges3[,2] \%in\% c(ego$name, ego$similar), ]
 
-  musnet <- simplify(graph.data.frame(edges, dir=FALSE,
+  musnet <- simplify(g_df(edges, dir=FALSE,
                      vertices=data.frame(name=c(ego$name, ego$similar))))
   str(musnet)
   

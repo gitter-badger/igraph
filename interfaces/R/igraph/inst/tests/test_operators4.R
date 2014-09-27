@@ -250,7 +250,7 @@ test_that("difference of named graphs works", {
   library(igraph)
 
   g1 <- g_ring(10)
-  g2 <- graph.star(11, center=11, mode="undirected")
+  g2 <- g_star(11, center=11, mode="undirected")
   V(g1)$name <- letters[1:10]
   V(g2)$name <- letters[1:11]
   g <- g1 %u% g2
@@ -297,8 +297,8 @@ test_that("compose works for named graphs", {
 
   library(igraph)
 
-  g1 <- graph.formula( A-B:D:E, B-C:D, C-D, D-E )
-  g2 <- graph.formula( A-B-E-A )
+  g1 <- g_formula( A-B:D:E, B-C:D, C-D, D-E )
+  g2 <- g_formula( A-B-E-A )
 
   V(g1)$bar1 <- seq_len(vcount(g1))
   V(g2)$bar2 <- seq_len(vcount(g2))
@@ -351,8 +351,8 @@ test_that("intersection of non-named graphs keeps attributes properly", {
   library(igraph)
   set.seed(42)
 
-  g <- erdos.renyi.game(10, 1/2)
-  g2 <- erdos.renyi.game(10, 1/2)
+  g <- g_np(10, 1/2)
+  g2 <- g_np(10, 1/2)
   E(g)$weight <- sample(ecount(g))
   E(g2)$weight <- sample(ecount(g2))
 
@@ -376,8 +376,8 @@ test_that("union of non-named graphs keeps attributes properly", {
   library(igraph)
   set.seed(42)
 
-  g <- erdos.renyi.game(10, 1/2)
-  g2 <- erdos.renyi.game(10, 1/2)
+  g <- g_np(10, 1/2)
+  g2 <- g_np(10, 1/2)
   E(g)$weight <- sample(ecount(g))
   E(g2)$weight <- sample(ecount(g2))
 

@@ -447,7 +447,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' This function downloads a graph from a database created for the evaluation
 #' of graph isomorphism testing algothitms.
 #' 
-#' \code{graph.graphdb} reads a graph from the graph database from an FTP or
+#' \code{g_graphdb} reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
 #' 
 #' If the \code{url} argument is specified then it should the complete path to
@@ -462,7 +462,8 @@ write.graph.dot <- function(graph, file, ...) {
 #' its old version at
 #' \url{http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
 #' for the actual format of a graph database file and other information.
-#' 
+#'
+#' @aliases graph.graphdb
 #' @param url If not \code{NULL} it is a complete URL with the file to import.
 #' @param prefix Gives the prefix. See details below. Possible values:
 #' \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
@@ -494,17 +495,17 @@ write.graph.dot <- function(graph, file, ...) {
 #' @examples
 #' 
 #' \dontrun{
-#' g <- graph.graphdb(prefix="iso", type="r001", nodes=20, pair="A",
+#' g <- g_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
 #'   which=10, compressed=TRUE)
-#' g2 <- graph.graphdb(prefix="iso", type="r001", nodes=20, pair="B",
+#' g2 <- g_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
 #'   which=10, compressed=TRUE)
 #' graph.isomorphic.vf2(g, g2)	% should be TRUE
-#' g3 <- graph.graphdb(url=paste(sep="/",
+#' g3 <- g_graphdb(url=paste(sep="/",
 #'                               "http://cneurocvs.rmki.kfki.hu",
 #'                               "graphdb/gzip/iso/bvg/b06m",
 #'                               "iso_b06m_m200.A09.gz"))
 #' }
-graph.graphdb <- function(url=NULL,
+g_graphdb <- function(url=NULL,
                           prefix="iso", type="r001", nodes=NULL, pair="A", which=0,
                           base="http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
                           compressed=TRUE, directed=TRUE) {

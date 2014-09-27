@@ -106,7 +106,7 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=igraph.arpack.default,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- ba.game(100, m=4, dir=FALSE)
+#' g <- g_pa(100, m=4, dir=FALSE)
 #' sc <- subgraph.centrality(g)
 #' cor(degree(g), sc)
 #' 

@@ -16,7 +16,7 @@ test_that("Kamada-Kawai layout generator works", {
     expect_that(sum(l), equals(0.914809637353466))
   }
 
-  g <- graph.star(30)
+  g <- g_star(30)
   l <- layout.kamada.kawai(g, maxiter=500)
   if (Sys.info()["sysname"] == "Darwin") {
     expect_that(sum(l), equals(-85.6883999492408))
@@ -46,7 +46,7 @@ test_that("Kamada-Kawai layout generator works", {
 test_that("3D Kamada-Kawai layout generator works", {
 
   library(igraph)
-  g <- graph.star(30)
+  g <- g_star(30)
   l <- layout.kamada.kawai(g, maxiter=5000, dim=3)
   expect_that(sum(l), equals(61.0559727551764))
 

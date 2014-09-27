@@ -20,15 +20,15 @@ test_that("average.path.length works", {
     induced.subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
   
-  g <- giant.component(erdos.renyi.game(100, 3/100))
+  g <- giant.component(g_np(100, 3/100))
   expect_that(apl(g), equals(average.path.length(g)))
 
-  g <- giant.component(erdos.renyi.game(100, 6/100, dir=TRUE), mode="strong")
+  g <- giant.component(g_np(100, 6/100, dir=TRUE), mode="strong")
   expect_that(apl(g), equals(average.path.length(g)))
 
-  g <- erdos.renyi.game(100, 2/100)
+  g <- g_np(100, 2/100)
   expect_that(apl(g), equals(average.path.length(g)))
   
-  g <- erdos.renyi.game(100, 4/100, dir=TRUE)
+  g <- g_np(100, 4/100, dir=TRUE)
   expect_that(apl(g), equals(average.path.length(g)))
 })

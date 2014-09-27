@@ -20,7 +20,7 @@ is.dag(graph)
   Gabor Csardi \email{csardi.gabor@gmail.com} for the R interface.
 }
 \examples{
-g <- graph.tree(10)
+g <- g_tree(10)
 is.dag(g)
 g2 <- g + edge(5,1)
 is.dag(g2)

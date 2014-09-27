@@ -8,16 +8,16 @@ pause <- function() {
 }
 
 ### Traditional approaches: degree, closeness, betweenness
-g <- graph.formula(Andre----Beverly:Diane:Fernando:Carol,
-                   Beverly--Andre:Diane:Garth:Ed,
-                   Carol----Andre:Diane:Fernando,
-                   Diane----Andre:Carol:Fernando:Garth:Ed:Beverly,
-                   Ed-------Beverly:Diane:Garth,
-                   Fernando-Carol:Andre:Diane:Garth:Heather,
-                   Garth----Ed:Beverly:Diane:Fernando:Heather,
-                   Heather--Fernando:Garth:Ike,
-                   Ike------Heather:Jane,
-                   Jane-----Ike )
+g <- g_formula(Andre----Beverly:Diane:Fernando:Carol,
+               Beverly--Andre:Diane:Garth:Ed,
+               Carol----Andre:Diane:Fernando,
+               Diane----Andre:Carol:Fernando:Garth:Ed:Beverly,
+               Ed-------Beverly:Diane:Garth,
+               Fernando-Carol:Andre:Diane:Garth:Heather,
+               Garth----Ed:Beverly:Diane:Fernando:Heather,
+               Heather--Fernando:Garth:Ike,
+               Ike------Heather:Jane,
+               Jane-----Ike )
 
 pause()
 
@@ -157,13 +157,13 @@ pause()
 ## pause()
 
 ## ### Transitivity of a random graph of the same size
-## g <- erdos.renyi.game(vcount(jg), ecount(jg), type="gnm")
+## g <- g_nm(vcount(jg), ecount(jg))
 ## transitivity(g)
 
 ## pause()
 
 ## ### Transitivity of a random graph with the same degree distribution
-## g <- degree.sequence.game(degree(jg, mode="out"), degree(jg, mode="in"),
+## g <- g_degseq(degree(jg, mode="out"), degree(jg, mode="in"),
 ##                           method="simple")
 ## transitivity(g)
 

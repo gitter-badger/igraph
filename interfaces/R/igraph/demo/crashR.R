@@ -256,8 +256,8 @@ print(g, v=T)
 pause()
 
 ### Create undirected example graph
-g2 <- graph.formula(Alice-Bob:Cecil:Daniel, 
-                    Cecil:Daniel-Eugene:Gordon )
+g2 <- g_formula(Alice-Bob:Cecil:Daniel, 
+                Cecil:Daniel-Eugene:Gordon )
 print(g2, v=T)
 
 pause()
@@ -290,8 +290,8 @@ g4
 pause()
 
 ### Edge sequences, first create a directed example graph
-g2 <- graph.formula(Alice -+ Bob:Cecil:Daniel, 
-                    Cecil:Daniel +-+ Eugene:Gordon )
+g2 <- g_formula(Alice -+ Bob:Cecil:Daniel, 
+                Cecil:Daniel +-+ Eugene:Gordon )
 print(g2, v=T)
 plot(g2, layout=layout.kamada.kawai, vertex.label=V(g2)$name)
 

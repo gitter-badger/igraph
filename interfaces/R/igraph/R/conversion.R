@@ -209,7 +209,7 @@ get.edgelist <- function(graph, names=TRUE) {
 #' 
 #' g <- g_ring(10)
 #' as.directed(g, "mutual")
-#' g2 <- graph.star(10)
+#' g2 <- g_star(10)
 #' as.undirected(g)
 #' 
 #' # Combining edge attributes
@@ -344,7 +344,7 @@ igraph.from.graphNEL <- function(graphNEL, name=TRUE, weight=TRUE,
     })
   }
   mode <- if (edgemode(graphNEL)=="directed") "out" else "all"
-  g <- graph.adjlist(al, mode=mode, duplicate=TRUE)
+  g <- g_adj_list(al, mode=mode, duplicate=TRUE)
   if (name) {
     V(g)$name <- nodes(graphNEL)
   }
@@ -592,11 +592,11 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' created, you will need the \code{Matrix} package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph.incidence}} for the opposite operation.
+#' @seealso \code{\link{g_incidence}} for the opposite operation.
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- graph.bipartite( c(0,1,0,1,0,0), c(1,2,2,3,3,4) )
+#' g <- g_bip( c(0,1,0,1,0,0), c(1,2,2,3,3,4) )
 #' get.incidence(g)
 #' 
 get.incidence <- function(graph, types=NULL, attr=NULL,
@@ -622,7 +622,7 @@ get.incidence <- function(graph, types=NULL, attr=NULL,
   }
 }
 
-#' @rdname graph.data.frame
+#' @rdname g_df
 #' @param x An igraph object.
 #' @param what Character constant, whether to return info about vertices,
 #' edges, or both. The default is \sQuote{edges}.

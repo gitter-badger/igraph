@@ -3,9 +3,9 @@ context("dominator.tree")
 
 test_that("dominator.tree works", {
   library(igraph)
-  g <- graph.formula(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
-                     E-+H, F-+I, G-+I:J, H-+E:K, I-+K, J-+I,
-                     K-+I:R, L-+H)
+  g <- g_formula(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
+                 E-+H, F-+I, G-+I:J, H-+E:K, I-+K, J-+I,
+                 K-+I:R, L-+H)
   dtree <- dominator.tree(g, root="R")
 
   dtree$dom <- V(g)$name[ dtree$dom ]

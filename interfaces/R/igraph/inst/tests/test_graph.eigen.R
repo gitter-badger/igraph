@@ -12,7 +12,7 @@ test_that("graph.eigen works for symmetric matrices", {
     })
   }
   
-  g <- erdos.renyi.game(50, 5/50)
+  g <- g_np(50, 5/50)
   e0 <- eigen(get.adjacency(g, sparse=FALSE))
 
   e1 <- graph.eigen(g, which=list(howmany=4, pos="LA"))

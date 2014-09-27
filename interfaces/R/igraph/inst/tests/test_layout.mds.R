@@ -7,7 +7,7 @@ test_that("layout.mds works", {
 
   ## A tree
 
-  g <- graph.tree(10, 2, "undirected")
+  g <- g_tree(10, 2, "undirected")
 
   mymds <- function(g) { 
     sp <- shortest.paths(g)
@@ -32,7 +32,7 @@ test_that("layout.mds works", {
   ## Small stress test
 
   for (i in 1:10) {
-    g <- erdos.renyi.game(100, 2/100)
+    g <- g_np(100, 2/100)
     l <- layout.mds(g)
     expect_that(ncol(l), equals(2))
   }

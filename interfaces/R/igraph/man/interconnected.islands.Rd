@@ -1,5 +1,6 @@
 \name{interconnected.islands}
 \alias{interconnected.islands.game}
+\alias{g_islands}
 \concept{Random graph model}
 \title{A graph with subgraphs that are each a random graph.}
 \description{
@@ -7,7 +8,7 @@
   parameters, and connect them with the specified number of edges.
 }
 \usage{
-interconnected.islands.game (islands.n, islands.size, islands.pin,
+g_islands (islands.n, islands.size, islands.pin,
                              n.inter)
 }
 \arguments{
@@ -23,9 +24,9 @@ interconnected.islands.game (islands.n, islands.size, islands.pin,
 }
 % \references{}
 \author{Samuel Thiriot (\url{http://samuelthiriot.res-ear.ch/})}
-\seealso{\code{\link{erdos.renyi.game}}}
+\seealso{\code{\link{g_np}}}
 \examples{
-g <- interconnected.islands.game(3, 10, 5/10, 1)
+g <- g_islands(3, 10, 5/10, 1)
 oc <- optimal.community(g)
 oc
 }

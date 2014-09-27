@@ -95,7 +95,7 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' @examples
 #' 
 #' ## A star and a ring
-#' g1 <- graph.star(10, mode="undirected")
+#' g1 <- g_star(10, mode="undirected")
 #' V(g1)$name <- letters[1:10]
 #' g2 <- g_ring(10)
 #' V(g2)$name <- letters[11:20]
@@ -302,9 +302,9 @@ graph.disjoint.union <- function(...) {
 #' @examples
 #' 
 #' ## Union of two social networks with overlapping sets of actors
-#' net1 <- graph.formula(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
-#'                       H-F:G, H-I-J)
-#' net2 <- graph.formula(D-A:F:Y, B-A-X-F-H-Z, F-Y)
+#' net1 <- g_formula(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
+#'                   H-F:G, H-I-J)
+#' net2 <- g_formula(D-A:F:Y, B-A-X-F-H-Z, F-Y)
 #' str(net1 %u% net2)
 #' 
 graph.union <- function(..., byname="auto") {
@@ -358,9 +358,9 @@ graph.union <- function(..., byname="auto") {
 #' @examples
 #' 
 #' ## Common part of two social networks
-#' net1 <- graph.formula(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
-#'                       H-F:G, H-I-J)
-#' net2 <- graph.formula(D-A:F:Y, B-A-X-F-H-Z, F-Y)
+#' net1 <- g_formula(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
+#'                   H-F:G, H-I-J)
+#' net2 <- g_formula(D-A:F:Y, B-A-X-F-H-Z, F-Y)
 #' str(net1 %s% net2)
 #' 
 graph.intersection <- function(..., byname="auto",
@@ -411,11 +411,11 @@ graph.intersection <- function(..., byname="auto",
 #' 
 #' ## Create a wheel graph
 #' wheel <- graph.union(g_ring(10),
-#'                      graph.star(11, center=11, mode="undirected"))
+#'                      g_star(11, center=11, mode="undirected"))
 #' V(wheel)$name <- letters[seq_len(vcount(wheel))]
 #' 
 #' ## Subtract a star graph from it
-#' sstar <- graph.star(6, center=6, mode="undirected")
+#' sstar <- g_star(6, center=6, mode="undirected")
 #' V(sstar)$name <- letters[c(1,3,5,7,9,11)]
 #' G <- wheel %m% sstar
 #' str(G)
@@ -498,7 +498,7 @@ graph.difference <- function(big, small, byname="auto") {
 #' gc <- graph.complementer(g)
 #' gu <- graph.union(g, gc)
 #' gu
-#' graph.isomorphic(gu, graph.full(vcount(g)))
+#' graph.isomorphic(gu, g_full(vcount(g)))
 #' 
 graph.complementer <- function(graph, loops=FALSE) {
 
@@ -566,7 +566,7 @@ graph.complementer <- function(graph, loops=FALSE) {
 #' @examples
 #' 
 #' g1 <- g_ring(10)
-#' g2 <- graph.star(10, mode="undirected")
+#' g2 <- g_star(10, mode="undirected")
 #' gc <- graph.compose(g1, g2)
 #' str(gc)
 #' str(simplify(gc))

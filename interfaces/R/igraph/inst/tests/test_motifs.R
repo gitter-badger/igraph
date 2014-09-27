@@ -6,7 +6,7 @@ test_that("motif finding works", {
   library(igraph)
   set.seed(123)
 
-  b <- erdos.renyi.game(10000, 4/10000, directed=TRUE)
+  b <- g_np(10000, 4/10000, directed=TRUE)
 
   mno <- graph.motifs.no(b)
 
@@ -27,7 +27,7 @@ test_that("motif finding works", {
 ######################
 
   set.seed(123)
-  b <- erdos.renyi.game(10000, 4/10000, directed=TRUE)
+  b <- g_np(10000, 4/10000, directed=TRUE)
 
   m <- graph.motifs(b)
 

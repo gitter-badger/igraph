@@ -5,16 +5,16 @@ test_that("evcent works", {
 
   library(igraph)
 
-  kite <- graph.formula(Andre    - Beverly:Carol:Diane:Fernando,
-                        Beverly  - Andre:Diane:Ed:Garth,
-                        Carol    - Andre:Diane:Fernando,
-                        Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,
-                        Ed       - Beverly:Diane:Garth,
-                        Fernando - Andre:Carol:Diane:Garth:Heather,
-                        Garth    - Beverly:Diane:Ed:Fernando:Heather,
-                        Heather  - Fernando:Garth:Ike,
-                        Ike      - Heather:Jane,
-                        Jane     - Ike)
+  kite <- g_formula(Andre    - Beverly:Carol:Diane:Fernando,
+                    Beverly  - Andre:Diane:Ed:Garth,
+                    Carol    - Andre:Diane:Fernando,
+                    Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,
+                    Ed       - Beverly:Diane:Garth,
+                    Fernando - Andre:Carol:Diane:Garth:Heather,
+                    Garth    - Beverly:Diane:Ed:Fernando:Heather,
+                    Heather  - Fernando:Garth:Ike,
+                    Ike      - Heather:Jane,
+                    Jane     - Ike)
   evc <- round(evcent(kite)$vector, 3)
   expect_that(evc, equals(structure(c(0.732, 0.732, 0.594, 1, 0.827,
                         0.594, 0.827, 0.407, 0.1, 0.023), .Names =
@@ -38,7 +38,7 @@ test_that("evcent works", {
   }
 
   for (i in 1:1000) {
-    G <- erdos.renyi.game(10, sample(1:20, 1), type="gnm")
+    G <- g_nm(10, sample(1:20, 1))
     ev <- evcent(G)
     expect_that(is.good(get.adjacency(G, sparse=FALSE), ev$vector,
                         ev$value), is_true())

@@ -99,9 +99,9 @@ assortativity.degree (graph, directed = TRUE)
 % \seealso{}
 \examples{
 # random network, close to zero
-assortativity.degree(erdos.renyi.game(10000,3/10000))
+assortativity.degree(g_np(10000, 3/10000))
 
 # BA model, tends to be dissortative
-assortativity.degree(ba.game(10000, m=4))
+assortativity.degree(g_pa(10000, m=4))
 }
 \keyword{graphs}

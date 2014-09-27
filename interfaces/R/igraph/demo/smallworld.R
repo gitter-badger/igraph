@@ -10,7 +10,7 @@ pause <- function() {
 pause()
 
 ### Create a star-like graph
-t1 <- graph.formula(A-B:C:D:E)
+t1 <- g_formula(A-B:C:D:E)
 t1
 
 pause()
@@ -57,7 +57,7 @@ plot(ring, vertex.label=NA, main="Ring graph")
 pause()
 
 ### Watts-Strogatz model
-ws1 <- watts.strogatz.game(1, 50, 3, p=0)
+ws1 <- g_smallworld(1, 50, 3, p=0)
 ws1$layout <- layout.circle
 V(ws1)$size <- 3
 E(ws1)$curved <- 1
@@ -90,7 +90,7 @@ pause()
 
 ### Function to test regular graph with given size
 try.ring.pl <- function(n) {
-  g <- watts.strogatz.game(1, n, 3, p=0)
+  g <- g_smallworld(1, n, 3, p=0)
   average.path.length(g)
 }
 try.ring.pl(10)
@@ -106,7 +106,7 @@ plot(ring.size, ring.pl, type="b")
 pause()
 
 ### Path lengths, random graph
-rg <- erdos.renyi.game(50, 50*3, type="gnm")
+rg <- g_nm(50, 50 * 3)
 rg$layout <- layout.circle
 V(rg)$size <- 3
 plot(rg, vertex.label=NA, main="Random graph")
@@ -116,7 +116,7 @@ pause()
 
 ### Path length of random graphs
 try.random.pl <- function(n) {
-  g <- erdos.renyi.game(n, n*3, type="gnm")
+  g <- g_nm(n, n*3)
   average.path.length(g)
 }
 try.random.pl(100)
@@ -141,7 +141,7 @@ transitivity(rg, type="localaverage")
 pause()
 
 ### Rewiring
-ws2 <- watts.strogatz.game(1, 50, 3, p=0.1)
+ws2 <- g_smallworld(1, 50, 3, p=0.1)
 ws2$layout <- layout.circle
 V(ws2)$size <- 3
 plot(ws2, vertex.label=NA)
@@ -151,7 +151,7 @@ pause()
 
 ### Path lengths in randomized lattices
 try.rr.pl <- function(n, p) {
-  g <- watts.strogatz.game(1, n, 3, p=p)
+  g <- g_smallworld(1, n, 3, p=p)
   average.path.length(g)
 }
 rr.pl.0.1 <- sapply(ring.size, try.rr.pl, p=0.1)
@@ -166,7 +166,7 @@ pause()
 
 ### Create the graph in the Watts-Strogatz paper
 ws.paper <- function(p, n=1000) {
-  g <- watts.strogatz.game(1, n, 10, p=p)
+  g <- g_smallworld(1, n, 10, p=p)
   tr <- transitivity(g, type="localaverage")
   pl <- average.path.length(g)
   c(tr, pl)

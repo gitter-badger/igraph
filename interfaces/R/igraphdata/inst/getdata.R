@@ -231,7 +231,7 @@ Kneiphof,A
 Vorstadt-Haberberg,C
 Lomse,D"
 
-Koenigsberg <- graph.data.frame(read.csv(textConnection(edges)),
+Koenigsberg <- g_df(read.csv(textConnection(edges)),
                                 vertices=read.csv(textConnection(vertices)),
                                 directed=FALSE)
 
@@ -351,7 +351,7 @@ classes <- read.csv(textConnection(class), header=TRUE, stringsAsFactors=FALSE)
 
 # Create the network
 
-yeast <- graph.data.frame(fromto[highmed,], directed=FALSE)
+yeast <- g_df(fromto[highmed,], directed=FALSE)
 yeast$name <- "Yeast protein interactions, von Mering et al."
 yeast$Citation <- "Comparative assessment of large-scale data sets of protein-protein interactions. Christian von Mering, Roland Krause, Berend Snel, Michael Cornell, Stephen G. Oliver, Stanley Fields and Peer Bork. Nature 417, 399-403 (2002)"
 yeast$Author <- "Christian von Mering, Roland Krause, Berend Snel, Michael Cornell, Stephen G. Oliver, Stanley Fields and Peer Bork"
@@ -383,7 +383,7 @@ l <- l[(grep("^DATA", l)+1):length(l)]
 l1 <- matrix(scan(textConnection(paste(l[1:34], collapse="\n"))), nr=34)
 l2 <- matrix(scan(textConnection(paste(l[1:34+34], collapse="\n"))), nr=34)
 
-karate <- graph.adjacency(l2, weighted=TRUE, mode="undirected")
+karate <- g_adj_matrix(l2, weighted=TRUE, mode="undirected")
 V(karate)$Faction <- c(1,1,1,1,1,1,1,1, 2,2, 1,1,1,1, 2,2, 1,1, 2, 1, 2, 1,
                      2,2,2,2,2,2,2,2,2,2,2,2)
 karate$name <- "Zachary's karate club network"
@@ -409,7 +409,7 @@ names(vert) <- c("name", "City")
 
 library(igraph)
 
-USairports <- graph.data.frame(tab2, vertices=vert)
+USairports <- g_df(tab2, vertices=vert)
 USairports$name <- "US airports"
 
 ## Add positions

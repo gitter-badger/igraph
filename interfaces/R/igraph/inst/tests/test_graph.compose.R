@@ -5,7 +5,7 @@ test_that("graph.compose works", {
 
   library(igraph)
 
-  g1 <- erdos.renyi.game(50, 3/50, directed=TRUE)
+  g1 <- g_np(50, 3/50, directed=TRUE)
   gi <- graph( rep(1:vcount(g1), each=2), dir=TRUE )
 
   g2 <- graph.compose(g1, gi)

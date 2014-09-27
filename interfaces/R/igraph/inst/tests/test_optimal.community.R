@@ -24,7 +24,7 @@ test_that("weighted optimal.community works", {
 
   library(igraph)
   set.seed(42)
-  g <- graph.full(5) + g_ring(5)
+  g <- g_full(5) + g_ring(5)
   E(g)$weight <- sample(1:2, ecount(g), replace=TRUE)
 
   oc <- optimal.community(g)

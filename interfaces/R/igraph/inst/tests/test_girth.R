@@ -6,7 +6,7 @@ test_that("girth works", {
   library(igraph)
 
   ## No circle in a tree
-  g <- graph.tree(1000, 3)
+  g <- g_tree(1000, 3)
   gi <- girth(g)
   expect_that(gi$girth, equals(0))
   expect_that(gi$circle, equals(numeric()))

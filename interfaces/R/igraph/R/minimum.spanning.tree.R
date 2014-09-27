@@ -52,7 +52,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- erdos.renyi.game(100, 3/100)
+#' g <- g_np(100, 3/100)
 #' mst <- minimum.spanning.tree(g)
 #' 
 minimum.spanning.tree <- function(graph, weights=NULL,

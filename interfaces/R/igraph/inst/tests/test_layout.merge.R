@@ -19,7 +19,7 @@ test_that("layout.merge works", {
 
   ## Stress test
   for (i in 1:10) {
-    g <- erdos.renyi.game(100, 2/100)
+    g <- g_np(100, 2/100)
     l <- layout.mds(g)
     expect_that(dim(l), equals(c(vcount(g), 2)))
   }

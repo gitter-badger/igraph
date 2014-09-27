@@ -47,17 +47,17 @@
 #' \code{cohesiveBlocks} object. They are returned in a list of numeric
 #' vectors, each containing vertex ids.
 #' 
-#' The function \code{blockGraphs} is similar, but returns the blocks as
+#' The function \code{g_blocks} is similar, but returns the blocks as
 #' (induced) subgraphs of the input graph. The various (graph, vertex and edge)
 #' attributes are kept in the subgraph.
 #' 
 #' The function \code{cohesion} returns a numeric vector, the cohesion of the
 #' different blocks. The order of the blocks is the same as for the
-#' \code{blocks} and \code{blockGraphs} functions.
+#' \code{blocks} and \code{g_blocks} functions.
 #' 
 #' The block hierarchy can be queried using the \code{hierarchy} function. It
 #' returns an igraph graph, its vertex ids are ordered according the order of
-#' the blocks in the \code{blocks} and \code{blockGraphs}, \code{cohesion},
+#' the blocks in the \code{blocks} and \code{g_blocks}, \code{cohesion},
 #' etc. functions.
 #' 
 #' \code{parent} gives the parent vertex of each block, in the block hierarchy,
@@ -105,14 +105,14 @@
 #' The generic function \code{plot} plots the graph, showing one or more
 #' cohesive blocks in it.
 #' 
-#' @aliases cohesive.blocks cohesiveBlocks blocks blockGraphs cohesion
+#' @aliases cohesive.blocks cohesiveBlocks blocks g_blocks blockGraphs cohesion
 #' hierarchy parent plotHierarchy exportPajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' @param graph For \code{cohesive.blocks} a graph object of class
 #' \code{igraph}. It must be undirected and simple. (See
 #' \code{\link{is.simple}}.)
 #' 
-#' For \code{blockGraphs} and \code{exportPajek} the same graph must be
+#' For \code{g_blocks} and \code{exportPajek} the same graph must be
 #' supplied whose cohesive block structure is given in the \code{blocks}
 #' argument.
 #' @param labels Logical scalar, whether to add the vertex labels to the result
@@ -157,7 +157,7 @@
 #' 
 #' \code{blocks} returns a list of numeric vectors, containing vertex ids.
 #' 
-#' \code{blockGraphs} returns a list of igraph graphs, corresponding to the
+#' \code{g_blocks} returns a list of igraph graphs, corresponding to the
 #' cohesive blocks.
 #' 
 #' \code{cohesion} returns a numeric vector, the cohesion of each block.
@@ -190,11 +190,11 @@
 #' @examples
 #' 
 #' ## The graph from the Moody-White paper
-#' mw <- graph.formula(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
-#'                     5-6:7:21, 6-7, 7-8:11:14:19, 8-9:11:14, 9-10,
-#'                     10-12:13, 11-12:14, 12-16, 13-16, 14-15, 15-16,
-#'                     17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
-#'                     21-22:23, 22-23)
+#' mw <- g_formula(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
+#'                 5-6:7:21, 6-7, 7-8:11:14:19, 8-9:11:14, 9-10,
+#'                 10-12:13, 11-12:14, 12-16, 13-16, 14-15, 15-16,
+#'                 17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
+#'                 21-22:23, 22-23)
 #' 
 #' mwBlocks <- cohesive.blocks(mw)
 #' 
@@ -214,18 +214,18 @@
 #' }
 #' 
 #' ## The science camp network
-#' camp <- graph.formula(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
-#'                       Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
-#'                       Holly   - Carol:Pat:Pam:Jennie:Bill,
-#'                       Bill    - Pauline:Michael:Lee:Holly,
-#'                       Pauline - Bill:Jennie:Ann,
-#'                       Jennie  - Holly:Michael:Lee:Ann:Pauline,
-#'                       Michael - Bill:Jennie:Ann:Lee:John,
-#'                       Ann     - Michael:Jennie:Pauline,
-#'                       Lee     - Michael:Bill:Jennie,
-#'                       Gery    - Pat:Steve:Russ:John,
-#'                       Russ    - Steve:Bert:Gery:John,
-#'                       John    - Gery:Russ:Michael)
+#' camp <- g_formula(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
+#'                   Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
+#'                   Holly   - Carol:Pat:Pam:Jennie:Bill,
+#'                   Bill    - Pauline:Michael:Lee:Holly,
+#'                   Pauline - Bill:Jennie:Ann,
+#'                   Jennie  - Holly:Michael:Lee:Ann:Pauline,
+#'                   Michael - Bill:Jennie:Ann:Lee:John,
+#'                   Ann     - Michael:Jennie:Pauline,
+#'                   Lee     - Michael:Bill:Jennie,
+#'                   Gery    - Pat:Steve:Russ:John,
+#'                   Russ    - Steve:Bert:Gery:John,
+#'                   John    - Gery:Russ:Michael)
 #' campBlocks <- cohesive.blocks(camp)
 #' campBlocks
 #' 
@@ -266,7 +266,7 @@ blocks <- function(blocks) {
 
 #' @rdname cohesive.blocks
 
-blockGraphs <- function(blocks, graph) {
+g_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced.subgraph, graph=graph)
 }
 

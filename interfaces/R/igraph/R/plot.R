@@ -417,7 +417,7 @@ plot.igraph <- function(x,
 #' @examples
 #' 
 #' \dontrun{
-#' g <- graph.lattice( c(5,5,5) )
+#' g <- g_lattice( c(5,5,5) )
 #' coords <- layout.fruchterman.reingold(g, dim=3)
 #' rglplot(g, layout=coords)
 #' }

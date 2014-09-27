@@ -141,14 +141,14 @@ centralization.evcent.tmax (graph = NULL, nodes = 0,
 %\seealso{}
 \examples{
 # A BA graph is quite centralized
-g <- ba.game(1000, m=4)
+g <- g_pa(1000, m=4)
 centralization.degree(g)$centralization
 centralization.closeness(g, mode="all")$centralization
 centralization.evcent(g, directed=FALSE)$centralization
 
 # The most centralized graph according to eigenvector centrality
 g0 <- graph( c(2,1), n=10, dir=FALSE )
-g1 <- graph.star(10, mode="undirected")
+g1 <- g_star(10, mode="undirected")
 centralization.evcent(g0)$centralization
 centralization.evcent(g1)$centralization
 }

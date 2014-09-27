@@ -5,7 +5,7 @@ test_that("largest.cliques works", {
 
   library(igraph)
 
-  g <- erdos.renyi.game(50,20/50)
+  g <- g_np(50,20/50)
   lc <- largest.cliques(g)
 
   ## TODO: this only checks that these are cliques

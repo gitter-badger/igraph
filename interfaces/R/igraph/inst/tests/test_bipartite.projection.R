@@ -5,17 +5,17 @@ test_that("bipartite.projection works", {
   library(igraph)
   set.seed(42)
 
-  g <- graph.full.bipartite(10,5)
+  g <- g_full_bip(10,5)
   proj <- bipartite.projection(g)
-  expect_that(graph.isomorphic(proj[[1]], graph.full(10)), is_true())
-  expect_that(graph.isomorphic(proj[[2]], graph.full(5)), is_true())
+  expect_that(graph.isomorphic(proj[[1]], g_full(10)), is_true())
+  expect_that(graph.isomorphic(proj[[2]], g_full(5)), is_true())
 
   M <- matrix(0, nr=5, nc=3)
   rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
   colnames(M) <- c("Party", "Skiing", "Badminton")
   M[] <- sample(0:1, length(M), replace=TRUE)
   M
-  g2 <- graph.incidence(M)
+  g2 <- g_incidence(M)
   expect_that(as.matrix(g2[1:5,6:8]), equals(M))
   expect_that(as.matrix(g2[1:5,1:5]), is_equivalent_to(matrix(0, 5, 5)))
   expect_that(as.matrix(g2[6:8,6:8]), is_equivalent_to(matrix(0, 3, 3)))  
@@ -40,7 +40,7 @@ test_that("bipartite.projection can calculate only one projection", {
   library(igraph)
   set.seed(42)
 
-  g <- bipartite.random.game(5, 10, p=.3)
+  g <- g_np_bip(5, 10, p=.3)
   proj <- bipartite.projection(g)
   proj1 <- bipartite.projection(g, which="false")
   proj2 <- bipartite.projection(g, which="true")
@@ -57,7 +57,7 @@ test_that("bipartite.projection can calculate only one projection", {
 test_that("bipartite.projection removes 'type' attribute if requested", {
 
   library(igraph)
-  g <- graph.full.bipartite(10,5)
+  g <- g_full_bip(10,5)
   proj <- bipartite.projection(g)
   proj1 <- bipartite.projection(g, which="true")
   proj2 <- bipartite.projection(g, which="false")
@@ -80,7 +80,7 @@ test_that("bipartite.projection removes 'type' attribute if requested", {
 test_that("bipartite.projection breaks for non-bipartite graphs (#543)", {
 
   library(igraph)
-  g <- graph.formula(A-0, B-1, A-1, 0-1)
+  g <- g_formula(A-0, B-1, A-1, 0-1)
   V(g)$type <- V(g)$name %in% LETTERS
 
   expect_that(bipartite.projection.size(g),

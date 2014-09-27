@@ -101,7 +101,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
   length. E.g. the following code gives a warning, because we set the
   attribute for three vertices, but supply only two values:
   \preformatted{
-    g <- graph.tree(10)
+    g <- g_tree(10)
     V(g)$color <- "grey"
     V(g)[1:3]$color <- c("green", "blue")
   }
@@ -227,7 +227,7 @@ d <- get.diameter(g)
 E(g, path=d)
 
 # performance for large graphs is bad
-largeg <- graph.lattice(c(1000, 100))
+largeg <- g_lattice(c(1000, 100))
 system.time(E(largeg)[inc(1)])
 system.time(incident(largeg, 1))
 }
