@@ -60,7 +60,7 @@ function() {
     E(g)$color <- "black"
     plot.new()
     layout(matrix(1:6, nrow=2, byrow=TRUE))
-    co <- layout.kamada.kawai(g)
+    co <- l_kk(g)
     par(mar=c(1,1,1,1))
     plot(g, layout=co)
     for (i in 1:length(gl$Bc)) {

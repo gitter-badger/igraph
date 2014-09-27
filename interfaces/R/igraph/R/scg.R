@@ -461,7 +461,7 @@ scgSemiProjectors <- function(groups,
 #' cg <- scg(g, 1, 3, algo="exact_scg")
 #' 
 #' #plot the result
-#' layout <- layout.kamada.kawai(g)
+#' layout <- l_kk(g)
 #' nt <- vcount(cg$Xt)
 #' col <- rainbow(nt)
 #' vsize <- table(cg$groups)
@@ -472,7 +472,7 @@ scgSemiProjectors <- function(groups,
 #' 		vertex.label = NA, layout = layout)
 #' plot(cg$Xt, edge.width = ewidth, edge.label = ewidth, 
 #' 	vertex.color = col, vertex.size = 20*vsize/max(vsize),
-#' 	vertex.label=NA, layout = layout.kamada.kawai)
+#' 	vertex.label=NA, layout = l_kk)
 #' par(op)
 #' 
 #' ## SCG of real-world network
@@ -498,14 +498,14 @@ scgSemiProjectors <- function(groups,
 #' ## use SCG to get the communities
 #' com <- scg(graph.laplacian(immuno), ev=n-c(1,2), nt=2)$groups
 #' col <- rainbow(max(com))
-#' layout <- layout.auto(immuno)
+#' layout <- l_auto(immuno)
 #' 
 #' plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
 #'                 vertex.label=NA)
 #' 
 #' ## display the coarse-grained graph
 #' gt <- simplify(as.undirected(gt))
-#' layout.cg <- layout.kamada.kawai(gt)
+#' layout.cg <- l_kk(gt)
 #' com.cg <- scg(graph.laplacian(gt), nt-c(1,2), 2)$groups
 #' vsize <- sqrt(as.vector(table(cg$groups)))
 #' 

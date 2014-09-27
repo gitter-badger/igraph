@@ -66,7 +66,7 @@ g <- g_formula(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
                E-+H, F-+I, G-+I:J, H-+E:K, I-+K, J-+I,
                K-+I:R, L-+H)
 dtree <- dominator.tree(g, root="R")
-layout <- layout.reingold.tilford(dtree$domtree, root="R")
+layout <- l_tree(dtree$domtree, root="R")
 layout[,2] <- -layout[,2]
 if (interactive()) {
   plot(dtree$domtree, layout=layout, vertex.label=V(dtree$domtree)$name)

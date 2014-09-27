@@ -16,7 +16,7 @@ t1
 pause()
 
 ### Define its plotting properties
-t1$layout <- layout.circle
+t1$layout <- l_circle
 V(t1)$color <- "white"
 V(t1)[name=="A"]$color <- "orange"
 V(t1)$size <- 40
@@ -50,7 +50,7 @@ pause()
 
 ### A one dimensional, circular lattice
 ring <- graph.ring(50)
-ring$layout <- layout.circle
+ring$layout <- l_circle
 V(ring)$size <- 3
 plot(ring, vertex.label=NA, main="Ring graph")
 
@@ -58,7 +58,7 @@ pause()
 
 ### Watts-Strogatz model
 ws1 <- g_smallworld(1, 50, 3, p=0)
-ws1$layout <- layout.circle
+ws1$layout <- l_circle
 V(ws1)$size <- 3
 E(ws1)$curved <- 1
 plot(ws1, vertex.label=NA, main="regular graph")
@@ -107,7 +107,7 @@ pause()
 
 ### Path lengths, random graph
 rg <- g_nm(50, 50 * 3)
-rg$layout <- layout.circle
+rg$layout <- l_circle
 V(rg)$size <- 3
 plot(rg, vertex.label=NA, main="Random graph")
 average.path.length(rg)
@@ -142,7 +142,7 @@ pause()
 
 ### Rewiring
 ws2 <- g_smallworld(1, 50, 3, p=0.1)
-ws2$layout <- layout.circle
+ws2$layout <- l_circle
 V(ws2)$size <- 3
 plot(ws2, vertex.label=NA)
 average.path.length(ws2)

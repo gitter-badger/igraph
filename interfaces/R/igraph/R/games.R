@@ -790,11 +790,11 @@ g_grg <- function(nodes, radius, torus=FALSE, coords=FALSE) {
 #' 
 #' pf <- matrix( c(1, 0, 0, 1), nr=2)
 #' g <- g_pref(20, 2, pref.matrix=pf)
-#' \dontrun{tkplot(g, layout=layout.fruchterman.reingold)}
+#' \dontrun{tkplot(g, layout=l_fr)}
 #' 
 #' pf <- matrix( c(0, 1, 0, 0), nr=2)
 #' g <- g_pref_asym(20, 2, pref.matrix=pf)
-#' \dontrun{tkplot(g, layout=layout.circle)}
+#' \dontrun{tkplot(g, layout=l_circle)}
 #' 
 g_pref <- function(nodes, types, type.dist=rep(1, types),
                             fixed.sizes=FALSE,

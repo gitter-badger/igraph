@@ -140,7 +140,7 @@ assign(".next", 1, .tkplot.env)
 #' ## Saving a tkplot() to a file programatically
 #' g <- g_star(10, center=10) %u% g_ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
-#' lay <- layout.auto(g)
+#' lay <- l_auto(g)
 #' 
 #' id <- tkplot(g, layout=lay)
 #' canvas <- tkplot.canvas(id)
@@ -155,7 +155,7 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' canvas <- tkplot.canvas(id)
 #' padding <- 20
-#' coords <- layout.norm(layout.circle(g), 0+padding, 450-padding,
+#' coords <- l_norm(l_circle(g), 0+padding, 450-padding,
 #'                       50+padding, 500-padding)
 #' tkplot.setcoords(id, coords)
 #' 
@@ -523,12 +523,12 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
 }
 
 .tkplot.addlayout("random",
-                  list(name="Random", f=layout.random, params=list()))
+                  list(name="Random", f=l_random, params=list()))
 .tkplot.addlayout("circle",
-                  list(name="Circle", f=layout.circle, params=list()))
+                  list(name="Circle", f=l_circle, params=list()))
 .tkplot.addlayout("fruchterman.reingold",
                   list(name="Fruchterman-Reingold",
-                       f=layout.fruchterman.reingold,
+                       f=l_fr,
                        params=list(
                          niter=list(name="Number of iterations",
                            type="numeric",
@@ -552,7 +552,7 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
                   )
 .tkplot.addlayout("kamada.kawai",
                   list(name="Kamada-Kawai",
-                       f=layout.kamada.kawai,
+                       f=l_kk,
                        params=list(
                          niter=list(name="Number of iterations",
                            type="numeric",
@@ -568,7 +568,7 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
                   )
 .tkplot.addlayout("reingold.tilford",
                   list(names="Reingold-Tilford",
-                       f=layout.reingold.tilford,
+                       f=l_tree,
                        params=list(
                          root=list(name="Root vertex",
                            type="numeric",

@@ -858,17 +858,17 @@ tkigraph <- function() {
         l
       }
     } else if (vcount(graph) < 300 && is.connected(graph)) {
-      layout.kamada.kawai(graph)
+      l_kk(graph)
     } else if (vcount(graph) < 1000) {
-      layout.fruchterman.reingold(graph)
+      l_fr(graph)
     } else {
-      layout.circle(graph)
+      l_circle(graph)
     }
   }
   
-  layouts <- list(layout.default, layout.kamada.kawai,
-                  layout.fruchterman.reingold,
-                  layout.reingold.tilford, layout.circle, layout.random)
+  layouts <- list(layout.default, l_kk,
+                  l_fr,
+                  l_tree, l_circle, l_random)
 
   if (read$vertex.size < 10) {
     label.dist <- 0.4
@@ -973,7 +973,7 @@ tkigraph <- function() {
                                   "Undirected"), default="2"))
   read$mode <- c("out", "in", "undirected")[read$mode+1]
   g <- g_tree(n=read$n, children=read$b, mode=read$mode)
-  lay <- layout.reingold.tilford(g, root=1, mode="all")
+  lay <- l_tree(g, root=1, mode="all")
   g <- set.graph.attribute(g, "layout", lay)
   g <- set.graph.attribute(g, "name", "Regular tree")
   .tkigraph.add.graph(g)
@@ -984,7 +984,7 @@ tkigraph <- function() {
                               n=list(name="Vertices", type="numeric",
                                 default=100, min=0))
   g <- g_ring(n=read$n)
-  g <- set.graph.attribute(g, "layout", layout.circle)
+  g <- set.graph.attribute(g, "layout", l_circle)
   g <- set.graph.attribute(g, "name", "Regular ring")
   .tkigraph.add.graph(g)
 }
@@ -1124,7 +1124,7 @@ tkigraph <- function() {
                            p=read$p)
   g <- set.graph.attribute(g, "name", "Watts-Strogatz small-world graph")
   if (read$dim == 1) { 
-    g <- set.graph.attribute(g, "layout", layout.circle)
+    g <- set.graph.attribute(g, "layout", l_circle)
   }
   .tkigraph.add.graph(g)
 }

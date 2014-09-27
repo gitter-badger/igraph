@@ -382,8 +382,8 @@
       actual coordinates. The function should return a matrix with two
       or three columns. For the 2D plots the third column is ignored.
 
-      The default value is \code{layout.random}, ie. a function
-      returning with 2D random placement.}
+      The default value is \code{l_auto}, a smart function that
+      chooses a layouter based on the graph.}
     \item{margin}{The amount of empty space below, over, at the left and
       right of the plot, it is a numeric vector of length four. Usually
       values between 0 and 0.5 are meaningful, but negative values are
@@ -435,14 +435,14 @@
 
 # plotting a simple ring graph, all default parameters, except the layout
 g <- g_ring(10)
-g$layout <- layout.circle
+g$layout <- l_circle
 plot(g)
 tkplot(g)
 rglplot(g)
 
 # plotting a random graph, set the parameters in the command arguments
 g <- barabasi.game(100)
-plot(g, layout=layout.fruchterman.reingold, vertex.size=4,
+plot(g, layout=l_fr, vertex.size=4,
      vertex.label.dist=0.5, vertex.color="red", edge.arrow.size=0.5)
 
 # plot a random graph, different color for each component
@@ -450,18 +450,18 @@ g <- g_np(100, 1/100)
 comps <- clusters(g)$membership
 colbar <- rainbow(max(comps)+1)
 V(g)$color <- colbar[comps+1]
-plot(g, layout=layout.fruchterman.reingold, vertex.size=5, vertex.label=NA)
+plot(g, layout=l_fr, vertex.size=5, vertex.label=NA)
 
 # plot communities in a graph
 g <- g_full(5) \%du\% g_full(5) \%du\% g_full(5)
 g <- add.edges(g, c(1,6, 1,11, 6,11))
 com <- spinglass.community(g, spins=5)
 V(g)$color <- com$membership+1
-g <- set.graph.attribute(g, "layout", layout.kamada.kawai(g))
+g <- set.graph.attribute(g, "layout", l_kk(g))
 plot(g, vertex.label.dist=1.5)
 
 # draw a bunch of trees, fix layout
-igraph.options(plot.layout=layout.reingold.tilford)
+igraph.options(plot.layout=l_tree)
 plot(g_tree(20, 2))
 plot(g_tree(50, 3), vertex.size=3, vertex.label=NA)
 tkplot(g_tree(50, 2, mode="undirected"), vertex.size=10,

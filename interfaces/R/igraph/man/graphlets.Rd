@@ -76,7 +76,7 @@ E(g)$label <- E(g)$weight
 E(g)$label.cex <- 2
 E(g)$color <- "black"
 layout(matrix(1:6, nrow=2, byrow=TRUE))
-co <- layout.kamada.kawai(g)
+co <- l_kk(g)
 par(mar=c(1,1,1,1))
 plot(g, layout=co)
 

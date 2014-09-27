@@ -98,7 +98,7 @@ pause()
 ### Add some the top 5 predicted edges to the graph, colored red
 
 E(g)$color <- "grey"
-lay <- layout.auto(g)
+lay <- l_auto(g)
 g2 <- add.edges(g, t(pred$edges[1:5,]), color="red")
 plot(g2, layout=lay)
 

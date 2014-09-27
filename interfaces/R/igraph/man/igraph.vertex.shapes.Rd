@@ -241,7 +241,7 @@ if (loadIfYouCan("XML") && loadIfYouCan("png") &&
   str(musnet)
   
   V(musnet)$raster <- c(list(ego$image), lapply(similar, "[[", "image"))
-  plot(musnet, layout=layout.star, vertex.shape="raster",
+  plot(musnet, layout=l_star, vertex.shape="raster",
        vertex.label=V(musnet)$name, margin=.2,
        vertex.size=50, vertex.size2=50,
        vertex.label.dist=2, vertex.label.degree=0)

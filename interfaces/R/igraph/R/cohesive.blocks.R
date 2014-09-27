@@ -356,7 +356,7 @@ plot.cohesiveBlocks <- function(x, y,
 #' @rdname cohesive.blocks
 
 plotHierarchy <- function(blocks,
-                          layout=layout.reingold.tilford(hierarchy(blocks),
+                          layout=l_tree(hierarchy(blocks),
                             root=1), ...) {
   plot(hierarchy(blocks), layout=layout, ...)
 }

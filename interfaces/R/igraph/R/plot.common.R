@@ -973,7 +973,7 @@ i.edge.default <- list(color="darkgrey",
                        curved=autocurve.edges,
                        arrow.width=1)
 
-i.plot.default <- list(layout=layout.auto,
+i.plot.default <- list(layout=l_auto,
                        margin=c(0,0,0,0),
                        rescale=TRUE,
                        asp=1,

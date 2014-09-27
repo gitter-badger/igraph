@@ -1002,15 +1002,17 @@ igraph_layout_star:
         PARAMS: GRAPH graph, OUT MATRIX res, VERTEX center=V(graph)[1], \
                 VECTORM1_OR_0 order=NULL
         DEPS: center ON graph
-        NAME-R: layout.star
+        NAME-R: l_star
 
 igraph_layout_grid:
         PARAMS: GRAPH graph, OUT MATRIX res, INTEGER width=0
         NAME-R: layout.grid
+        IGNORE: RR
 
 igraph_layout_grid_3d:
         PARAMS: GRAPH graph, OUT MATRIX res, INTEGER width=0, INTEGER height=0
         NAME-R: layout.grid.3d
+        IGNORE: RR
 
 igraph_layout_fruchterman_reingold:
         PARAMS: GRAPH graph, INOUT MATRIX coords=NULL, \
@@ -1131,7 +1133,7 @@ igraph_layout_bipartite:
         PARAMS: GRAPH graph, BIPARTITE_TYPES types=NULL, OUT MATRIX res, \
                 REAL hgap=1, REAL vgap=1, INTEGER maxiter=100
         DEPS: types ON graph
-        NAME-R: layout.bipartite
+        NAME-R: l_bip
 
 igraph_layout_gem:
         PARAMS: GRAPH graph, INOUT MATRIX res=matrix(), \
