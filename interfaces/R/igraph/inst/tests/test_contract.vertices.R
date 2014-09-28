@@ -1,7 +1,7 @@
 
-context("contract.vertices")
+context("contract")
 
-test_that("contract.vertices works", {
+test_that("contract works", {
   library(igraph)
   set.seed(42)
 
@@ -10,7 +10,7 @@ test_that("contract.vertices works", {
   V(g)$name <- letters[1:vcount(g)]
   E(g)$weight <- sample(ecount(g))
 
-  g2 <- contract.vertices(g, rep(1:5, each=2),
+  g2 <- contract(g, rep(1:5, each=2),
                           vertex.attr.comb=toString)
 
   ## graph and edge attributes are kept, vertex attributes are

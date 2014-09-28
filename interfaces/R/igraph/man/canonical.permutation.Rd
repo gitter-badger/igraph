@@ -1,12 +1,13 @@
-\name{canonical.permutation}
+\name{canon_perm}
 \alias{canonical.permutation}
+\alias{canon_perm}
 \concept{Canonical permutation}
 \concept{BLISS}
 \title{Canonical permutation of a graph}
 \description{The canonical permutation brings every isomorphic graphs
   into the same (labeled) graph.}
 \usage{
-canonical.permutation(graph, sh="fm")
+canon_perm(graph, sh="fm")
 }
 \arguments{
   \item{graph}{The input graph, treated as undirected.}
@@ -14,7 +15,7 @@ canonical.permutation(graph, sh="fm")
     algorithm. See details for possible values.}
 }
 \details{
-  \code{canonical.permutation} computes a permutation which brings the
+  \code{canon_perm} computes a permutation which brings the
   graph into canonical form, as defined by the BLISS algorithm.
   All isomorphic graphs have the same canonical form.
 
@@ -70,12 +71,12 @@ canonical.permutation(graph, sh="fm")
 \examples{
 ## Calculate the canonical form of a random graph
 g1 <- g_nm(10, 20)
-cp1 <- canonical.permutation(g1)
+cp1 <- canon_perm(g1)
 cf1 <- permute.vertices(g1, cp1$labeling)
 
 ## Do the same with a random permutation of it
 g2 <- permute.vertices(g1, sample(vcount(g1)))
-cp2 <- canonical.permutation(g2)
+cp2 <- canon_perm(g2)
 cf2 <- permute.vertices(g2, cp2$labeling)
 
 ## Check that they are the same

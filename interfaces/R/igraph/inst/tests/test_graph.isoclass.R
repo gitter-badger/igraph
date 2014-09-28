@@ -10,7 +10,7 @@ test_that("graph.isoclass works", {
   expect_that(graph.isoclass(g1), equals(10))
   expect_that(graph.isoclass(g2), equals(11))
 
-  g1 <- add.vertices(g1, 3)
+  g1 <- add_vertices(g1, 3)
   expect_that(graph.isoclass.subgraph(g1, 1:3), equals(10))
   expect_that(graph.isoclass.subgraph(g1 %du% g2, 1:3), equals(10))
   expect_that(graph.isoclass.subgraph(g1 %du% g2, 7:9), equals(11))

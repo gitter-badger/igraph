@@ -1,11 +1,12 @@
-\name{dominator.tree}
+\name{dominator_tree}
 \alias{dominator.tree}
+\alias{dominator_tree}
 \concept{Domintor tree}
 \title{Dominator tree}
 \description{Dominator tree of a directed graph.
 }
 \usage{
-dominator.tree (graph, root, mode = c("out", "in"))
+dominator_tree (graph, root, mode = c("out", "in"))
 }
 \arguments{
   \item{graph}{A directed graph. If it is not a flowgraph, and it
@@ -65,7 +66,7 @@ dominator.tree (graph, root, mode = c("out", "in"))
 g <- g_formula(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
                E-+H, F-+I, G-+I:J, H-+E:K, I-+K, J-+I,
                K-+I:R, L-+H)
-dtree <- dominator.tree(g, root="R")
+dtree <- dominator_tree(g, root="R")
 layout <- l_tree(dtree$domtree, root="R")
 layout[,2] <- -layout[,2]
 if (interactive()) {

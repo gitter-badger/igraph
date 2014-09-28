@@ -16,7 +16,7 @@ groups(x)
 }
 \details{
   Currently two methods are defined for this function. The default
-  method works on the output of \code{\link{clusters}}. (In fact it
+  method works on the output of \code{\link{comps}}. (In fact it
   works on any object that is a list with an entry called
   \code{membership}.)
 
@@ -31,7 +31,7 @@ groups(x)
   Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \seealso{
-  \code{\link{clusters}} and the various community finding functions.
+  \code{\link{comps}} and the various community finding functions.
 }
 \examples{
 g <- graph.famous("Zachary")
@@ -39,6 +39,6 @@ fgc <- fastgreedy.community(g)
 groups(fgc)
 
 g2 <- g_ring(10) + g_full(5)
-groups(clusters(g2))
+groups(comps(g2))
 }
 \keyword{graphs}

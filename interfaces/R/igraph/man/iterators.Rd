@@ -189,7 +189,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
 \examples{
 # mean degree of vertices in the largest cluster in a random graph
 g <- erdos.renyi.game(100, 2/100)
-c <- clusters(g)
+c <- comps(g)
 vsl <- which(which.max(c$csize)==c$membership)
 mean(degree(g, vsl))
 

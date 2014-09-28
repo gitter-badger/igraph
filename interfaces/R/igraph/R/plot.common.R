@@ -198,9 +198,10 @@ igraph.check.shapes <- function(x) {
 #' solution is to bend the edges, with diffenent curvature, so that all of them
 #' are visible.
 #' 
-#' \code{autocurve.edges} calculates the optimal \code{edge.curved} vector for
+#' \code{make_curves} calculates the optimal \code{edge.curved} vector for
 #' plotting a graph with multiple edges, so that all edges are visible.
-#' 
+#'
+#' @aliases autocurve.edges
 #' @param graph The input graph.
 #' @param start The curvature at the two extreme edges. All edges will have a
 #' curvature between \code{-start} and \code{start}, spaced equally.
@@ -215,15 +216,15 @@ igraph.check.shapes <- function(x) {
 #' g <- graph( c(0,1,1,0,1,2,1,3,1,3,1,3,
 #'               2,3,2,3,2,3,2,3,0,1)+1 )
 #' 
-#' autocurve.edges(g)
+#' make_curves(g)
 #' 
 #' \dontrun{
 #' set.seed(42)
 #' plot(g)
 #' }
 #' 
-autocurve.edges <- function(graph, start=0.5) {
-  cm <- count.multiple(graph)
+make_curves <- function(graph, start=0.5) {
+  cm <- count_multiple(graph)
   el <- apply(get.edgelist(graph, names=FALSE), 1, paste, collapse=":")
   ord <- order(el)
   res <- numeric(length(ord))
@@ -970,7 +971,7 @@ i.edge.default <- list(color="darkgrey",
                        label.y=NULL,
                        arrow.size=1,
                        arrow.mode=i.get.arrow.mode,
-                       curved=autocurve.edges,
+                       curved=make_curves,
                        arrow.width=1)
 
 i.plot.default <- list(layout=l_auto,

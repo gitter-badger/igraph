@@ -27,13 +27,13 @@ is.mutual(graph, es = E(graph))
 }
 %\references{}
 \author{ Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{ \code{\link{reciprocity}}, \code{\link{dyad.census}} if you
+\seealso{ \code{\link{reciprocity}}, \code{\link{dyad_census}} if you
   just want some statistics about mutual edges.}
 \examples{
 g <- g_nm(10, 50, directed=TRUE)
 reciprocity(g)
-dyad.census(g)
+dyad_census(g)
 is.mutual(g)
-sum(is.mutual(g))/2 == dyad.census(g)$mut
+sum(is.mutual(g))/2 == dyad_census(g)$mut
 }
 \keyword{graphs}

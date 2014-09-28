@@ -20,7 +20,7 @@
 #
 ###################################################################
 
-are.connected <- function(graph, v1, v2) {
+is_connected_to <- function(graph, v1, v2) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }

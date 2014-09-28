@@ -1,36 +1,36 @@
 
-context("decompose.graph")
+context("decompose")
 
-test_that("decompose.graph works", {
+test_that("decompose works", {
   library(igraph)
   g <- g_np(1000, 1/1500)
-  G <- decompose.graph(g)
-  clu <- clusters(g)
+  G <- decompose(g)
+  clu <- comps(g)
   Gsizes <- sapply(G, vcount)
   expect_that(sort(clu$csize), equals(sort(Gsizes)))
 })
 
-test_that("decompose.graph works for many components", {
+test_that("decompose works for many components", {
   library(igraph)
   g <- g_empty(50001)
-  tmp <- decompose.graph(g)
+  tmp <- decompose(g)
   expect_that(1, equals(1))
 })
 
-test_that("decompose.graph works for many components and attributes", {
+test_that("decompose works for many components and attributes", {
   library(igraph)
   g <- g_empty(50001)
   V(g)$name <- 1:vcount(g)
-  tmp <- decompose.graph(g)
+  tmp <- decompose(g)
   expect_that(1, equals(1))
 })
 
-test_that("decompose.graph keeps attributes", {
+test_that("decompose keeps attributes", {
   library(igraph)
   g <- g_ring(10) + g_ring(5)
   V(g)$name <- letters[1:(10+5)]
   E(g)$name <- apply(get.edgelist(g), 1, paste, collapse="-")
-  d <- decompose.graph(g)
+  d <- decompose(g)
   d <- d[order(sapply(d, vcount))]
 
   expect_that(length(d), equals(2))

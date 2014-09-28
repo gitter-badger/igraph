@@ -1,10 +1,10 @@
 
-context("dyad.census")
+context("dyad_census")
 
-test_that("dyad.census works", {
+test_that("dyad_census works", {
   library(igraph)
   ce <- simplify(read.graph(gzfile("celegansneural.gml.gz"), format="gml"))
-  dc <- dyad.census(ce)
+  dc <- dyad_census(ce)
 
   expect_that(dc, equals(list(mut=197, asym=1951, null=41808)))
   expect_that(sum(is.mutual(ce)), equals(dc$mut * 2))

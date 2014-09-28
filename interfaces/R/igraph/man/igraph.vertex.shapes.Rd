@@ -1,6 +1,7 @@
 \name{Vertex shapes}
 \alias{igraph.vertex.shapes}
 \alias{vertex.shapes}
+\alias{add_shape}
 \alias{add.vertex.shape}
 \alias{igraph.shape.noclip}
 \alias{igraph.shape.noplot}
@@ -11,7 +12,7 @@
   vertex shapes when plotting graphs.}
 \usage{
 vertex.shapes (shape = NULL)
-add.vertex.shape (shape, clip = igraph.shape.noclip,
+add_shape (shape, clip = igraph.shape.noclip,
        plot = igraph.shape.noplot, parameters = list())
 igraph.shape.noclip (coords, el, params, end = c("both", "from", "to"))
 igraph.shape.noplot (coords, v = NULL, params)
@@ -88,7 +89,7 @@ igraph.shape.noplot (coords, v = NULL, params)
   the clipping and plotting functions of that shape are returned in a
   named list.
 
-  \code{add.vertex.shape} can be used to add new vertex shapes to
+  \code{add_shape} can be used to add new vertex shapes to
   igraph. For this one must give the clipping and plotting functions of
   the new shape. It is also possible to list the plot/vertex/edge
   parameters, in the \code{parameters} argument, that the clipping
@@ -109,7 +110,7 @@ igraph.shape.noplot (coords, v = NULL, params)
   argument is \code{NULL}. It returns a named list with entries named
   \sQuote{clip} and \sQuote{plot}, both of them R functions.
 
-  \code{add.vertex.shape} returns \code{TRUE}, invisibly.
+  \code{add_shape} returns \code{TRUE}, invisibly.
 
   \code{igraph.shape.noclip} returns the appropriate columns of its
   \code{coords} argument.
@@ -130,7 +131,7 @@ plot(g, vertex.shape=shapes, vertex.label=shapes, vertex.label.dist=1,
      vertex.pie.color=list(heat.colors(5)))
 
 # add new vertex shape, plot nothing with no clipping
-add.vertex.shape("nil")
+add_shape("nil")
 plot(g, vertex.shape="nil")
 
 #################################################################
@@ -150,7 +151,7 @@ mytriangle <- function(coords, v=NULL, params) {
           add=TRUE, inches=FALSE)
 }
 # clips as a circle
-add.vertex.shape("triangle", clip=vertex.shapes("circle")$clip,
+add_shape("triangle", clip=vertex.shapes("circle")$clip,
                  plot=mytriangle)
 plot(g, vertex.shape="triangle", vertex.color=rainbow(vcount(g)),
      vertex.size=seq(10,20,length=vcount(g)))
@@ -179,7 +180,7 @@ mystar <- function(coords, v=NULL, params) {
          })
 }
 # no clipping, edges will be below the vertices anyway
-add.vertex.shape("star", clip=igraph.shape.noclip,
+add_shape("star", clip=igraph.shape.noclip,
                  plot=mystar, parameters=list(vertex.norays=5))
 plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
      vertex.size=seq(10,20,length=vcount(g)))

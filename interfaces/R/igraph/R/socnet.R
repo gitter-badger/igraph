@@ -1381,7 +1381,7 @@ tkigraph <- function() {
     if (mode=="dia") {
       dia[i] <- diameter(graphs[[ gnos[i] ]], directed=FALSE)
     } else if (mode=="path") {
-      dia[i] <- average.path.length(graphs[[ gnos[i] ]], directed=FALSE)
+      dia[i] <- avg_path_len(graphs[[ gnos[i] ]], directed=FALSE)
     }
     isconn[i] <- is.connected(graphs[[ gnos[i] ]])
   }
@@ -1424,7 +1424,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  comm <- clusters(graph)
+  comm <- comps(graph)
   members <- sapply(sapply(seq(along=comm$csize),
                            function(i) which(comm$membership==i)),
                     paste, collapse=", ")
@@ -1440,7 +1440,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  comm <- clusters(graph)
+  comm <- comps(graph)
   value <- data.frame("Vertex"=seq(along=comm$membership),
                  "Component"=comm$membership)
   .tkigraph.showData(value, title=paste("Components of graph #", gnos))
@@ -1453,7 +1453,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  cs <- clusters(graph)$csize
+  cs <- comps(graph)$csize
   value <- data.frame(seq(along=cs), cs)
   colnames(value) <- c("Cluster #", "Size")
 
@@ -1495,7 +1495,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  clu <- clusters(graph)
+  clu <- comps(graph)
   colbar <- rainbow(length(clu$csize)*2)
   vertex.color <- colbar[ clu$membership ]
   .tkigraph.plot(gnos=gnos, simple=simple, vertex.color=vertex.color)
@@ -1508,7 +1508,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  clu <- clusters(graph)
+  clu <- comps(graph)
   v <- which(clu$membership == which.max(clu$csize))
   g <- induced.subgraph(graph, v)
   .tkigraph.add.graph(g)
@@ -1543,7 +1543,7 @@ tkigraph <- function() {
   read <- .tkigraph.dialogbox(TITLE="Graph from component",
                               comp=list(name="Component id", type="numeric",
                                 default=1, min=1))
-  clu <- clusters(graph)
+  clu <- comps(graph)
   if (read$comp<1 || read$comp > length(clu$csize)) {
     .tkigraph.error("Invalid component id")
     return()
@@ -1911,7 +1911,7 @@ tkigraph <- function() {
     .tkigraph.error("Please select exactly one graph")
     return()
   }
-  graphs <- decompose.graph(get("graphs", .tkigraph.env)[[gnos]])
+  graphs <- decompose(get("graphs", .tkigraph.env)[[gnos]])
   coh <- sapply(graphs, graph.cohesion)
   value <- data.frame("Component"=seq(length=length(graphs)), "Cohesion"=coh)
   .tkigraph.showData(value, title=paste("Cohesion of components in graph #",

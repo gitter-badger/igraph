@@ -4,6 +4,7 @@
 \alias{neighbors}
 \alias{incident}
 \alias{is.directed}
+\alias{is_connected_to}
 \alias{are.connected}
 \alias{get.edge}
 \alias{get.edges}
@@ -18,7 +19,7 @@ ecount(graph)
 neighbors(graph, v, mode = 1)
 incident(graph, v, mode=c("all", "out", "in", "total"))
 is.directed(graph)
-are.connected(graph, v1, v2)
+is_connected_to(graph, v1, v2)
 get.edge(graph, id)
 get.edges(graph, es)
 }
@@ -55,7 +56,7 @@ get.edges(graph, es)
   \code{is.directed} gives whether the graph is directed or not. It just
   gives its \code{directed} attribute.
   
-  \code{are.connected} decides whether there is an edge from \code{v1}
+  \code{is_connected_to} decides whether there is an edge from \code{v1}
   to \code{v2}. 
 
   \code{get.edge} returns the end points of the edge with the supplied
@@ -68,7 +69,7 @@ get.edges(graph, es)
 \value{
   \code{vcount} and \code{ecount} return integer
   constants. \code{neighbors} returns an integer
-  vector. \code{is.directed} and \code{are.connected} return boolean
+  vector. \code{is.directed} and \code{is_connected_to} return boolean
   constants. \code{get.edge} returns a numeric vector of length two.
   \code{get.edges} returns a two-column matrix.
 }
@@ -81,8 +82,8 @@ vcount(g)
 ecount(g)
 neighbors(g, 5)
 incident(g, 5)
-are.connected(g, 1, 2)
-are.connected(g, 2, 4)
+is_connected_to(g, 1, 2)
+is_connected_to(g, 2, 4)
 get.edges(g, 1:6)
 }
 \keyword{graphs}

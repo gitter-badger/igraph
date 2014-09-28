@@ -1,16 +1,16 @@
 
-context("canonical.permutation")
+context("canon_perm")
 
-test_that("canonical.permutation works", {
+test_that("canon_perm works", {
   library(igraph)
 
   g1 <- g_nm(10, 20)
-  cp1 <- canonical.permutation(g1)
+  cp1 <- canon_perm(g1)
   cf1 <- permute.vertices(g1, cp1$labeling)
      
   ## Do the same with a random permutation of it
   g2 <- permute.vertices(g1, sample(vcount(g1)))
-  cp2 <- canonical.permutation(g2)
+  cp2 <- canon_perm(g2)
   cf2 <- permute.vertices(g2, cp2$labeling)
      
   ## Check that they are the same

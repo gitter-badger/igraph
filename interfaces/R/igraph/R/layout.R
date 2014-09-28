@@ -457,7 +457,7 @@ l_comps <- function(graph, layout=l_kk, ...) {
   }
   
   V(graph)$id <- seq(vcount(graph))
-  gl <- decompose.graph(graph)
+  gl <- decompose(graph)
   ll <- lapply(gl, layout, ...)
   
   l <- l_merge(gl, ll)

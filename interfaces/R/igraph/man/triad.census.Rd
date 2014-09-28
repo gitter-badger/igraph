@@ -47,7 +47,7 @@ triad.census(graph)
   Boston: Houghton Mifflin.
 }
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{dyad.census}} for classifying binary relationships,
+\seealso{\code{\link{dyad_census}} for classifying binary relationships,
   \code{\link{graph.motifs}} for the underlying implementation.}
 \examples{
 g <- g_nm(15, 45, directed = TRUE)

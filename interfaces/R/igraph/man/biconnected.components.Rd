@@ -1,10 +1,11 @@
-\name{biconnected.components}
+\name{biconn_comps}
 \alias{biconnected.components}
+\alias{biconn_comps}
 \concept{Biconnected component}
 \title{Biconnected components}
 \description{Finding the biconnected components of a graph}
 \usage{
-biconnected.components(graph)
+biconn_comps(graph)
 }
 \arguments{
   \item{graph}{The input graph. It is treated as an undirected graph,
@@ -33,16 +34,16 @@ biconnected.components(graph)
   \item{components}{A list of numeric vectors, the vertices of the
     components.}
   \item{articulation_points}{The articulation points of the graph. See
-    \code{\link{articulation.points}}.}
+    \code{\link{articulation_points}}.}
 }
 %\references
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{articulation.points}}, \code{\link{clusters}},
+\seealso{\code{\link{articulation_points}}, \code{\link{comps}},
   \code{\link{is.connected}}, \code{\link{vertex.connectivity}}}
 \examples{
 g <- graph.disjoint.union( g_full(5), g_full(5) )
-clu <- clusters(g)$membership
-g <- add.edges(g, c(which(clu==1), which(clu==2)))
-bc <- biconnected.components(g)
+clu <- comps(g)$membership
+g <- add_edges(g, c(which(clu==1), which(clu==2)))
+bc <- biconn_comps(g)
 }
 \keyword{graphs}

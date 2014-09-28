@@ -29,19 +29,19 @@
 #' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 #' for vertices of the second kind.
 #' 
-#' \code{bipartite.projection.size} calculates the number of vertices and edges
+#' \code{bip_proj_size} calculates the number of vertices and edges
 #' in the two projections of the bipartite graphs, without calculating the
 #' projections themselves. This is useful to check how much memory the
 #' projections would need if you have a large bipartite graph.
 #' 
-#' \code{bipartite.projections} calculates the actual projections.  You can use
+#' \code{bip_projs} calculates the actual projections.  You can use
 #' the \code{probe1} argument to specify the order of the projections in the
 #' result. By default vertex type \code{FALSE} is the first and \code{TRUE} is
 #' the second.
 #' 
-#' \code{bipartite.projections} keeps vertex attributes.
+#' \code{bip_proj} keeps vertex attributes.
 #' 
-#' @aliases bipartite.projection bipartite.projection.size
+#' @aliases bipartite.projection bipartite.projection.size bip_proj_size bip_proj
 #' @param graph The input graph. It can be directed, but edge directions are
 #' ignored during the computation.
 #' @param types An optional vertex type vector to use instead of the
@@ -70,7 +70,7 @@
 #' 
 #' ## Projection of a full bipartite graph is a full graph
 #' g <- g_full_bip(10,5)
-#' proj <- bipartite.projection(g)
+#' proj <- bip_proj(g)
 #' graph.isomorphic(proj[[1]], g_full(10))
 #' graph.isomorphic(proj[[2]], g_full(5))
 #' 
@@ -82,11 +82,11 @@
 #' M
 #' g2 <- g_incidence(M)
 #' g2$name <- "Event network"
-#' proj2 <- bipartite.projection(g2)
+#' proj2 <- bip_proj(g2)
 #' print(proj2[[1]], g=TRUE, e=TRUE)
 #' print(proj2[[2]], g=TRUE, e=TRUE)
 #' 
-bipartite.projection <- function(graph, types=NULL,
+bip_proj <- function(graph, types=NULL,
                                  multiplicity=TRUE, probe1=NULL,
 				 which=c("both", "true", "false"),
                                  remove.type=TRUE) {

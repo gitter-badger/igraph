@@ -125,7 +125,7 @@ pause()
 ## pause()
 
 ## ### How big are these?
-## table(clusters(jg)$csize)
+## table(comps(jg)$csize)
 
 ## pause()
 

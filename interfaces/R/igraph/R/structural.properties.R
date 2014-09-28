@@ -59,7 +59,7 @@
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' g2 <- delete.edges(g, c(1,2,1,10))
+#' g2 <- delete_edges(g, c(1,2,1,10))
 #' diameter(g2, unconnected=TRUE)
 #' diameter(g2, unconnected=FALSE)
 #' 
@@ -140,7 +140,7 @@ farthest.nodes <- function(graph, directed=TRUE, unconnected=TRUE,
   res
 }       
 
-average.path.length <- function(graph, directed=TRUE, unconnected=TRUE) {
+avg_path_len <- function(graph, directed=TRUE, unconnected=TRUE) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -269,7 +269,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' graphs and Dijkstra's algorithm for weighted ones. The latter only supports
 #' non-negative edge weights.
 #' 
-#' \code{average.path.length} calculates the average path length in a graph, by
+#' \code{avg_path_len} calculates the average path length in a graph, by
 #' calculating the shortest paths between all pairs of vertices (both ways for
 #' directed graphs). This function does not consider edge weights currently and
 #' uses a breadth-first search.
@@ -280,7 +280,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' histogram.
 #' 
 #' @aliases shortest.paths get.shortest.paths get.all.shortest.paths
-#' average.path.length path.length.hist
+#' avg_path_len path.length.hist average.path.length
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
 #' calculated.
@@ -334,7 +334,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' shortest paths to the same vertex are collected into consecutive elements of
 #' the list.
 #' 
-#' For \code{average.path.length} a single number is returned.
+#' For \code{avg_path_len} a single number is returned.
 #' 
 #' \code{path.length.hist} returns a named list with two entries: \code{res} is
 #' a numeric vector, the histogram of distances, \code{unconnected} is a
@@ -351,13 +351,13 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' shortest.paths(g)
 #' get.shortest.paths(g, 5)
 #' get.all.shortest.paths(g, 1, 6:8)
-#' average.path.length(g)
+#' avg_path_len(g)
 #' ## Weighted shortest paths
 #' el <- matrix(nc=3, byrow=TRUE,
 #'              c(1,2,0, 1,3,2, 1,4,1, 2,3,0, 2,5,5, 2,6,2, 3,2,1, 3,4,1,
 #'                3,7,1, 4,3,0, 4,7,2, 5,6,2, 5,8,8, 6,3,2, 6,7,1, 6,9,1,
 #'                6,10,3, 8,6,1, 8,9,1, 9,10,4) )
-#' g2 <- add.edges(g_empty(10), t(el[,1:2]), weight=el[,3])
+#' g2 <- add_edges(g_empty(10), t(el[,1:2]), weight=el[,3])
 #' shortest.paths(g2, mode="out")
 #' 
 shortest.paths <- function(graph, v=V(graph), to=V(graph),
@@ -532,7 +532,7 @@ get.all.shortest.paths <- function(graph, from,
 #' @return Numeric vector, the ids of the vertices in the same component as
 #' \code{v}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{clusters}}
+#' @seealso \code{\link{comps}}
 #' @keywords graphs
 #' @examples
 #' 
@@ -1022,14 +1022,14 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 ##       j <- first[b]
 
 ##       ## cj is the contribution of j
-##       cj <- are.connected(graph, i, j)      / deg[i+1]
-##       cj <- cj + are.connected(graph, j, i) / deg[i+1]
+##       cj <- is_connected_to(graph, i, j)      / deg[i+1]
+##       cj <- cj + is_connected_to(graph, j, i) / deg[i+1]
 
 ##       second <- not(i, not(j, neighbors(graph, j, mode="all")))
 ##       for (c in seq(along=second)) {
 ##         q <- second[c]
-##         cj <- cj + are.connected(graph, i, q) / deg[q+1] / deg[i+1]
-##         cj <- cj + are.connected(graph, q, i) / deg[q+1] / deg[i+1]
+##         cj <- cj + is_connected_to(graph, i, q) / deg[q+1] / deg[i+1]
+##         cj <- cj + is_connected_to(graph, q, i) / deg[q+1] / deg[i+1]
 ##       }
                             
 ##       ## Ok, we have the total contribution of j
@@ -1622,11 +1622,11 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' the given vertices with the given order parameter. This function preserves
 #' the vertex, edge and graph attributes.
 #' 
-#' \code{connect.neighborhood} creates a new graph by connecting each vertex to
+#' \code{connect} creates a new graph by connecting each vertex to
 #' all other vertices in its neighborhood.
 #' 
 #' @aliases neighborhood neighborhood.size graph.neighborhood g_ego
-#' connect.neighborhood
+#' connect.neighborhood connect
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood.
 #' @param nodes The vertices for which the calculation is performed.
@@ -1644,7 +1644,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' 
 #' \code{g_ego} returns with a list of graphs.
 #' 
-#' \code{connect.neighborhood} returns with a new graph object.
+#' \code{connect} returns with a new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
 #' done by Vincent Matossian
 #' @keywords graphs
@@ -1664,7 +1664,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' 
 #' # connecting to the neighborhood
 #' g <- g_ring(10)
-#' g <- connect.neighborhood(g, 2)
+#' g <- connect(g, 2)
 #' 
 neighborhood <- function(graph, order, nodes=V(graph),
                          mode=c("all", "out", "in"), mindist=0) {
@@ -1737,7 +1737,7 @@ g_ego <- function(graph, order, nodes=V(graph),
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' g <- add.edges(g, c(1,2, 2,3, 1,3))
+#' g <- add_edges(g, c(1,2, 2,3, 1,3))
 #' graph.coreness(g) 		# small core triangle in a ring
 #' 
 graph.coreness <- function(graph, mode=c("all", "out", "in")) {
@@ -1874,23 +1874,23 @@ is.loop <- function(graph, eids=E(graph)) {
 #' \code{is.multiple} decides whether the edges of the graph are multiple
 #' edges.
 #' 
-#' \code{count.multiple} counts the multiplicity of each edge of a graph.
+#' \code{count_multiple} counts the multiplicity of each edge of a graph.
 #' 
-#' Note that the semantics for \code{is.multiple} and \code{count.multiple} is
+#' Note that the semantics for \code{is.multiple} and \code{count_multiple} is
 #' different. \code{is.multiple} gives \code{TRUE} for all occurences of a
 #' multiple edge except for one. Ie. if there are three \code{i-j} edges in the
 #' graph then \code{is.multiple} returns \code{TRUE} for only two of them while
-#' \code{count.multiple} returns \sQuote{3} for all three.
+#' \code{count_multiple} returns \sQuote{3} for all three.
 #' 
 #' See the examples for getting rid of multiple edges while keeping their
 #' original multiplicity as an edge attribute.
 #' 
-#' @aliases has.multiple is.loop is.multiple count.multiple
+#' @aliases has.multiple is.loop is.multiple count.multiple count_multiple
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #' all edges in the graph.
 #' @return \code{has.multiple} returns a logical scalar.  \code{is.loop} and
-#' \code{is.multiple} return a logical vector. \code{count.multiple} returns a
+#' \code{is.multiple} return a logical vector. \code{count_multiple} returns a
 #' numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{simplify}} to eliminate loop and multiple edges.
@@ -1905,9 +1905,9 @@ is.loop <- function(graph, eids=E(graph)) {
 #' g <- barabasi.game(10, m=3, algorithm="bag")
 #' has.multiple(g)
 #' is.multiple(g)
-#' count.multiple(g)
+#' count_multiple(g)
 #' is.multiple(simplify(g))
-#' all(count.multiple(simplify(g)) == 1)
+#' all(count_multiple(simplify(g)) == 1)
 #' 
 #' # Direction of the edge is important
 #' is.multiple(graph( c(1,2, 2,1) ))
@@ -1915,7 +1915,7 @@ is.loop <- function(graph, eids=E(graph)) {
 #' 
 #' # Remove multiple edges but keep multiplicity
 #' g <- barabasi.game(10, m=3, algorithm="bag")
-#' E(g)$weight <- count.multiple(g)
+#' E(g)$weight <- count_multiple(g)
 #' g <- simplify(g)
 #' any(is.multiple(g))
 #' E(g)$weight
@@ -1930,7 +1930,7 @@ is.multiple <- function(graph, eids=E(graph)) {
         PACKAGE="igraph")
 }
 
-count.multiple <- function(graph, eids=E(graph)) {
+count_multiple <- function(graph, eids=E(graph)) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object");
@@ -2233,10 +2233,10 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' \code{is.connected} decides whether the graph is weakly or strongly
 #' connected.
 #' 
-#' \code{clusters} finds the maximal (weakly or strongly) connected components
+#' \code{comps} finds the maximal (weakly or strongly) connected components
 #' of a graph.
 #' 
-#' \code{no.clusters} does almost the same as \code{clusters} but returns only
+#' \code{no.clusters} does almost the same as \code{comps} but returns only
 #' the number of clusters found instead of returning the actual clusters.
 #' 
 #' \code{cluster.distribution} creates a histogram for the maximal connected
@@ -2246,7 +2246,7 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' The strongly connected components are implemented by two consecutive
 #' depth-first searches.
 #' 
-#' @aliases no.clusters clusters is.connected cluster.distribution
+#' @aliases no.clusters clusters is.connected cluster.distribution comps
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #' directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
@@ -2255,7 +2255,7 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' \code{mode} makes sense.
 #' @return For \code{is.connected} a logical constant.
 #' 
-#' For \code{clusters} a named list with three components:
+#' For \code{comps} a named list with three components:
 #' \item{membership}{numeric vector giving the cluster id to which each vertex
 #' belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
 #' \item{no}{numeric constant, the number of clusters.}
@@ -2272,10 +2272,10 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' @examples
 #' 
 #' g <- g_np(20, 1/20)
-#' clu <- clusters(g)
+#' clu <- comps(g)
 #' groups(clu)
 #' 
-clusters <- function(graph, mode=c("weak", "strong")) {
+comps <- function(graph, mode=c("weak", "strong")) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   mode <- switch(igraph.match.arg(mode), "weak"=1, "strong"=2)
@@ -2320,7 +2320,7 @@ clusters <- function(graph, mode=c("weak", "strong")) {
 #' 
 #' g <- g_tree(10) %du% g_tree(10)
 #' V(g)$id <- seq_len(vcount(g))-1
-#' roots <- sapply(decompose.graph(g), function(x) {
+#' roots <- sapply(decompose(g), function(x) {
 #'             V(x)$id[ topological.sort(x)[1]+1 ] })
 #' tree <- unfold.tree(g, roots=roots)
 #' 

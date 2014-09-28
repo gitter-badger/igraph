@@ -316,7 +316,7 @@
       means curvature 0.5, \code{FALSE} means curvature zero.
 
       By default the vector specifying the curvatire is calculated via a
-      call to the \code{\link{autocurve.edges}} function. This function makes
+      call to the \code{\link{make_curves}} function. This function makes
       sure that multiple edges are curved and are all visible. This
       parameter is ignored for loop edges. 
       
@@ -447,14 +447,14 @@ plot(g, layout=l_fr, vertex.size=4,
 
 # plot a random graph, different color for each component
 g <- g_np(100, 1/100)
-comps <- clusters(g)$membership
+comps <- comps(g)$membership
 colbar <- rainbow(max(comps)+1)
 V(g)$color <- colbar[comps+1]
 plot(g, layout=l_fr, vertex.size=5, vertex.label=NA)
 
 # plot communities in a graph
 g <- g_full(5) \%du\% g_full(5) \%du\% g_full(5)
-g <- add.edges(g, c(1,6, 1,11, 6,11))
+g <- add_edges(g, c(1,6, 1,11, 6,11))
 com <- spinglass.community(g, spins=5)
 V(g)$color <- com$membership+1
 g <- set.graph.attribute(g, "layout", l_kk(g))

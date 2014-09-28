@@ -101,7 +101,7 @@
 
   Edges can also have a \sQuote{name} attribute, and this is treated
   specially as well. Just like for vertices, edges can also be selected
-  based on their names, e.g. in the \code{\link{delete.edges}} and
+  based on their names, e.g. in the \code{\link{delete_edges}} and
   other functions.
 
   We note here, that vertex names can also be used to select edges.

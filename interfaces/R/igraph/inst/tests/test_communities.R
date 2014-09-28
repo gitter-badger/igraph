@@ -27,10 +27,10 @@ test_that("community detection functions work", {
   }
 
   fc <- fastgreedy.community(karate)
-  m1 <- modularity(karate, cutat(fc, no=1))
-  m2 <- modularity(karate, cutat(fc, no=2))
-  m3 <- modularity(karate, cutat(fc, no=3))
-  m4 <- modularity(karate, cutat(fc, no=4))
+  m1 <- modularity(karate, cut_at(fc, no=1))
+  m2 <- modularity(karate, cut_at(fc, no=2))
+  m3 <- modularity(karate, cut_at(fc, no=3))
+  m4 <- modularity(karate, cut_at(fc, no=4))
   expect_that(m1, equals(0))
   expect_that(m2, equals(0.3717948718))
   expect_that(m3, equals(0.3806706114))

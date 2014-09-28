@@ -35,7 +35,7 @@
 #' hiearchy of vertex subsets is found, whith the entire graph \eqn{G} at its
 #' root.
 #' 
-#' The function \code{cohesive.blocks} implements cohesive blocking.  It
+#' The function \code{cohesive_blocks} implements cohesive blocking.  It
 #' returns a \code{cohesiveBlocks} object. \code{cohesiveBlocks} should be
 #' handled as an opaque class, i.e. its internal structure should not be
 #' accessed directly, but through the functions listed here.
@@ -108,7 +108,7 @@
 #' @aliases cohesive.blocks cohesiveBlocks blocks g_blocks blockGraphs cohesion
 #' hierarchy parent plotHierarchy exportPajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
-#' @param graph For \code{cohesive.blocks} a graph object of class
+#' @param graph For \code{cohesive_blocks} a graph object of class
 #' \code{igraph}. It must be undirected and simple. (See
 #' \code{\link{is.simple}}.)
 #' 
@@ -119,7 +119,7 @@
 #' object. These labels can be then used when reporting and plotting the
 #' cohesive blocks.
 #' @param blocks,x,object A \code{cohesiveBlocks} object, created with the
-#' \code{cohesive.blocks} function.
+#' \code{cohesive_blocks} function.
 #' @param file Defines the file (or connection) the Pajek file is written to.
 #' 
 #' If the \code{project.file} argument is \code{TRUE}, then it can be a
@@ -153,7 +153,7 @@
 #' Reingold-Tilford layout generator is used.
 #' @param \dots Additional arguments. \code{plotHierarchy} and \code{plot} pass
 #' them to \code{plot.igraph}.  \code{print} and \code{summary} ignore them.
-#' @return \code{cohesive.blocks} returns a \code{cohesiveBlocks} object.
+#' @return \code{cohesive_blocks} returns a \code{cohesiveBlocks} object.
 #' 
 #' \code{blocks} returns a list of numeric vectors, containing vertex ids.
 #' 
@@ -196,7 +196,7 @@
 #'                 17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
 #'                 21-22:23, 22-23)
 #' 
-#' mwBlocks <- cohesive.blocks(mw)
+#' mwBlocks <- cohesive_blocks(mw)
 #' 
 #' # Inspect block membership and cohesion
 #' mwBlocks
@@ -226,7 +226,7 @@
 #'                   Gery    - Pat:Steve:Russ:John,
 #'                   Russ    - Steve:Bert:Gery:John,
 #'                   John    - Gery:Russ:Michael)
-#' campBlocks <- cohesive.blocks(camp)
+#' campBlocks <- cohesive_blocks(camp)
 #' campBlocks
 #' 
 #' if (interactive()) {
@@ -235,7 +235,7 @@
 #'        mark.border=1, colbar=c(NA, NA,"cyan","orange") )
 #' }
 #' 
-cohesive.blocks <- function(graph, labels=TRUE) {
+cohesive_blocks <- function(graph, labels=TRUE) {
 
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
@@ -252,43 +252,43 @@ cohesive.blocks <- function(graph, labels=TRUE) {
   res
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 length.cohesiveBlocks <- function(x) {
   length(x$blocks)
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 blocks <- function(blocks) {
   blocks$blocks
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 g_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced.subgraph, graph=graph)
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 cohesion <- function(blocks) {
   blocks$cohesion
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 hierarchy <- function(blocks) {
   blocks$blockTree
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 parent <- function(blocks) {
   blocks$parent
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 #' @method print cohesiveBlocks
 
 print.cohesiveBlocks <- function(x, ...) {
@@ -333,7 +333,7 @@ print.cohesiveBlocks <- function(x, ...) {
   invisible(x)
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 #' @method summary cohesiveBlocks
 
 summary.cohesiveBlocks <- function(object, ...) {
@@ -342,7 +342,7 @@ summary.cohesiveBlocks <- function(object, ...) {
   invisible(object)
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 plot.cohesiveBlocks <- function(x, y,
                                 colbar=rainbow(max(cohesion(x))+1),
@@ -353,7 +353,7 @@ plot.cohesiveBlocks <- function(x, y,
        vertex.color=col, ...)
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 plotHierarchy <- function(blocks,
                           layout=l_tree(hierarchy(blocks),
@@ -418,7 +418,7 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
   invisible(NULL)
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 exportPajek <- function(blocks, graph, file,
                         project.file=TRUE) {
@@ -435,7 +435,7 @@ exportPajek <- function(blocks, graph, file,
   }
 }
 
-#' @rdname cohesive.blocks
+#' @rdname cohesive_blocks
 
 maxcohesion <- function(blocks) {
   res <- numeric(blocks$vcount)

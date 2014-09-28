@@ -39,21 +39,21 @@
 #' 
 #' \code{maximal.cliques.count} counts the maximal cliques.
 #' 
-#' \code{clique.number} calculates the size of the largest clique(s).
+#' \code{clique_num} calculates the size of the largest clique(s).
 #' 
 #' The current implementation of these functions searches for maximal
 #' independent vertex sets (see \code{\link{independent.vertex.sets}}) in the
 #' complementer graph.
 #' 
 #' @aliases cliques largest.cliques maximal.cliques maximal.cliques.count
-#' clique.number
+#' clique.number clique_num
 #' @param graph The input graph, directed graphs will be considered as
 #' undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
 #' \code{NULL} means no limit, ie. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #' \code{NULL} means no limit.
-#' @return \code{cliques}, \code{largest.cliques} and \code{clique.number}
+#' @return \code{cliques}, \code{largest.cliques} and \code{clique_num}
 #' return a list containing numeric vectors of vertex ids. Each list element is
 #' a clique.
 #' 
@@ -61,7 +61,7 @@
 #' argument is not \code{NULL}. The output is written to the specified file in
 #' this case.
 #' 
-#' \code{clique.number} and \code{maximal.cliques.count} return an integer
+#' \code{clique_num} and \code{maximal.cliques.count} return an integer
 #' scalar.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -74,7 +74,7 @@
 #' 
 #' # this usually contains cliques of size six
 #' g <- g_np(100, 0.3)
-#' clique.number(g)
+#' clique_num(g)
 #' cliques(g, min=6)
 #' largest.cliques(g)
 #' 
@@ -186,7 +186,7 @@ maximal.cliques.count <- function(graph, min=NULL, max=NULL,
   res
 }
 
-clique.number <- function(graph) {
+clique_num <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object");
   }

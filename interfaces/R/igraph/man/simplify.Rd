@@ -38,8 +38,8 @@ is.simple(graph)
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{\code{\link{is.loop}}, \code{\link{is.multiple}} and
-  \code{\link{count.multiple}}, \code{\link{delete.edges}},
-  \code{\link{delete.vertices}}}
+  \code{\link{count_multiple}}, \code{\link{delete_edges}},
+  \code{\link{delete_vertices}}}
 \examples{
 g <- graph( c(1,2,1,2,3,3) )
 is.simple(g)

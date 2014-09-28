@@ -679,7 +679,7 @@ path <- function(...) {
       toadd <- unlist(e2[names(e2)==""])
       attr <- e2[names(e2)!=""]
     }
-    res <- add.edges(e1, as.igraph.vs(e1, toadd), attr=attr)
+    res <- add_edges(e1, as.igraph.vs(e1, toadd), attr=attr)
 
   } else if ("igraph.vertex" %in% class(e2)) {
     ## Adding vertices, possibly with attributes
@@ -699,7 +699,7 @@ path <- function(...) {
       e2 <- c(list(name=nn), e2[names(e2)!=""])
     }
     la <- unique(sapply(e2, length))
-    res <- add.vertices(e1, la, attr=e2)
+    res <- add_vertices(e1, la, attr=e2)
 
   } else if ("igraph.path" %in% class(e2)) {
     ## Adding edges along a path, possibly with attributes
@@ -715,18 +715,18 @@ path <- function(...) {
     lt <- length(toadd)
     if (lt >= 2) {
       toadd <- c(toadd[1], rep(toadd[2:(lt-1)], each=2), toadd[lt])
-      res <- add.edges(e1, toadd, attr=attr)
+      res <- add_edges(e1, toadd, attr=attr)
     } else {
       res <- e1
     }
     
   } else if (is.numeric(e2) && length(e2)==1) {
     ## Adding some isolate vertices
-    res <- add.vertices(e1, e2)
+    res <- add_vertices(e1, e2)
 
   } else if (is.character(e2)) {
     ## Adding named vertices
-    res <- add.vertices(e1, length(e2), name=e2)
+    res <- add_vertices(e1, length(e2), name=e2)
     
   } else {
     stop("Cannot add unknown type to igraph graph")
@@ -741,24 +741,24 @@ path <- function(...) {
   if (is.igraph(e2)) {
     res <- graph.difference(e1, e2)
   } else if ("igraph.vertex" %in% class(e2)) {
-    res <- delete.vertices(e1, unlist(e2, recursive=FALSE))
+    res <- delete_vertices(e1, unlist(e2, recursive=FALSE))
   } else if ("igraph.edge" %in% class(e2)) {
-    res <- delete.edges(e1, unlist(e2, recursive=FALSE))
+    res <- delete_edges(e1, unlist(e2, recursive=FALSE))
   } else if ("igraph.path" %in% class(e2)) {
     todel <- unlist(e2, recursive=FALSE)
     lt <- length(todel)
     if (lt >= 2) {
       todel <- paste(todel[-lt], todel[-1], sep="|")
-      res <- delete.edges(e1, todel)
+      res <- delete_edges(e1, todel)
     } else {
       res <- e1
     }
   } else if ("igraph.vs" %in% class(e2)) {
-    res <- delete.vertices(e1, e2)
+    res <- delete_vertices(e1, e2)
   } else if ("igraph.es" %in% class(e2)) {
-    res <- delete.edges(e1, e2)
+    res <- delete_edges(e1, e2)
   } else if (is.numeric(e2) || is.character(e2)) {
-    res <- delete.vertices(e1, e2)
+    res <- delete_vertices(e1, e2)
   } else {
     stop("Cannot substract unknown type from igraph graph")
   }

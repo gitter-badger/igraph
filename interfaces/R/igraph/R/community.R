@@ -77,7 +77,7 @@
 #' 
 #' \code{is.hierarchical} checks whether a hierarchical algorithm was used to
 #' find the community structure. Some functions only make sense for
-#' hierarchical methods (e.g. \code{merges}, \code{cutat} and
+#' hierarchical methods (e.g. \code{merges}, \code{cut_at} and
 #' \code{as.dendrogram}).
 #' 
 #' \code{merges} returns the merge matrix for hierarchical methods. An error
@@ -85,7 +85,7 @@
 #' community structure. You can check this by calling \code{is.hierarchical} on
 #' the \code{communities} object.
 #' 
-#' \code{cutat} cuts the merge tree of a hierarchical community finding method,
+#' \code{cut_at} cuts the merge tree of a hierarchical community finding method,
 #' at the desired place and returns a membership vector. The desired place can
 #' be expressed as the desired number of communities or as the number of merge
 #' steps to make. The function gives an error message, if called with a
@@ -106,7 +106,7 @@
 #' returns a character vector that gives the steps performed by the algorithm
 #' while finding the communities.
 #' 
-#' \code{code.length} is defined for the InfoMAP method
+#' \code{code_len} is defined for the InfoMAP method
 #' (\code{\link{infomap.community}} and returns the code length of the
 #' partition.
 #' 
@@ -123,9 +123,9 @@
 #' not included in igraph).
 #'
 #' @rdname communities
-#' @aliases communities membership algorithm crossing cutat merges sizes
+#' @aliases communities membership algorithm crossing cutat merges sizes cut_at
 #' is.hierarchical print.communities plot.communities length.communities
-#' as.dendrogram.communities as.hclust.communities
+#' as.dendrogram.communities as.hclust.communities code_len
 #' asPhylo asPhylo.communities showtrace code.length create.communities
 #' @param communities,x,object A \code{communities} object, the result of an
 #' igraph community detection function.
@@ -194,21 +194,21 @@
 #' 
 #' \code{merges} returns a two-column numeric matrix.
 #' 
-#' \code{cutat} returns a numeric vector, the membership vector of the
+#' \code{cut_at} returns a numeric vector, the membership vector of the
 #' vertices.
 #' 
 #' \code{as.dendrogram} returns a \code{\link[stats]{dendrogram}} object.
 #' 
 #' \code{showtrace} returns a character vector.
 #' 
-#' \code{code.length} returns a numeric scalar for communities found with the
+#' \code{code_len} returns a numeric scalar for communities found with the
 #' InfoMAP method and \code{NULL} for other methods.
 #' 
 #' \code{plot} for \code{communities} objects returns \code{NULL}, invisibly.
 #' 
 #' \code{create.communities} returns a \code{communities} object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso See \code{\link{dendPlot}} for plotting community structure
+#' @seealso See \code{\link{dend_plot}} for plotting community structure
 #' dendrograms.
 #' 
 #' See \code{\link{compare.communities}} for comparing two community structures
@@ -385,7 +385,7 @@ modularity <- function(x, ...)
 #' @examples
 #' 
 #' g <- g_full(5) %du% g_full(5) %du% g_full(5)
-#' g <- add.edges(g, c(1,6, 1,11, 6, 11))
+#' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' wtc <- walktrap.community(g)
 #' modularity(wtc)
 #' modularity(g, membership(wtc))
@@ -484,7 +484,7 @@ crossing <- function(communities, graph) {
 
 #' @rdname communities
 
-code.length <- function(communities) {
+code_len <- function(communities) {
   communities$codelength
 }
 
@@ -680,7 +680,7 @@ asPhylo.communities <- function(x, use.modularity=FALSE, ...) {
 
 #' @rdname communities
 
-cutat <- function(communities, no, steps) {
+cut_at <- function(communities, no, steps) {
 
   if (!inherits(communities, "communities")) {
     stop("Not a community structure")
@@ -859,7 +859,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' 
 #' Changes to the original function for including the possibility of negative
 #' ties were implemented by Vincent Traag (\url{http://www.traag.net/}).
-#' @seealso \code{\link{communities}}, \code{\link{clusters}}
+#' @seealso \code{\link{communities}}, \code{\link{comps}}
 #' @references J. Reichardt and S. Bornholdt: Statistical Mechanics of
 #' Community Detection, \emph{Phys. Rev. E}, 74, 016110 (2006),
 #' \url{http://arxiv.org/abs/cond-mat/0603718}
@@ -873,7 +873,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' @examples
 #' 
 #'   g <- g_np(10, 5/10) %du% g_np(9, 5/9)
-#'   g <- add.edges(g, c(1, 12))
+#'   g <- add_edges(g, c(1, 12))
 #'   g <- induced.subgraph(g, subcomponent(g, 1))
 #'   spinglass.community(g, spins=2)
 #'   spinglass.community(g, vertex=1)
@@ -970,7 +970,7 @@ spinglass.community <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' @examples
 #' 
 #' g <- g_full(5) %du% g_full(5) %du% g_full(5)
-#' g <- add.edges(g, c(1,6, 1,11, 6, 11))
+#' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' walktrap.community(g)
 #' 
 walktrap.community <- function(graph, weights=E(graph)$weight, steps=4,
@@ -1077,7 +1077,7 @@ walktrap.community <- function(graph, weights=E(graph)$weight, steps=4,
 #' eb <- edge.betweenness.community(g)
 #' 
 #' g <- g_full(10) %du% g_full(10)
-#' g <- add.edges(g, c(1,11))
+#' g <- add_edges(g, c(1,11))
 #' eb <- edge.betweenness.community(g)
 #' eb
 #' 
@@ -1165,7 +1165,7 @@ edge.betweenness.community.merges <- function(graph, edges) {
 #' @examples
 #' 
 #' g <- g_full(5) %du% g_full(5) %du% g_full(5)
-#' g <- add.edges(g, c(1,6, 1,11, 6, 11))
+#' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' fc <- fastgreedy.community(g)
 #' membership(fc)
 #' sizes(fc)
@@ -1295,7 +1295,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' @examples
 #' 
 #' g <- g_full(5) %du% g_full(5) %du% g_full(5)
-#' g <- add.edges(g, c(1,6, 1,11, 6, 11))
+#' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' lec <- leading.eigenvector.community(g)
 #' lec
 #' 
@@ -1406,7 +1406,7 @@ community.le.to.membership <- function(merges, steps, membership) {
 #' @examples
 #' 
 #'   g <- g_np(10, 5/10) %du% g_np(9, 5/9)
-#'   g <- add.edges(g, c(1, 12))
+#'   g <- add_edges(g, c(1, 12))
 #'   label.propagation.community(g)
 #' 
 label.propagation.community <- function(graph, weights=NULL, initial=NULL,
@@ -1487,7 +1487,7 @@ label.propagation.community <- function(graph, weights=NULL, initial=NULL,
 #' 
 #' # This is so simple that we will have only one level
 #' g <- g_full(5) %du% g_full(5) %du% g_full(5)
-#' g <- add.edges(g, c(1,6, 1,11, 6, 11))
+#' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' multilevel.community(g)
 #' 
 multilevel.community <- function(graph, weights=NULL) {
@@ -1706,10 +1706,11 @@ plot.communities <- function(x, y,
 
 
 
-#' @rdname dendPlot.communities
+#' @rdname dend_plot.communities
+#' @aliases dendPlot
 
-dendPlot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
-  UseMethod("dendPlot")
+dend_plot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
+  UseMethod("dend_plot")
 
 
 
@@ -1717,7 +1718,7 @@ dendPlot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' 
 #' Plot a hierarchical community structure as a dendrogram.
 #' 
-#' \code{dendPlot} supports three different plotting functions, selected via
+#' \code{dend_plot} supports three different plotting functions, selected via
 #' the \code{mode} argument. By default the plotting function is taken from the
 #' \code{dend.plot.type} igraph option, and it has for possible values:
 #' \itemize{ \item \code{auto} Choose automatically between the plotting
@@ -1730,7 +1731,7 @@ dendPlot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' 
 #' The different plotting functions take different sets of arguments. When
 #' using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
-#' \preformatted{ dendPlot(x, mode="phylo", colbar = rainbow(11, start=0.7,
+#' \preformatted{ dend_plot(x, mode="phylo", colbar = rainbow(11, start=0.7,
 #' end=0.1), edge.color = NULL, use.edge.length = FALSE, \dots) } The extra
 #' arguments not documented above: \itemize{ \item \code{colbar} Color bar for
 #' the edges.  \item \code{edge.color} Edge colors. If \code{NULL}, then the
@@ -1739,7 +1740,7 @@ dendPlot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' \code{plot.phylo}.  }
 #' 
 #' The syntax for \code{plot.hclust} (\code{mode="hclust"}): \preformatted{
-#' dendPlot(x, mode="hclust", rect = 0, colbar = rainbow(rect), hang = 0.01,
+#' dend_plot(x, mode="hclust", rect = 0, colbar = rainbow(rect), hang = 0.01,
 #' ann = FALSE, main = "", sub = "", xlab = "", ylab = "", \dots) } The extra
 #' arguments not documented above: \itemize{ \item \code{rect} A numeric
 #' scalar, the number of groups to mark on the dendrogram. The dendrogram is
@@ -1758,7 +1759,7 @@ dendPlot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' to pass to \code{plot.hclust}.  }
 #' 
 #' The syntax for \code{plot.dendrogram} (\code{mode="dendrogram"}):
-#' \preformatted{ dendPlot(x, \dots) } The extra arguments are simply passed to
+#' \preformatted{ dend_plot(x, \dots) } The extra arguments are simply passed to
 #' \code{as.dendrogram}.
 #' 
 #' @param x An object containing the community structure of a graph. See
@@ -1776,9 +1777,9 @@ dendPlot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' 
 #' karate <- graph.famous("Zachary")
 #' fc <- fastgreedy.community(karate)
-#' dendPlot(fc)
+#' dend_plot(fc)
 #' 
-dendPlot.communities <- function(x, 
+dend_plot.communities <- function(x, 
                                  mode=getIgraphOpt("dend.plot.type"), ...,
                                  use.modularity=FALSE) {  
   mode <- igraph.match.arg(mode, c("auto", "phylo", "hclust", "dendrogram"))

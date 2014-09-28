@@ -832,7 +832,7 @@ igraph.polygon <- function(points, vertex.size=15/200, expand.by=15/200,
               cbind(points[,1], points[,2]-vertex.size-by),
               cbind(points[,1], points[,2]+vertex.size+by))
 
-  cl <- convex.hull(pp)
+  cl <- convex_hull(pp)
   xspline(cl$rescoords, shape=shape, open=FALSE, col=col, border=border)
 }
 

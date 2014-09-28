@@ -1,19 +1,19 @@
 
-context("biconnected.components")
+context("biconn_comps")
 
-test_that("biconnected.components works", {
+test_that("biconn_comps works", {
   library(igraph)
 
   g <- g_full(5) + g_full(5)
-  clu <- clusters(g)$membership
-  g <- add.edges(g, c(match(1,clu), match(2,clu)) )
+  clu <- comps(g)$membership
+  g <- add_edges(g, c(match(1,clu), match(2,clu)) )
 
   sortlist <- function(list) {
     list <- lapply(list, sort)
     list[order(sapply(list, paste, collapse="x"))]
   }
     
-  bc <- biconnected.components(g)
+  bc <- biconn_comps(g)
   expect_that(bc$no, equals(3))
   expect_that(sortlist(bc$tree_edges), equals(list(c(11,15,18,20),
                                                    c(1,5,8,10), 21)))

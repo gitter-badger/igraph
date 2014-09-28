@@ -32,6 +32,6 @@ l_star(graph, center = V(graph)[1], order = NULL)
   ring graphs.}
 \examples{
 g <- g_star(10)
-l_starp(g)
+l_star(g)
 }
 \keyword{graphs}

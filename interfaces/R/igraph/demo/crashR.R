@@ -263,12 +263,12 @@ print(g2, v=T)
 pause()
 
 ### Remove Alice
-g3 <- delete.vertices(g2, match("Alice", V(g2)$name))
+g3 <- delete_vertices(g2, match("Alice", V(g2)$name))
 
 pause()
 
 ### Add three new vertices
-g4 <- add.vertices(g3, 3)
+g4 <- add_vertices(g3, 3)
 print(g4, v=T)
 igraph.options(print.vertex.attributes=TRUE, 
                plot.layout=l_fr)
@@ -278,13 +278,13 @@ plot(g4)
 pause()
 
 ### Add three new vertices, with names this time
-g4 <- add.vertices(g3, 3, attr=list(name=c("Helen", "Ike", "Jane")))
+g4 <- add_vertices(g3, 3, attr=list(name=c("Helen", "Ike", "Jane")))
 g4
 
 pause()
 
 ### Add some edges as well
-g4 <- add.edges(g4, match(c("Helen", "Jane", "Ike", "Jane"), V(g4)$name ))
+g4 <- add_edges(g4, match(c("Helen", "Jane", "Ike", "Jane"), V(g4)$name ))
 g4
 
 pause()
@@ -308,7 +308,7 @@ E(g2, P=c(1,2))
 pause()
 
 ### Delete this edge
-g3 <- delete.edges(g2, E(g2, P=c(1,2)))
+g3 <- delete_edges(g2, E(g2, P=c(1,2)))
 g3
 
 pause()

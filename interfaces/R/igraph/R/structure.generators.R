@@ -461,7 +461,7 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
     res <- g_empty(n=vc, directed=(mode=="directed"))
     weight <- list(el[,3])
     names(weight) <- weighted
-    res <- add.edges(res, edges=t(as.matrix(el[,1:2])), attr=weight)
+    res <- add_edges(res, edges=t(as.matrix(el[,1:2])), attr=weight)
   } else {
     edges <- unlist(apply(el, 1, function(x) rep(unname(x[1:2]), x[3])))
     res <- graph(n=vc, edges, directed=(mode=="directed"))
@@ -785,13 +785,13 @@ g_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 
 ##   n <- prod(dimvector)
 ##   res <- g_empty(n=n, directed=directed, ...)
-##   res <- add.edges(res, .Call("REST_create_lattice", dimvector, n,
+##   res <- add_edges(res, .Call("REST_create_lattice", dimvector, n,
 ##                               circular, mutual, PACKAGE="igraph"))
 
 ##   # Connect also to local neighborhood
 ##   if (nei >= 2) {
 ##     neighbors <- lapply(1:length(res), function(a) get.neighborhood(res, a))
-##     res <- add.edges(res, .Call("REST_connect_neighborhood", neighbors, nei,
+##     res <- add_edges(res, .Call("REST_connect_neighborhood", neighbors, nei,
 ##                                 mutual, PACKAGE="igraph"))
 ##   }
 
@@ -1089,7 +1089,7 @@ g_df <- function(d, directed=TRUE, vertices=NULL) {
   }
 
   # add vertices
-  g <- add.vertices(g, length(names), attr=attrs)
+  g <- add_vertices(g, length(names), attr=attrs)
 
   # create edge list
   from <- as.character(d[,1])
@@ -1109,7 +1109,7 @@ g_df <- function(d, directed=TRUE, vertices=NULL) {
   }
 
   # add the edges
-  g <- add.edges(g, edges, attr=attrs)
+  g <- add_edges(g, edges, attr=attrs)
   g
 }
 
@@ -1597,7 +1597,7 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
     res <- g_empty(n=n1+n2, directed=directed)
     weight <- list(el[,3])
     names(weight) <- weighted
-    res <- add.edges(res, edges=t(as.matrix(el[,1:2])), attr=weight)
+    res <- add_edges(res, edges=t(as.matrix(el[,1:2])), attr=weight)
 
   } else {
 
@@ -1668,7 +1668,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     res <- g_empty(n=n1+n2, directed=directed)
     weight <- list(weight)
     names(weight) <- weighted
-    res <- add.edges(res, edges, attr=weight)
+    res <- add_edges(res, edges, attr=weight)
     res <- set.vertex.attribute(res, "type",
                                 value=c(rep(FALSE, n1), rep(TRUE, n2)))
 

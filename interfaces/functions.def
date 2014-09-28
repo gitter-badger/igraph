@@ -9,7 +9,7 @@ igraph_empty:
 
 igraph_add_edges:
         PARAMS: INOUT GRAPH graph, VECTOR edges, ATTRIBUTES attr
-        NAME-R: add.edges
+        NAME-R: add_edges
         IGNORE: RR, RC
 
 igraph_add_vertices:
@@ -779,7 +779,7 @@ igraph_assortativity_degree:
 igraph_contract_vertices:
         PARAMS: INOUT GRAPH graph, VECTORM1 mapping, \
                 VERTEX_ATTRIBUTE_COMBINATION vertex_attr_comb=Default
-        NAME-R: contract.vertices
+        NAME-R: contract
 
 igraph_eccentricity:
         PARAMS: GRAPH graph, OUT VERTEXINDEX res, VERTEXSET vids=ALL, \
@@ -839,7 +839,7 @@ igraph_bipartite_projection_size:
                 OUT INTEGERPTR vcount1, OUT INTEGERPTR ecount1, \
                 OUT INTEGERPTR vcount2, OUT INTEGERPTR ecount2
         DEPS: types ON graph
-        NAME-R: bipartite.projection.size
+        NAME-R: bip_proj_size
 
 igraph_bipartite_projection:
         PARAMS: GRAPH graph, BIPARTITE_TYPES types=NULL, \
@@ -871,7 +871,7 @@ igraph_get_incidence:
 
 igraph_is_bipartite:
         PARAMS: GRAPH graph, OUT BOOLEANPTR res, OUT VECTOR_BOOL_OR_0 type
-        NAME-R: bipartite.mapping
+        NAME-R: bip_map
 
 igraph_bipartite_game_gnp:
         PARAMS: OUT GRAPH graph, OUT VECTOR_BOOL_OR_0 types, \
@@ -918,7 +918,7 @@ igraph_decompose:
 igraph_articulation_points:
         PARAMS: GRAPH graph, OUT VERTEXSET res
         DEPS: res ON graph
-        NAME-R: articulation.points
+        NAME-R: articulation_points
 
 igraph_biconnected_components:
         PARAMS: GRAPH graph, OUT INTEGERPTR no, \
@@ -928,7 +928,7 @@ igraph_biconnected_components:
                 OUT VERTEXSET articulation_points
         DEPS: tree_edges ON graph, component_edges ON graph, \
               components ON graph
-        NAME-R: biconnected.components
+        NAME-R: biconn_comps
 
 #######################################
 # Cliques
@@ -1502,7 +1502,7 @@ igraph_motifs_randesu_no:
 
 igraph_dyad_census:
         PARAMS: GRAPH graph, OUT INTEGERPTR mut, OUT INTEGERPTR asym, OUT INTEGERPTR null
-        NAME-R: dyad.census
+        NAME-R: dyad_census
         RETURN: ERROR
 
 igraph_triad_census:
@@ -1513,7 +1513,7 @@ igraph_triad_census:
 igraph_adjacent_triangles:
         PARAMS: GRAPH graph, OUT VECTOR res, VERTEXSET vids=ALL
         DEPS: vids ON graph
-        NAME-R: adjacent.triangles
+        NAME-R: count_triangles
 
 igraph_list_triangles:
         PARAMS: GRAPH graph, OUT VERTEXSET_INT res
@@ -1639,7 +1639,7 @@ igraph_dominator_tree:
                 OUT GRAPH_OR_0 domtree, OUT VERTEXSET leftout, \
                 INOUTMODE mode=OUT
         DEPS: root ON graph
-        NAME-R: dominator.tree
+        NAME-R: dominator_tree
 
 igraph_all_st_cuts:
         PARAMS: GRAPH graph, OUT EDGESETLIST_OR_0 cuts, \
@@ -1779,7 +1779,7 @@ igraph_isomorphic_34:
 
 igraph_canonical_permutation:
         PARAMS: GRAPH graph, OUT VECTORM1 labeling, BLISSSH sh="fm", OUT BLISSINFO info
-        NAME-R: canonical.permutation
+        NAME-R: canon_perm
 
 igraph_permute_vertices:
         PARAMS: GRAPH graph, OUT GRAPH res, VECTORM1 permutation
@@ -1942,7 +1942,7 @@ igraph_random_sample:
 
 igraph_convex_hull:
         PARAMS: MATRIX data, OUT VECTOR resverts, OUT MATRIX rescoords
-        NAME-R: convex.hull
+        NAME-R: convex_hull
 
 #######################################
 # (R)evolver

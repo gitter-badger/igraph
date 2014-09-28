@@ -23,7 +23,7 @@
 # Structure building
 ###################################################################
 
-add.edges <- function(graph, edges, ..., attr=list()) {
+add_edges <- function(graph, edges, ..., attr=list()) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -53,7 +53,7 @@ add.edges <- function(graph, edges, ..., attr=list()) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 4L, eattrs, PACKAGE="igraph")
 }
 
-add.vertices <- function(graph, nv, ..., attr=list()) {
+add_vertices <- function(graph, nv, ..., attr=list()) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -83,7 +83,7 @@ add.vertices <- function(graph, nv, ..., attr=list()) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 3L, vattrs, PACKAGE="igraph")
 }
 
-delete.edges <- function(graph, edges) {
+delete_edges <- function(graph, edges) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -92,7 +92,7 @@ delete.edges <- function(graph, edges) {
         PACKAGE="igraph")
 }
 
-delete.vertices <- function(graph, v) {
+delete_vertices <- function(graph, v) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }

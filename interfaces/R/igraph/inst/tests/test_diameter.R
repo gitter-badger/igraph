@@ -6,7 +6,7 @@ test_that("diameter works", {
   library(igraph)
 
   gc <- function(graph) {
-    clu <- clusters(graph)
+    clu <- comps(graph)
     induced.subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
 

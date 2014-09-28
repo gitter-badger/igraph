@@ -23,7 +23,7 @@ pause()
 
 ### Run cohesive blocking on it
 
-cbKarate <- cohesive.blocks(karate)
+cbKarate <- cohesive_blocks(karate)
 cbKarate
 
 pause()

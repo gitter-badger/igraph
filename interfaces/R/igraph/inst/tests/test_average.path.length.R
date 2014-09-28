@@ -1,7 +1,7 @@
 
-context("average.path.length")
+context("avg_path_len")
 
-test_that("average.path.length works", {
+test_that("avg_path_len works", {
   library(igraph)
 
   apl <- function(graph) {
@@ -16,19 +16,19 @@ test_that("average.path.length works", {
   }
 
   giant.component <- function(graph, mode="weak") {
-    clu <- clusters(graph, mode=mode)
+    clu <- comps(graph, mode=mode)
     induced.subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
   
   g <- giant.component(g_np(100, 3/100))
-  expect_that(apl(g), equals(average.path.length(g)))
+  expect_that(apl(g), equals(avg_path_len(g)))
 
   g <- giant.component(g_np(100, 6/100, dir=TRUE), mode="strong")
-  expect_that(apl(g), equals(average.path.length(g)))
+  expect_that(apl(g), equals(avg_path_len(g)))
 
   g <- g_np(100, 2/100)
-  expect_that(apl(g), equals(average.path.length(g)))
+  expect_that(apl(g), equals(avg_path_len(g)))
   
   g <- g_np(100, 4/100, dir=TRUE)
-  expect_that(apl(g), equals(average.path.length(g)))
+  expect_that(apl(g), equals(avg_path_len(g)))
 })

@@ -182,12 +182,12 @@
         (is.null(attr) && is.numeric(value) && value==0)) {
       ## Delete edges
       todel <- x[from=from, to=to, ..., edges=TRUE]
-      x <- delete.edges(x, todel)
+      x <- delete_edges(x, todel)
     } else {
       ## Addition or update of an attribute (or both)
       ids <- x[from=from, to=to, ..., edges=TRUE]
       if (any(ids==0)) {
-        x <- add.edges(x, rbind(from[ids==0], to[ids==0]))
+        x <- add_edges(x, rbind(from[ids==0], to[ids==0]))
       }
       if (!is.null(attr)) {
         ids <- x[from=from, to=to, ..., edges=TRUE]
@@ -207,7 +207,7 @@
     } else {
       todel <- unlist(x[[i, j, ..., edges=TRUE]])
     }
-    x <- delete.edges(x, todel)
+    x <- delete_edges(x, todel)
   } else {
     ## Addition or update of an attribute (or both)
     i <- if (missing(i)) as.numeric(V(x)) else as.igraph.vs(x, i)
@@ -226,9 +226,9 @@
       }))
       ## Do the changes
       if (is.null(attr)) {
-        x <- add.edges(x, toadd)
+        x <- add_edges(x, toadd)
       } else {
-        x <- add.edges(x, toadd, attr=structure(list(value), names=attr))
+        x <- add_edges(x, toadd, attr=structure(list(value), names=attr))
         toupdate <- unlist(x[[i, j, ..., edges=TRUE]])
         x <- set.edge.attribute(x, attr, toupdate, value)
       }

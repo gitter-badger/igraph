@@ -854,7 +854,7 @@ g_pref_asym <- function(nodes, types,
   }
 }
 
-connect.neighborhood <- function(graph, order, mode=c("all", "out", "in", "total")) {
+connect <- function(graph, order, mode=c("all", "out", "in", "total")) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -889,9 +889,9 @@ connect.neighborhood <- function(graph, order, mode=c("all", "out", "in", "total
 #' 
 #' # Some random shortcuts shorten the distances on a lattice
 #' g <- g_lattice( length=100, dim=1, nei=5 )
-#' average.path.length(g)
+#' avg_path_len(g)
 #' g <- rewire.edges( g, prob=0.05 )
-#' average.path.length(g)
+#' avg_path_len(g)
 #' 
 rewire.edges <- function(graph, prob, loops=FALSE, multiple=FALSE) {
   if (!is.igraph(graph)) {
@@ -935,7 +935,7 @@ rewire.edges <- function(graph, prob, loops=FALSE, multiple=FALSE) {
 #' @examples
 #' 
 #' g <- g_smallworld(1, 100, 5, 0.05)
-#' average.path.length(g)
+#' avg_path_len(g)
 #' transitivity(g, type="average")
 #' 
 g_smallworld <- function(dim, size, nei, p, loops=FALSE,

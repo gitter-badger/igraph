@@ -1,8 +1,12 @@
 \name{graph.structure}
+\alias{add_edges}
 \alias{add.edges}
+\alias{add_vertices}
 \alias{add.vertices}
 \alias{delete.edges}
+\alias{delete_edges}
 \alias{delete.vertices}
+\alias{delete_vertices}
 \alias{[.igraph}
 \alias{[[.igraph}
 \alias{[<-.igraph}
@@ -33,10 +37,10 @@ edge(\dots)
 edges(\dots)
 path(\dots)
 
-add.edges(graph, edges, \dots, attr=list())
-add.vertices(graph, nv, \dots, attr=list())
-delete.edges(graph, edges)
-delete.vertices(graph, v)
+add_edges(graph, edges, \dots, attr=list())
+add_vertices(graph, nv, \dots, attr=list())
+delete_edges(graph, edges)
+delete_vertices(graph, v)
 }
 \arguments{
   \item{x,graph,e1}{The graph to work on.}
@@ -44,7 +48,7 @@ delete.vertices(graph, v)
   \item{\dots}{These are currently ignored for the indexing operators.
     For \code{vertex}, \code{vertices}, \code{edge}, \code{edges} and
     \code{path} see details below.
-    For \code{add.edges} and \code{add.vertices} these additional
+    For \code{add_edges} and \code{add_vertices} these additional
     parameters will be added as edge/vertex attributes. Note that these
     arguments have to be named.}
   \item{from}{A numeric or character vector giving vertex ids or names.
@@ -73,8 +77,8 @@ delete.vertices(graph, v)
   \item{e2}{See details below.}
   \item{attr}{For the indexing operators: if not \code{NULL}, then it
      should be the name of an edge attribute. This attribute is queried,
-     or updated to the given value. For \code{add.edges} and
-     \code{add.vertices}: additional edge/vertex attributes to add. This
+     or updated to the given value. For \code{add_edges} and
+     \code{add_vertices}: additional edge/vertex attributes to add. This
      will be concatenated to the other supplied attributes.}
   \item{nv}{Numeric constant, the number of vertices to add.}
   \item{v}{Vector sequence, the vertices to remove.}
@@ -96,8 +100,8 @@ delete.vertices(graph, v)
   also wants to add attributes, together with the new vertices/edges.
   Please see the details below.
 
-  In addition, the four functions, \code{add.vertices}, \code{add.edges},
-  \code{delete.vertices} and \code{delete.edges} can also be used
+  In addition, the four functions, \code{add_vertices}, \code{add_edges},
+  \code{delete_vertices} and \code{delete_edges} can also be used
   to manipulate the structure.
 }
 \section{The indexing operators}{
@@ -302,24 +306,24 @@ delete.vertices(graph, v)
   }
 }
 \section{More functions to manipulate graph structure}{
-  \code{add.edges} adds the specified edges to the graph. The ids of the
+  \code{add_edges} adds the specified edges to the graph. The ids of the
   vertices are preserved. The additionally supplied named arguments will
   be added as edge attributes for the new edges. If an attribute was not
   present in the original graph, its value for the original edges will
   be \code{NA}.
 
-  \code{add.vertices} adds the specified number of isolate vertices to
+  \code{add_vertices} adds the specified number of isolate vertices to
   the graph. The ids of the old vertices are preserved. The additionally
   supplied named arguments will be added as vertex attributes for the
   new vertices. If an attribute was not present in the original graph,
   its value is set to \code{NA} for the original vertices.
 
-  \code{delete.edges} removes the specified edges from the graph. If a
+  \code{delete_edges} removes the specified edges from the graph. If a
   specified edge is not present, the function gives an error message,
   and the original graph remains unchanged.
   The ids of the vertices are preserved.
 
-  \code{delete.vertices} removes the specified vertices from the graph
+  \code{delete_vertices} removes the specified vertices from the graph
   together with their adjacent edges. The ids of the vertices are
   \emph{not} preserved.
 }
@@ -344,8 +348,8 @@ if (interactive()) {
 
 # The old-style operations
 g <- g_ring(10)
-add.edges(g, c(2,6,3,7) )
-delete.edges(g, E(g, P=c(1,10, 2,3)) )
-delete.vertices(g, c(2,7,8) )
+add_edges(g, c(2,6,3,7) )
+delete_edges(g, E(g, P=c(1,10, 2,3)) )
+delete_vertices(g, c(2,7,8) )
 }
 \keyword{graphs}
