@@ -1,11 +1,12 @@
-\name{triad.census}
+\name{triad_census}
 \alias{triad.census}
+\alias{triad_census}
 \concept{Triad census}
 \title{Triad census, subgraphs with three vertices}
 \description{This function counts the different subgraphs of three
   vertices in a graph.}
 \usage{
-triad.census(graph)
+triad_census(graph)
 }
 \arguments{
   \item{graph}{The input graph, it should be directed. An undirected
@@ -36,7 +37,7 @@ triad.census(graph)
   }
 
   This functions uses the RANDESU motif finder algorithm to find and
-  count the subgraphs, see \code{\link{graph.motifs}}. 
+  count the subgraphs, see \code{\link{motifs}}. 
 }
 \value{A numeric vector, the subgraph counts, in the order given in the
   above description.}
@@ -48,9 +49,9 @@ triad.census(graph)
 }
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{\code{\link{dyad_census}} for classifying binary relationships,
-  \code{\link{graph.motifs}} for the underlying implementation.}
+  \code{\link{motifs}} for the underlying implementation.}
 \examples{
 g <- g_nm(15, 45, directed = TRUE)
-triad.census(g)
+triad_census(g)
 }
 \keyword{graphs}

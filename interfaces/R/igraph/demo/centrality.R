@@ -120,7 +120,7 @@ pause()
 ## pause()
 
 ## ### How many components?
-## no.clusters(jg)
+## count_comps(jg)
 
 ## pause()
 

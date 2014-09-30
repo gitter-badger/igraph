@@ -84,14 +84,14 @@ transitivity(ws1)
 pause()
 
 ### Path lengths, regular graph
-avg_path_len(ws1)
+mean_distance(ws1)
 
 pause()
 
 ### Function to test regular graph with given size
 try.ring.pl <- function(n) {
   g <- g_smallworld(1, n, 3, p=0)
-  avg_path_len(g)
+  mean_distance(g)
 }
 try.ring.pl(10)
 try.ring.pl(100)
@@ -110,14 +110,14 @@ rg <- g_nm(50, 50 * 3)
 rg$layout <- l_circle
 V(rg)$size <- 3
 plot(rg, vertex.label=NA, main="Random graph")
-avg_path_len(rg)
+mean_distance(rg)
 
 pause()
 
 ### Path length of random graphs
 try.random.pl <- function(n) {
   g <- g_nm(n, n*3)
-  avg_path_len(g)
+  mean_distance(g)
 }
 try.random.pl(100)
 
@@ -145,14 +145,14 @@ ws2 <- g_smallworld(1, 50, 3, p=0.1)
 ws2$layout <- l_circle
 V(ws2)$size <- 3
 plot(ws2, vertex.label=NA)
-avg_path_len(ws2)
+mean_distance(ws2)
 
 pause()
 
 ### Path lengths in randomized lattices
 try.rr.pl <- function(n, p) {
   g <- g_smallworld(1, n, 3, p=p)
-  avg_path_len(g)
+  mean_distance(g)
 }
 rr.pl.0.1 <- sapply(ring.size, try.rr.pl, p=0.1)
 plot(ring.size, rr.pl.0.1, type="b")
@@ -168,7 +168,7 @@ pause()
 ws.paper <- function(p, n=1000) {
   g <- g_smallworld(1, n, 10, p=p)
   tr <- transitivity(g, type="localaverage")
-  pl <- avg_path_len(g)
+  pl <- mean_distance(g)
   c(tr, pl)
 }
 

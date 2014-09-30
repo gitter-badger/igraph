@@ -51,9 +51,9 @@ readpaj <- function(filename) {
 
   tf <- tempfile()
   cat(net, file=tf, sep="\n")
-  G <- read.graph(tf, format="pajek")
+  G <- read_graph(tf, format="pajek")
   V(G)$name <- V(G)$id
-  G <- remove.vertex.attribute(G, "id")
+  G <- delete_vertex_attr(G, "id")
   V(G)$ECO <- as.numeric(eco[-(1:2)])
   V(G)$Biomass <- as.numeric(bim[-(1:2)])
   G
@@ -252,8 +252,8 @@ save(Koenigsberg, file="/tmp/Koenigsberg.rda")
 ## download.file(url=url, destfile=yzip)
 ## system(paste("cd", tmp, ";", "unzip", yzip))
 
-## YS <- read.graph(paste(tmp, sep="/", "YeastS.net"), format="pajek")
-## YL <- read.graph(paste(tmp, sep="/", "YeastL.net"), format="pajek")
+## YS <- read_graph(paste(tmp, sep="/", "YeastS.net"), format="pajek")
+## YL <- read_graph(paste(tmp, sep="/", "YeastL.net"), format="pajek")
 ## cluLines <- readLines(paste(tmp, sep="/", "Yeast.clu"))
 ## cluLines <- cluLines[(grep("^\\*vertices", cluLines)+1):length(cluLines)]
 ## ccode <- c("1"="T", "2"="M", "3"="U", "4"="C", "5"="F", "6"="P",
@@ -261,7 +261,7 @@ save(Koenigsberg, file="/tmp/Koenigsberg.rda")
 
 ## V(YS)$name <- V(YS)$id
 ## V(YS)$Long_name <- V(YL)$id
-## YS <- remove.vertex.attribute(YS, "id")
+## YS <- delete_vertex_attr(YS, "id")
 ## V(YS)$Class <- ccode[cluLines]
 ## YS$name <- "Yeast protein interaction network by Bu et al. 2003"
 ## YS$Citation <- "Dongbo Bu, Yi Zhao, Lun Cai, Hong Xue, Xiaopeng Zhu, Hongchao Lu, Jingfen Zhang, Shiwei Sun, Lunjiang Ling, Nan Zhang, Guojie Li and Runsheng Chen: Topological structure analysis of the protein–protein interaction network in budding yeast. Nucl. Acids Res. (2003) 31 (9): 2443-2450."

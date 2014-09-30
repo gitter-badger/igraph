@@ -29,7 +29,7 @@ test_that("decompose keeps attributes", {
   library(igraph)
   g <- g_ring(10) + g_ring(5)
   V(g)$name <- letters[1:(10+5)]
-  E(g)$name <- apply(get.edgelist(g), 1, paste, collapse="-")
+  E(g)$name <- apply(edgelist(g), 1, paste, collapse="-")
   d <- decompose(g)
   d <- d[order(sapply(d, vcount))]
 
@@ -37,8 +37,8 @@ test_that("decompose keeps attributes", {
   expect_that(sapply(d, vcount), equals(c(5,10)))
   expect_that(V(d[[1]])$name, equals(letters[1:5+10]))
   expect_that(V(d[[2]])$name, equals(letters[1:10]))
-  e1 <- apply(get.edgelist(d[[1]]), 1, paste, collapse="-")
-  e2 <- apply(get.edgelist(d[[2]]), 1, paste, collapse="-")
+  e1 <- apply(edgelist(d[[1]]), 1, paste, collapse="-")
+  e2 <- apply(edgelist(d[[2]]), 1, paste, collapse="-")
   expect_that(E(d[[1]])$name, equals(e1))
   expect_that(E(d[[2]])$name, equals(e2))
 })

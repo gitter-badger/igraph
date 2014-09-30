@@ -65,23 +65,23 @@ canon_perm(graph, sh="fm")
 }
 \author{Tommi Junttila for BLISS, Gabor Csardi
   \email{csardi.gabor@gmail.com} for the igraph and R interfaces.}
-\seealso{\code{\link{permute.vertices}} to apply a permutation to a
+\seealso{\code{\link{permute}} to apply a permutation to a
   graph, \code{\link{graph.isomorphic}} for deciding graph isomorphism,
   possibly based on canonical labels.}
 \examples{
 ## Calculate the canonical form of a random graph
 g1 <- g_nm(10, 20)
 cp1 <- canon_perm(g1)
-cf1 <- permute.vertices(g1, cp1$labeling)
+cf1 <- permute(g1, cp1$labeling)
 
 ## Do the same with a random permutation of it
-g2 <- permute.vertices(g1, sample(vcount(g1)))
+g2 <- permute(g1, sample(vcount(g1)))
 cp2 <- canon_perm(g2)
-cf2 <- permute.vertices(g2, cp2$labeling)
+cf2 <- permute(g2, cp2$labeling)
 
 ## Check that they are the same
-el1 <- get.edgelist(cf1)
-el2 <- get.edgelist(cf2)
+el1 <- edgelist(cf1)
+el2 <- edgelist(cf2)
 el1 <- el1[ order(el1[,1], el1[,2]), ]
 el2 <- el2[ order(el2[,1], el2[,2]), ]
 all(el1 == el2)

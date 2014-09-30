@@ -68,7 +68,7 @@ test_that("[ indexing works with negative indices", {
   expect_that(as.matrix(g[2:3,-1]), equals(nres))
 })
 
-el <- get.edgelist(g, names=FALSE)
+el <- edgelist(g, names=FALSE)
 E(g)$weight <- el[,1] * el[,2]
 
 test_that("[ indexing works with weighted graphs", {

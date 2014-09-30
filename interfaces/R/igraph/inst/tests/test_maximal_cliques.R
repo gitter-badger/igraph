@@ -59,7 +59,7 @@ bk4 <- function(graph, min=0, max=Inf) {
   }
 
   res <- list()
-  cord <- order(graph.coreness(graph))
+  cord <- order(coreness(graph))
   for (v in seq_along(cord)) {
     if (v != length(cord)) {
       P <- intersect(Gamma(cord[v]), cord[(v+1):length(cord)])
@@ -86,13 +86,13 @@ test_that("Maximal cliques work", {
   G <- g_np(1000, 1000, type="gnm")
   cli <- g_full(10)
   for (i in 1:10) {
-    G <- permute.vertices(G, sample(vcount(G)))
+    G <- permute(G, sample(vcount(G)))
     G <- G %u% cli
   }
   G <- simplify(G)
 
   cl1 <- mysort(bk4(G, min=3))
-  cl2 <- mysort(maximal.cliques(G, min=3))
+  cl2 <- mysort(max_cliques(G, min=3))
 
   expect_that(cl1, is_identical_to(cl2))
 })
@@ -102,10 +102,10 @@ test_that("Maximal cliques work for subsets", {
   set.seed(42)
   G <- g_np(100, .5)
 
-  cl1  <- mysort(maximal.cliques(G, min=8))
+  cl1  <- mysort(max_cliques(G, min=8))
 
-  c1 <- maximal.cliques(G, min=8, subset=1:13)
-  c2 <- maximal.cliques(G, min=8, subset=14:100)
+  c1 <- max_cliques(G, min=8, subset=1:13)
+  c2 <- max_cliques(G, min=8, subset=14:100)
   cl2 <- mysort(c(c1, c2))
   
   expect_that(cl1, is_identical_to(cl2))
@@ -116,10 +116,10 @@ test_that("Counting maximal cliques works", {
   set.seed(42)
   G <- g_np(100, .5)
 
-  cl1  <- maximal.cliques.count(G, min=8)
+  cl1  <- num_max_cliques(G, min=8)
           
-  c1 <- maximal.cliques.count(G, min=8, subset=1:13)
-  c2 <- maximal.cliques.count(G, min=8, subset=14:100)
+  c1 <- num_max_cliques(G, min=8, subset=1:13)
+  c2 <- num_max_cliques(G, min=8, subset=14:100)
   cl2 <- c1+c2
   
   expect_that(cl1, is_identical_to(cl2))

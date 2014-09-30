@@ -112,7 +112,7 @@ revolver.air (graph, cats, window,
 revolver.d.d (graph, vtime = V(graph)$time, etime = E(graph)$time, niter = 5, 
              sd = FALSE, norm = FALSE, cites = FALSE, expected = FALSE, 
              error = TRUE, debug = matrix(ncol = 2, nrow = 0))
-revolver.p.p (graph, events = get.graph.attribute(graph, "events"), 
+revolver.p.p (graph, events = graph_attr(graph, "events"), 
              vtime = V(graph)$time, etime = E(graph)$time, niter = 5, sd = FALSE, 
              norm = FALSE, cites = FALSE, expected = FALSE, error = TRUE, 
              debug = matrix(ncol = 2, nrow = 0)) 

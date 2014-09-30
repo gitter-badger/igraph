@@ -23,7 +23,7 @@
 # Connected components, subgraphs, kinda
 ###################################################################
 
-no.clusters <- function(graph, mode=c("weak", "strong")) {
+count_comps <- function(graph, mode=c("weak", "strong")) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -41,7 +41,7 @@ no.clusters <- function(graph, mode=c("weak", "strong")) {
 #' @param mul.size Logical. If TRUE the relative frequencies will be multiplied
 #' by the cluster sizes.
 
-cluster.distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
+comp_dist <- function(graph, cumulative=FALSE, mul.size=FALSE,
                                  ...) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")

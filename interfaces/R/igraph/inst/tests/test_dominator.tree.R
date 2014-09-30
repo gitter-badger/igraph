@@ -13,7 +13,7 @@ test_that("dominator_tree works", {
   expect_that(dtree$dom, equals(c("R", "R", "R", "R", "R", "C", "C",
                                   "D", "R", "R", "G", "R")))
   expect_that(dtree$leftout, equals(character()))
-  expect_that(get.edgelist(dtree$domtree),
+  expect_that(edgelist(dtree$domtree),
               equals(structure(c("R", "R", "R", "R", "R", "C", "C",
                                  "D", "R", "R", "G", "R", "A", "B",
                                  "C", "D", "E", "F", "G", "L", "H",

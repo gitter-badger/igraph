@@ -2,6 +2,7 @@
 \alias{arpack}
 \alias{arpack-options}
 \alias{igraph.arpack.default}
+\alias{arpack_defaults}
 \alias{arpack.unpack.complex}
 \concept{Eigenvalues}
 \concept{Eigenvectors}
@@ -10,7 +11,7 @@
 \description{Interface to the ARPACK library for calculating
   eigenvectors of sparse matrices}
 \usage{
-arpack(func, extra = NULL, sym = FALSE, options = igraph.arpack.default, 
+arpack(func, extra = NULL, sym = FALSE, options = arpack_defaults, 
     env = parent.frame(), complex=!sym)
 arpack.unpack.complex(vectors, values, nev)
 }
@@ -245,13 +246,13 @@ f <- function(x, extra=NULL) {
 arpack(f, options=list(n=10, nev=1, ncv=3), sym=TRUE)
 
 # double check
-eigen(graph.laplacian(g_star(10, mode="undirected")))
+eigen(laplacian(g_star(10, mode="undirected")))
 
 ## First three eigenvalues of the adjacency matrix of a graph
 ## We need the 'Matrix' package for this
 if (require(Matrix)) {
   g <- g_np(1000, 5/1000)
-  M <- get.adjacency(g, sparse=TRUE)
+  M <- adj(g, sparse=TRUE)
   f2 <- function(x, extra=NULL) { cat("."); as.vector(M \%*\% x) }
   baev <- arpack(f2, sym=TRUE, options=list(n=vcount(g), nev=3, ncv=8,
                                   which="LM", maxiter=200))

@@ -33,7 +33,7 @@ r.to.graphml <- function(input_file, output_file) {
   tmp <- create.tmp()
   sapply(names(g), function(n) {
     f <- paste(sep="", tmp, "/", n, ".GraphML")
-    write.graph(g[[n]], file=f, format="GraphML")
+    write_graph(g[[n]], file=f, format="GraphML")
   })
 
   zip.output(tmp, output_file)
@@ -47,7 +47,7 @@ r.to.pajek <- function(input_file, output_file) {
   tmp <- create.tmp()
   sapply(names(g), function(n) {
     f <- paste(sep="", tmp, "/", n, ".net")
-    write.graph(g[[n]], file=f, format="Pajek")
+    write_graph(g[[n]], file=f, format="Pajek")
   })
 
   zip.output(tmp, output_file)  
@@ -109,11 +109,11 @@ r.check <- function(input_file, tags, netnames, netno, meta) {
   }
   if ('weighted' %in% tags) {
     res$`Tags, weighted` <- any(sapply(G, function(x)
-                                       'weight' %in% list.edge.attributes(x)))
+                                       'weight' %in% edge_attr_names(x)))
   }
   if ('bipartite' %in% tags) {
     res$`Tags, bipartite` <-any(sapply(G, function(x)
-                                       'type' %in% list.vertex.attributes(x)))
+                                       'type' %in% vertex_attr_names(x)))
   }
 
   ## Network properties, directed, weighted and bipartite, TODO
@@ -121,9 +121,9 @@ r.check <- function(input_file, tags, netnames, netno, meta) {
   ## Metadata
   meta <- lapply(strsplit(meta, ";;")[[1]],
                  function(x) strsplit(x, ";")[[1]])
-  va <- lapply(G, list.vertex.attributes)
-  ea <- lapply(G, list.edge.attributes)
-  ga <- lapply(G, list.graph.attributes)
+  va <- lapply(G, vertex_attr_names)
+  ea <- lapply(G, edge_attr_names)
+  ga <- lapply(G, graph_attr_names)
   netids <- strsplit(netno, ";")[[1]]
   for (m in meta) {
     aa <- switch(m[[1]], "vertex"=va, "edge"=ea, "graph"=ga)

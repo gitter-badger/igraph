@@ -24,7 +24,7 @@ l_grid (graph, width = 0, height = 0, dim = 2)
 \details{
   The function places the vertices on a simple rectangular grid, one
   after the other. If you want to change the order of the vertices, then
-  see the \code{\link{permute.vertices}} function.
+  see the \code{\link{permute}} function.
 }
 \value{
   A two-column or three-column matrix.

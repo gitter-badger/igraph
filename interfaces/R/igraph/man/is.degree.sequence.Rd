@@ -48,7 +48,7 @@ is.graphical.degree.sequence (out.deg, in.deg = NULL)
   Tamas Nepusz \email{ntamas@gmail.com}
 }
 \examples{
-g <- erdos.renyi.game(100, 2/100)
+g <- g_np(100, 2/100)
 is.degree.sequence(degree(g))
 is.graphical.degree.sequence(degree(g))
 }

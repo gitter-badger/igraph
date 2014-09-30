@@ -39,7 +39,7 @@ test_that("g_pa can start from a graph", {
   g8 <- g_pa(10, m=3, algorithm="psumtree-multiple",
                 start.graph=g_star(5))
   expect_that(degree(g8, mode="out"), equals(c(0,1,1,1,1, 3,3,3,3,3)))
-  expect_that(graph.isomorphic(induced.subgraph(g8, 1:5), g_star(5)),
+  expect_that(graph.isomorphic(induced_subgraph(g8, 1:5), g_star(5)),
               is_true())
 
   g9 <- g_pa(10, m=3, algorithm="psumtree-multiple",
@@ -51,7 +51,7 @@ test_that("g_pa can start from a graph", {
 
   g11 <- g_pa(10, m=3, start.graph=g_star(5))
   expect_that(degree(g11, mode="out"), equals(c(0,1,1,1,1, 3,3,3,3,3)))
-  expect_that(graph.isomorphic(induced.subgraph(g11, 1:5), g_star(5)),
+  expect_that(graph.isomorphic(induced_subgraph(g11, 1:5), g_star(5)),
               is_true())
   
   g12 <- g_pa(10, m=3, start.graph=g_star(10))

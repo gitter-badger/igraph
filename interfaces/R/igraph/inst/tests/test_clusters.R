@@ -7,7 +7,7 @@ test_that("comps works", {
   
   gc <- function(graph) {
     cl <- comps(graph)
-    induced.subgraph(graph, which(cl$membership==which.max(cl$csize)))
+    induced_subgraph(graph, which(cl$membership==which.max(cl$csize)))
   }
   
   rg <- function(n) {
@@ -17,7 +17,7 @@ test_that("comps works", {
   G <- lapply(1:30, function(x) rg(sample(100, 1)))
   Gsize <- sapply(G, vcount)
 
-  allg <- graph.disjoint.union(G)
+  allg <- disjoint_union(G)
   clu <- comps(allg)
 
   expect_that(as.numeric(table(clu$membership)), equals(clu$csize))

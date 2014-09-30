@@ -87,14 +87,14 @@ i.parse.plot.params <- function(graph, params) {
       return(ret())
     } else {
       ## we don't have the parameter, check attributes first
-      if (type=="vertex" && name %in% list.vertex.attributes(graph)) {
-        p[[type]][[name]] <- get.vertex.attribute(graph, name)
+      if (type=="vertex" && name %in% vertex_attr_names(graph)) {
+        p[[type]][[name]] <- vertex_attr(graph, name)
         return(ret())
-      } else if (type=="edge" && name %in% list.edge.attributes(graph)) {
-        p[[type]][[name]] <- get.edge.attribute(graph, name)
+      } else if (type=="edge" && name %in% edge_attr_names(graph)) {
+        p[[type]][[name]] <- edge_attr(graph, name)
         return(ret())
-      } else if (type=="plot" && name %in% list.graph.attributes(graph)) {
-        p[[type]][[name]] <- get.graph.attribute(graph, name)
+      } else if (type=="plot" && name %in% graph_attr_names(graph)) {
+        p[[type]][[name]] <- graph_attr(graph, name)
         return(ret())
       } else {
         ## no attributes either, check igraph parameters
@@ -127,8 +127,8 @@ i.get.edge.labels <- function(graph, edge.labels=NULL) {
 i.get.labels <- function(graph, labels=NULL) {
 
   if (is.null(labels)) {
-    if ("name" %in% list.vertex.attributes(graph)) {
-      labels <- get.vertex.attribute(graph, "name")
+    if ("name" %in% vertex_attr_names(graph)) {
+      labels <- vertex_attr(graph, "name")
     } else {
       labels <- seq_len(vcount(graph))
     }
@@ -140,7 +140,7 @@ i.get.arrow.mode <- function(graph, arrow.mode=NULL) {
 
   if (is.character(arrow.mode) &&
       length(arrow.mode)==1 && substr(arrow.mode, 1, 2)=="a:") {
-    arrow.mode <- get.vertex.attribute(graph, substring(arrow.mode,3))
+    arrow.mode <- vertex_attr(graph, substring(arrow.mode,3))
   }
 
   if (is.character(arrow.mode)) {
@@ -225,7 +225,7 @@ igraph.check.shapes <- function(x) {
 #' 
 make_curves <- function(graph, start=0.5) {
   cm <- count_multiple(graph)
-  el <- apply(get.edgelist(graph, names=FALSE), 1, paste, collapse=":")
+  el <- apply(edgelist(graph, names=FALSE), 1, paste, collapse=":")
   ord <- order(el)
   res <- numeric(length(ord))
 

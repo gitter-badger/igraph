@@ -55,7 +55,7 @@
   edge attributes are handy if you want to assign a given \sQuote{look}
   to a graph, attributes are saved with the graph is you save it with
   \code{\link[base]{save}} or in GraphML format with
-  \code{\link{write.graph}}, so the graph will have the same look after
+  \code{\link{write_graph}}, so the graph will have the same look after
   loading it again.
 
   If a parameter is not given in the command line, and the corresponding
@@ -457,7 +457,7 @@ g <- g_full(5) \%du\% g_full(5) \%du\% g_full(5)
 g <- add_edges(g, c(1,6, 1,11, 6,11))
 com <- spinglass.community(g, spins=5)
 V(g)$color <- com$membership+1
-g <- set.graph.attribute(g, "layout", l_kk(g))
+g <- set_graph_attr(g, "layout", l_kk(g))
 plot(g, vertex.label.dist=1.5)
 
 # draw a bunch of trees, fix layout

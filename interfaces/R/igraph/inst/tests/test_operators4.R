@@ -19,14 +19,14 @@ test_that("disjoint union works for named graphs", {
   E(g1)$b1 <- 1:10
   E(g2)$b2 <- 11:20
   
-  g <- graph.disjoint.union(g1, g2)
+  g <- disjoint_union(g1, g2)
 
-  expect_that(sort(list.graph.attributes(g)),
+  expect_that(sort(graph_attr_names(g)),
               equals(c("circular_1", "circular_2", "foo", "mutual_1",
                        "mutual_2", "name_1", "name_2")))
-  expect_that(sort(list.vertex.attributes(g)),
+  expect_that(sort(vertex_attr_names(g)),
               equals(c("a1", "a2", "name")))
-  expect_that(sort(list.edge.attributes(g)),
+  expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight")))
 
   expect_that(V(g)$name, equals(letters[1:20]))
@@ -46,7 +46,7 @@ test_that("disjoint union gives warning for non-unique vertex names", {
   g1 <- g_ring(5); V(g1)$name <- letters[1:5]
   g2 <- g_ring(5); V(g2)$name <- letters[5:9]
   
-  expect_that(graph.disjoint.union(g1, g2),
+  expect_that(disjoint_union(g1, g2),
               gives_warning("Duplicate vertex names in disjoint union"))
 })
   
@@ -69,12 +69,12 @@ test_that("union of unnamed graphs works", {
   
   g <- graph.union(g1, g2)
 
-  expect_that(sort(list.graph.attributes(g)),
+  expect_that(sort(graph_attr_names(g)),
               equals(c("circular_1", "circular_2", "foo", "mutual_1",
                        "mutual_2", "name_1", "name_2")))
-  expect_that(sort(list.vertex.attributes(g)),
+  expect_that(sort(vertex_attr_names(g)),
               equals(c("a1", "a2")))
-  expect_that(sort(list.edge.attributes(g)),
+  expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight_1", "weight_2")))
 
   df1 <- get.data.frame(g)
@@ -108,12 +108,12 @@ test_that("union of named graphs works", {
 
   g <- graph.union(g1, g2)
 
-  expect_that(sort(list.graph.attributes(g)),
+  expect_that(sort(graph_attr_names(g)),
               equals(c("circular_1", "circular_2", "foo",
                        "mutual_1", "mutual_2", "name_1", "name_2")))
-  expect_that(sort(list.vertex.attributes(g)),
+  expect_that(sort(vertex_attr_names(g)),
               equals(c("a1", "a2", "name")))
-  expect_that(sort(list.edge.attributes(g)),
+  expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight_1", "weight_2")))
   
   df1 <- get.data.frame(g, what="both")
@@ -179,12 +179,12 @@ test_that("intersection of named graphs works", {
 
   g <- graph.intersection(g1, g2, keep.all.vertices=FALSE)
 
-  expect_that(sort(list.graph.attributes(g)),
+  expect_that(sort(graph_attr_names(g)),
               equals(c("circular_1", "circular_2", "foo", "mutual_1",
                        "mutual_2", "name_1", "name_2")))
-  expect_that(sort(list.vertex.attributes(g)),
+  expect_that(sort(vertex_attr_names(g)),
               equals(c("a1", "a2", "name")))
-  expect_that(sort(list.edge.attributes(g)),
+  expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight_1", "weight_2")))
 
   df1 <- get.data.frame(g, what="both")
@@ -310,7 +310,7 @@ test_that("compose works for named graphs", {
   E(g1)$foo <- letters[seq_len(ecount(g1))]
   E(g2)$foo <- letters[seq_len(ecount(g2))]
 
-  g <- graph.compose(g1, g2)
+  g <- compose(g1, g2)
   df <- get.data.frame(g, what="both")
 
   df.v <- read.table(stringsAsFactors=FALSE, textConnection("

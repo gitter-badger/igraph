@@ -5,6 +5,6 @@ test_that("Largest cliques is correct", {
   library(igraph)
   adj <- matrix(1, nrow=11, ncol=11) - diag(11)
   g <- g_adj_matrix(adj)
-  lc <- suppressWarnings(largest.cliques(g))
+  lc <- suppressWarnings(largest_cliques(g))
   expect_that(lc, equals(list(1:11)))
 })

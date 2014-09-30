@@ -50,8 +50,8 @@ igraph.to.graphNEL(graph)
 }
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{ \code{\link{get.adjacency}}, \code{\link{g_adj_matrix}},
-  \code{\link{get.adjlist}} and \code{\link{graph.adjlist}}.
+\seealso{ \code{\link{adj}}, \code{\link{g_adj_matrix}},
+  \code{\link{adj_list}} and \code{\link{graph.adjlist}}.
 }
 \examples{
 ## Undirected

@@ -33,7 +33,7 @@
 ## e(graph)$weight[1:10]           # get edge attribute
 ##
 
-get.graph.attribute <- function(graph, name) {
+graph_attr <- function(graph, name) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -41,7 +41,7 @@ get.graph.attribute <- function(graph, name) {
         PACKAGE="igraph")[[as.character(name)]]
 }
 
-set.graph.attribute <- function(graph, name, value) {
+set_graph_attr <- function(graph, name, value) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -71,7 +71,7 @@ graph.attributes <- function(graph) {
         PACKAGE="igraph")
 }
 
-get.vertex.attribute <- function(graph, name, index=V(graph)) {
+vertex_attr <- function(graph, name, index=V(graph)) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -81,7 +81,7 @@ get.vertex.attribute <- function(graph, name, index=V(graph)) {
   myattr[index]
 }
 
-set.vertex.attribute <- function(graph, name, index=V(graph), value) {
+set_vertex_attr <- function(graph, name, index=V(graph), value) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -124,7 +124,7 @@ vertex.attributes <- function(graph) {
         PACKAGE="igraph")
 }
 
-get.edge.attribute <- function(graph, name, index=E(graph)) {
+edge_attr <- function(graph, name, index=E(graph)) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -135,7 +135,7 @@ get.edge.attribute <- function(graph, name, index=E(graph)) {
   myattr[index]
 }
 
-set.edge.attribute <- function(graph, name, index=E(graph), value) {
+set_edge_attr <- function(graph, name, index=E(graph), value) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -179,7 +179,7 @@ edge.attributes <- function(graph) {
         PACKAGE="igraph")
 }
 
-list.graph.attributes <- function(graph) {
+graph_attr_names <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -188,7 +188,7 @@ list.graph.attributes <- function(graph) {
   res
 }
 
-list.vertex.attributes <- function(graph) {
+vertex_attr_names <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -198,7 +198,7 @@ list.vertex.attributes <- function(graph) {
   res
 }
 
-list.edge.attributes <- function(graph) {
+edge_attr_names <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
@@ -207,12 +207,12 @@ list.edge.attributes <- function(graph) {
   res
 }
 
-remove.graph.attribute <- function(graph, name) {
+delete_graph_attr <- function(graph, name) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
   name <- as.character(name)
-  if (!name %in% list.graph.attributes(graph)) {
+  if (!name %in% graph_attr_names(graph)) {
     stop("No such graph attribute: ", name)
   }
 
@@ -222,12 +222,12 @@ remove.graph.attribute <- function(graph, name) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 2L, gattr, PACKAGE="igraph")
 }
 
-remove.vertex.attribute <- function(graph, name) {
+delete_vertex_attr <- function(graph, name) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
   name <- as.character(name)
-  if (!name %in% list.vertex.attributes(graph)) {
+  if (!name %in% vertex_attr_names(graph)) {
     stop("No such vertex attribute: ", name)
   }
 
@@ -237,12 +237,12 @@ remove.vertex.attribute <- function(graph, name) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 3L, vattr, PACKAGE="igraph")
 }
 
-remove.edge.attribute <- function(graph, name) {
+delete_edge_attr <- function(graph, name) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
   name <- as.character(name)
-  if (!name %in% list.edge.attributes(graph)) {
+  if (!name %in% edge_attr_names(graph)) {
     stop("No such edge attribute: ", name)
   }
 
@@ -289,7 +289,7 @@ is.named <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
-  "name" %in% list.vertex.attributes(graph)
+  "name" %in% vertex_attr_names(graph)
 }
 
 
@@ -325,7 +325,7 @@ is.weighted <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
-  "weight" %in% list.edge.attributes(graph)
+  "weight" %in% edge_attr_names(graph)
 }
 
 #' @rdname g_bip
@@ -334,7 +334,7 @@ is.bipartite <- function(graph) {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
   }
-  "type" %in% list.vertex.attributes(graph)
+  "type" %in% vertex_attr_names(graph)
 }
 
 #############

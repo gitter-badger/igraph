@@ -9,14 +9,14 @@ test_that("get.diameter works", {
   E(g)$weight <- sample(seq_len(ecount(g)))
   d <- diameter(g)
   gd <- get.diameter(g)
-  sp <- shortest.paths(g)
+  sp <- distances(g)
 
   expect_that(d, equals(max(sp)))
   expect_that(sp[ gd[1], gd[length(gd)] ], equals(d))
 
   d <- diameter(g, weights=NA)
   gd <- get.diameter(g, weights=NA)
-  sp <- shortest.paths(g, weights=NA)
+  sp <- distances(g, weights=NA)
   
   expect_that(d, equals(max(sp)))
   length(gd) == d + 1

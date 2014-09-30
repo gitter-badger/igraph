@@ -78,7 +78,7 @@ if (require(Matrix)) {
 } else {
   myimage <- image
 }
-A <- get.adjacency(G)
+A <- adj(G)
 myimage(A)
 
 pause()

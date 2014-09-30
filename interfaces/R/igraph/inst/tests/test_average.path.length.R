@@ -1,11 +1,11 @@
 
-context("avg_path_len")
+context("mean_distance")
 
-test_that("avg_path_len works", {
+test_that("mean_distance works", {
   library(igraph)
 
   apl <- function(graph) {
-    sp <- shortest.paths(graph, mode="out")
+    sp <- distances(graph, mode="out")
     if (is.directed(graph)) {
       diag(sp) <- NA
     } else {
@@ -17,18 +17,18 @@ test_that("avg_path_len works", {
 
   giant.component <- function(graph, mode="weak") {
     clu <- comps(graph, mode=mode)
-    induced.subgraph(graph, which(clu$membership==which.max(clu$csize)))
+    induced_subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
   
   g <- giant.component(g_np(100, 3/100))
-  expect_that(apl(g), equals(avg_path_len(g)))
+  expect_that(apl(g), equals(mean_distance(g)))
 
   g <- giant.component(g_np(100, 6/100, dir=TRUE), mode="strong")
-  expect_that(apl(g), equals(avg_path_len(g)))
+  expect_that(apl(g), equals(mean_distance(g)))
 
   g <- g_np(100, 2/100)
-  expect_that(apl(g), equals(avg_path_len(g)))
+  expect_that(apl(g), equals(mean_distance(g)))
   
   g <- g_np(100, 4/100, dir=TRUE)
-  expect_that(apl(g), equals(avg_path_len(g)))
+  expect_that(apl(g), equals(mean_distance(g)))
 })

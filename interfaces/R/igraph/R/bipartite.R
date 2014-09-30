@@ -92,7 +92,7 @@ bip_proj <- function(graph, types=NULL,
                                  remove.type=TRUE) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% list.vertex.attributes(graph)) { 
+  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
   types <- V(graph)$type 
   } 
   if (!is.null(types)) {
@@ -123,10 +123,10 @@ bip_proj <- function(graph, types=NULL,
                as.integer(probe1), which, PACKAGE="igraph")
   if (remove.type) {
     if (is.igraph(res[[1]])) {
-      res[[1]] <- remove.vertex.attribute(res[[1]], "type")
+      res[[1]] <- delete_vertex_attr(res[[1]], "type")
     }
     if (is.igraph(res[[2]])) {
-      res[[2]] <- remove.vertex.attribute(res[[2]], "type")
+      res[[2]] <- delete_vertex_attr(res[[2]], "type")
     }
   }
   if (which == 0L) {

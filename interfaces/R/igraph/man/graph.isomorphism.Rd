@@ -1,7 +1,8 @@
 \name{graph-isomorphism}
 \alias{graph.isoclass}
+\alias{iso_class}
 \alias{graph.isocreate}
-\alias{g_isoclass}
+\alias{g_iso_class}
 \alias{graph.isomorphic}
 \alias{graph.isomorphic.vf2}
 \alias{graph.count.isomorphisms.vf2}
@@ -47,9 +48,9 @@ graph.subisomorphic.lad (pattern, target, domains = NULL,
                          induced = FALSE, map = TRUE, all.maps = FALSE,
                          time.limit = Inf)
 
-graph.isoclass(graph)
+iso_class(graph)
 graph.isoclass.subgraph(graph, vids)
-g_isoclass(size, number, directed=TRUE)
+g_iso_class(size, number, directed=TRUE)
 }
 \arguments{
   \item{graph}{A graph object.}
@@ -122,7 +123,7 @@ g_isoclass(size, number, directed=TRUE)
   \code{igraph.isomorphic.bliss} uses the BLISS algorithm by Junttila
   and Kaski, and it works for undirected graphs. For both graphs the
   \code{\link{canon_perm}} and then the
-  \code{\link{permute.vertices}} function is called to transfer them
+  \code{\link{permute}} function is called to transfer them
   into canonical form; finally the canonical forms are compared.
 
   \code{graph.isomorphic.vf2} decides whethe two graphs are isomorphic,
@@ -132,7 +133,7 @@ g_isoclass(size, number, directed=TRUE)
   \code{graph.count.isomorphisms.vf2} counts the different isomorphic
   mappings between \code{graph1} and \code{graph2}. (To count
   automorphisms you can supply the same graph twice, but it is better to
-  call \code{\link{graph.automorphisms}}.) It uses the VF2 algorithm.
+  call \code{\link{automorphisms}}.) It uses the VF2 algorithm.
 
   \code{graph.get.isomorphisms.vf2} calculates all isomorphic mappings
   between \code{graph1} and \code{graph2}. It uses the VF2 algorithm.
@@ -155,7 +156,7 @@ g_isoclass(size, number, directed=TRUE)
   restrict the matching to a subset of allowed vertices, individually
   for each vertex in \code{pattern}.
   
-  \code{graph.isoclass} returns the isomorphism class of a graph, a
+  \code{iso_class} returns the isomorphism class of a graph, a
   non-negative integer number. Graphs (with the same number of vertices)
   having the same isomorphism class are isomorphic and isomorphic graphs
   always have the same isomorphism class. Currently it can handle only
@@ -165,12 +166,12 @@ g_isoclass(size, number, directed=TRUE)
   subgraph of the input graph. Currently it only works for subgraphs
   with 3 or 4 vertices.
   
-  \code{g_isoclass} create a graph from the given isomorphic
+  \code{g_iso_class} create a graph from the given isomorphic
   class. Currently it can handle only graphs with 3 or 4 vertices.
 }
 \note{
-  Functions \code{graph.isoclass}, \code{graph.isoclass.subgraph} and
-  \code{g_isoclass} are considered experimental and might be
+  Functions \code{iso_class}, \code{graph.isoclass.subgraph} and
+  \code{g_iso_class} are considered experimental and might be
   reorganized/rewritten later.
 }
 \value{
@@ -248,10 +249,10 @@ g_isoclass(size, number, directed=TRUE)
     \code{target}, in a list of vectors, where each vector is in the
     same format as \code{map} just above.}
   
-  \code{graph.isoclass} and \code{graph.isoclass.subgraph} return a
+  \code{iso_class} and \code{graph.isoclass.subgraph} return a
   non-negative integer number. 
 
-  \code{g_isoclass} returns a graph object.
+  \code{g_iso_class} returns a graph object.
 }
 \references{
   Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -268,19 +269,19 @@ g_isoclass(size, number, directed=TRUE)
   \emph{Artificial Intelligence} 174(12-13):850--864, 2010.
 }
 \author{ Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{graph.motifs}}}
+\seealso{\code{\link{motifs}}}
 \examples{
 # create some non-isomorphic graphs
-g1 <- g_isoclass(3, 10)
-g2 <- g_isoclass(3, 11)
-graph.isoclass(g1)
-graph.isoclass(g2)
+g1 <- g_iso_class(3, 10)
+g2 <- g_iso_class(3, 11)
+iso_class(g1)
+iso_class(g2)
 graph.isomorphic(g1, g2)
 
 # create two isomorphic graphs, by
 # permuting the vertices of the first 
 g1 <- barabasi.game(30, m=2, directed=FALSE)
-g2 <- permute.vertices(g1, sample(vcount(g1)))
+g2 <- permute(g1, sample(vcount(g1)))
 # should be TRUE
 graph.isomorphic(g1, g2)
 graph.isomorphic.bliss(g1, g2)

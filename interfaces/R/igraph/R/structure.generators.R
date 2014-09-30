@@ -272,7 +272,7 @@ g_formula <- function(..., simplify=TRUE) {
   names(ids) <- v
   res <- graph( unname(ids[edges]), n=length(v), directed=directed)
   if (simplify) res <- simplify(res)
-  res <- set.vertex.attribute(res, "name", value=v)
+  res <- set_vertex_attr(res, "name", value=v)
   res
 }
 
@@ -638,10 +638,10 @@ g_adj_matrix <- function(adjmatrix, mode=c("directed", "undirected", "max",
   }
 
   if (!is.na(add.colnames)) {
-    res <- set.vertex.attribute(res, add.colnames, value=colnames(adjmatrix))
+    res <- set_vertex_attr(res, add.colnames, value=colnames(adjmatrix))
   }
   if (!is.na(add.rownames)) {
-    res <- set.vertex.attribute(res, add.rownames, value=rownames(adjmatrix))
+    res <- set_vertex_attr(res, add.rownames, value=rownames(adjmatrix))
   }
 
   res
@@ -1512,7 +1512,7 @@ g_full_bip <- function(n1, n2, directed=FALSE,
     res$n2 <- n2
     res$mode <- mode
   }
-  set.vertex.attribute(res$graph, "type", value=res$types)
+  set_vertex_attr(res$graph, "type", value=res$types)
 }
 
 
@@ -1566,7 +1566,7 @@ g_bip <- function(types, edges, directed=FALSE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_create_bipartite", types, edges, directed,
                PACKAGE="igraph")
-  set.vertex.attribute(res, "type", value=types)
+  set_vertex_attr(res, "type", value=types)
 }
 
 graph.incidence.sparse <- function(incidence, directed, mode, multiple,
@@ -1620,7 +1620,7 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
     res <- graph(n=n1+n2, edges, directed=directed)
   }
 
-  set.vertex.attribute(res, "type", value=c(rep(FALSE, n1), rep(TRUE, n2)))
+  set_vertex_attr(res, "type", value=c(rep(FALSE, n1), rep(TRUE, n2)))
 }
 
 graph.incidence.dense <- function(incidence, directed, mode, multiple,
@@ -1669,7 +1669,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     weight <- list(weight)
     names(weight) <- weighted
     res <- add_edges(res, edges, attr=weight)
-    res <- set.vertex.attribute(res, "type",
+    res <- set_vertex_attr(res, "type",
                                 value=c(rep(FALSE, n1), rep(TRUE, n2)))
 
   } else {
@@ -1679,7 +1679,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     ## Function call
     res <- .Call("R_igraph_incidence", incidence, directed, mode, multiple,
                  PACKAGE="igraph")
-    res <- set.vertex.attribute(res$graph, "type", value=res$types)
+    res <- set_vertex_attr(res$graph, "type", value=res$types)
 
   }
 
@@ -1778,7 +1778,7 @@ g_incidence <- function(incidence, directed=FALSE,
     }
   }
   if (!is.na(add.names)) {
-    res <- set.vertex.attribute(res, add.names,
+    res <- set_vertex_attr(res, add.names,
                                 value=c(rownames(incidence), colnames(incidence)))
   }
   res
@@ -1810,6 +1810,6 @@ g_full_cit <- function(n, directed=TRUE) {
   res <- .Call("R_igraph_full_citation", n, directed,
         PACKAGE="igraph")
 
-  res <- set.graph.attribute(res, 'name', 'Full citation graph')
+  res <- set_graph_attr(res, 'name', 'Full citation graph')
   res
 }

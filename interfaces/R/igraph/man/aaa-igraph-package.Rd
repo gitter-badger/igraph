@@ -72,7 +72,7 @@
   always consecutive and they start with one. I.e. for a graph with
   \eqn{n} vertices the vertex ids are between \eqn{1} and
   \eqn{n}. If some operation changes the number of vertices in the
-  graphs, e.g. a subgraph is created via \code{\link{induced.subgraph}}, then
+  graphs, e.g. a subgraph is created via \code{\link{induced_subgraph}}, then
   the vertices are renumbered to satisfty this criteria.
 
   The same is true for the edges as well, edge ids are always between
@@ -88,7 +88,7 @@
   In igraph it is possible to assign attributes to the vertices or edges
   of a graph, or to the graph itself. igraph provides flexible
   constructs for selecting a set of vertices or edges based on their
-  attribute values, see \code{\link{get.vertex.attribute}} and
+  attribute values, see \code{\link{vertex_attr}} and
   \code{\link{iterators}} for details.
 
   Some vertex/edge/graph attributes are treated specially. One of them
@@ -140,8 +140,8 @@
   igraph can handle various graph file formats, usually both for reading
   and writing. We suggest that you use the GraphML file format for your
   graphs, except if the graphs are too big. For big graphs a simpler
-  format is recommended. See \code{\link{read.graph}} and
-  \code{\link{write.graph}} for details.
+  format is recommended. See \code{\link{read_graph}} and
+  \code{\link{write_graph}} for details.
 }
 \section{Further information}{
   The igraph homepage is at \url{http://igraph.org}.

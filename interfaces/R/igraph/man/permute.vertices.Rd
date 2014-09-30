@@ -1,10 +1,11 @@
-\name{permute.vertices}
+\name{permute}
 \alias{permute.vertices}
+\alias{permute}
 \concept{Permutation}
 \title{Permute the vertices of a graph}
 \description{Create a new graph, by permuting vertex ids.}
 \usage{
-permute.vertices(graph, permutation)
+permute(graph, permutation)
 }
 \arguments{
   \item{graph}{The input graph, it can directed or undirected.}
@@ -19,7 +20,7 @@ permute.vertices(graph, permutation)
   with the output of \code{\link{canon_perm}} to create
   the canonical form of a graph.
 
-  \code{permute.vertices} keeps all graph, vertex and edge attributes of
+  \code{permute} keeps all graph, vertex and edge attributes of
   the graph.
 }
 \value{A new graph object.}
@@ -29,14 +30,14 @@ permute.vertices(graph, permutation)
 \examples{
 # Random permutation of a random graph
 g <- g_nm(20, 50)
-g2 <- permute.vertices(g, sample(vcount(g)))
+g2 <- permute(g, sample(vcount(g)))
 graph.isomorphic(g, g2)
 
 # Permutation keeps all attributes
 g$name <- "Random graph, Gnm, 20, 50"
 V(g)$name <- letters[1:vcount(g)]
 E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
-g2 <- permute.vertices(g, sample(vcount(g)))
+g2 <- permute(g, sample(vcount(g)))
 graph.isomorphic(g, g2)
 g2$name
 V(g2)$name

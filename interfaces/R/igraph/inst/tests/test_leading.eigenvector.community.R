@@ -54,7 +54,7 @@ test_that("leading.eigenvector.community works", {
   }
 
   g <- graph.famous("Zachary")
-  A <- get.adjacency(g, sparse=FALSE)
+  A <- adj(g, sparse=FALSE)
   ec <- ecount(g)
   deg <- degree(g)
   lc <- leading.eigenvector.community(g, callback=f)

@@ -28,7 +28,7 @@
 #' 
 #' One convenient way to plot graphs is to plot with \code{\link{tkplot}}
 #' first, handtune the placement of the vertices, query the coordinates by the
-#' \code{\link{tkplot.getcoords}} function and use them with \code{plot} to
+#' \code{\link{tk_coords}} function and use them with \code{plot} to
 #' plot the graph to any R device.
 #' 
 #' @param x The graph to plot.
@@ -173,7 +173,7 @@ plot.igraph <- function(x,
 
   ################################################################
   ## calculate position of arrow-heads
-  el <- get.edgelist(graph, names=FALSE)
+  el <- edgelist(graph, names=FALSE)
   loops.e <- which(el[,1] == el[,2])
   nonloops.e <- which(el[,1] != el[,2])
   loops.v <- el[,1] [loops.e]
@@ -622,7 +622,7 @@ rglplot.igraph <- function(x, ...) {
   }
   
   # add the edges, the loops are handled separately
-  el <- get.edgelist(graph, names=FALSE)
+  el <- edgelist(graph, names=FALSE)
   
   # It is faster this way
   par3d(skipRedraw=TRUE)

@@ -313,15 +313,15 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
 }  
 
 "$.igraph" <- function(x, name) {
-  get.graph.attribute(x, name)
+  graph_attr(x, name)
 }
 
 "$<-.igraph" <- function(x, name, value) {
-  set.graph.attribute(x, name, value)
+  set_graph_attr(x, name, value)
 }
   
 "$.igraph.vs" <- function(x, name) {
-  res <- get.vertex.attribute(get("graph", attr(x, "env")), name, x)
+  res <- vertex_attr(get("graph", attr(x, "env")), name, x)
   if ("single" %in% names(attributes(x)) && attr(x, "single")) {
     res[[1]]
   } else {
@@ -330,7 +330,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
 }
 
 "$.igraph.es" <- function(x, name) {
-  res <- get.edge.attribute(get("graph", attr(x, "env")), name, x)
+  res <- edge_attr(get("graph", attr(x, "env")), name, x)
   if ("single" %in% names(attributes(x)) && attr(x, "single")) {
     res[[1]]
   } else {
@@ -358,7 +358,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
       ! "value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
-  set.vertex.attribute(x, attr(value, "name"), index=value,
+  set_vertex_attr(x, attr(value, "name"), index=value,
                        value=attr(value, "value"))
 }
 
@@ -370,7 +370,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
       ! "value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
-  set.edge.attribute(x, attr(value, "name"), index=value,
+  set_edge_attr(x, attr(value, "name"), index=value,
                      value=attr(value, "value"))
 }
 
@@ -378,7 +378,7 @@ print.igraph.vs <- function(x, ...) {
   cat("Vertex sequence:\n")
   graph <- get("graph", attr(x, "env"))
   x <- as.numeric(x)
-  if ("name" %in% list.vertex.attributes(graph)) {
+  if ("name" %in% vertex_attr_names(graph)) {
     x <- V(graph)$name[x]
   }
   print(x)
@@ -394,7 +394,7 @@ print.igraph.es <- function(x, ...) {
   }
   x <- as.numeric(x)
   el <- get.edges(graph, x)
-  if ("name" %in% list.vertex.attributes(graph)) {
+  if ("name" %in% vertex_attr_names(graph)) {
     el <- matrix(V(graph)$name[el], ncol=2)
   }
   tab <- data.frame(e=paste(sep="", "[", x, "]"), row.names="e")
@@ -406,7 +406,7 @@ print.igraph.es <- function(x, ...) {
 # these are internal
 
 as.igraph.vs <- function(graph, v, na.ok=FALSE) {
-  if (is.character(v) && "name" %in% list.vertex.attributes(graph)) {
+  if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
     v <- as.numeric(match(v, V(graph)$name))
     if (!na.ok && any(is.na(v))) {
       stop("Invalid vertex names")
@@ -441,7 +441,7 @@ as.igraph.es <- function(graph, e) {
         stop("Invalid edge name: ", e[Pairs][vl!=2][1])
       }
       vp <- unlist(vv)
-      if (! "name" %in% list.vertex.attributes(graph)) {
+      if (! "name" %in% vertex_attr_names(graph)) {
         vp <- as.numeric(vp)
       }
       res[Pairs] <- get.edge.ids(graph, vp)
@@ -449,7 +449,7 @@ as.igraph.es <- function(graph, e) {
 
     ## Based on edge ids/names
     if (length(Names) != 0) {
-      if ("name" %in% list.edge.attributes(graph)) {
+      if ("name" %in% edge_attr_names(graph)) {
         res[Names] <- as.numeric(match(e[Names], E(graph)$name))
       } else {
         res[Names] <- as.numeric(e[Names])

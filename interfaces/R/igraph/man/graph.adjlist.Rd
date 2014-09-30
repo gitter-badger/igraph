@@ -34,7 +34,7 @@ g_adj_list(adjlist, mode = c("out", "in", "all", "total"),
   efficient than igraph graphs.
 
   The idea is that you convert your graph to an adjacency list by
-  \code{\link{get.adjlist}}, do your modifications to the graphs and
+  \code{\link{adj_list}}, do your modifications to the graphs and
   finally create again an igraph graph by calling \code{g_adj_list}.
 }
 \value{
@@ -42,17 +42,17 @@ g_adj_list(adjlist, mode = c("out", "in", "all", "total"),
 }
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{ \code{\link{get.edgelist}} }
+\seealso{ \code{\link{edgelist}} }
 \examples{
 ## Directed
 g <- g_ring(10, dir=TRUE)
-al <- get.adjlist(g, mode="out")
+al <- adj_list(g, mode="out")
 g2 <- g_adj_list(al)
 graph.isomorphic(g, g2)
 
 ## Undirected
 g <- g_ring(10)
-al <- get.adjlist(g)
+al <- adj_list(g)
 g2 <- g_adj_list(al, mode="all")
 graph.isomorphic(g, g2)
 ecount(g2)

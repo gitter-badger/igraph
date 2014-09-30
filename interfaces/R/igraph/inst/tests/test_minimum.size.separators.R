@@ -1,7 +1,7 @@
 
-context("minimum.size.separators")
+context("min_size_sep")
 
-test_that("minimum.size.separators works", {
+test_that("min_size_sep works", {
 
   library(igraph)
 
@@ -18,7 +18,7 @@ test_that("minimum.size.separators works", {
                     Russ    - Steve:Bert:Gery:John,
                     John    - Gery:Russ:Michael)
   camp <- simplify(camp)
-  sep <- lapply(minimum.size.separators(camp), function(x) V(camp)[x])
+  sep <- lapply(min_size_sep(camp), function(x) V(camp)[x])
   expect_that(all(sapply(sep, is.minimal.separator, graph=camp)), is_true())
 
 })

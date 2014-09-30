@@ -19,11 +19,11 @@
 #
 ###################################################################
 
-igraph.arpack.default <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
+arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
                               ncv=3, ldv=0, ishift=1, maxiter=3000, nb=1,
                               mode=1, start=0, sigma=0.0, sigmai=0.0)
 
-arpack <- function(func, extra=NULL, sym=FALSE, options=igraph.arpack.default,
+arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
                    env=parent.frame(), complex=!sym) {
 
   if (!is.list(options) ||
@@ -33,13 +33,13 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=igraph.arpack.default,
   if (any(names(options) == "")) {
     stop("all options must be named")
   }
-  if (any(! names(options) %in% names(igraph.arpack.default))) {
+  if (any(! names(options) %in% names(arpack_defaults))) {
     stop("unkown ARPACK option(s): ",
-         paste(setdiff(names(options), names(igraph.arpack.default)),
+         paste(setdiff(names(options), names(arpack_defaults)),
                        collapse=", "))
   }
   
-  options.tmp <- igraph.arpack.default
+  options.tmp <- arpack_defaults
   options.tmp[ names(options) ] <- options
   options <- options.tmp
 
@@ -111,16 +111,16 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=igraph.arpack.default,
 #' cor(degree(g), sc)
 #' 
 subgraph.centrality <- function(graph, diag=FALSE) {
-  A <- get.adjacency(graph)
+  A <- adj(graph)
   if (!diag) { diag(A) <- 0 }
   eig <- eigen(A)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (getIgraphOpt("add.vertex.names") && is.named(graph)) { 
-    names(res) <- get.vertex.attribute(graph, "name") 
+    names(res) <- vertex_attr(graph, "name") 
   }
   res
 }
 
-igraph.eigen.default <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
+eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
                              vl=-Inf, vu=Inf, vestimate=0L,
                              balance="none")

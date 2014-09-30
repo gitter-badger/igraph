@@ -1,12 +1,13 @@
-\name{minimum.size.separators}
+\name{min_size_sep}
 \alias{minimum.size.separators}
+\alias{min_size_sep}
 \concept{Minimum size vertex separator}
 \concept{Vertex separator}
 \title{Minimum size vertex separators}
 \description{Find all vertex sets of minimal size whose removal
   separates the graph into more components}
 \usage{
-minimum.size.separators (graph)
+min_size_sep (graph)
 }
 \arguments{
   \item{graph}{The input graph. It may be directed, but edge directions
@@ -47,18 +48,18 @@ mw <- g_formula(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
                 21-22:23, 22-23)
 
 # Cohesive subgraphs
-mw1 <- induced.subgraph(mw, as.character(c(1:7, 17:23)))
-mw2 <- induced.subgraph(mw, as.character(7:16))
-mw3 <- induced.subgraph(mw, as.character(17:23))
-mw4 <- induced.subgraph(mw, as.character(c(7,8,11,14)))
-mw5 <- induced.subgraph(mw, as.character(1:7))
+mw1 <- induced_subgraph(mw, as.character(c(1:7, 17:23)))
+mw2 <- induced_subgraph(mw, as.character(7:16))
+mw3 <- induced_subgraph(mw, as.character(17:23))
+mw4 <- induced_subgraph(mw, as.character(c(7,8,11,14)))
+mw5 <- induced_subgraph(mw, as.character(1:7))
 
-minimum.size.separators(mw)
-minimum.size.separators(mw1)
-minimum.size.separators(mw2)
-minimum.size.separators(mw3)
-minimum.size.separators(mw4)
-minimum.size.separators(mw5)
+min_size_sep(mw)
+min_size_sep(mw1)
+min_size_sep(mw2)
+min_size_sep(mw3)
+min_size_sep(mw4)
+min_size_sep(mw5)
 
 # Another example, the science camp network
 camp <- g_formula(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
@@ -73,6 +74,6 @@ camp <- g_formula(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
                   Gery    - Pat:Steve:Russ:John,
                   Russ    - Steve:Bert:Gery:John,
                   John    - Gery:Russ:Michael)
-lapply(minimum.size.separators(camp), function(x) V(camp)[x])
+lapply(min_size_sep(camp), function(x) V(camp)[x])
 }
 \keyword{graphs}

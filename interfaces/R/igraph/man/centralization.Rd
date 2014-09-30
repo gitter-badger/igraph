@@ -24,7 +24,7 @@ centralization.closeness (graph, mode = c("out", "in", "all", "total"),
 centralization.betweenness (graph, directed = TRUE, nobigint = TRUE,
     normalized = TRUE)
 centralization.evcent (graph, directed = FALSE, scale = TRUE,
-    options = igraph.arpack.default, normalized = TRUE)
+    options = arpack_defaults, normalized = TRUE)
 
 centralization.degree.tmax (graph = NULL, nodes = 0,
     mode = c("all", "out", "in", "total"), loops = FALSE)

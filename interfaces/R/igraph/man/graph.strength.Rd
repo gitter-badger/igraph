@@ -1,10 +1,11 @@
-\name{graph.strength}
+\name{strength}
 \alias{graph.strength}
+\alias{strength}
 \title{Strength or weighted vertex degree}
 \description{Summing up the edge weights of the adjacent edges for each
   vertex.}
 \usage{
-graph.strength (graph, vids = V(graph), mode = c("all", "out", "in", "total"),
+strength (graph, vids = V(graph), mode = c("all", "out", "in", "total"),
       loops = TRUE, weights = NULL)
 }
 \arguments{
@@ -33,12 +34,12 @@ graph.strength (graph, vids = V(graph), mode = c("all", "out", "in", "total"),
 \examples{
 g <- g_star(10)
 E(g)$weight <- seq(ecount(g))
-graph.strength(g)
-graph.strength(g, mode="out")
-graph.strength(g, mode="in")
+strength(g)
+strength(g, mode="out")
+strength(g, mode="in")
 
 # No weights, a warning is given
 g <- g_ring(10)
-graph.strength(g)
+strength(g)
 }
 \keyword{graphs}

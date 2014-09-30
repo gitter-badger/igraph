@@ -29,7 +29,8 @@
 #' consisting of the minimum spanning trees of its components.
 #' 
 #' If the graph is unconnected a minimum spanning forest is returned.
-#' 
+#'
+#' @aliases minimum.spanning.tree
 #' @param graph The graph object to analyze.
 #' @param weights Numeric algorithm giving the weights of the edges in the
 #' graph. The order is determined by the edge ids. This is ignored if the
@@ -53,9 +54,9 @@
 #' @examples
 #' 
 #' g <- g_np(100, 3/100)
-#' mst <- minimum.spanning.tree(g)
+#' g_mst <- mst(g)
 #' 
-minimum.spanning.tree <- function(graph, weights=NULL,
+mst <- function(graph, weights=NULL,
                                   algorithm=NULL, ...) {
 
   if (!is.igraph(graph)) {
@@ -63,7 +64,7 @@ minimum.spanning.tree <- function(graph, weights=NULL,
   }
 
   if (is.null(algorithm)) {
-    if (!is.null(weights) || "weight" %in% list.edge.attributes(graph)) {
+    if (!is.null(weights) || "weight" %in% edge_attr_names(graph)) {
       algorithm <- "prim"
     } else {
       algorithm <- "unweighted"
@@ -75,7 +76,7 @@ minimum.spanning.tree <- function(graph, weights=NULL,
     .Call("R_igraph_minimum_spanning_tree_unweighted", graph,
           PACKAGE="igraph")
   } else if (algorithm=="prim") {
-    if (is.null(weights) && ! "weight" %in% list.edge.attributes(graph)) {
+    if (is.null(weights) && ! "weight" %in% edge_attr_names(graph)) {
       stop("edges weights must be supplied for Prim's algorithm")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight

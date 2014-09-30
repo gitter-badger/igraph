@@ -889,9 +889,9 @@ connect <- function(graph, order, mode=c("all", "out", "in", "total")) {
 #' 
 #' # Some random shortcuts shorten the distances on a lattice
 #' g <- g_lattice( length=100, dim=1, nei=5 )
-#' avg_path_len(g)
+#' mean_distance(g)
 #' g <- rewire.edges( g, prob=0.05 )
-#' avg_path_len(g)
+#' mean_distance(g)
 #' 
 rewire.edges <- function(graph, prob, loops=FALSE, multiple=FALSE) {
   if (!is.igraph(graph)) {
@@ -935,7 +935,7 @@ rewire.edges <- function(graph, prob, loops=FALSE, multiple=FALSE) {
 #' @examples
 #' 
 #' g <- g_smallworld(1, 100, 5, 0.05)
-#' avg_path_len(g)
+#' mean_distance(g)
 #' transitivity(g, type="average")
 #' 
 g_smallworld <- function(dim, size, nei, p, loops=FALSE,
@@ -1085,13 +1085,13 @@ g_np_bip <- function(n1, n2, type=c("gnp", "gnm"), p, m,
   if (type=="gnp") {      
     res <- .Call("R_igraph_bipartite_game_gnp", n1, n2, p, directed, mode,
                  PACKAGE="igraph")
-    res <- set.vertex.attribute(res$graph, "type", value=res$types)
+    res <- set_vertex_attr(res$graph, "type", value=res$types)
     res$name <- "Bipartite Gnp random graph"
     res$p <- p
   } else if (type=="gnm") {
     res <- .Call("R_igraph_bipartite_game_gnm", n1, n2, m, directed, mode,
                  PACKAGE="igraph")
-    res <- set.vertex.attribute(res$graph, "type", value=res$types)
+    res <- set_vertex_attr(res$graph, "type", value=res$types)
     res$name <- "Bipartite Gnm random graph"
     res$m <- m
   }

@@ -1,10 +1,11 @@
-\name{graph.knn}
+\name{knn}
+\alias{knn}
 \alias{graph.knn}
 \title{Average nearest neighbor degree}
 \description{Calculate the average nearest neighbor degree of the given
   vertices and the same quantity in the function of vertex degree}
 \usage{
-graph.knn(graph, vids=V(graph), weights=NULL)
+knn(graph, vids=V(graph), weights=NULL)
 }
 \arguments{
   \item{graph}{The input graph. It can be directed, but it will be
@@ -16,7 +17,7 @@ graph.knn(graph, vids=V(graph), weights=NULL)
     only.}
   \item{weights}{Weight vector. If the graph has a \code{weight} edge
     attribute, then this is used by default. If this argument is given,
-    then vertex strength (see \code{\link{graph.strength}}) is used
+    then vertex strength (see \code{\link{strength}}) is used
     instead of vertex degree. But note that \code{knnk} is still given
     in the function of the normal vertex degree. }
 }
@@ -43,21 +44,21 @@ graph.knn(graph, vids=V(graph), weights=NULL)
 \examples{
 # Some trivial ones
 g <- g_ring(10)
-graph.knn(g)
+knn(g)
 g2 <- g_star(10)
-graph.knn(g2)
+knn(g2)
 
 # A scale-free one, try to plot 'knnk'
 g3 <- g_pa(1000, m=5)
-graph.knn(g3)
+knn(g3)
 
 # A random graph
 g4 <- g_np(1000, p=5/1000)
-graph.knn(g4)
+knn(g4)
 
 # A weighted graph
 g5 <- g_star(10)
 E(g5)$weight <- seq(ecount(g5))
-graph.knn(g5)
+knn(g5)
 }
 \keyword{graphs}

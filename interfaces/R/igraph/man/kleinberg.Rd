@@ -5,8 +5,8 @@
 \title{Kleinberg's centrality scores.}
 \description{Kleinberg's hub and authority scores.}
 \usage{
-authority.score (graph, scale = TRUE, weights=NULL, options = igraph.arpack.default) 
-hub.score (graph, scale = TRUE, weights=NULL, options = igraph.arpack.default) 
+authority.score (graph, scale = TRUE, weights=NULL, options = arpack_defaults) 
+hub.score (graph, scale = TRUE, weights=NULL, options = arpack_defaults) 
 }
 \arguments{
   \item{graph}{The input graph.}

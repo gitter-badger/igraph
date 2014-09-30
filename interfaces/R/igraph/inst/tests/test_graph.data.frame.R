@@ -31,7 +31,7 @@ test_that("g_df works on matrices", {
 
   el <- cbind(1:5,5:1,weight=1:5)
   g <- g_df(el)
-  g <- remove.vertex.attribute(g, "name")
+  g <- delete_vertex_attr(g, "name")
   el2 <- get.data.frame(g)
   expect_that(as.data.frame(el), is_equivalent_to(el2))
 

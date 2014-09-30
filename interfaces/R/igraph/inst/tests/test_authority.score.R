@@ -10,7 +10,7 @@ test_that("authority score works", {
       if (x[1] < 0) { x <- -x       }
       x
     }
-    A <- get.adjacency(graph, sparse=FALSE)
+    A <- adj(graph, sparse=FALSE)
     if (as) { 
       s1 <- eigen(t(A) %*% A)$vectors[,1]
       s2 <- authority.score(graph)$vector
@@ -58,14 +58,14 @@ test_that("authority.score survives stress test", {
   for (i in 1:100) {
     G <- g_nm(10, sample(1:20, 1))
     as <- authority.score(G)
-    M <- get.adjacency(G)
+    M <- adj(G)
     is.good(t(M) %*% M, as$vector, as$value)
   }
 
   for (i in 1:100) {
     G <- g_nm(10, sample(1:20, 1))
     hs <- hub.score(G)
-    M <- get.adjacency(G)
+    M <- adj(G)
     is.good(M %*% t(M), hs$vector, hs$value)
   }
 })

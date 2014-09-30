@@ -38,7 +38,7 @@ pause()
 ### See the hierarchy tree first
 
 hierarchy(cbKarate)
-plotHierarchy(cbKarate)
+plot_hierarchy(cbKarate)
 
 ## Plot the first level, blocks 1 & 2
 

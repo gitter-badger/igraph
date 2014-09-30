@@ -33,7 +33,7 @@ test_that("[ can add and delete edges", {
 test_that("[ can set weights and delete weighted edges", {
 
   g <- g_empty(10) ; A <- matrix(0, 10, 10)
-  g <- set.edge.attribute(g, "weight", c(), 1)
+  g <- set_edge_attr(g, "weight", c(), 1)
   A[1,2] <- g[1,2] <- 1
   expect_that(am(g[]), equals(A))
   

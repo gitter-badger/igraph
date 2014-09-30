@@ -199,10 +199,10 @@ delete_vertices(graph, v)
   \itemize{
   \item If is is another igraph graph object and they are both
     named graphs, then the union of the two graphs are calculated,
-    see \code{\link{graph.union}}.
+    see \code{\link{union}}.
   \item If it is another igraph graph object, but either of the two
     are not named, then the disjoint union of
-    the two graphs is calculated, see \code{\link{graph.disjoint.union}}.
+    the two graphs is calculated, see \code{\link{disjoint_union}}.
   \item If it is a numeric scalar, then the specified number of vertices
     are added to the graph.
   \item If it is a character scalar or vector, then it is interpreted as
@@ -273,7 +273,7 @@ delete_vertices(graph, v)
   the type of the right hand side argument:
   \itemize{
   \item If it is an igraph graph object, then the difference of the
-    two graphs is calculated, see \code{\link{graph.difference}}.
+    two graphs is calculated, see \code{\link{difference}}.
   \item If it is a numeric or character vector, then it is interpreted
     as a vector of vertex ids and the specified vertices will be
     deleted from the graph. Example: \preformatted{  g <- g_ring(10)

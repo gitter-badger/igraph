@@ -1,4 +1,3 @@
-
 #######################################
 # The basic interface
 #######################################
@@ -506,7 +505,7 @@ igraph_rewire:
 igraph_induced_subgraph:
         PARAMS: GRAPH graph, OUT GRAPH res, VERTEXSET vids, SUBGRAPH_IMPL impl=AUTO
         DEPS: vids ON graph
-        NAME-R: induced.subgraph
+        NAME-R: induced_subgraph
         IGNORE: RR
 
 igraph_subgraph:
@@ -526,7 +525,7 @@ igraph_average_path_length:
 igraph_path_length_hist:
         PARAMS: GRAPH graph, OUT VECTOR res, OUT REALPTR unconnected, \
                 BOOLEAN directed=True
-        NAME-R: path.length.hist
+        NAME-R: distance_table
         FLAGS: PROGRESS
 
 igraph_simplify:
@@ -615,7 +614,7 @@ igraph_is_multiple:
 
 igraph_has_multiple:
         PARAMS: GRAPH graph, OUT BOOLEANPTR res
-        NAME-R: has.multiple
+        NAME-R: any_multiple
 
 igraph_count_multiple:
         PARAMS: GRAPH graph, OUT VECTOR res, EDGESET es=ALL
@@ -634,39 +633,39 @@ igraph_eigenvector_centrality:
         PARAMS: GRAPH graph, OUT VERTEXINDEX vector, OUT REALPTR value, \
                 BOOLEAN directed=False, BOOLEAN scale=True, \
                 EDGEWEIGHTS weights=NULL, \
-                INOUT ARPACKOPT options=igraph.arpack.default
+                INOUT ARPACKOPT options=arpack_defaults
         DEPS: weights ON graph, vector ON graph
-        DEFAULT-R: options=igraph.arpack.default
+        DEFAULT-R: options=arpack_defaults
         NAME-R: evcent
 
 igraph_hub_score:
         PARAMS: GRAPH graph, OUT VERTEXINDEX vector, OUT REALPTR value, \
                 BOOLEAN scale=True, EDGEWEIGHTS weights=NULL, \
-                INOUT ARPACKOPT options=igraph.arpack.default
-        DEFAULT-R: options=igraph.arpack.default
+                INOUT ARPACKOPT options=arpack_defaults
+        DEFAULT-R: options=arpack_defaults
         DEPS: weights ON graph, vector ON graph
         NAME-R: hub.score
 
 igraph_authority_score:
         PARAMS: GRAPH graph, OUT VERTEXINDEX vector, OUT REALPTR value, \
                 BOOLEAN scale=True, EDGEWEIGHTS weights=NULL, \
-                INOUT ARPACKOPT options=igraph.arpack.default
-        DEFAULT-R: options=igraph.arpack.default
+                INOUT ARPACKOPT options=arpack_defaults
+        DEFAULT-R: options=arpack_defaults
         DEPS: weights ON graph, vector ON graph
         NAME-R: authority.score
 
 igraph_arpack_rssolve:
-        PARAMS: ARPFUNC fun, EXTRA extra, INOUT ARPACKOPT options=igraph.arpack.default, \
+        PARAMS: ARPFUNC fun, EXTRA extra, INOUT ARPACKOPT options=arpack_defaults, \
                 NULL storage, OUT VECTOR_OR_0 values, \
                 OUT MATRIX_OR_0 vectors
-        DEFAULT-R: options=igraph.arpack.default
+        DEFAULT-R: options=arpack_defaults
         IGNORE: RR, RC, RNamespace
 
 igraph_arpack_rnsolve:
-        PARAMS: ARPFUNC fun, EXTRA extra, INOUT ARPACKOPT options=igraph.arpack.default, \
+        PARAMS: ARPFUNC fun, EXTRA extra, INOUT ARPACKOPT options=arpack_defaults, \
                 NULL storage, OUT VECTOR_OR_0 values, \
                 OUT MATRIX_OR_0 vectors
-        DEFAULT-R: options=igraph.arpack.default
+        DEFAULT-R: options=arpack_defaults
         IGNORE: RR, RC, RNamespace
 
 igraph_arpack_unpack_complex:
@@ -676,7 +675,7 @@ igraph_arpack_unpack_complex:
 igraph_unfold_tree:
         PARAMS: GRAPH graph, OUT GRAPH tree, NEIMODE mode=ALL, VECTOR roots,\
                 OUT VECTORM1_OR_0 vertex_index
-        NAME-R: unfold.tree
+        NAME-R: unfold_tree
         IGNORE: RR
 
 igraph_is_mutual:
@@ -686,7 +685,7 @@ igraph_is_mutual:
 
 igraph_maximum_cardinality_search:
         PARAMS: GRAPH graph, OUT VECTORM1 alpha, OUT VECTORM1_OR_0 alpham1
-        NAME-R: maximum.cardinality.search
+        NAME-R: max_cardinality
 
 igraph_is_chordal:
         PARAMS: GRAPH graph, VECTORM1_OR_0 alpha=NULL, VECTORM1_OR_0 alpham1=NULL, \
@@ -699,12 +698,13 @@ igraph_avg_nearest_neighbor_degree:
         PARAMS: GRAPH graph, VERTEXSET vids=ALL, OUT VERTEXINDEX_OR_0 knn, \
                 OUT VECTOR_OR_0 knnk, EDGEWEIGHTS weights=NULL
         DEPS: vids ON graph, weights ON graph, knn ON graph vids
-        NAME-R: graph.knn
+        NAME-R: knn
 
 igraph_strength:
         PARAMS: GRAPH graph, OUT VERTEXINDEX res, VERTEXSET vids=ALL, \
                 NEIMODE mode=ALL, BOOLEAN loops=True, EDGEWEIGHTS weights=NULL
         DEPS: vids ON graph, weights ON graph, res ON graph vids
+        NAME-R: strength
 
 igraph_centralization:
         PARAMS: VECTOR scores, REAL theoretical_max=0, BOOLEAN normalized=True
@@ -751,7 +751,7 @@ igraph_centralization_closeness_tmax:
 igraph_centralization_eigenvector_centrality:
         PARAMS: GRAPH graph, OUT VECTOR vector, OUT REALPTR value, \
                 BOOLEAN directed=False, BOOLEAN scale=True, \
-                INOUT ARPACKOPT options=igraph.arpack.default, \
+                INOUT ARPACKOPT options=arpack_defaults, \
                 OUT REALPTR centralization, OUT REALPTR theoretical_max,\
                 BOOLEAN normalized=True
         NAME-R: centralization.evcent
@@ -795,6 +795,7 @@ igraph_diversity:
         PARAMS: GRAPH graph, EDGEWEIGHTS weights=NULL, OUT VERTEXINDEX res, \
                 VERTEXSET vids=ALL
         DEPS: weights ON graph, vids ON graph, res ON graph vids
+        NAME-R: diversity
 
 #######################################
 # Degree sequences     
@@ -866,7 +867,7 @@ igraph_get_incidence:
         PARAMS: GRAPH graph, BIPARTITE_TYPES types=NULL, OUT MATRIX res, \
                 OUT VECTOR_OR_0 row_ids, OUT VECTOR_OR_0 col_ids
         DEPS: types ON graph
-        NAME-R: get.incidence
+        NAME-R: incidence
         IGNORE: RR
 
 igraph_is_bipartite:
@@ -895,6 +896,7 @@ igraph_laplacian:
                 EDGEWEIGHTS weights=NULL
         DEPS: weights ON graph
         IGNORE: RR, RC
+        NAME-R: laplacian
 
 #######################################
 # Components
@@ -953,7 +955,7 @@ igraph_maximal_cliques:
 igraph_maximal_cliques_count:
         PARAMS: GRAPH graph, OUT INTEGERPTR no, INTEGER min_size=0, \
                 INTEGER max_size=0
-        NAME-R: maximal.cliques.count
+        NAME-R: num_max_cliques
         IGNORE: RR, RC
 
 igraph_maximal_cliques_file:
@@ -1264,13 +1266,13 @@ igraph_community_leading_eigenvector:
         PARAMS: GRAPH graph, EDGEWEIGHTS weights=NULL, \
                 OUT MATRIX merges, OUT VECTOR membership, \
                 INTEGER steps=-1, \
-                INOUT ARPACKOPT options=igraph.arpack.default, \
+                INOUT ARPACKOPT options=arpack_defaults, \
                 OUT REALPTR modularity, BOOLEAN start=False, \
                 OUT VECTOR_OR_0 eigenvalues, \
                 OUT VECTOR_OR_0 eigenvectors, \
                 OUT VECTOR_OR_0 history, \
                 LEVCFUNC callback, EXTRA callback_extra
-        DEFAULT-R: options=igraph.arpack.default
+        DEFAULT-R: options=arpack_defaults
         CLASS-R: igraph.eigenc
         NAME-R: leading.eigenvector.community
         IGNORE: RR, RC
@@ -1394,7 +1396,7 @@ igraph_to_undirected:
 
 igraph_get_stochastic:
         PARAMS: GRAPH graph, OUT MATRIX res, BOOLEAN column_wise=False
-        NAME-R: get.stochastic
+        NAME-R: stochastic
         IGNORE: RR
 
 igraph_get_stochastic_sparsemat:
@@ -1507,7 +1509,7 @@ igraph_dyad_census:
 
 igraph_triad_census:
         PARAMS: GRAPH graph, OUT VECTOR res
-        NAME-R: triad.census
+        NAME-R: triad_census
         RETURN: ERROR
 
 igraph_adjacent_triangles:
@@ -1571,6 +1573,7 @@ igraph_maxflow:
                 OUT VECTORM1_OR_0 partition2, VERTEX source, VERTEX target, \
                 EDGECAPACITY capacity=NULL, OUT MAXFLOW_STATS stats
         DEPS: capacity ON graph, source ON graph, target ON graph
+        NAME-R: max_flow
 
 igraph_maxflow_value:
         PARAMS: GRAPH graph, OUT REALPTR value, VERTEX source, VERTEX target, \
@@ -1647,7 +1650,7 @@ igraph_all_st_cuts:
                 VERTEX source, VERTEX target
         DEPS: source ON graph, target ON graph, cuts ON graph, \
               partition1s ON graph
-        NAME-R: stCuts
+        NAME-R: st_cuts
 
 igraph_all_st_mincuts:
         PARAMS: GRAPH graph, OUT REALPTR value, \
@@ -1656,7 +1659,7 @@ igraph_all_st_mincuts:
                 VERTEX source, VERTEX target, EDGEWEIGHTS capacity=NULL
         DEPS: capacity ON graph, source ON graph, target ON graph, \
               cuts ON graph, partition1s ON graph
-        NAME-R: stMincuts
+        NAME-R: st_min_cuts
 
 igraph_is_separator:
         PARAMS: GRAPH graph, VERTEXSET candidate, OUT BOOLEANPTR res
@@ -1671,12 +1674,12 @@ igraph_is_minimal_separator:
 igraph_all_minimal_st_separators:
         PARAMS: GRAPH graph, OUT VERTEXSETLIST separators
         DEPS: separators ON graph
-        NAME-R: minimal.st.separators
+        NAME-R: min_st_sep
 
 igraph_minimum_size_separators:
         PARAMS: GRAPH graph, OUT VERTEXSETLIST separators
         DEPS: separators ON graph
-        NAME-R: minimum.size.separators
+        NAME-R: min_size_sep
 
 igraph_cohesive_blocks:
         PARAMS: GRAPH graph, OUT VERTEXSETLIST blocks, \
@@ -1701,6 +1704,7 @@ igraph_coreness:
 
 igraph_isoclass:
         PARAMS: GRAPH graph, OUT INTEGERPTR isoclass
+        NAME-R: iso_class
 
 igraph_isomorphic:
         PARAMS: GRAPH graph1, GRAPH graph2, OUT BOOLEANPTR iso
@@ -1712,7 +1716,7 @@ igraph_isoclass_subgraph:
 
 igraph_isoclass_create:
         PARAMS: OUT GRAPH graph, INTEGER size, INTEGER number, BOOLEAN directed=True
-        NAME-R: g_isoclass
+        NAME-R: g_iso_class
 
 igraph_isomorphic_vf2:
         PARAMS: GRAPH graph1, GRAPH graph2, \
@@ -1783,7 +1787,7 @@ igraph_canonical_permutation:
 
 igraph_permute_vertices:
         PARAMS: GRAPH graph, OUT GRAPH res, VECTORM1 permutation
-        NAME-R: permute.vertices
+        NAME-R: permute
 
 igraph_isomorphic_bliss:
         PARAMS: GRAPH graph1, GRAPH graph2, OUT BOOLEANPTR iso, \
@@ -1793,6 +1797,7 @@ igraph_isomorphic_bliss:
 
 igraph_automorphisms:
         PARAMS: GRAPH graph, BLISSSH sh="fm", OUT BLISSINFO info
+        NAME-R: automorphisms
 
 igraph_subisomorphic_lad:
         PARAMS: GRAPH pattern, GRAPH target, VERTEXSETLIST_OR_0 domains, \
@@ -1809,7 +1814,7 @@ igraph_scg_grouping:
                 VECTOR_OR_0 nt_vec, SCGMAT mtype=Default, \
                 SCGALGO algo=Default, VECTOR_OR_0 p=NULL, \
 		INTEGER maxiter=100
-        NAME-R: scgGrouping
+        NAME-R: scg_group
         IGNORE: RR
 
 igraph_scg_semiprojectors:
@@ -1817,14 +1822,14 @@ igraph_scg_semiprojectors:
                 OUT MATRIX_OR_0 L, OUT MATRIX_OR_0 R, \
                 OUT SPARSEMATPTR_OR_0 Lsparse, OUT SPARSEMATPTR_OR_0 Rsparse, \
                 VECTOR_OR_0 p=NULL, SCGNORM norm=Default
-        NAME-R: scgSemiProjectors
+        NAME-R: scg_semi_proj
         IGNORE: RR, RC
 
 igraph_scg_norm_eps:
         PARAMS: MATRIX V, VECTORM1 groups, OUT VECTOR eps, \
                 SCGMAT mtype=Default, VECTOR_OR_0 p=NULL, \
                 SCGNORM norm=Default
-        NAME-R: scgNormEps
+        NAME-R: scg_eps
 
 igraph_scg_adjacency:
         PARAMS: GRAPH_OR_0 graph, MATRIX_OR_0 matrix, \
@@ -1893,7 +1898,7 @@ igraph_maximum_bipartite_matching:
                OUT VECTOR_LONG_M1 matching, \
                EDGEWEIGHTS weights=NULL, REAL eps=.Machine$double.eps
        DEPS: types ON graph, weights ON graph
-       NAME-R: maximum.bipartite.matching
+       NAME-R: max_bip_match
        IGNORE: RR
 
 #######################################
@@ -1903,10 +1908,10 @@ igraph_maximum_bipartite_matching:
 igraph_eigen_adjacency:
        PARAMS: GRAPH graph, EIGENALGO algorithm=ARPACK, \
                EIGENWHICH which=Default, \
-               INOUT ARPACKOPT options=igraph.arpack.default, \
+               INOUT ARPACKOPT options=arpack_defaults, \
                NULL storage, OUT VECTOR values, OUT MATRIX vectors, \
                NULL cmplxvalues, NULL cmplxvectors
-       NAME-R: graph.eigen
+       NAME-R: adj_eigen
 
 #######################################
 # Fitting power laws

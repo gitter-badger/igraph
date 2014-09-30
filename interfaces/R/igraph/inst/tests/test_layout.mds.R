@@ -10,7 +10,7 @@ test_that("l_mds works", {
   g <- g_tree(10, 2, "undirected")
 
   mymds <- function(g) { 
-    sp <- shortest.paths(g)
+    sp <- distances(g)
     sp <- sp * sp
     sp <- sp - rowMeans(sp) - rep(rowMeans(sp), each=nrow(sp)) + mean(sp)
     sp <- sp / -2

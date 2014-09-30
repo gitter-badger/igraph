@@ -101,7 +101,7 @@
 #' \code{asPhylo} converts a hierarchical community structure to a \code{phylo}
 #' object, you will need the \code{ape} package for this.
 #' 
-#' \code{showtrace} works (currently) only for communities found by the leading
+#' \code{show_trace} works (currently) only for communities found by the leading
 #' eigenvector method (\code{\link{leading.eigenvector.community}}), and
 #' returns a character vector that gives the steps performed by the algorithm
 #' while finding the communities.
@@ -127,6 +127,7 @@
 #' is.hierarchical print.communities plot.communities length.communities
 #' as.dendrogram.communities as.hclust.communities code_len
 #' asPhylo asPhylo.communities showtrace code.length create.communities
+#' show_trace
 #' @param communities,x,object A \code{communities} object, the result of an
 #' igraph community detection function.
 #' @param graph An igraph graph object, corresponding to \code{communities}.
@@ -199,7 +200,7 @@
 #' 
 #' \code{as.dendrogram} returns a \code{\link[stats]{dendrogram}} object.
 #' 
-#' \code{showtrace} returns a character vector.
+#' \code{show_trace} returns a character vector.
 #' 
 #' \code{code_len} returns a numeric scalar for communities found with the
 #' InfoMAP method and \code{NULL} for other methods.
@@ -421,7 +422,7 @@ mod.matrix <- function(graph, membership, weights=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   membership <- as.numeric(membership)-1
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -472,7 +473,7 @@ merges <- function(communities) {
 
 crossing <- function(communities, graph) {
   m <- membership(communities)
-  el <- get.edgelist(graph, names=FALSE)
+  el <- edgelist(graph, names=FALSE)
   m1 <- m[el[,1]]
   m2 <- m[el[,2]]
   res <- m1 != m2
@@ -715,7 +716,7 @@ cut_at <- function(communities, no, steps) {
 
 #' @rdname communities
 
-showtrace <- function(communities) {
+show_trace <- function(communities) {
 
   if (!inherits(communities, "communities")) {
     stop("Not a community structure")
@@ -874,7 +875,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' 
 #'   g <- g_np(10, 5/10) %du% g_np(9, 5/9)
 #'   g <- add_edges(g, c(1, 12))
-#'   g <- induced.subgraph(g, subcomponent(g, 1))
+#'   g <- induced_subgraph(g, subcomponent(g, 1))
 #'   spinglass.community(g, spins=2)
 #'   spinglass.community(g, vertex=1)
 #' 
@@ -889,7 +890,7 @@ spinglass.community <- function(graph, weights=NULL, vertex=NULL, spins=25,
     stop("Not a graph object")
   }
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -916,7 +917,7 @@ spinglass.community <- function(graph, weights=NULL, vertex=NULL, spins=25,
     res$vcount     <- vcount(graph)
     res$membership <- res$membership + 1
     if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
-      res$names <- get.vertex.attribute(graph, "name")
+      res$names <- vertex_attr(graph, "name")
     }
     class(res) <- "communities"
   } else {
@@ -1303,14 +1304,14 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' 
 leading.eigenvector.community <- function(graph, steps=-1, weights=NULL,
                                           start=NULL,
-                                          options=igraph.arpack.default,
+                                          options=arpack_defaults,
                                           callback=NULL, extra=NULL,
                                           env=parent.frame()){
 
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   steps <- as.integer(steps)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -1319,7 +1320,7 @@ leading.eigenvector.community <- function(graph, steps=-1, weights=NULL,
     weights <- NULL 
   }
   if (!is.null(start)) { start <- as.numeric(start)-1 }
-  options.tmp <- igraph.arpack.default; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
   
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   # Function call
@@ -1413,7 +1414,7 @@ label.propagation.community <- function(graph, weights=NULL, initial=NULL,
                                         fixed=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -1493,7 +1494,7 @@ label.propagation.community <- function(graph, weights=NULL, initial=NULL,
 multilevel.community <- function(graph, weights=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -1577,7 +1578,7 @@ multilevel.community <- function(graph, weights=NULL) {
 optimal.community <- function(graph, weights=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -1653,7 +1654,7 @@ infomap.community <- function(graph, e.weights=NULL, v.weights=NULL,
   
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(e.weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) { 
     e.weights <- E(graph)$weight 
   } 
   if (!is.null(e.weights) && any(!is.na(e.weights))) { 
@@ -1661,7 +1662,7 @@ infomap.community <- function(graph, e.weights=NULL, v.weights=NULL,
   } else { 
     e.weights <- NULL 
   }
-  if (is.null(v.weights) && "weight" %in% list.vertex.attributes(graph)) { 
+  if (is.null(v.weights) && "weight" %in% vertex_attr_names(graph)) { 
     v.weights <- V(graph)$weight 
   } 
   if (!is.null(v.weights) && any(!is.na(v.weights))) { 

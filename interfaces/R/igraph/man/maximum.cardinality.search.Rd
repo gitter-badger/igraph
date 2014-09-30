@@ -1,5 +1,6 @@
-\name{maximum.cardinality.search}
+\name{max_cardinality}
 \alias{maximum.cardinality.search}
+\alias{max_cardinality}
 \concept{maximum cardinality search}
 \concept{graph decomposition}
 \concept{chordal graph}
@@ -7,7 +8,7 @@
 \description{Maximum cardinality search is a simple ordering a vertices
   that is useful in determining the chordality of a graph.}
 \usage{
-maximum.cardinality.search(graph)
+max_cardinality(graph)
 }
 \arguments{
   \item{graph}{The input graph. It may be directed, but edge directions
@@ -37,13 +38,13 @@ maximum.cardinality.search(graph)
 g1 <- g_formula(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
                 E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,
                 I-A:H)
-maximum.cardinality.search(g1)
+max_cardinality(g1)
 is.chordal(g1, fillin=TRUE)
 
 g2 <- g_formula(A-B:E, B-A:E:F:D, C-E:D:G, D-B:F:E:C:G,
                 E-A:B:C:D:F, F-B:D:E, G-C:D:H:I, H-G:I:J,
                 I-G:H:J, J-H:I)
-maximum.cardinality.search(g2)
+max_cardinality(g2)
 is.chordal(g2, fillin=TRUE)
 }
 \keyword{graphs}

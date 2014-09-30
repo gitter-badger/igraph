@@ -12,7 +12,7 @@ test_that("g_bip works", {
     if (length(w)!=0) { as.vector(rbind(x, w)) } else { numeric() }
   }))
   g2 <- g_bip(seq_len(nrow(I)+ncol(I)) > nrow(I), edges)
-  I2 <- get.incidence(g2)
+  I2 <- incidence(g2)
   
   expect_that(I2, is_equivalent_to(I))
 })

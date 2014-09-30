@@ -1,21 +1,21 @@
 
-context("edge.connectivity")
+context("edge_conn")
 
-test_that("edge.connectivity works", {
+test_that("edge_conn works", {
 
   library(igraph)
 
   gc <- function(graph) {
     clu <- comps(graph)
-    induced.subgraph(graph, which(clu$membership==which.max(clu$csize)))
+    induced_subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
 
   g <- gc(g_np(30, 8/30))
-  ec <- edge.connectivity(g)
+  ec <- edge_conn(g)
   ecST <- Inf
   for (j in 1:(vcount(g)-1)) {
     for (k in (j+1):vcount(g)) {
-      ec2 <- edge.connectivity(g, source=j, target=k)
+      ec2 <- edge_conn(g, source=j, target=k)
       if (ec2 < ecST) { ecST <- ec2 }
     } 
   }
@@ -34,9 +34,9 @@ test_that("edge.connectivity works", {
                     Ike      - Heather:Jane,
                     Jane     - Ike)
 
-  ec1 <- edge.connectivity(kite, source="Heather", target="Andre")
-  ec2 <- edge.connectivity(kite, source="Garth", target="Andre")
-  ec3 <- edge.connectivity(kite, source="Garth", target="Ike")
+  ec1 <- edge_conn(kite, source="Heather", target="Andre")
+  ec2 <- edge_conn(kite, source="Garth", target="Andre")
+  ec3 <- edge_conn(kite, source="Garth", target="Ike")
   expect_that(ec1, equals(2))
   expect_that(ec2, equals(4))
   expect_that(ec3, equals(1))

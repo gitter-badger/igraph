@@ -54,7 +54,7 @@
 #' \code{get.diameter} and a numeric vector of length two for
 #' \code{farthest.nodes}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{shortest.paths}}
+#' @seealso \code{\link{distances}}
 #' @keywords graphs
 #' @examples
 #' 
@@ -78,7 +78,7 @@ diameter <- function(graph, directed=TRUE, unconnected=TRUE, weights=NULL) {
     stop("Not a graph object")
   }
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -100,7 +100,7 @@ get.diameter <- function(graph, directed=TRUE, unconnected=TRUE,
     stop("Not a graph object")
   }
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -123,7 +123,7 @@ farthest.nodes <- function(graph, directed=TRUE, unconnected=TRUE,
     stop("Not a graph object")
   }
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -140,7 +140,7 @@ farthest.nodes <- function(graph, directed=TRUE, unconnected=TRUE,
   res
 }       
 
-avg_path_len <- function(graph, directed=TRUE, unconnected=TRUE) {
+mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -231,7 +231,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 
 #' Shortest (directed or undirected) paths between vertices
 #' 
-#' \code{shortest.paths} calculates the length of all the shortest paths from
+#' \code{distances} calculates the length of all the shortest paths from
 #' or to the vertices in the network. \code{get.shortest.paths} calculates one
 #' shortest path (the path itself, and not just its length) from or to the
 #' given vertex.
@@ -240,7 +240,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' the minimal number of vertices. The functions documented in this manual page
 #' all calculate shortest paths between vertex pairs.
 #' 
-#' \code{shortest.paths} calculates the lengths of pairwise shortest paths from
+#' \code{distances} calculates the lengths of pairwise shortest paths from
 #' a set of vertices (\code{from}) to another set of vertices (\code{to}). It
 #' uses different algorithms, depending on the \code{argorithm} argument and
 #' the \code{weight} edge attribute of the graph. The implemented algorithms
@@ -269,24 +269,24 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' graphs and Dijkstra's algorithm for weighted ones. The latter only supports
 #' non-negative edge weights.
 #' 
-#' \code{avg_path_len} calculates the average path length in a graph, by
+#' \code{mean_distance} calculates the average path length in a graph, by
 #' calculating the shortest paths between all pairs of vertices (both ways for
 #' directed graphs). This function does not consider edge weights currently and
 #' uses a breadth-first search.
 #' 
-#' \code{path.length.hist} calculates a histogram, by calculating the shortest
+#' \code{distance_table} calculates a histogram, by calculating the shortest
 #' path length between each pair of vertices. For directed graphs both
 #' directions are considered, so every pair of vertices appears twice in the
 #' histogram.
 #' 
-#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths
-#' avg_path_len path.length.hist average.path.length
+#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths distances
+#' mean_distance distance_table average.path.length path.length.hist
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
 #' calculated.
 #' @param to Numeric vector, the vertices to which the shortest paths will be
 #' calculated. By default it includes all vertices. Note that for
-#' \code{shortest.paths} every vertex must be included here at most once. (This
+#' \code{distances} every vertex must be included here at most once. (This
 #' is not required for \code{get.shortest.paths}.
 #' @param mode Character constant, gives whether the shortest paths to or from
 #' the given vertices should be calculated for directed graphs. If \code{out}
@@ -308,7 +308,7 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' that the igraph C core might still override your choice in obvious cases,
 #' i.e. if there are no edge weights, then the unweighted algorithm will be
 #' used, regardless of this argument.
-#' @return For \code{shortest.paths} a numeric matrix with \code{length(to)}
+#' @return For \code{distances} a numeric matrix with \code{length(to)}
 #' columns and \code{length(v)} rows. The shortest path length from a vertex to
 #' itself is always zero. For unreachable vertices \code{Inf} is included.
 #' 
@@ -334,9 +334,9 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' shortest paths to the same vertex are collected into consecutive elements of
 #' the list.
 #' 
-#' For \code{avg_path_len} a single number is returned.
+#' For \code{mean_distance} a single number is returned.
 #' 
-#' \code{path.length.hist} returns a named list with two entries: \code{res} is
+#' \code{distance_table} returns a named list with two entries: \code{res} is
 #' a numeric vector, the histogram of distances, \code{unconnected} is a
 #' numeric scalar, the number of pairs for which the first vertex is not
 #' reachable from the second. The sum of the two entries is always \eqn{n(n-1)}
@@ -348,19 +348,19 @@ degree.distribution <- function(graph, cumulative=FALSE, ...) {
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' shortest.paths(g)
+#' distances(g)
 #' get.shortest.paths(g, 5)
 #' get.all.shortest.paths(g, 1, 6:8)
-#' avg_path_len(g)
+#' mean_distance(g)
 #' ## Weighted shortest paths
 #' el <- matrix(nc=3, byrow=TRUE,
 #'              c(1,2,0, 1,3,2, 1,4,1, 2,3,0, 2,5,5, 2,6,2, 3,2,1, 3,4,1,
 #'                3,7,1, 4,3,0, 4,7,2, 5,6,2, 5,8,8, 6,3,2, 6,7,1, 6,9,1,
 #'                6,10,3, 8,6,1, 8,9,1, 9,10,4) )
 #' g2 <- add_edges(g_empty(10), t(el[,1:2]), weight=el[,3])
-#' shortest.paths(g2, mode="out")
+#' distances(g2, mode="out")
 #' 
-shortest.paths <- function(graph, v=V(graph), to=V(graph),
+distances <- function(graph, v=V(graph), to=V(graph),
                            mode=c("all", "out", "in"),
                            weights=NULL,
                            algorithm=c("automatic", "unweighted", "dijkstra",
@@ -378,7 +378,7 @@ shortest.paths <- function(graph, v=V(graph), to=V(graph),
                       "dijkstra"=2, "bellman-ford"=3, "johnson"=4)
   
   if (is.null(weights)) {
-    if ("weight" %in% list.edge.attributes(graph)) {
+    if ("weight" %in% edge_attr_names(graph)) {
       weights <- as.numeric(E(graph)$weight)
     }
   } else {
@@ -405,7 +405,7 @@ shortest.paths <- function(graph, v=V(graph), to=V(graph),
   res
 }
 
-#' @rdname shortest.paths
+#' @rdname distances
 #' @param from Numeric constant, the vertex from or to the shortest paths will
 #' be calculated. Note that right now this is not a vector of vertex ids, but
 #' only a single vertex.
@@ -443,7 +443,7 @@ get.shortest.paths <- function(graph, from, to=V(graph),
   output <- switch(output, "vpath"=0, "epath"=1, "both"=2)
 
   if (is.null(weights)) {
-    if ("weight" %in% list.edge.attributes(graph)) {
+    if ("weight" %in% edge_attr_names(graph)) {
       weights <- as.numeric(E(graph)$weight)
     }
   } else {
@@ -490,7 +490,7 @@ get.all.shortest.paths <- function(graph, from,
   mode <- switch(mode, "out"=1, "in"=2, "all"=3)
 
   if (is.null(weights)) {
-    if ("weight" %in% list.edge.attributes(graph)) {
+    if ("weight" %in% edge_attr_names(graph)) {
       weights <- as.numeric(E(graph)$weight)
     }
   } else {
@@ -563,7 +563,7 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' \code{subgraph} creates a subgraph of a graph, containing only the specified
 #' vertices and all the edges among them.
 #' 
-#' \code{induced.subgraph} calculates the induced subgraph of a set of vertices
+#' \code{induced_subgraph} calculates the induced subgraph of a set of vertices
 #' in a graph. This means that exactly the specified vertices and all the edges
 #' between then will be kept in the result graph.
 #' 
@@ -575,7 +575,7 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' (assuming \sQuote{\code{auto}} as the \code{impl} argument), but it is
 #' deprecated and will be removed in the next major version of igraph.
 #' 
-#' @aliases subgraph induced.subgraph subgraph.edges
+#' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
 #' @param graph The original graph.
 #' @param v Numeric vector, the vertices of the original graph which will
 #' form the subgraph.
@@ -585,7 +585,7 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' g2 <- induced.subgraph(g, 1:7)
+#' g2 <- induced_subgraph(g, 1:7)
 #' g3 <- subgraph.edges(g, 1:5, 1:5)
 #' 
 subgraph <- function(graph, v) {
@@ -610,7 +610,7 @@ subgraph <- function(graph, v) {
 #' automatically, using heuristics based on the size of the original and the
 #' result graph.
 
-induced.subgraph <- function(graph, vids, impl=c("auto", "copy_and_delete", "create_from_scratch")) {
+induced_subgraph <- function(graph, vids, impl=c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -655,7 +655,7 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
   vids <- as.igraph.vs(graph, vids)
   directed <- as.logical(directed)
   cutoff <- as.numeric(cutoff)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -670,7 +670,7 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
   res <- .Call("R_igraph_betweenness_estimate", graph, vids-1, directed, cutoff, weights, nobigint,
         PACKAGE="igraph")
   if (getIgraphOpt("add.vertex.names") && is.named(graph)) { 
-  names(res) <- get.vertex.attribute(graph, "name", vids) 
+  names(res) <- vertex_attr(graph, "name", vids) 
   }
   res
 }
@@ -754,7 +754,7 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
     stop("Not a graph object")
   }
   v <- as.igraph.vs(graph, v)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -798,7 +798,7 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
 #' weighted C_i = 1/s_i 1/(k_i-1) sum( (w_ij+w_ih)/2 a_ij a_ih a_jh, j, h)}
 #' 
 #' \eqn{s_i}{s_i} is the strength of vertex \eqn{i}{i}, see
-#' \code{\link{graph.strength}}, \eqn{a_{ij}}{a_ij} are elements of the
+#' \code{\link{strength}}, \eqn{a_{ij}}{a_ij} are elements of the
 #' adjacency matrix, \eqn{k_i}{k_i} is the vertex degree, \eqn{w_{ij}}{w_ij}
 #' are the weights.
 #' 
@@ -889,7 +889,7 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
                  "localaverage"=2, "localaverageundirected"=2, "barrat"=3,
                  "weighted"=3)
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -931,7 +931,7 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 }
 
 ## Generated by stimulus now
-## graph.laplacian <- function(graph, normalized=FALSE) {
+## laplacian <- function(graph, normalized=FALSE) {
 
 ##   if (!is.igraph(graph)) {
 ##     stop("Not a graph object")
@@ -943,7 +943,7 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 ## }
   
 ## OLD implementation
-## graph.laplacian <- function(graph, normalized=FALSE) {
+## laplacian <- function(graph, normalized=FALSE) {
 
 ##   if (!is.igraph(graph)) {
 ##     stop("Not a graph object")
@@ -952,7 +952,7 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 ##     warning("Laplacian of a directed graph???")
 ##   }
 
-##   M <- get.adjacency(graph)
+##   M <- adj(graph)
 ##   if (!normalized) {
 ##     M <- structure(ifelse(M>0, -1, 0), dim=dim(M))
 ##     diag(M) <- degree(graph)
@@ -976,7 +976,7 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 ##   }
 
 ##   idx <- degree(graph) != 0
-##   A <- get.adjacency(graph, attr=attr)
+##   A <- adj(graph, attr=attr)
 ##   A <- A[idx, idx]
 ##   n <- sum(idx)
   
@@ -1093,7 +1093,7 @@ constraint <- function(graph, nodes=V(graph), weights=NULL) {
   nodes <- as.igraph.vs(graph, nodes)
   
   if (is.null(weights)) {
-    if ("weight" %in% list.edge.attributes(graph)) {
+    if ("weight" %in% edge_attr_names(graph)) {
       weights <- E(graph)$weight
     }
   }
@@ -1203,7 +1203,7 @@ bonpow.dense <- function(graph, nodes=V(graph),
     stop("Not a graph object")
   }  
   
-  d <- get.adjacency(graph)
+  d <- adj(graph)
   if (!loops) {
     diag(d) <- 0
   }
@@ -1232,7 +1232,7 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
   vg <- vcount(graph)
   
   ## sparse adjacency matrix
-  d <- get.adjacency(graph, sparse=TRUE)
+  d <- adj(graph, sparse=TRUE)
 
   ## sparse identity matrix
   id <- Matrix::Diagonal(vg)
@@ -1364,7 +1364,7 @@ bonpow <- function(graph, nodes=V(graph),
   }
 
   if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
-    names(res) <- get.vertex.attribute(graph, "name", nodes)
+    names(res) <- vertex_attr(graph, "name", nodes)
   }
   
   res
@@ -1380,7 +1380,7 @@ alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
   exo <- rep(exo, length=vcount(graph))
   exo <- matrix(exo, ncol=1)
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     ## weights == NULL and there is a "weight" edge attribute
     attr <- "weight"
   } else if (is.null(weights)) {
@@ -1391,14 +1391,14 @@ alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
     attr <- "weight"
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
-    graph <- set.edge.attribute(graph, "weight", value=as.numeric(weights))
+    graph <- set_edge_attr(graph, "weight", value=as.numeric(weights))
     attr <- "weight"
   } else {
     ## weights != NULL, but weights == rep(NA, x)
     attr <- NULL
   }
 
-  d <- t(get.adjacency(graph, attr=attr, sparse=FALSE))
+  d <- t(adj(graph, attr=attr, sparse=FALSE))
   if (!loops) {
     diag(d) <- 0
   }
@@ -1423,7 +1423,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
     graph <- simplify(graph, remove.multiple=FALSE, remove.loops=TRUE)
   }  
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     ## weights == NULL and there is a "weight" edge attribute
     attr <- "weight"
   } else if (is.null(weights)) {
@@ -1434,14 +1434,14 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
     attr <- "weight"
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
-    graph <- set.edge.attribute(graph, "weight", value=as.numeric(weights))
+    graph <- set_edge_attr(graph, "weight", value=as.numeric(weights))
     attr <- "weight"
   } else {
     ## weights != NULL, but weights == rep(NA, x)
     attr <- NULL
   }
 
-  M <- Matrix::t(get.adjacency(graph, attr = attr, sparse = TRUE))
+  M <- Matrix::t(adj(graph, attr = attr, sparse = TRUE))
   M <- as(M, "dgCMatrix")
   
   ## Create an identity matrix
@@ -1532,7 +1532,7 @@ alpha.centrality <- function(graph, nodes=V(graph), alpha=1,
                                   exo, weights, tol)
   }
   if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
-    names(res) <- get.vertex.attribute(graph, "name", nodes)
+    names(res) <- vertex_attr(graph, "name", nodes)
   }
   res
 }
@@ -1584,7 +1584,7 @@ graph.density <- function(graph, loops=FALSE) {
         PACKAGE="igraph")
 }
 
-neighborhood.size <- function(graph, order, nodes=V(graph),
+ego_size <- function(graph, order, nodes=V(graph),
                               mode=c("all", "out", "in"), mindist=0) {
 
   if (!is.igraph(graph)) {
@@ -1612,10 +1612,10 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' \code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #' 
-#' \code{neighborhood.size} calculates the size of the neighborhoods for the
+#' \code{ego_size} calculates the size of the neighborhoods for the
 #' given vertices with the given order.
 #' 
-#' \code{neighborhood} calculates the neighborhoods of the given vertices with
+#' \code{ego} calculates the neighborhoods of the given vertices with
 #' the given order parameter.
 #' 
 #' \code{g_ego} is creates (sub)graphs from all neighborhoods of
@@ -1626,7 +1626,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' all other vertices in its neighborhood.
 #' 
 #' @aliases neighborhood neighborhood.size graph.neighborhood g_ego
-#' connect.neighborhood connect
+#' connect.neighborhood connect ego_size ego
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood.
 #' @param nodes The vertices for which the calculation is performed.
@@ -1638,9 +1638,9 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' steps are counted. \sQuote{"all"} ignores the direction of the edges. This
 #' argument is ignored for undirected graphs.
 #' @param mindist The minimum distance to include the vertex in the result.
-#' @return \code{neighborhood.size} returns with an integer vector.
+#' @return \code{ego_size} returns with an integer vector.
 #' 
-#' \code{neighborhood} returns with a list of integer vectors.
+#' \code{ego} returns with a list of integer vectors.
 #' 
 #' \code{g_ego} returns with a list of graphs.
 #' 
@@ -1651,12 +1651,12 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' neighborhood.size(g, 0, 1:3)
-#' neighborhood.size(g, 1, 1:3)
-#' neighborhood.size(g, 2, 1:3)
-#' neighborhood(g, 0, 1:3)
-#' neighborhood(g, 1, 1:3)
-#' neighborhood(g, 2, 1:3)
+#' ego_size(g, 0, 1:3)
+#' ego_size(g, 1, 1:3)
+#' ego_size(g, 2, 1:3)
+#' ego(g, 0, 1:3)
+#' ego(g, 1, 1:3)
+#' ego(g, 2, 1:3)
 #' 
 #' # attributes are preserved
 #' V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
@@ -1666,7 +1666,7 @@ neighborhood.size <- function(graph, order, nodes=V(graph),
 #' g <- g_ring(10)
 #' g <- connect(g, 2)
 #' 
-neighborhood <- function(graph, order, nodes=V(graph),
+ego <- function(graph, order, nodes=V(graph),
                          mode=c("all", "out", "in"), mindist=0) {
   
   if (!is.igraph(graph)) {
@@ -1685,7 +1685,7 @@ neighborhood <- function(graph, order, nodes=V(graph),
   res
 }
 
-#' @rdname neighborhood
+#' @rdname ego
 
 g_ego <- function(graph, order, nodes=V(graph),
                   mode=c("all", "out", "in"), mindist=0) {
@@ -1718,7 +1718,8 @@ g_ego <- function(graph, order, nodes=V(graph),
 #' subgraph of the k-core.
 #' 
 #' This function calculates the coreness for each vertex.
-#' 
+#'
+#' @aliases graph.coreness
 #' @param graph The input graph, it can be directed or undirected
 #' @param mode The type of the core in directed graphs. Character constant,
 #' possible values: \code{in}: in-cores are computed, \code{out}: out-cores are
@@ -1738,9 +1739,9 @@ g_ego <- function(graph, order, nodes=V(graph),
 #' 
 #' g <- g_ring(10)
 #' g <- add_edges(g, c(1,2, 2,3, 1,3))
-#' graph.coreness(g) 		# small core triangle in a ring
+#' coreness(g) 		# small core triangle in a ring
 #' 
-graph.coreness <- function(graph, mode=c("all", "out", "in")) {
+coreness <- function(graph, mode=c("all", "out", "in")) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -1752,7 +1753,7 @@ graph.coreness <- function(graph, mode=c("all", "out", "in")) {
   res <- .Call("R_igraph_coreness", graph, as.numeric(mode),
                PACKAGE="igraph")
   if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
-    names(res) <- get.vertex.attribute(graph, "name")
+    names(res) <- vertex_attr(graph, "name")
   }
   res
 }
@@ -1768,7 +1769,8 @@ graph.coreness <- function(graph, mode=c("all", "out", "in")) {
 #' function returns a possible topological sort among them. If the graph is not
 #' acyclic (it has at least one cycle), a partial topological sort is returned
 #' and a warning is issued.
-#' 
+#'
+#' @aliases topological.sort
 #' @param graph The input graph, should be directed
 #' @param mode Specifies how to use the direction of the edges.  For
 #' \dQuote{\code{out}}, the sorting order ensures that each node comes before
@@ -1783,9 +1785,9 @@ graph.coreness <- function(graph, mode=c("all", "out", "in")) {
 #' @examples
 #' 
 #' g <- barabasi.game(100)
-#' topological.sort(g)
+#' topo_sort(g)
 #' 
-topological.sort <- function(graph, mode=c("out", "all", "in")) {
+topo_sort <- function(graph, mode=c("out", "all", "in")) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -1869,7 +1871,7 @@ is.loop <- function(graph, eids=E(graph)) {
 #' 
 #' \code{is.loop} decides whether the edges of the graph are loop edges.
 #' 
-#' \code{has.multiple} decides whether the graph has any multiple edges.
+#' \code{any_multiple} decides whether the graph has any multiple edges.
 #' 
 #' \code{is.multiple} decides whether the edges of the graph are multiple
 #' edges.
@@ -1886,10 +1888,11 @@ is.loop <- function(graph, eids=E(graph)) {
 #' original multiplicity as an edge attribute.
 #' 
 #' @aliases has.multiple is.loop is.multiple count.multiple count_multiple
+#'   any_multiple
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #' all edges in the graph.
-#' @return \code{has.multiple} returns a logical scalar.  \code{is.loop} and
+#' @return \code{any_multiple} returns a logical scalar.  \code{is.loop} and
 #' \code{is.multiple} return a logical vector. \code{count_multiple} returns a
 #' numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1903,7 +1906,7 @@ is.loop <- function(graph, eids=E(graph)) {
 #' 
 #' # Multiple edges
 #' g <- barabasi.game(10, m=3, algorithm="bag")
-#' has.multiple(g)
+#' any_multiple(g)
 #' is.multiple(g)
 #' count_multiple(g)
 #' is.multiple(simplify(g))
@@ -1956,7 +1959,8 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' current vertex, \sQuote{dist}, its distance from the root of the search
 #' tree.} \item{extra}{The extra argument.} } See examples below on how to use
 #' the callback function.
-#' 
+#'
+#' @aliases graph.bfs
 #' @param graph The input graph.
 #' @param root Numeric vector, usually of length one. The root vertex, or root
 #' vertices to start the search from.
@@ -2002,12 +2006,12 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' and \code{dist} might be \code{NULL} if their corresponding argument is
 #' \code{FALSE}, i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph.dfs}} for depth-first search.
+#' @seealso \code{\link{dfs}} for depth-first search.
 #' @keywords graphs
 #' @examples
 #' 
 #' ## Two rings
-#' graph.bfs(g_ring(10) %du% g_ring(10), root=1, "out",
+#' bfs(g_ring(10) %du% g_ring(10), root=1, "out",
 #'           order=TRUE, rank=TRUE, father=TRUE, pred=TRUE,
 #'           succ=TRUE, dist=TRUE)
 #' 
@@ -2016,7 +2020,7 @@ count_multiple <- function(graph, eids=E(graph)) {
 #'   print(data)
 #'   FALSE
 #' }
-#' tmp <- graph.bfs(g_ring(10) %du% g_ring(10), root=1, "out",
+#' tmp <- bfs(g_ring(10) %du% g_ring(10), root=1, "out",
 #'                  callback=f)
 #' 
 #' ## How to use a callback to stop the search
@@ -2024,10 +2028,10 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' f <- function(graph, data, extra) {
 #'  data['succ'] == -1
 #' }
-#' graph.bfs(g_ring(10) %du% g_ring(10), root=1, callback=f)
+#' bfs(g_ring(10) %du% g_ring(10), root=1, callback=f)
 #' 
 #' 
-graph.bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
+bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
                       unreachable=TRUE, restricted=NULL,
                       order=TRUE, rank=FALSE, father=FALSE,
                       pred=FALSE, succ=FALSE, dist=FALSE,
@@ -2079,7 +2083,8 @@ graph.bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #' \sQuote{vid}, the vertex that was just visited and \sQuote{dist}, its
 #' distance from the root of the search tree.} \item{extra}{The extra
 #' argument.} } See examples below on how to use the callback functions.
-#' 
+#'
+#' @aliases graph.dfs
 #' @param graph The input graph.
 #' @param root The single root vertex to start the search from.
 #' @param neimode For directed graphs specifies the type of edges to follow.
@@ -2119,12 +2124,12 @@ graph.bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #' might be \code{NULL} if their corresponding argument is \code{FALSE}, i.e.
 #' if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph.bfs}} for breadth-first search.
+#' @seealso \code{\link{bfs}} for breadth-first search.
 #' @keywords graphs
 #' @examples
 #' 
 #' ## A graph with two separate trees
-#' graph.dfs(g_tree(10) %du% g_tree(10), root=1, "out",
+#' dfs(g_tree(10) %du% g_tree(10), root=1, "out",
 #'           TRUE, TRUE, TRUE, TRUE)
 #' 
 #' ## How to use a callback
@@ -2136,18 +2141,18 @@ graph.bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #'   cat("out:", paste(collapse=", ", data), "\n")
 #'   FALSE
 #' }
-#' tmp <- graph.dfs(g_tree(10), root=1, "out",
+#' tmp <- dfs(g_tree(10), root=1, "out",
 #'                  in.callback=f.in, out.callback=f.out)
 #' 
 #' ## Terminate after the first component, using a callback
 #' f.out <- function(graph, data, extra) {
 #'  data['vid'] == 1
 #' }
-#' tmp <- graph.dfs(g_tree(10) %du% g_tree(10), root=1,
+#' tmp <- dfs(g_tree(10) %du% g_tree(10), root=1,
 #'                  out.callback=f.out)
 #' 
 #' 
-graph.dfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
+dfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
                       unreachable=TRUE,
                       order=TRUE, order.out=FALSE, father=FALSE, dist=FALSE,
                       in.callback=NULL, out.callback=NULL, extra=NULL,
@@ -2185,7 +2190,7 @@ edge.betweenness <- function(graph, e=E(graph),
   if (!is.igraph(graph)) { stop("Not a graph object") }
   e <- as.igraph.es(graph, e)
   directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -2208,7 +2213,7 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
   e <- as.igraph.es(graph, e)
   directed <- as.logical(directed)
   cutoff <- as.numeric(cutoff)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -2236,10 +2241,10 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' \code{comps} finds the maximal (weakly or strongly) connected components
 #' of a graph.
 #' 
-#' \code{no.clusters} does almost the same as \code{comps} but returns only
+#' \code{count_comps} does almost the same as \code{comps} but returns only
 #' the number of clusters found instead of returning the actual clusters.
 #' 
-#' \code{cluster.distribution} creates a histogram for the maximal connected
+#' \code{comp_dist} creates a histogram for the maximal connected
 #' component sizes.
 #' 
 #' The weakly connected components are found by a simple breadth-first search.
@@ -2247,6 +2252,7 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' depth-first searches.
 #' 
 #' @aliases no.clusters clusters is.connected cluster.distribution comps
+#'   count_comps
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #' directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
@@ -2260,9 +2266,9 @@ edge.betweenness.estimate <- function(graph, e=E(graph),
 #' belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
 #' \item{no}{numeric constant, the number of clusters.}
 #' 
-#' For \code{no.clusters} an integer constant is returned.
+#' For \code{count_comps} an integer constant is returned.
 #' 
-#' For \code{cluster.distribution} a numeric vector with the relative
+#' For \code{comp_dist} a numeric vector with the relative
 #' frequencies. The length of the vector is the size of the largest component
 #' plus one. Note that (for currently unknown reasons) the first element of the
 #' vector is the number of clusters of size zero, so this is always zero.
@@ -2303,6 +2309,7 @@ comps <- function(graph, mode=c("weak", "strong")) {
 #' The \code{roots} vector can be calculated by simply doing a topological sort
 #' in all components of the graph, see the examples below.
 #' 
+#' @aliases unfold.tree
 #' @param graph The input graph, it can be either directed or undirected.
 #' @param mode Character string, defined the types of the paths used for the
 #' breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
@@ -2321,10 +2328,10 @@ comps <- function(graph, mode=c("weak", "strong")) {
 #' g <- g_tree(10) %du% g_tree(10)
 #' V(g)$id <- seq_len(vcount(g))-1
 #' roots <- sapply(decompose(g), function(x) {
-#'             V(x)$id[ topological.sort(x)[1]+1 ] })
-#' tree <- unfold.tree(g, roots=roots)
+#'             V(x)$id[ topo_sort(x)[1]+1 ] })
+#' tree <- unfold_tree(g, roots=roots)
 #' 
-unfold.tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
+unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
@@ -2396,7 +2403,7 @@ closeness <- function(graph, vids=V(graph),
   if (!is.igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -2426,7 +2433,7 @@ closeness.estimate <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
   vids <- as.igraph.vs(graph, vids)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   cutoff <- as.numeric(cutoff)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -2441,7 +2448,7 @@ closeness.estimate <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
   res <- .Call("R_igraph_closeness_estimate", graph, vids-1, mode, cutoff, weights, normalized,
         PACKAGE="igraph")
   if (getIgraphOpt("add.vertex.names") && is.named(graph)) { 
-  names(res) <- get.vertex.attribute(graph, "name", vids) 
+  names(res) <- vertex_attr(graph, "name", vids) 
   }
   res
 }
@@ -2482,16 +2489,16 @@ closeness.estimate <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' graph.laplacian(g)
-#' graph.laplacian(g, norm=TRUE)
-#' graph.laplacian(g, norm=TRUE, sparse=FALSE)
+#' laplacian(g)
+#' laplacian(g, norm=TRUE)
+#' laplacian(g, norm=TRUE, sparse=FALSE)
 #' 
-graph.laplacian <- function(graph, normalized=FALSE, weights=NULL,
+laplacian <- function(graph, normalized=FALSE, weights=NULL,
                             sparse=getIgraphOpt("sparsematrices")) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   normalized <- as.logical(normalized)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -2517,7 +2524,7 @@ graph.laplacian <- function(graph, normalized=FALSE, weights=NULL,
 is.matching <- function(graph, matching, types=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% list.vertex.attributes(graph)) { 
+  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
     types <- V(graph)$type 
   } 
   if (!is.null(types)) { 
@@ -2537,7 +2544,7 @@ is.matching <- function(graph, matching, types=NULL) {
 is.maximal.matching <- function(graph, matching, types=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% list.vertex.attributes(graph)) { 
+  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
     types <- V(graph)$type 
   } 
   if (!is.null(types)) { 
@@ -2554,17 +2561,17 @@ is.maximal.matching <- function(graph, matching, types=NULL) {
   res
 }
 
-maximum.bipartite.matching <- function(graph, types=NULL, weights=NULL,
+max_bip_match <- function(graph, types=NULL, weights=NULL,
                                        eps=.Machine$double.eps) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% list.vertex.attributes(graph)) { 
+  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
     types <- V(graph)$type 
   } 
   if (!is.null(types)) { 
     types <- as.logical(types) 
   }
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 

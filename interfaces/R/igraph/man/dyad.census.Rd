@@ -30,7 +30,7 @@ dyad_census(graph)
   Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \seealso{
-  \code{\link{triad.census}} for the same classification, but with triples.
+  \code{\link{triad_census}} for the same classification, but with triples.
 }
 \examples{
 g <- g_pa(100)

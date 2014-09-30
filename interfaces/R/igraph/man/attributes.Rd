@@ -1,21 +1,33 @@
 \name{attributes}
 \alias{attributes}
 \alias{set.graph.attribute}
+\alias{set_graph_attr}
 \alias{get.graph.attribute}
+\alias{graph_attr}
 \alias{remove.graph.attribute}
+\alias{delete_graph_attr}
 \alias{list.graph.attributes}
+\alias{graph_attr_names}
 \alias{graph.attributes}
 \alias{graph.attributes<-}
 \alias{set.vertex.attribute}
+\alias{set_vertex_attr}
 \alias{get.vertex.attribute}
+\alias{vertex_attr}
 \alias{remove.vertex.attribute}
+\alias{delete_vertex_attr}
 \alias{list.vertex.attributes}
+\alias{vertex_attr_names}
 \alias{vertex.attributes}
 \alias{vertex.attributes<-}
 \alias{set.edge.attribute}
+\alias{set_edge_attr}
 \alias{get.edge.attribute}
+\alias{edge_attr}
 \alias{remove.edge.attribute}
+\alias{delete_edge_attr}
 \alias{list.edge.attributes}
+\alias{edge_attr_names}
 \alias{edge.attributes}
 \alias{edge.attributes<-}
 \concept{Vertex/edge/graph attributes}
@@ -26,20 +38,20 @@
   the graph is plotted, or simply the weights of the edges in a weighted
   graph.}
 \usage{
-get.graph.attribute(graph, name)
-set.graph.attribute(graph, name, value)
-list.graph.attributes(graph)
+graph_attr(graph, name)
+set_graph_attr(graph, name, value)
+graph_attr_names(graph)
 graph.attributes(graph)
-remove.graph.attribute(graph, name)
-get.vertex.attribute(graph, name, index=V(graph))
-set.vertex.attribute(graph, name, index=V(graph), value)
-remove.vertex.attribute(graph, name)
-list.vertex.attributes(graph)
+delete_graph_attr(graph, name)
+vertex_attr(graph, name, index=V(graph))
+set_vertex_attr(graph, name, index=V(graph), value)
+delete_vertex_attr(graph, name)
+vertex_attr_names(graph)
 vertex.attributes(graph)
-get.edge.attribute(graph, name, index=E(graph))
-set.edge.attribute(graph, name, index=E(graph), value)
-remove.edge.attribute(graph, name)
-list.edge.attributes(graph)
+edge_attr(graph, name, index=E(graph))
+set_edge_attr(graph, name, index=E(graph), value)
+delete_edge_attr(graph, name)
+edge_attr_names(graph)
 edge.attributes(graph)
 }
 \arguments{
@@ -81,11 +93,11 @@ edge.attributes(graph)
   attributes if they are present but this is not done in the current
   version very extensively. Expect more in the (near) future.
 
-  Graph attributes can be created with the \code{set.graph.attribute}
-  function, and removed with \code{remove.graph.attribute}. Graph
-  attributes are queried with \code{get.graph.attribute} and the
+  Graph attributes can be created with the \code{set_graph_attr}
+  function, and removed with \code{delete_graph_attr}. Graph
+  attributes are queried with \code{graph_attr} and the
   assigned graph attributes are listed with
-  \code{list.graph.attributes}.
+  \code{graph_attr_names}.
 
   The function \code{graph.attributes} returns all graph attributes in a
   named list. This function has a counterpart that sets all graph
@@ -96,11 +108,11 @@ edge.attributes(graph)
   attributes, see an example below.
   
   The functions for vertex attributes are
-  \code{set.vertex.attribute}, \code{get.vertex.attribute},
-  \code{remove.vertex.attribute} and \code{list.vertex.attributes} and
-  for edge attributes they are \code{set.edge.attribute},
-  \code{get.edge.attribute}, \code{remove.edge.attribute} and
-  \code{list.edge.attributes}.
+  \code{set_vertex_attr}, \code{vertex_attr},
+  \code{delete_vertex_attr} and \code{vertex_attr_names} and
+  for edge attributes they are \code{set_edge_attr},
+  \code{edge_attr}, \code{delete_edge_attr} and
+  \code{edge_attr_names}.
 
   Similarly to graph attributes, \code{vertex.attributes} returns all
   vertex attributes, in a named list, and \code{edge.attributes} returns
@@ -126,17 +138,17 @@ edge.attributes(graph)
   various vertex and edge sets.
 }
 \value{
-  \code{get.graph.attribute}, \code{get.vertex.attribute} and
-  \code{get.edge.attribute} return an R object, or a list of R objects
+  \code{graph_attr}, \code{vertex_attr} and
+  \code{edge_attr} return an R object, or a list of R objects
   if attributes of more vertices/edges are requested.
 
-  \code{set.graph.attribute}, \code{set.vertex.attribute},
-  \code{set.edge.attribute}, and also \code{remove.graph.attribute},
-  \code{remove.vertex.attribute} and \code{remove.edge.attribute} return
+  \code{set_graph_attr}, \code{set_vertex_attr},
+  \code{set_edge_attr}, and also \code{delete_graph_attr},
+  \code{delete_vertex_attr} and \code{delete_edge_attr} return
   a new graph object with the updates/removes performed.
 
-  \code{list.graph.attributes}, \code{list.vertex.attributes} and
-  \code{list.edge.attributes} return a character vector, the names of
+  \code{graph_attr_names}, \code{vertex_attr_names} and
+  \code{edge_attr_names} return a character vector, the names of
   the attributes present.
 }
 % \references{}
@@ -146,16 +158,16 @@ edge.attributes(graph)
   attributes if several vertices or edges are mapped into one.}
 \examples{
 g <- g_ring(10)
-g <- set.graph.attribute(g, "name", "RING")
+g <- set_graph_attr(g, "name", "RING")
 # It is the same as
 g$name <- "RING"
 g$name
 
-g <- set.vertex.attribute(g, "color", value=c("red", "green"))
-get.vertex.attribute(g, "color")
+g <- set_vertex_attr(g, "color", value=c("red", "green"))
+vertex_attr(g, "color")
 
-g <- set.edge.attribute(g, "weight", value=runif(ecount(g)))
-get.edge.attribute(g, "weight")
+g <- set_edge_attr(g, "weight", value=runif(ecount(g)))
+edge_attr(g, "weight")
 
 # The following notation is more convenient
 g <- g_star(10)

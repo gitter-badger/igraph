@@ -8,7 +8,7 @@
 }
 \usage{
 evcent (graph, directed = FALSE, scale = TRUE, weights = NULL,
-     options = igraph.arpack.default) 
+     options = arpack_defaults) 
 }
 \arguments{
   \item{graph}{Graph to be analyzed.}

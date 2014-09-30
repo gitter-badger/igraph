@@ -50,7 +50,7 @@ test_that("LAD stress test", {
   for (i in 1:N) {
     target <- g_np(20, .5)
     pn <- sample(4:18, 1)
-    pattern <- induced.subgraph(target, sample(vcount(target), pn))
+    pattern <- induced_subgraph(target, sample(vcount(target), pn))
     iso <- graph.subisomorphic.lad(pattern, target, induced=TRUE,
                                    all.maps=FALSE)
     expect_that(iso$iso, is_true())

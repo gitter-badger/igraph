@@ -39,9 +39,9 @@ biconn_comps(graph)
 %\references
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{\code{\link{articulation_points}}, \code{\link{comps}},
-  \code{\link{is.connected}}, \code{\link{vertex.connectivity}}}
+  \code{\link{is.connected}}, \code{\link{vertex_conn}}}
 \examples{
-g <- graph.disjoint.union( g_full(5), g_full(5) )
+g <- disjoint_union( g_full(5), g_full(5) )
 clu <- comps(g)$membership
 g <- add_edges(g, c(which(clu==1), which(clu==2)))
 bc <- biconn_comps(g)

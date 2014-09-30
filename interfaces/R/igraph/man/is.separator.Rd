@@ -36,7 +36,7 @@ is.minimal.separator(graph, candidate)
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{
-  \code{\link{minimum.size.separators}} lists all vertex separator of
+  \code{\link{min_size_sep}} lists all vertex separator of
   minimum size.
 }
 \examples{
@@ -48,14 +48,14 @@ mw <- g_formula(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
                 21-22:23, 22-23)
 
 # Cohesive subgraphs
-mw1 <- induced.subgraph(mw, as.character(c(1:7, 17:23)))
-mw2 <- induced.subgraph(mw, as.character(7:16))
-mw3 <- induced.subgraph(mw, as.character(17:23))
-mw4 <- induced.subgraph(mw, as.character(c(7,8,11,14)))
-mw5 <- induced.subgraph(mw, as.character(1:7))
+mw1 <- induced_subgraph(mw, as.character(c(1:7, 17:23)))
+mw2 <- induced_subgraph(mw, as.character(7:16))
+mw3 <- induced_subgraph(mw, as.character(17:23))
+mw4 <- induced_subgraph(mw, as.character(c(7,8,11,14)))
+mw5 <- induced_subgraph(mw, as.character(1:7))
 
 check.sep <- function(G) {
-  sep <- minimum.size.separators(G)
+  sep <- min_size_sep(G)
   sapply(sep, is.minimal.separator, graph=G)
 }
 

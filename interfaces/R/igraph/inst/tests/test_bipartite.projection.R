@@ -49,8 +49,8 @@ test_that("bip_proj can calculate only one projection", {
   expect_that(graph.isomorphic(proj$proj2, proj2), is_true())
   expect_that(vertex.attributes(proj$proj1), equals(vertex.attributes(proj1)))
   expect_that(vertex.attributes(proj$proj2), equals(vertex.attributes(proj2)))
-  expect_that(edge.attributes(proj$proj1), equals(edge.attributes(proj1)))
-  expect_that(edge.attributes(proj$proj2), equals(edge.attributes(proj2)))
+  expect_that(edge_attr(proj$proj1), equals(edge_attr(proj1)))
+  expect_that(edge_attr(proj$proj2), equals(edge_attr(proj2)))
 
 })
 
@@ -66,15 +66,15 @@ test_that("bip_proj removes 'type' attribute if requested", {
   proj4 <- bip_proj(g, which="true", remove.type=FALSE)
   proj5 <- bip_proj(g, which="false", remove.type=FALSE)
 
-  expect_that("type" %in% list.vertex.attributes(proj[[1]]), is_false())
-  expect_that("type" %in% list.vertex.attributes(proj[[2]]), is_false())
-  expect_that("type" %in% list.vertex.attributes(proj1), is_false())
-  expect_that("type" %in% list.vertex.attributes(proj2), is_false())
+  expect_that("type" %in% vertex_attr_names(proj[[1]]), is_false())
+  expect_that("type" %in% vertex_attr_names(proj[[2]]), is_false())
+  expect_that("type" %in% vertex_attr_names(proj1), is_false())
+  expect_that("type" %in% vertex_attr_names(proj2), is_false())
 
-  expect_that("type" %in% list.vertex.attributes(proj3[[1]]), is_true())
-  expect_that("type" %in% list.vertex.attributes(proj3[[2]]), is_true())
-  expect_that("type" %in% list.vertex.attributes(proj4), is_true())
-  expect_that("type" %in% list.vertex.attributes(proj5), is_true())
+  expect_that("type" %in% vertex_attr_names(proj3[[1]]), is_true())
+  expect_that("type" %in% vertex_attr_names(proj3[[2]]), is_true())
+  expect_that("type" %in% vertex_attr_names(proj4), is_true())
+  expect_that("type" %in% vertex_attr_names(proj5), is_true())
 })
 
 test_that("bip_proj breaks for non-bipartite graphs (#543)", {

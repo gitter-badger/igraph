@@ -1,13 +1,13 @@
 
-context("graph.adhesion")
+context("adhesion")
 
-test_that("graph.adhesion works", {
+test_that("adhesion works", {
 
   library(igraph)
 
   g <- graph.famous("Zachary")
-  expect_that(graph.adhesion(g), equals(1))
-  expect_that(graph.cohesion(g), equals(1))
+  expect_that(adhesion(g), equals(1))
+  expect_that(cohesion(g), equals(1))
 
   kite <- g_formula(Andre    - Beverly:Carol:Diane:Fernando,
                     Beverly  - Andre:Diane:Ed:Garth,
@@ -20,8 +20,8 @@ test_that("graph.adhesion works", {
                     Ike      - Heather:Jane,
                     Jane     - Ike)
 
-  expect_that(graph.adhesion(kite), equals(1)) 
-  expect_that(graph.cohesion(kite), equals(1))
+  expect_that(adhesion(kite), equals(1)) 
+  expect_that(cohesion(kite), equals(1))
 
   camp <- g_formula(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
                     Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
@@ -36,6 +36,6 @@ test_that("graph.adhesion works", {
                     Russ    - Steve:Bert:Gery:John,
                     John    - Gery:Russ:Michael)
 
-  expect_that(graph.adhesion(camp), equals(2))
-  expect_that(graph.cohesion(camp), equals(2))
+  expect_that(adhesion(camp), equals(2))
+  expect_that(cohesion(camp), equals(2))
 })

@@ -91,27 +91,27 @@
       ## nop
     } else if (!is.null(attr)) {
       if (any(res!=0)) {
-        res[res!=0] <- get.edge.attribute(x, attr, res[res!=0])
+        res[res!=0] <- edge_attr(x, attr, res[res!=0])
       }
     } else {
       res <- as.logical(res)+0
     }
     res
   } else if (missing(i) && missing(j)) {
-    get.adjacency(x, sparse=sparse, attr=attr, edges=edges)
+    adj(x, sparse=sparse, attr=attr, edges=edges)
   } else if (missing(j)) {
-    get.adjacency(x, sparse=sparse, attr=attr, edges=edges)[i,,drop=drop]
+    adj(x, sparse=sparse, attr=attr, edges=edges)[i,,drop=drop]
   } else if (missing(i)) {
-    get.adjacency(x, sparse=sparse, attr=attr, edges=edges)[,j,drop=drop]
+    adj(x, sparse=sparse, attr=attr, edges=edges)[,j,drop=drop]
   } else {
-    get.adjacency(x, sparse=sparse, attr=attr, edges=edges)[i,j,drop=drop]
+    adj(x, sparse=sparse, attr=attr, edges=edges)[i,j,drop=drop]
   }
 }
 
 `[[.igraph` <- function(x, i, j, ..., directed=TRUE,
                         edges=FALSE, exact=TRUE) {
   ## TODO: make it faster, don't need the whole list usually
-  getfun <- if (edges) get.adjedgelist else get.adjlist
+  getfun <- if (edges) adj_edge_list else adj_list
   if (missing(i) && missing(j)) {
     mode <- if (directed) "out" else "all"
     getfun(x, mode=mode)
@@ -128,7 +128,7 @@
     if (!edges) {
       lapply(getfun(x, mode=mode)[i], intersect, j)
     } else {
-      ee <- get.adjedgelist(x, mode=mode)[i]
+      ee <- adj_edge_list(x, mode=mode)[i]
       lapply(seq_along(i), function(yy) {
         from <- i[yy]
         el <- get.edges(x, ee[[yy]])
@@ -191,7 +191,7 @@
       }
       if (!is.null(attr)) {
         ids <- x[from=from, to=to, ..., edges=TRUE]
-        x <- set.edge.attribute(x, attr, ids, value=value)
+        x <- set_edge_attr(x, attr, ids, value=value)
       }
     }
   } else if (is.null(value) ||
@@ -230,7 +230,7 @@
       } else {
         x <- add_edges(x, toadd, attr=structure(list(value), names=attr))
         toupdate <- unlist(x[[i, j, ..., edges=TRUE]])
-        x <- set.edge.attribute(x, attr, toupdate, value)
+        x <- set_edge_attr(x, attr, toupdate, value)
       }
     }    
   }

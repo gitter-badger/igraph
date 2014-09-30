@@ -66,7 +66,7 @@ l_random <- function(graph, dim=2) {
 #' Place vertices on a circle, in the order of their vertex ids.
 #' 
 #' If you want to order the vertices differently, then permute them using the
-#' \code{\link{permute.vertices}} function.
+#' \code{\link{permute}} function.
 #'
 #' @aliases layout.circle
 #' @param graph The input graph.
@@ -112,7 +112,7 @@ l_circle <- function(graph, order=V(graph)) {
 #' \dQuote{uniformly on a sphere} means.
 #' 
 #' If you want to order the vertices differently, then permute them using the
-#' \code{\link{permute.vertices}} function.
+#' \code{\link{permute}} function.
 #'
 #' @aliases layout.sphere
 #' @param graph The input graph.
@@ -359,7 +359,7 @@ l_tree <- function(graph, root=numeric(), circular=FALSE,
 #' vertices in the graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{plot.igraph}}, \code{\link{tkplot}},
-#' \code{\link{layout}}, \code{\link{graph.disjoint.union}}
+#' \code{\link{layout}}, \code{\link{disjoint_union}}
 #' @keywords graphs
 #' @examples
 #' 
@@ -368,7 +368,7 @@ l_tree <- function(graph, root=numeric(), circular=FALSE,
 #'           barabasi.game, directed=FALSE)
 #' layouts <- lapply(graphs, l_kk)
 #' lay <- l_merge(graphs, layouts)
-#' g <- graph.disjoint.union(graphs)
+#' g <- disjoint_union(graphs)
 #' \dontrun{plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")}
 
 l_merge <- function(graphs, layouts, method="dla") {
@@ -461,7 +461,7 @@ l_comps <- function(graph, layout=l_kk, ...) {
   ll <- lapply(gl, layout, ...)
   
   l <- l_merge(gl, ll)
-  l[ unlist(sapply(gl, get.vertex.attribute, "id")), ] <- l[]
+  l[ unlist(sapply(gl, vertex_attr, "id")), ] <- l[]
   l
 }
 
@@ -749,16 +749,16 @@ l_auto <- function(graph, dim=2, ...) {
   ##    the Kamada-Kawai layout.
   ## 5. Otherwise we use the DrL layout generator.
   
-  if ("layout" %in% list.graph.attributes(graph)) {
-    lay <- get.graph.attribute(graph, "layout")
+  if ("layout" %in% graph_attr_names(graph)) {
+    lay <- graph_attr(graph, "layout")
     if (is.function(lay)) {
       lay(graph, ...)
     } else {
       lay
     }
 
-  } else if ( all(c("x", "y") %in% list.vertex.attributes(graph)) ) {
-    if ("z" %in% list.vertex.attributes(graph)) {
+  } else if ( all(c("x", "y") %in% vertex_attr_names(graph)) ) {
+    if ("z" %in% vertex_attr_names(graph)) {
       cbind(V(graph)$x, V(graph)$y, V(graph)$z)
     } else {
       cbind(V(graph)$x, V(graph)$y)
@@ -944,7 +944,7 @@ l_auto <- function(graph, dim=2, ...) {
 #'                         1, which))
 #' 
 #' origvert <- c(rep(TRUE, vcount(ex)), rep(FALSE, nrow(layex$layout.dummy)))
-#' realedge <- get.edgelist(layex$extd_graph)[,2] <= vcount(ex)
+#' realedge <- edgelist(layex$extd_graph)[,2] <= vcount(ex)
 #' plot(layex$extd_graph, vertex.label.cex=0.5,
 #'      edge.arrow.size=.5, 
 #'      vertex.size=ifelse(origvert, 5, 0),
@@ -961,7 +961,7 @@ l_auto <- function(graph, dim=2, ...) {
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
   maxiter <- as.integer(maxiter)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
@@ -992,65 +992,65 @@ l_auto <- function(graph, dim=2, ...) {
   E(res$extd_graph)$orig <- res$extd_to_orig_eids
   res$extd_to_orig_eids <- NULL
 
-  res$extd_graph <- set.vertex.attribute(res$extd_graph, "dummy",
+  res$extd_graph <- set_vertex_attr(res$extd_graph, "dummy",
                                          value=c(rep(FALSE, vc),
                                            rep(TRUE, nrow(res$res)-vc)))
 
   res$extd_graph$layout <- rbind(res$layout, res$layout.dummy)
 
   if (attributes=="default" || attributes=="all") {
-    if ("size" %in% list.vertex.attributes(graph)) {
+    if ("size" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$size <- 0
       V(res$extd_graph)$size[ !V(res$extd_graph)$dummy ] <- V(graph)$size
     }
-    if ("size2" %in% list.vertex.attributes(graph)) {
+    if ("size2" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$size2 <- 0
       V(res$extd_graph)$size2[ !V(res$extd_graph)$dummy ] <- V(graph)$size2
     }
-    if ("shape" %in% list.vertex.attributes(graph)) {
+    if ("shape" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$shape <- "none"
       V(res$extd_graph)$shape[ !V(res$extd_graph)$dummy ] <- V(graph)$shape
     }
-    if ("label" %in% list.vertex.attributes(graph)) {
+    if ("label" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$label <- ""
       V(res$extd_graph)$label[ !V(res$extd_graph)$dummy ] <- V(graph)$label
     }
-    if ("color" %in% list.vertex.attributes(graph)) {
+    if ("color" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$color <- head(V(graph)$color, 1)
       V(res$extd_graph)$color[ !V(res$extd_graph)$dummy ] <- V(graph)$color
     }
-    eetar <- get.edgelist(res$extd_graph, names=FALSE)[,2]
+    eetar <- edgelist(res$extd_graph, names=FALSE)[,2]
     E(res$extd_graph)$arrow.mode <- 0
-    if ("arrow.mode" %in% list.edge.attributes(graph)) {
+    if ("arrow.mode" %in% edge_attr_names(graph)) {
       E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- E(graph)$arrow.mode
     } else {
       E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- is.directed(graph) * 2
     }
-    if ("arrow.size" %in% list.edge.attributes(graph)) {
+    if ("arrow.size" %in% edge_attr_names(graph)) {
       E(res$extd_graph)$arrow.size <- 0
       E(res$extd_graph)$arrow.size[ eetar <= vc ] <- E(graph)$arrow.size
     }
   }
 
   if (attributes=="all") {
-    gatt <- setdiff(list.graph.attributes(graph), "layout")
-    vatt <- setdiff(list.vertex.attributes(graph),
+    gatt <- setdiff(graph_attr_names(graph), "layout")
+    vatt <- setdiff(vertex_attr_names(graph),
                     c("size", "size2", "shape", "label", "color"))
-    eatt <- setdiff(list.edge.attributes(graph),
+    eatt <- setdiff(edge_attr_names(graph),
                     c("arrow.mode", "arrow.size"))
     for (ga in gatt) {
-      res$extd_graph <- set.graph.attribute(res$extd_graph, ga,
-                                            get.graph.attribute(graph, ga))
+      res$extd_graph <- set_graph_attr(res$extd_graph, ga,
+                                            graph_attr(graph, ga))
     }
     for (va in vatt) {
       notdummy <- which(!V(res$extd_graph)$dummy)
-      res$extd_graph <- set.vertex.attribute(res$extd_graph, va,
+      res$extd_graph <- set_vertex_attr(res$extd_graph, va,
                                              notdummy,
-                                             get.vertex.attribute(graph, va))
+                                             vertex_attr(graph, va))
     }
     for (ea in eatt) {
-      eanew <- get.edge.attribute(graph, ea)[E(res$extd_graph)$orig]
-      res$extd_graph <- set.edge.attribute(res$extd_graph, ea, value=eanew)
+      eanew <- edge_attr(graph, ea)[E(res$extd_graph)$orig]
+      res$extd_graph <- set_edge_attr(res$extd_graph, ea, value=eanew)
     }
   }
   
@@ -1100,7 +1100,7 @@ l_auto <- function(graph, dim=2, ...) {
 #' plot(g, layout=l, vertex.label=NA, vertex.size=3)
 
 l_mds <- function(graph, dist=NULL, dim=2,
-                       options=igraph.arpack.default) {
+                       options=arpack_defaults) {
   
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
@@ -1207,7 +1207,7 @@ l_fr <- function(graph, coords=NULL, dim=2,
   grid <- igraph.match.arg(grid)
   grid <- switch(grid, "grid"=0L, "nogrid"=1L, "auto"=2L)
 
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -1324,7 +1324,7 @@ l_kk <- function(graph, coords=NULL, dim=2,
   maxiter <- as.integer(maxiter)
   epsilon <- as.numeric(epsilon)
   kkconst <- as.numeric(kkconst)
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) { 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 

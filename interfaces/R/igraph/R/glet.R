@@ -1,8 +1,8 @@
 
-graphlets.candidate.basis <- function(graph, weights=NULL) {
+graphlet_basis <- function(graph, weights=NULL) {
   ## Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -23,11 +23,11 @@ graphlets.candidate.basis <- function(graph, weights=NULL) {
   res
 }
 
-graphlets.project <- function(graph, weights=NULL, cliques, niter=1000,
+graphlet_proj <- function(graph, weights=NULL, cliques, niter=1000,
                               Mu=rep(1, length(cliques))) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% list.edge.attributes(graph)) {
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
@@ -91,8 +91,8 @@ function() {
 
   ## Project another graph on the graphlets
   set.seed(42)
-  g2 <- set.edge.attribute(g, "weight", value=sample(E(g)$weight))
-  gl2 <- graphlets.project(g2, gl$Bc, 1000)
+  g2 <- set_edge_attr(g, "weight", value=sample(E(g)$weight))
+  gl2 <- graphlet_proj(g2, gl$Bc, 1000)
   fitandplot(g2, gl2)
   
 }
