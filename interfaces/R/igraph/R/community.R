@@ -687,7 +687,7 @@ cut_at <- function(communities, no, steps) {
   if (!inherits(communities, "communities")) {
     stop("Not a community structure")
   }
-  if (!is.hierarchical(communities, full=TRUE)) {
+  if (!is.hierarchical(communities)) {
     stop("Not a fully hierarchical communitity structure")
   }
 
@@ -1239,20 +1239,12 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' Newman's paper to understand why this is a good method for detecting
 #' community structure.
 #' 
-#' \code{community.le.to.memberhip} creates a membership vector from the result
-#' of \code{cluster_leading_eigen}. It takes \code{membership} and
-#' permformes \code{steps} merges, according to the supplied \code{merges}
-#' matrix.
-#' 
-#' @aliases leading.eigenvector.community community.le.to.membership
+#' @aliases leading.eigenvector.community
 #' @param graph The input graph. Should be undirected as the method needs a
 #' symmetric matrix.
 #' @param steps The number of steps to take, this is actually the number of
 #' tries to make a step. It is not a particularly useful parameter.
-#' 
-#' For \code{community.le.to.membership} the number of merges to produce from
-#' the supplied \code{membership} vector.
-#' @param weights An optional weight vector. The \sQuote{weight} edge attribute
+#' #' @param weights An optional weight vector. The \sQuote{weight} edge attribute
 #' is used if present. Supply \sQuote{\code{NA}} here if you want to ignore the
 #' \sQuote{weight} edge attribute.
 #' @param start \code{NULL}, or a numeric membership vector, giving the start
@@ -1273,11 +1265,6 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' graph, the second line creates community \code{N+1}, etc.  }
 #' \item{options}{Information about the underlying ARPACK computation, see
 #' \code{\link{arpack}} for details.  }
-#' 
-#' \code{community.le.to.membership} returns a named list with two components:
-#' \item{membership}{A membership vector, a numerical vector indication which
-#' vertex belongs to which community. The communities are always numbered from
-#' one.} \item{csize}{A numeric vector giving the sizes of the communities.}
 #' @section Callback functions: The \code{callback} argument can be used to
 #' supply a function that is called after each eigenvector calculation. The
 #' following arguments are supplied to this function: \describe{
@@ -1342,26 +1329,6 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
   res$merges <- res$merges + 1
   res$history <- res$history + 1
   class(res) <- "communities"
-  res
-}
-
-#' @rdname cluster_leading_eigen
-#' @param membership The starting community structure on which \code{steps}
-#' merges are performed.
-#' @param merges The merge matrix, possible from the result of
-#' \code{cluster_leading_eigen}.
-
-community.le.to.membership <- function(merges, steps, membership) {
-  # Argument checks
-  merges <- as.matrix(structure(as.double(merges), dim=dim(merges)))
-  steps <- as.integer(steps)
-  membership <- as.numeric(membership)
-
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  # Function call
-  res <- .Call("R_igraph_le_community_to_membership", merges, steps, membership,
-        PACKAGE="igraph")
-
   res
 }
 
