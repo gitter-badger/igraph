@@ -50,6 +50,8 @@ deprecated("blockGraphs", g_blocks)
 
 deprecated("callaway.traits.game", g_traits_callaway)
 deprecated("canonical.permutation", canon_perm)
+deprecated("cited.type.game", g_cit_types)
+deprecated("citing.cited.type.game", g_cit_cit_types)
 deprecated("clique.number", clique_num)
 deprecated("cluster.distribution", comp_dist)
 deprecated("clusters", comps)
