@@ -72,7 +72,7 @@ g_fitness_pl (no.of.nodes, no.of.edges, exponent.out,
 \author{Tamas Nepusz \email{ntamas@gmail.com}}
 \examples{
 g <- g_fitness_pl(10000, 30000, 2.2, 2.3)
-\dontrun{plot(degree.distribution(g, cumulative=TRUE, mode="out"), log="xy")}
+\dontrun{plot(degree_dist(g, cumulative=TRUE, mode="out"), log="xy")}
 }
 \keyword{graphs}
  

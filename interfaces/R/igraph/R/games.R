@@ -104,7 +104,7 @@
 #' @examples
 #' 
 #' g <- g_pa(10000)
-#' degree.distribution(g)
+#' degree_dist(g)
 #' 
 
 g_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
@@ -199,7 +199,7 @@ g_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
 #' @examples
 #' 
 #' g <- g_np(1000, 1/1000)
-#' degree.distribution(g)
+#' degree_dist(g)
 
 g_np <- function(n, p, directed = FALSE, loops = FALSE) {
 
@@ -244,7 +244,7 @@ g_np <- function(n, p, directed = FALSE, loops = FALSE) {
 #' @examples
 #' 
 #' g <- g_nm(1000, 1000)
-#' degree.distribution(g)
+#' degree_dist(g)
 
 g_nm <- function(n, m, directed = FALSE, loops = FALSE) {
 
@@ -307,7 +307,7 @@ g_nm <- function(n, m, directed = FALSE, loops = FALSE) {
 #' @examples
 #' 
 #' g <- erdos.renyi.game(1000, 1/1000)
-#' degree.distribution(g)
+#' degree_dist(g)
 #' 
 erdos.renyi.game <- function(n, p.or.m, type=c("gnp", "gnm"),
                              directed=FALSE, loops=FALSE, ...) {

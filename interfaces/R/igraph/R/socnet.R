@@ -1292,7 +1292,7 @@ tkigraph <- function() {
     return()
   }
   graphs <- get("graphs", .tkigraph.env)
-  bp <- page.rank(graphs[[gnos]])$vector
+  bp <- page_rank(graphs[[gnos]])$vector
   value <- data.frame(V(graphs[[gnos]])$name, bp)
   colnames(value) <- c("Vertex", "Page rank")
   value <- value[ order(value[,2], decreasing=TRUE), ]

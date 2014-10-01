@@ -159,7 +159,7 @@ mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
 #' its adjacent edges.
 #' 
 #' 
-#' @aliases degree degree.distribution
+#' @aliases degree degree.distribution degree_dist
 #' @param graph The graph to analyze.
 #' @param v The ids of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -174,7 +174,7 @@ mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
 #' @return For \code{degree} a numeric vector of the same length as argument
 #' \code{v}.
 #' 
-#' For \code{degree.distribution} a numeric vector of the same length as the
+#' For \code{degree_dist} a numeric vector of the same length as the
 #' maximum degree plus one. The first element is the relative frequency zero
 #' degree vertices, the second vertices with degree one, etc.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -184,7 +184,7 @@ mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
 #' g <- g_ring(10)
 #' degree(g)
 #' g2 <- g_np(1000, 10/1000)
-#' degree.distribution(g2)
+#' degree_dist(g2)
 #' 
 degree <- function(graph, v=V(graph),
                    mode=c("all", "out", "in", "total"), loops=TRUE,
@@ -211,7 +211,7 @@ degree <- function(graph, v=V(graph),
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #' be calculated.
 
-degree.distribution <- function(graph, cumulative=FALSE, ...) {
+degree_dist <- function(graph, cumulative=FALSE, ...) {
   
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -649,7 +649,7 @@ subgraph.edges <- function(graph, eids, delete.vertices=TRUE) {
 #' @param cutoff The maximum path length to consider when calculating the
 #' betweenness. If zero or negative then there is no such limit.
 
-betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, weights=NULL, nobigint=TRUE) {
+betweenness_estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, weights=NULL, nobigint=TRUE) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -694,18 +694,19 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
 #' calculates edge betweenness.
 #' 
-#' \code{betweenness.estimate} only considers paths of length \code{cutoff} or
+#' \code{betweenness_estimate} only considers paths of length \code{cutoff} or
 #' smaller, this can be run for larger graphs, as the running time is not
 #' quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative
 #' then the function calculates the exact betweenness scores.
 #' 
-#' \code{edge.betweenness.estimate} is similar, but for edges.
+#' \code{edge_betweenness_estimate} is similar, but for edges.
 #' 
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
 #' 
 #' @aliases betweenness edge.betweenness betweenness.estimate
-#' edge.betweenness.estimate edge_betweenness
+#' edge.betweenness.estimate edge_betweenness betweenness_estimate
+#' edge_betweenness_estimate
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
 #' @param directed Logical, whether directed paths should be considered while
@@ -728,8 +729,8 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' A numeric vector with the edge betweenness score for each edge in \code{e}
 #' for \code{edge_betweenness}.
 #' 
-#' \code{betweenness.estimate} returns the estimated betweenness scores for
-#' vertices in \code{vids}, \code{edge.betweenness.estimate} the estimated edge
+#' \code{betweenness_estimate} returns the estimated betweenness scores for
+#' vertices in \code{vids}, \code{edge_betweenness_estimate} the estimated edge
 #' betweenness score for \emph{all} edges; both in a numeric vector.
 #' @note \code{edge_betweenness} might give false values for graphs with
 #' multiple edges.
@@ -2208,7 +2209,7 @@ edge_betweenness <- function(graph, e=E(graph),
   res[as.numeric(e)]
 }
 
-edge.betweenness.estimate <- function(graph, e=E(graph),
+edge_betweenness_estimate <- function(graph, e=E(graph),
                                       directed=TRUE, cutoff, weights=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
@@ -2363,12 +2364,12 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' \eqn{i}{\code{i}} then the total number of vertices is used in the formula
 #' instead of the path length.
 #' 
-#' \code{closeness.estimate} only considers paths of length \code{cutoff} or
+#' \code{closeness_estimate} only considers paths of length \code{cutoff} or
 #' smaller, this can be run for larger graphs, as the running time is not
 #' quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative
 #' then the function calculates the exact closeness scores.
 #' 
-#' @aliases closeness closeness.estimate
+#' @aliases closeness closeness.estimate closeness_estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
 #' @param mode Character string, defined the types of the paths used for
@@ -2429,7 +2430,7 @@ closeness <- function(graph, vids=V(graph),
 #' @param cutoff The maximum path length to consider when calculating the
 #' betweenness. If zero or negative then there is no such limit.
 
-closeness.estimate <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), cutoff, weights=NULL, normalized=FALSE) {
+closeness_estimate <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), cutoff, weights=NULL, normalized=FALSE) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)

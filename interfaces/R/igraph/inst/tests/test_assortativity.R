@@ -18,18 +18,18 @@ test_that("assortativity works", {
     num / sqrt(den1) / sqrt(den2)
   }
 
-  asd <- assortativity.degree(g)
+  asd <- assortativity_degree(g)
   as <- assortativity(g, degree(g, mode="out"), degree(g, mode="in"))
   as2 <- assR(g)
 
   expect_that(asd, equals(as))
   expect_that(asd, equals(as2))
 
-  asu <- assortativity.degree(simplify(as.undirected(g, mode="collapse")))
+  asu <- assortativity_degree(simplify(as.undirected(g, mode="collapse")))
   expect_that(asu, equals(-0.16319921031570466807))
 
   p <- read_graph(f <- gzfile("power.gml.gz"), format="gml")
-  p.asd <- assortativity.degree(p)
+  p.asd <- assortativity_degree(p)
   p.as <- assortativity(p, degree(p))
   p.as2 <- assR(as.directed(p, mode="mutual"))
 
@@ -42,7 +42,7 @@ test_that("nominal assortativity works", {
   
   o <- read_graph(f <- gzfile("football.gml.gz"), format="gml")
   o <- simplify(o)
-  an <- assortativity.nominal(o, V(o)$value+1)
+  an <- assortativity_nominal(o, V(o)$value+1)
 
   el <- edgelist(o, names=FALSE)
   etm <- matrix(0, nr=max(V(o)$value)+1, nc=max(V(o)$value)+1)

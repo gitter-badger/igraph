@@ -77,7 +77,7 @@ arpack.unpack.complex(vectors, values, nev)
     \item{n}{Numeric scalar. The dimension of the eigenproblem. You only
       need to set this if you call \code{\link{arpack}}
       directly. (I.e. not needed for \code{\link{eigen_centrality}},
-      \code{\link{page.rank}}, etc.)}
+      \code{\link{page_rank}}, etc.)}
     \item{which}{Specify which eigenvalues/vectors to compute, character
       constant with exactly two characters.
 
@@ -113,7 +113,7 @@ arpack.unpack.complex(vectors, values, nev)
       }	
 
       This parameter is sometimes overwritten by the various functions,
-      e.g. \code{\link{page.rank}} always sets \sQuote{\code{LM}}.
+      e.g. \code{\link{page_rank}} always sets \sQuote{\code{LM}}.
     }
     \item{nev}{Numeric scalar. The number of eigenvalues to be computed.}
     \item{tol}{Numeric scalar. Stopping criterion: the relative accuracy
@@ -222,8 +222,8 @@ arpack.unpack.complex(vectors, values, nev)
 }
 \author{Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
   ARPACK, Gabor Csardi \email{csardi.gabor@gmail.com} for the R interface.}
-\seealso{\code{\link{eigen_centrality}}, \code{\link{page.rank}},
-  \code{\link{hub.score}}, \code{\link{leading.eigenvector.community}}
+\seealso{\code{\link{eigen_centrality}}, \code{\link{page_rank}},
+  \code{\link{hub_score}}, \code{\link{leading.eigenvector.community}}
   are some of the functions in igraph which use ARPACK. The ARPACK
   homepage is at \url{http://www.caam.rice.edu/software/ARPACK/}.
 }

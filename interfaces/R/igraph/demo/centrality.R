@@ -73,7 +73,7 @@ plotG(g)
 pause()
 
 ### PageRank
-V(g)$label <- paste(sep="\n", V(g)$name, round(page.rank(g)$vector, 2))
+V(g)$label <- paste(sep="\n", V(g)$name, round(page_rank(g)$vector, 2))
 plotG(g)
 
 pause()
@@ -84,7 +84,7 @@ cent <- list(`Degree`=degree(g),
              `Closeness`=closeness(g),
              `Betweenness`=betweenness(g),
              `Eigenvector`=eigen_centrality(g)$vector,
-             `PageRank`=page.rank(g)$vector)
+             `PageRank`=page_rank(g)$vector)
 
 pause()
 
@@ -130,12 +130,12 @@ pause()
 ## pause()
 
 ## ### In-degree distribution
-## plot(degree.distribution(jg, mode="in"), log="xy")
+## plot(degree_dist(jg, mode="in"), log="xy")
 
 ## pause()
 
 ## ### Out-degree distribution
-## plot(degree.distribution(jg, mode="out"), log="xy")
+## plot(degree_dist(jg, mode="out"), log="xy")
 
 ## pause()
 
@@ -170,13 +170,13 @@ pause()
 ## pause()
 
 ## ### Authority and Hub scores
-## AS <- authority.score(jg)$vector
-## HS <- hub.score(jg)$vector
+## AS <- authority_score(jg)$vector
+## HS <- hub_score(jg)$vector
 
 ## pause()
 
 ## ### Time evolution of authority scores
-## AS <- authority.score(jg)$vector
+## AS <- authority_score(jg)$vector
 ## center <- which.max(AS)
 ## startyear <- V(jg)[center]$year
 
@@ -187,7 +187,7 @@ pause()
 ##   print(y)
 ##   keep <- which(V(jg)$year <= y)
 ##   g2 <- subgraph(jg, keep)
-##   as <- abs(authority.score(g2, scale=FALSE)$vector)
+##   as <- abs(authority_score(g2, scale=FALSE)$vector)
 ##   w <- match(V(jg)[center]$usid, V(g2)$usid)
 ##   as[w]
 ## }

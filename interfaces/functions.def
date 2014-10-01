@@ -372,7 +372,7 @@ igraph_closeness_estimate:
                 NEIMODE mode=OUT, REAL cutoff, EDGEWEIGHTS weights=NULL, \
                 BOOLEAN normalized=False
         DEPS: vids ON graph, weights ON graph, res ON graph vids
-        NAME-R: closeness.estimate
+        NAME-R: closeness_estimate
         IGNORE: RR
 
 igraph_shortest_paths:
@@ -451,7 +451,7 @@ igraph_betweenness_estimate:
                 BOOLEAN directed=True, REAL cutoff, EDGEWEIGHTS weights=NULL, \
                 BOOLEAN nobigint=True
         DEPS: vids ON graph, weights ON graph, res ON graph vids
-        NAME-R: betweenness.estimate
+        NAME-R: betweenness_estimate
         FLAGS: PROGRESS
         IGNORE: RR
 
@@ -466,7 +466,7 @@ igraph_edge_betweenness_estimate:
         PARAMS: GRAPH graph, OUT VECTOR res, BOOLEAN directed=True, \
                 REAL cutoff, EDGEWEIGHTS weights=NULL
         DEPS: weights ON graph
-        NAME-R: edge.betweenness.estimate
+        NAME-R: edge_betweenness_estimate
         IGNORE: RR
 
 igraph_pagerank_old:
@@ -474,7 +474,7 @@ igraph_pagerank_old:
                 BOOLEAN directed=True, INTEGER niter=1000, REAL eps=0.001, \
                 REAL damping=0.85, BOOLEAN old=False
         DEPS: vids ON graph, res ON graph vids
-        NAME-R: page.rank.old
+        NAME-R: page_rank_old
 
 igraph_pagerank:
         PARAMS: GRAPH graph, PAGERANKALGO algo=PRPACK, \
@@ -484,7 +484,7 @@ igraph_pagerank:
                 INOUT PAGERANKOPT options=NULL
         DEPS: vids ON graph, weights ON graph, vector ON graph vids \
               options ON algo
-        NAME-R: page.rank
+        NAME-R: page_rank
         IGNORE: RR, RC, RNamespace
 
 igraph_personalized_pagerank:
@@ -496,7 +496,7 @@ igraph_personalized_pagerank:
                 INOUT PAGERANKOPT options=NULL
         DEPS: vids ON graph, weights ON graph, vector ON graph vids, \
               options ON algo
-        NAME-R: page.rank
+        NAME-R: page_rank
 
 igraph_rewire:
         PARAMS: INOUT GRAPH rewire, INTEGER n, REWIRINGMODE mode=SIMPLE
@@ -644,7 +644,7 @@ igraph_hub_score:
                 INOUT ARPACKOPT options=arpack_defaults
         DEFAULT-R: options=arpack_defaults
         DEPS: weights ON graph, vector ON graph
-        NAME-R: hub.score
+        NAME-R: hub_score
 
 igraph_authority_score:
         PARAMS: GRAPH graph, OUT VERTEXINDEX vector, OUT REALPTR value, \
@@ -652,7 +652,7 @@ igraph_authority_score:
                 INOUT ARPACKOPT options=arpack_defaults
         DEFAULT-R: options=arpack_defaults
         DEPS: weights ON graph, vector ON graph
-        NAME-R: authority.score
+        NAME-R: authority_score
 
 igraph_arpack_rssolve:
         PARAMS: ARPFUNC fun, EXTRA extra, INOUT ARPACKOPT options=arpack_defaults, \
@@ -709,19 +709,19 @@ igraph_strength:
 igraph_centralization:
         PARAMS: VECTOR scores, REAL theoretical_max=0, BOOLEAN normalized=True
         RETURN: REAL
-        NAME-R: centralize.scores
+        NAME-R: centralize
 
 igraph_centralization_degree:
         PARAMS: GRAPH graph, OUT VECTOR res, \
                 NEIMODE mode=ALL, BOOLEAN loops=True, \
                 OUT REALPTR centralization, OUT REALPTR theoretical_max, \
                 BOOLEAN normalized=True
-        NAME-R: centralization.degree
+        NAME-R: centr_degree
 
 igraph_centralization_degree_tmax:
         PARAMS: GRAPH_OR_0 graph=NULL, INTEGER nodes=0, NEIMODE mode=ALL, \
                 BOOLEAN loops=False, OUT REALPTR res
-        NAME-R: centralization.degree.tmax
+        NAME-R: centr_degree_tmax
 
 igraph_centralization_betweenness:
         PARAMS: GRAPH graph, OUT VECTOR res, \
@@ -734,19 +734,19 @@ igraph_centralization_betweenness:
 igraph_centralization_betweenness_tmax:
         PARAMS: GRAPH_OR_0 graph=NULL, INTEGER nodes=0, \
                 BOOLEAN directed=True, OUT REALPTR res
-        NAME-R: centralization.betweenness.tmax
+        NAME-R: centr_betw_tmax
 
 igraph_centralization_closeness:
         PARAMS: GRAPH graph, OUT VECTOR res, \
                 NEIMODE mode=OUT, OUT REALPTR centralization, \
                 OUT REALPTR theoretical_max, \
                 BOOLEAN normalized=True
-        NAME-R: centralization.closeness
+        NAME-R: centr_clo
 
 igraph_centralization_closeness_tmax:
         PARAMS: GRAPH_OR_0 graph=NULL, INTEGER nodes=0, \
                 NEIMODE mode=OUT, OUT REALPTR res
-        NAME-R: centralization.closeness.tmax
+        NAME-R: centr_clo_tmax
 
 igraph_centralization_eigenvector_centrality:
         PARAMS: GRAPH graph, OUT VECTOR vector, OUT REALPTR value, \
@@ -754,18 +754,18 @@ igraph_centralization_eigenvector_centrality:
                 INOUT ARPACKOPT options=arpack_defaults, \
                 OUT REALPTR centralization, OUT REALPTR theoretical_max,\
                 BOOLEAN normalized=True
-        NAME-R: centralization.evcent
+        NAME-R: centr_eigen
 
 igraph_centralization_eigenvector_centrality_tmax:
         PARAMS: GRAPH_OR_0 graph=NULL, INTEGER nodes=0, \
                 BOOLEAN directed=False, BOOLEAN scale=True, \
                 OUT REALPTR res
-        NAME-R: centralization.evcent.tmax
+        NAME-R: centr_eigen_tmax
 
 igraph_assortativity_nominal:
         PARAMS: GRAPH graph, VECTORM1 types, OUT REALPTR res, \
                 BOOLEAN directed=True
-        NAME-R: assortativity.nominal
+        NAME-R: assortativity_nominal
 
 igraph_assortativity:
         PARAMS: GRAPH graph, VECTOR types1, VECTOR_OR_0 types2=NULL, \
@@ -774,7 +774,7 @@ igraph_assortativity:
 
 igraph_assortativity_degree:
         PARAMS: GRAPH graph, OUT REALPTR res, BOOLEAN directed=True
-        NAME-R: assortativity.degree
+        NAME-R: assortativity_degree
 
 igraph_contract_vertices:
         PARAMS: INOUT GRAPH graph, VECTORM1 mapping, \

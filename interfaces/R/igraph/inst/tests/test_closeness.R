@@ -42,7 +42,7 @@ test_that("closeness centralization works", {
                     Jane     - Ike)
 
   c1 <- closeness(kite, normalized=TRUE)
-  c2 <- centralization.closeness(kite)
+  c2 <- centr_clo(kite)
   expect_that(unname(c1), equals(c2$res))
   expect_that(c2$centralization, equals(0.270374931581828))
   expect_that(c2$theoretical_max, equals(4.23529411764706))
