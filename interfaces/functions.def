@@ -459,7 +459,7 @@ igraph_edge_betweenness:
         PARAMS: GRAPH graph, OUT VECTOR res, BOOLEAN directed=True, \
                 EDGEWEIGHTS weights=NULL
         DEPS: weights ON graph
-        NAME-R: edge.betweenness
+        NAME-R: edge_betweenness
         IGNORE: RR
 
 igraph_edge_betweenness_estimate:
@@ -636,7 +636,7 @@ igraph_eigenvector_centrality:
                 INOUT ARPACKOPT options=arpack_defaults
         DEPS: weights ON graph, vector ON graph
         DEFAULT-R: options=arpack_defaults
-        NAME-R: evcent
+        NAME-R: eigen_centrality
 
 igraph_hub_score:
         PARAMS: GRAPH graph, OUT VERTEXINDEX vector, OUT REALPTR value, \

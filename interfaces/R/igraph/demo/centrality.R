@@ -67,7 +67,7 @@ plotG(g)
 pause()
 
 ### Eigenvector centrality
-V(g)$label <- paste(sep="\n", V(g)$name, round(evcent(g)$vector, 2))
+V(g)$label <- paste(sep="\n", V(g)$name, round(eigen_centrality(g)$vector, 2))
 plotG(g)
 
 pause()
@@ -83,7 +83,7 @@ karate <- graph.famous("Zachary")
 cent <- list(`Degree`=degree(g),
              `Closeness`=closeness(g),
              `Betweenness`=betweenness(g),
-             `Eigenvector`=evcent(g)$vector,
+             `Eigenvector`=eigen_centrality(g)$vector,
              `PageRank`=page.rank(g)$vector)
 
 pause()

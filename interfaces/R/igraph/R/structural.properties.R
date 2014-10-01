@@ -691,8 +691,8 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' 
 #' \deqn{\sum_{i\ne j} g{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 #' 
-#' \code{betweenness} calculates vertex betweenness, \code{edge.betweenness}
-#' calculates edge.betweenness.
+#' \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
+#' calculates edge betweenness.
 #' 
 #' \code{betweenness.estimate} only considers paths of length \code{cutoff} or
 #' smaller, this can be run for larger graphs, as the running time is not
@@ -705,7 +705,7 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' Brandes (see References) is used.
 #' 
 #' @aliases betweenness edge.betweenness betweenness.estimate
-#' edge.betweenness.estimate
+#' edge.betweenness.estimate edge_betweenness
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
 #' @param directed Logical, whether directed paths should be considered while
@@ -726,12 +726,12 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' \code{v} for \code{betweenness}.
 #' 
 #' A numeric vector with the edge betweenness score for each edge in \code{e}
-#' for \code{edge.betweenness}.
+#' for \code{edge_betweenness}.
 #' 
 #' \code{betweenness.estimate} returns the estimated betweenness scores for
 #' vertices in \code{vids}, \code{edge.betweenness.estimate} the estimated edge
 #' betweenness score for \emph{all} edges; both in a numeric vector.
-#' @note \code{edge.betweenness} might give false values for graphs with
+#' @note \code{edge_betweenness} might give false values for graphs with
 #' multiple edges.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{closeness}}, \code{\link{degree}}
@@ -745,7 +745,7 @@ betweenness.estimate <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' 
 #' g <- g_np(10, 3/10)
 #' betweenness(g)
-#' edge.betweenness(g)
+#' edge_betweenness(g)
 #' 
 betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
                         nobigint=TRUE, normalized=FALSE) {
@@ -1253,7 +1253,7 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 
 #' Find Bonacich Power Centrality Scores of Network Positions
 #' 
-#' \code{bonpow} takes a graph (\code{dat}) and returns the Boncich power
+#' \code{power_centrality} takes a graph (\code{dat}) and returns the Boncich power
 #' centralities of positions (selected by \code{nodes}).  The decay rate for
 #' power contributions is specified by \code{exponent} (1 by default).
 #' 
@@ -1294,7 +1294,8 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 #' changes in exponent magnitude (particularly in the negative case).  If your
 #' theory motivates use of this measure, you should be very careful to choose a
 #' decay parameter on a non-ad hoc basis.
-#' 
+#'
+#' @aliases bonpow
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
 #' the calculation.  By default, all vertices are included.
@@ -1314,13 +1315,13 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 #' @note This function was ported (ie. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
 #' this algorithm; thus, the routine may fail in certain cases.  This will be
-#' fixed when I get a better algorithm.  \code{bonpow} will not symmetrize your
+#' fixed when I get a better algorithm.  \code{power_centrality} will not symmetrize your
 #' data before extracting eigenvectors; don't send this routine asymmetric
 #' matrices unless you really mean to do so.
 #' @author Carter T. Butts
 #' (\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{evcent}} and \code{\link{alpha.centrality}}
+#' @seealso \code{\link{eigen_centrality}} and \code{\link{alpha_centrality}}
 #' @references Bonacich, P.  (1972).  ``Factoring and Weighting Approaches to
 #' Status Scores and Clique Identification.'' \emph{Journal of Mathematical
 #' Sociology}, 2, 113-120.
@@ -1335,24 +1336,24 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 #' g.d <- graph( c(1,2,1,3,1,4,2,5,3,6,4,7), dir=FALSE)
 #' g.e <- graph( c(1,2,1,3,1,4,2,5,2,6,3,7,3,8,4,9,4,10), dir=FALSE)
 #' g.f <- graph( c(1,2,1,3,1,4,2,5,2,6,2,7,3,8,3,9,3,10,4,11,4,12,4,13), dir=FALSE)
-#' # Compute Bonpow scores
+#' # Compute power centrality scores
 #' for (e in seq(-0.5,.5, by=0.1)) {
-#'   print(round(bonpow(g.c, exp=e)[c(1,2,4)], 2))
+#'   print(round(power_centrality(g.c, exp=e)[c(1,2,4)], 2))
 #' }
 #' 
 #' for (e in seq(-0.4,.4, by=0.1)) {
-#'   print(round(bonpow(g.d, exp=e)[c(1,2,5)], 2))
+#'   print(round(power_centrality(g.d, exp=e)[c(1,2,5)], 2))
 #' }
 #' 
 #' for (e in seq(-0.4,.4, by=0.1)) {
-#'   print(round(bonpow(g.e, exp=e)[c(1,2,5)], 2))
+#'   print(round(power_centrality(g.e, exp=e)[c(1,2,5)], 2))
 #' }
 #' 
 #' for (e in seq(-0.4,.4, by=0.1)) {
-#'   print(round(bonpow(g.f, exp=e)[c(1,2,5)], 2))
+#'   print(round(power_centrality(g.f, exp=e)[c(1,2,5)], 2))
 #' }
 #' 
-bonpow <- function(graph, nodes=V(graph),
+power_centrality <- function(graph, nodes=V(graph),
                    loops=FALSE, exponent=1,
                    rescale=FALSE, tol=1e-7, sparse=TRUE){
 
@@ -1462,7 +1463,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 
 #' Find Bonacich alpha centrality scores of network positions
 #' 
-#' \code{alpha.centrality} calculates the alpha centrality of some (or all)
+#' \code{alpha_centrality} calculates the alpha centrality of some (or all)
 #' vertices in a graph.
 #' 
 #' The alpha centrality measure can be considered as a generalization of
@@ -1475,7 +1476,8 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' graph, \eqn{e}{e} is the vector of exogenous sources of status of the
 #' vertices and \eqn{\alpha}{alpha} is the relative importance of the
 #' endogenous versus exogenous factors.
-#' 
+#'
+#' @aliases alpha.centrality
 #' @param graph The input graph, can be directed or undirected
 #' @param nodes Vertex sequence, the vertices for which the alpha centrality
 #' values are returned. (For technical reasons they will be calculated for all
@@ -1504,7 +1506,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' @section Warning: Singular adjacency matrices cause problems for this
 #' algorithm, the routine may fail is certain cases.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{evcent}} and \code{\link{bonpow}}
+#' @seealso \code{\link{eigen_centrality}} and \code{\link{power_centrality}}
 #' @references Bonacich, P. and Paulette, L. (2001). ``Eigenvector-like
 #' measures of centrality for asymmetric relations'' \emph{Social Networks},
 #' 23, 191-201.
@@ -1515,11 +1517,11 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' g.1 <- graph( c(1,3,2,3,3,4,4,5) )
 #' g.2 <- graph( c(2,1,3,1,4,1,5,1) )
 #' g.3 <- graph( c(1,2,2,3,3,4,4,1,5,1) )
-#' alpha.centrality(g.1)
-#' alpha.centrality(g.2)
-#' alpha.centrality(g.3,alpha=0.5)
+#' alpha_centrality(g.1)
+#' alpha_centrality(g.2)
+#' alpha_centrality(g.3,alpha=0.5)
 #' 
-alpha.centrality <- function(graph, nodes=V(graph), alpha=1,
+alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
                              loops=FALSE, exo=1, weights=NULL,
                              tol=1e-7, sparse=TRUE) {
 
@@ -2184,7 +2186,7 @@ dfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
 
-edge.betweenness <- function(graph, e=E(graph),
+edge_betweenness <- function(graph, e=E(graph),
                              directed=TRUE, weights=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }

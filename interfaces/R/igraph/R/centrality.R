@@ -100,7 +100,7 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
 #' @return A numeric vector, the subgraph centrality scores of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} based on the Matlab
 #' code by Ernesto Estrada
-#' @seealso \code{\link{evcent}}, \code{\link{page.rank}}
+#' @seealso \code{\link{eigen_centrality}}, \code{\link{page.rank}}
 #' @references Ernesto Estrada, Juan A. Rodriguez-Velazquez: Subgraph
 #' centrality in Complex Networks. \emph{Physical Review E} 71, 056103 (2005).
 #' @keywords graphs

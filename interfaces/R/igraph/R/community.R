@@ -1013,7 +1013,7 @@ walktrap.community <- function(graph, weights=E(graph)$weight, steps=4,
 #' sparsely connected to other modules.
 #' 
 #' The edge betweenness score of an edge measures the number of shortest paths
-#' through it, see \code{\link{edge.betweenness}} for details. The idea of the
+#' through it, see \code{\link{edge_betweenness}} for details. The idea of the
 #' edge betweenness based community structure detection is that it is likely
 #' that edges connecting separate modules have high edge betweenness as all the
 #' shortest paths from one module to another must traverse through them. So if
@@ -1061,7 +1061,7 @@ walktrap.community <- function(graph, weights=E(graph)$weight, steps=4,
 #' \code{\link{communities}} object, please see the \code{\link{communities}}
 #' manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{edge.betweenness}} for the definition and calculation
+#' @seealso \code{\link{edge_betweenness}} for the definition and calculation
 #' of the edge betweenness, \code{\link{walktrap.community}},
 #' \code{\link{fastgreedy.community}},
 #' \code{\link{leading.eigenvector.community}} for other community detection

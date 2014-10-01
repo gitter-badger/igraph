@@ -1275,7 +1275,7 @@ tkigraph <- function() {
     return()
   }
   graphs <- get("graphs", .tkigraph.env)
-  bp <- bonpow(graphs[[gnos]])
+  bp <- power_centrality(graphs[[gnos]])
   value <- data.frame(V(graphs[[gnos]])$name, bp)
   colnames(value) <- c("Vertex", "Power centrality")
   value <- value[ order(value[,2], decreasing=TRUE), ]
@@ -1309,7 +1309,7 @@ tkigraph <- function() {
     return()
   }
   graphs <- get("graphs", .tkigraph.env)
-  ebtw <- edge.betweenness(graphs[[gnos]])
+  ebtw <- edge_betweenness(graphs[[gnos]])
   el <- edgelist(graphs[[gnos]])
   value <- data.frame(E(graphs[[gnos]])$name, el[,1], el[,2], ebtw)
   colnames(value) <- c("Edge", "From", "To", "Betweenness")

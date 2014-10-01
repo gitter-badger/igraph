@@ -74,8 +74,8 @@ adj_eigen(kite)[c("values", "vectors")]
 ## Double check
 eigen(adj(kite, sparse=FALSE))$vectors[,1]
 
-## Should be the same as 'evcent' (but rescaled)
-cor(evcent(kite)$vector, adj_eigen(kite)$vectors)
+## Should be the same as 'eigen_centrality' (but rescaled)
+cor(eigen_centrality(kite)$vector, adj_eigen(kite)$vectors)
 
 ## Smallest eigenvalues
 adj_eigen(kite, which=list(pos="SM", howmany=2))$values

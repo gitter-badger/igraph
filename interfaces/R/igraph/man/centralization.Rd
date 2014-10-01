@@ -58,7 +58,7 @@ centralization.evcent.tmax (graph = NULL, nodes = 0,
     such that the maximum score is one.}
   \item{nodes}{The number of vertices. This is ignored if the graph is
     given.}
-  \item{options}{This is passed to \code{\link{evcent}}, the options for
+  \item{options}{This is passed to \code{\link{eigen_centrality}}, the options for
     the ARPACK eigensolver.}
 }
 \details{
@@ -120,7 +120,7 @@ centralization.evcent.tmax (graph = NULL, nodes = 0,
   \item{vector}{The node-level centrality scores.}
   \item{value}{The corresponding eigenvalue.}
   \item{options}{ARPACK options, see the return value of
-  \code{\link{evcent}} for details.} 
+  \code{\link{eigen_centrality}} for details.} 
   \item{centralization}{The graph level centrality index.}
   \item{theoretical_max}{The same as above, the theoretical maximum
     centralization score for a graph with the same number of vertices.}
