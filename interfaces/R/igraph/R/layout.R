@@ -82,7 +82,7 @@ l_random <- function(graph, dim=2) {
 #' ## community
 #' library(igraphdata)
 #' data(karate)
-#' karate_groups <- optimal.community(karate)
+#' karate_groups <- cluster_optimal(karate)
 #' coords <- l_circle(karate, order =
 #'           order(membership(karate_groups)))
 #' V(karate)$label <- sub("Actor ", "", V(karate)$name)

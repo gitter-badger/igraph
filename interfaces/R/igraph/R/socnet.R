@@ -1704,7 +1704,7 @@ tkigraph <- function() {
   } else {
     read$weights <- NULL
   }
-  comm <- spinglass.community(graph, weights=read$weights, spins=read$spins,
+  comm <- cluster_spinglass(graph, weights=read$weights, spins=read$spins,
                               parupdate=read$parupdate, start.temp=read$start.temp,
                               stop.temp=read$stop.temp, cool.fact=read$cool.fact,
                               update.rule=read$update.rule, gamma=read$gamma)
@@ -1835,7 +1835,7 @@ tkigraph <- function() {
   } else {
     read$weights <- NULL
   }
-  comm <- spinglass.community(graph, vertex=read$vertex,
+  comm <- cluster_spinglass(graph, vertex=read$vertex,
                               weights=read$weights, spins=read$spins,
                               update.rule=read$update.rule, gamma=read$gamma)
   .tkigraph.spinglass.mycommunity.dialog(comm, read, gnos)

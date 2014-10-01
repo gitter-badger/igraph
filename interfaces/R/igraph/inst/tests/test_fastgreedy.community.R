@@ -1,13 +1,13 @@
 
-context("fastgreedy.community")
+context("cluster_fast_greedy")
 
-test_that("fastgreedy.community works", {
+test_that("cluster_fast_greedy works", {
 
   library(igraph)
   set.seed(42)
 
   g <- graph.famous("Zachary")
-  fc <- fastgreedy.community(g)
+  fc <- cluster_fast_greedy(g)
 
   expect_that(modularity(g, fc$membership), equals(max(fc$modularity)))
   expect_that(membership(fc), equals(c(1, 3, 3, 3, 1, 1, 1, 3, 2, 3,

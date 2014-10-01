@@ -27,7 +27,7 @@ g_islands (islands.n, islands.size, islands.pin,
 \seealso{\code{\link{g_np}}}
 \examples{
 g <- g_islands(3, 10, 5/10, 1)
-oc <- optimal.community(g)
+oc <- cluster_optimal(g)
 oc
 }
 \keyword{graphs}

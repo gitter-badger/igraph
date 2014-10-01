@@ -223,7 +223,7 @@ arpack.unpack.complex(vectors, values, nev)
 \author{Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
   ARPACK, Gabor Csardi \email{csardi.gabor@gmail.com} for the R interface.}
 \seealso{\code{\link{eigen_centrality}}, \code{\link{page_rank}},
-  \code{\link{hub_score}}, \code{\link{leading.eigenvector.community}}
+  \code{\link{hub_score}}, \code{\link{cluster_leading_eigen}}
   are some of the functions in igraph which use ARPACK. The ARPACK
   homepage is at \url{http://www.caam.rice.edu/software/ARPACK/}.
 }

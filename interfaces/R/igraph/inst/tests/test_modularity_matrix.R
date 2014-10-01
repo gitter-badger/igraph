@@ -7,7 +7,7 @@ test_that("mod.matrix works", {
 
   kar <- graph.famous("zachary")
 
-  fc <- fastgreedy.community(kar)
+  fc <- cluster_fast_greedy(kar)
 
   m1 <- modularity(kar, membership(fc))
   m2 <- modularity(kar, membership(fc), weights=rep(1, ecount(kar)))

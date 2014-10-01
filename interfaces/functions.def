@@ -1274,7 +1274,7 @@ igraph_community_leading_eigenvector:
                 LEVCFUNC callback, EXTRA callback_extra
         DEFAULT-R: options=arpack_defaults
         CLASS-R: igraph.eigenc
-        NAME-R: leading.eigenvector.community
+        NAME-R: cluster_leading_eigen
         IGNORE: RR, RC
 
 igraph_community_label_propagation:
@@ -1282,7 +1282,7 @@ igraph_community_label_propagation:
                 VECTOR_OR_0 initial=NULL, VECTOR_BOOL_OR_0 fixed=NULL, \
                 OUT REALPTR modularity
         DEPS: weights ON graph
-        NAME-R: label.propagation.community
+        NAME-R: cluster_label_prop
         IGNORE: RR
 
 igraph_community_multilevel:
@@ -1290,14 +1290,14 @@ igraph_community_multilevel:
                 OUT VECTOR membership, \
 		OUT MATRIX_OR_0 memberships, OUT VECTOR_OR_0 modularity
         DEPS: weights ON graph
-        NAME-R: multilevel.community
+        NAME-R: cluster_louvain
         IGNORE: RR
 
 igraph_community_optimal_modularity:
         PARAMS: GRAPH graph, OUT REALPTR modularity, \
                 OUT VECTOR_OR_0 membership, \
                 EDGEWEIGHTS weights=NULL
-        NAME-R: optimal.community
+        NAME-R: cluster_optimal
         IGNORE: RR
 
 igraph_split_join_distance:
@@ -1345,7 +1345,7 @@ igraph_community_infomap:
         PARAMS: GRAPH graph, EDGEWEIGHTS e_weights=NULL, \
                 VERTEXWEIGHTS v_weights=NULL, INT nb_trials=10, \
                 OUT VECTOR membership, OUT REALPTR codelength
-        NAME-R: infomap.community
+        NAME-R: cluster_infomap
         DEPS: e_weights ON graph, v_weights ON graph
         IGNORE: RR
 

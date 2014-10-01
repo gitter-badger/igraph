@@ -1,13 +1,13 @@
 
-context("walktrap.community")
+context("cluster_walktrap")
 
-test_that("walktrap.community works", {
+test_that("cluster_walktrap works", {
 
   library(igraph)
 
   g <- graph.famous("Zachary")
   set.seed(42)
-  wc <- walktrap.community(g)
+  wc <- cluster_walktrap(g)
 
   expect_that(modularity(g, membership(wc)), equals(modularity(wc)))
   expect_that(membership(wc), equals(c(1, 1, 2, 1, 5, 5, 5, 1, 2, 2,

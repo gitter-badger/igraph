@@ -16,7 +16,7 @@ pause()
 
 ### Optimalize modularity
 
-optcom <- optimal.community(karate)
+optcom <- cluster_optimal(karate)
 V(karate)$comm <- membership(optcom)
 plot(optcom, karate)
 

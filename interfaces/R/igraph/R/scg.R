@@ -290,7 +290,7 @@ scg_group <- function(V, nt,
 #' # compute the semi-projectors and projector for the partition
 #' # provided by a community detection method
 #' g <- barabasi.game(20, m=1.5)
-#' eb <- edge.betweenness.community(g)
+#' eb <- cluster_edge_betweenness(g)
 #' memb <- membership(eb)
 #' lr <- scg_semi_proj(memb)
 #' #In the symmetric case L = R

@@ -455,7 +455,7 @@ plot(g, layout=l_fr, vertex.size=5, vertex.label=NA)
 # plot communities in a graph
 g <- g_full(5) \%du\% g_full(5) \%du\% g_full(5)
 g <- add_edges(g, c(1,6, 1,11, 6,11))
-com <- spinglass.community(g, spins=5)
+com <- cluster_spinglass(g, spins=5)
 V(g)$color <- com$membership+1
 g <- set_graph_attr(g, "layout", l_kk(g))
 plot(g, vertex.label.dist=1.5)

@@ -35,7 +35,7 @@ groups(x)
 }
 \examples{
 g <- graph.famous("Zachary")
-fgc <- fastgreedy.community(g)
+fgc <- cluster_fast_greedy(g)
 groups(fgc)
 
 g2 <- g_ring(10) + g_full(5)

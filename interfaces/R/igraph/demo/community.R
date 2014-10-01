@@ -41,7 +41,7 @@ karate$layout <- l_kk(karate, niter=1000)
 pause()
 
 ### Greedy algorithm
-fc <- fastgreedy.community(karate)
+fc <- cluster_fast_greedy(karate)
 memb <- membership(fc)
 plot(karate, vertex.color=memb)
   
@@ -67,8 +67,8 @@ G <- g_pref(128*4, types=16, pref.matrix=pref.mat)
 pause()
 
 ### Run spinglass community detection with two gamma parameters
-sc1 <- spinglass.community(G, spins=4, gamma=1.0)
-sc2.2 <- spinglass.community(G, spins=16, gamma=2.2)
+sc1 <- cluster_spinglass(G, spins=4, gamma=1.0)
+sc2.2 <- cluster_spinglass(G, spins=16, gamma=2.2)
 
 pause()
 
@@ -106,38 +106,38 @@ communities <- list()
 
 pause()
 
-### edge.betweenness.community
-ebc <- edge.betweenness.community(karate)
+### cluster_edge_betweenness
+ebc <- cluster_edge_betweenness(karate)
 communities$`Edge betweenness` <- ebc
 
 pause()
 
-### fastgreedy.community
-fc <- fastgreedy.community(karate)
+### cluster_fast_greedy
+fc <- cluster_fast_greedy(karate)
 communities$`Fast greedy` <- fc
 
 pause()
 
-### leading.eigenvector.community
-lec <- leading.eigenvector.community(karate)
+### cluster_leading_eigen
+lec <- cluster_leading_eigen(karate)
 communities$`Leading eigenvector` <- lec
 
 pause()
 
-### spinglass.community
-sc <- spinglass.community(karate, spins=10)
+### cluster_spinglass
+sc <- cluster_spinglass(karate, spins=10)
 communities$`Spinglass` <- sc
 
 pause()
 
-### walktrap.community
-wt <- walktrap.community(karate)
+### cluster_walktrap
+wt <- cluster_walktrap(karate)
 communities$`Walktrap` <- wt
 
 pause()
 
-### label.propagation.community
-labprop <- label.propagation.community(karate)
+### cluster_label_prop
+labprop <- cluster_label_prop(karate)
 communities$`Label propagation` <- labprop
 
 pause()
