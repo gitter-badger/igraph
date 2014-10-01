@@ -228,7 +228,7 @@ deprecated("no.clusters", count_comps)
 
 deprecated("optimal.community", cluster_optimal)
 
-deprecates("page.rank", page_rank)
+deprecated("page.rank", page_rank)
 deprecated("page.rank.old", page_rank_old)
 deprecated("path.length.hist", distance_table)
 deprecated("permute.vertices", permute)
@@ -257,7 +257,7 @@ deprecated("stCuts", st_cuts)
 deprecated("stMincuts", st_min_cuts)
 deprecated("static.fitness.game", g_fitness)
 deprecated("statis.power.law.game", g_fitness_pl)
-deprecated("subgraph.centrality", sugraph_centrality)
+deprecated("subgraph.centrality", subgraph_centrality)
 
 deprecated("tkplot.canvas", tk_canvas)
 deprecated("tkplot.center", tk_center)

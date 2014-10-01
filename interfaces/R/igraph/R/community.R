@@ -35,7 +35,7 @@
 #' directed or undirected graphs, by optimizing some criteria, and usually
 #' using heuristics.
 #' 
-#' igraph implements a number of commmunity detection methods (see them below),
+#' igraph implements a number of community detection methods (see them below),
 #' all of which return an object of the class \code{communities}. Because the
 #' community structure detection algorithms are different, \code{communities}
 #' objects do not always have the same structure. Nevertheless, they have some

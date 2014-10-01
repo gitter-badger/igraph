@@ -729,7 +729,7 @@ igraph_centralization_betweenness:
                 OUT REALPTR centralization, \
                 OUT REALPTR theoretical_max, \
                 BOOLEAN normalized=True
-        NAME-R: centralization.betweenness
+        NAME-R: centr_betw
 
 igraph_centralization_betweenness_tmax:
         PARAMS: GRAPH_OR_0 graph=NULL, INTEGER nodes=0, \
