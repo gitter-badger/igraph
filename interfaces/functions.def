@@ -1254,7 +1254,7 @@ igraph_modularity_matrix:
         PARAMS: GRAPH graph, VECTORM1 membership, OUT MATRIX modmat, \
                 EDGEWEIGHTS weights=NULL
         DEPS: weights ON graph
-        NAME-R: mod.matrix
+        NAME-R: modularity_matrix
         IGNORE: RR
 
 igraph_reindex_membership:

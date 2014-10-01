@@ -82,7 +82,7 @@
 #' \sQuote{basename_block_x.net} for each cohesive block, where \sQuote{x} is
 #' the number of the block, starting with one.
 #' 
-#' \code{maxcohesion} returns the maximal cohesion of each vertex, i.e. the
+#' \code{max_cohesion} returns the maximal cohesion of each vertex, i.e. the
 #' cohesion of the most cohesive block of the vertex.
 #' 
 #' The generic function \code{summary} works on \code{cohesiveBlocks} objects
@@ -108,7 +108,7 @@
 #' @aliases cohesive.blocks cohesiveBlocks blocks g_blocks blockGraphs
 #' hierarchy parent plotHierarchy exportPajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
-#' plot_hierarchy
+#' plot_hierarchy max_cohesion
 #' @param graph For \code{cohesive_blocks} a graph object of class
 #' \code{igraph}. It must be undirected and simple. (See
 #' \code{\link{is.simple}}.)
@@ -173,7 +173,7 @@
 #' \code{plot_hierarchy}, \code{plot} and \code{exportPajek} return \code{NULL},
 #' invisibly.
 #' 
-#' \code{maxcohesion} returns a numeric vector with one entry for each vertex,
+#' \code{max_cohesion} returns a numeric vector with one entry for each vertex,
 #' giving the cohesion of its most cohesive block.
 #' 
 #' \code{print} and \code{summary} return the \code{cohesiveBlocks} object
@@ -351,7 +351,7 @@ summary.cohesiveBlocks <- function(object, ...) {
 
 plot.cohesiveBlocks <- function(x, y,
                                 colbar=rainbow(max(cohesion(x))+1),
-                                col=colbar[maxcohesion(x)+1],
+                                col=colbar[max_cohesion(x)+1],
                                 mark.groups=blocks(x)[-1],
                                 ...) {
   plot(y, mark.groups=mark.groups,
@@ -442,7 +442,7 @@ exportPajek <- function(blocks, graph, file,
 
 #' @rdname cohesive_blocks
 
-maxcohesion <- function(blocks) {
+max_cohesion <- function(blocks) {
   res <- numeric(blocks$vcount)
   myb <- blocks(blocks)
   coh <- cohesion(blocks)

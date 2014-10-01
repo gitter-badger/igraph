@@ -38,7 +38,7 @@
 #' \code{farthest.points} returns two vertex ids, the vertices which are
 #' connected by the diameter path.
 #' 
-#' @aliases diameter get.diameter farthest.nodes
+#' @aliases diameter get.diameter farthest.nodes farthest_vertices
 #' @param graph The graph to analyze.
 #' @param directed Logical, whether directed or undirected paths are to be
 #' considered. This is ignored for undirected graphs.
@@ -52,7 +52,7 @@
 #' used by default.
 #' @return A numeric constant for \code{diameter}, a numeric vector for
 #' \code{get.diameter} and a numeric vector of length two for
-#' \code{farthest.nodes}.
+#' \code{farthest_vertices}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{distances}}
 #' @keywords graphs
@@ -116,7 +116,7 @@ get.diameter <- function(graph, directed=TRUE, unconnected=TRUE,
   res + 1
 }
 
-farthest.nodes <- function(graph, directed=TRUE, unconnected=TRUE,
+farthest_vertices <- function(graph, directed=TRUE, unconnected=TRUE,
                            weights=NULL) {
 
   if (!is.igraph(graph)) {
@@ -1550,7 +1550,8 @@ alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
 #' 
 #' Note that this function may return strange results for graph with multiple
 #' edges, density is ill-defined for graphs with multiple edges.
-#' 
+#'
+#' @aliases graph.density
 #' @param graph The input graph.
 #' @param loops Logical constant, whether to allow loop edges in the graph. If
 #' this is TRUE then self loops are considered to be possible. If this is FALSE
@@ -1572,11 +1573,11 @@ alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
 #' 
 #' # loop edges
 #' g <- graph( c(1,2, 2,2, 2,3) )
-#' graph.density(g, loops=FALSE)              # this is wrong!!!
-#' graph.density(g, loops=TRUE)               # this is right!!!
-#' graph.density(simplify(g), loops=FALSE)    # this is also right, but different
+#' density(g, loops=FALSE)              # this is wrong!!!
+#' density(g, loops=TRUE)               # this is right!!!
+#' density(simplify(g), loops=FALSE)    # this is also right, but different
 #' 
-graph.density <- function(graph, loops=FALSE) {
+density <- function(graph, loops=FALSE) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object")

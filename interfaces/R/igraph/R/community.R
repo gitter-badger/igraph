@@ -354,7 +354,7 @@ modularity <- function(x, ...)
 #' \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
 #' adjacent edges for vertex \eqn{i}.
 #' 
-#' \code{mod.matrix} calculates the modularity matrix. This is a dense matrix,
+#' \code{modularity_matrix} calculates the modularity matrix. This is a dense matrix,
 #' and it is defined as the difference of the adjacency matrix and the
 #' configuration model null model matrix. In other words element
 #' \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
@@ -373,7 +373,7 @@ modularity <- function(x, ...)
 #' @return For \code{modularity} a numeric scalar, the modularity score of the
 #' given configuration.
 #' 
-#' For \code{mod.matrix} a numeic square matrix, its order is the number of
+#' For \code{modularity_matrix} a numeic square matrix, its order is the number of
 #' vertices in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{cluster_walktrap}},
@@ -417,8 +417,9 @@ modularity.communities <- function(x, ...) {
 }
 
 #' @rdname modularity.igraph
+#' @aliases mod.matrix
 
-mod.matrix <- function(graph, membership, weights=NULL) {
+modularity_matrix <- function(graph, membership, weights=NULL) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   membership <- as.numeric(membership)-1

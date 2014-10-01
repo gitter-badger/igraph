@@ -147,7 +147,7 @@ pause()
 ## pause()
 
 ## ### Density
-## graph.density(jg)
+## density(jg)
 
 ## pause()
 

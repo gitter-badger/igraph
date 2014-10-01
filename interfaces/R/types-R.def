@@ -13,9 +13,9 @@ INTEGER:
 REAL:
     INCONV: %I% <- as.numeric(%I%)
     DEFAULT:
-      ECROSSW: 1.0 - sqrt(graph.density(graph))
-      NEDISTW: 0.2 * (1-graph.density(graph))
-      ELENW: graph.density(graph) / 10
+      ECROSSW: 1.0 - sqrt(density(graph))
+      NEDISTW: 0.2 * (1-density(graph))
+      ELENW: density(graph) / 10
 
 BOOLEAN:
     INCONV: %I% <- as.logical(%I%)

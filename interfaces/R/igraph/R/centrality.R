@@ -91,7 +91,8 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
 #' Currently the calculation is performed by explicitly calculating all
 #' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 #' effectively means that the measure can only be calculated for small graphs.
-#' 
+#'
+#' @aliases subgraph.centrality
 #' @param graph The input graph, it should be undirected, but the
 #' implementation does not check this currently.
 #' @param diag Boolean scalar, whether to include the diagonal of the adjacency
@@ -107,10 +108,10 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
 #' @examples
 #' 
 #' g <- g_pa(100, m=4, dir=FALSE)
-#' sc <- subgraph.centrality(g)
+#' sc <- subgraph_centrality(g)
 #' cor(degree(g), sc)
 #' 
-subgraph.centrality <- function(graph, diag=FALSE) {
+subgraph_centrality <- function(graph, diag=FALSE) {
   A <- adj(graph)
   if (!diag) { diag(A) <- 0 }
   eig <- eigen(A)

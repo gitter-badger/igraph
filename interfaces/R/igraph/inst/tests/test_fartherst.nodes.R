@@ -1,7 +1,7 @@
 
-context("farthest.nodes")
+context("farthest_vertices")
 
-test_that("farthest.nodes works", {
+test_that("farthest_vertices works", {
 
   library(igraph)
 
@@ -16,7 +16,7 @@ test_that("farthest.nodes works", {
                     Ike      - Heather:Jane,
                     Jane     - Ike)
 
-  fn <- farthest.nodes(kite)
+  fn <- farthest_vertices(kite)
   expect_that(fn, equals(c(1,10,4)))
 
   expect_that(distances(kite, v=fn[1], to=fn[2])[1], equals(fn[3]))

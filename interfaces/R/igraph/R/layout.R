@@ -1539,9 +1539,9 @@ l_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 l_dh <- function(graph, coords=NULL, maxiter=10,
            fineiter=max(10, log2(vcount(graph))), cool.fact=0.75,
            weight.node.dist=1.0, weight.border=0.0,
-           weight.edge.lengths=graph.density(graph) / 10,
-           weight.edge.crossings=1.0 - sqrt(graph.density(graph)),
-           weight.node.edge.dist=0.2 * (1-graph.density(graph))) {
+           weight.edge.lengths=density(graph) / 10,
+           weight.edge.crossings=1.0 - sqrt(density(graph)),
+           weight.node.edge.dist=0.2 * (1-density(graph))) {
   
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
