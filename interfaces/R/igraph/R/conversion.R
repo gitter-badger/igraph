@@ -630,7 +630,7 @@ incidence <- function(graph, types=NULL, attr=NULL,
 #' @param what Character constant, whether to return info about vertices,
 #' edges, or both. The default is \sQuote{edges}.
 
-get.data.frame <- function(x, what=c("edges", "vertices", "both")) {
+data_frame <- function(x, what=c("edges", "vertices", "both")) {
 
   if (!is_igraph(x)) { stop("Not a graph object") }
   what <- igraph.match.arg(what)

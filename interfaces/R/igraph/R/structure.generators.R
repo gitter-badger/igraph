@@ -971,7 +971,7 @@ g_atlas <- function(n) {
 #' Excel and are imported into R via \code{\link{read.table}},
 #' \code{\link{read.delim}} or \code{\link{read.csv}}.
 #' 
-#' \code{get.data.frame} converts the igraph graph into one or more data
+#' \code{data_frame} converts the igraph graph into one or more data
 #' frames, depending on the \code{what} argument.
 #' 
 #' If the \code{what} argument is \code{edges} (the default), then the edges of
@@ -990,7 +990,7 @@ g_atlas <- function(n) {
 #' If the \code{what} argument is \code{both}, then both vertex and edge data
 #' is returned, in a list with named entries \code{vertices} and \code{edges}.
 #' 
-#' @aliases g_df graph.data.frame get.data.frame
+#' @aliases g_df graph.data.frame data_frame get.data.frame
 #' @param d A data frame containing a symbolic edge list in the first two
 #' columns. Additional columns are considered as edge attributes.  Since
 #' version 0.7 this argument is coerced to a data frame with
@@ -1033,8 +1033,8 @@ g_atlas <- function(n) {
 #' print(g, e=TRUE, v=TRUE)
 #' 
 #' ## The opposite operation
-#' get.data.frame(g, what="vertices")
-#' get.data.frame(g, what="edges")
+#' data_frame(g, what="vertices")
+#' data_frame(g, what="edges")
 #' 
 g_df <- function(d, directed=TRUE, vertices=NULL) {
 

@@ -19,7 +19,7 @@ test_that("g_df works", {
                           stringsAsFactors=FALSE)
   g <- g_df(relations, directed=TRUE, vertices=actors)
 
-  df <- get.data.frame(g, what="both")
+  df <- data_frame(g, what="both")
   expect_that(df$vertices, is_equivalent_to(actors))
   expect_that(df$edges, equals(relations))
 
@@ -32,7 +32,7 @@ test_that("g_df works on matrices", {
   el <- cbind(1:5,5:1,weight=1:5)
   g <- g_df(el)
   g <- delete_vertex_attr(g, "name")
-  el2 <- get.data.frame(g)
+  el2 <- data_frame(g)
   expect_that(as.data.frame(el), is_equivalent_to(el2))
 
 })

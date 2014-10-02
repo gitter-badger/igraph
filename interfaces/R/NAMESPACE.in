@@ -358,6 +358,7 @@ export(count_multiple)
 export(count_triangles)
 export(cut_at)
 
+export(data_frame)
 export(decompose)
 export(degree_dist)                     # degree_distribution
 export(delete_edge_attr)
