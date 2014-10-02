@@ -86,7 +86,7 @@ threshold.net <- function(graph, level) {
 
 graphlets.old <- function(graph) {
 
-  if (!is.weighted(graph)) { stop("Graph not weighted") }
+  if (!is_weighted(graph)) { stop("Graph not weighted") }
   if (min(E(graph)$weight) <= 0 || !is.finite(E(graph)$weight)) {
     stop("Edge weights must be non-negative and finite")
   }
@@ -128,7 +128,7 @@ test_that("Graphlets work for a bigger graph", {
 
 graphlets.project.old <- function(graph, cliques, iter, Mu=NULL) {
 
-  if (!is.weighted(graph)) { stop("Graph not weighted") }
+  if (!is_weighted(graph)) { stop("Graph not weighted") }
   if (min(E(graph)$weight) <= 0 || !is.finite(E(graph)$weight)) {
     stop("Edge weights must be non-negative and finite")
   }

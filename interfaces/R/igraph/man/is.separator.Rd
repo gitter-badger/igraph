@@ -1,5 +1,7 @@
-\name{is.separator}
+\name{is_separator}
 \alias{is.separator}
+\alias{is_separator}
+\alias{is_min_separator}
 \alias{is.minimal.separator}
 \concept{Vertex separator}
 \title{Vertex separators}
@@ -7,8 +9,8 @@
   vertex separator, or a minimal vertex separator.
 }
 \usage{
-is.separator(graph, candidate)
-is.minimal.separator(graph, candidate)
+is_separator(graph, candidate)
+is_min_separator(graph, candidate)
 }
 \arguments{
   \item{graph}{The input graph. It may be directed, but edge directions
@@ -17,11 +19,11 @@ is.minimal.separator(graph, candidate)
     candidate separator.}
 }
 \details{
-  \code{is.separator} decides whether the supplied vertex set is a
+  \code{is_separator} decides whether the supplied vertex set is a
   vertex separator. A vertex set is a vertex separator if its removal
   results a disconnected graph.
 
-  \code{is.minimal.separator} decides whether the supplied vertex set is
+  \code{is_min_separator} decides whether the supplied vertex set is
   a minimal vertex separator. A minimal vertex separator is a vertex
   separator, such that none of its subsets is a vertex separator.
 
@@ -56,7 +58,7 @@ mw5 <- induced_subgraph(mw, as.character(1:7))
 
 check.sep <- function(G) {
   sep <- min_size_sep(G)
-  sapply(sep, is.minimal.separator, graph=G)
+  sapply(sep, is_min_separator, graph=G)
 }
 
 check.sep(mw)

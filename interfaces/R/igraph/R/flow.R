@@ -22,7 +22,7 @@
 min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
                          value.only=TRUE) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (is.null(capacity)) {
@@ -142,7 +142,7 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' 
 vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -226,7 +226,7 @@ vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' 
 edge_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -246,7 +246,7 @@ edge_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 
 edge_disjoint_paths <- function(graph, source, target) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -258,7 +258,7 @@ edge_disjoint_paths <- function(graph, source, target) {
 
 vertex_disjoint_paths <- function(graph, source=NULL, target=NULL) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -270,7 +270,7 @@ vertex_disjoint_paths <- function(graph, source=NULL, target=NULL) {
 
 adhesion <- function(graph, checks=TRUE) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   
@@ -284,7 +284,7 @@ adhesion <- function(graph, checks=TRUE) {
 
 cohesion.igraph <- function(x, checks=TRUE, ...) {
 
-  if (!is.igraph(x)) {
+  if (!is_igraph(x)) {
     stop("Not a graph object")
   }
 

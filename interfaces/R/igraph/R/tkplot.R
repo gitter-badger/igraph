@@ -169,7 +169,7 @@ assign(".next", 1, .tkplot.env)
 #' 
 tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   

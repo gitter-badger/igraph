@@ -84,7 +84,7 @@
 #' 
 #' 
 cliques <- function(graph, min=NULL, max=NULL) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -102,7 +102,7 @@ cliques <- function(graph, min=NULL, max=NULL) {
 }
 
 largest_cliques <- function(graph) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -126,7 +126,7 @@ largest_cliques <- function(graph) {
 
 max_cliques <- function(graph, min=NULL, max=NULL,
                             subset=NULL, file=NULL) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
 
@@ -167,7 +167,7 @@ max_cliques <- function(graph, min=NULL, max=NULL,
 num_max_cliques <- function(graph, min=NULL, max=NULL,
                                   subset=NULL) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
 
   if (is.null(min)) { min <- 0 }
   if (is.null(max)) { max <- 0 }
@@ -187,7 +187,7 @@ num_max_cliques <- function(graph, min=NULL, max=NULL,
 }
 
 clique_num <- function(graph) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
   
@@ -261,7 +261,7 @@ clique_num <- function(graph) {
 #' length(maximal_ivs(g))
 #' 
 ivs <- function(graph, min=NULL, max=NULL) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
 
@@ -281,7 +281,7 @@ ivs <- function(graph, min=NULL, max=NULL) {
 }
 
 largest_ivs <- function(graph) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
 
@@ -292,7 +292,7 @@ largest_ivs <- function(graph) {
 }
 
 maximal_ivs <- function(graph) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
 
@@ -303,7 +303,7 @@ maximal_ivs <- function(graph) {
 }
 
 ivs_size <- function(graph) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
 

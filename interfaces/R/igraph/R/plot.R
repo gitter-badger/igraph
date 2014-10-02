@@ -83,7 +83,7 @@ plot.igraph <- function(x,
                        ...) {
 
   graph <- x
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -430,7 +430,7 @@ rglplot.igraph <- function(x, ...) {
   require(rgl)
   
   graph <- x
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 

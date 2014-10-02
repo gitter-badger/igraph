@@ -436,7 +436,7 @@ tkigraph <- function() {
                   justify="right", padx=2)
   lab3 <- tklabel(top, text=as.character(ecount(g)), justify="right",
                   padx=2)
-  lab4 <- tklabel(top, text=if (is.directed(g)) "YES" else "NO")
+  lab4 <- tklabel(top, text=if (is_directed(g)) "YES" else "NO")
   tkgrid(but, lab, ent, lab2, lab3, lab4, "in"=topframe, sticky="nsew")
 
   tklines <- get("tklines", .tkigraph.env)
@@ -857,7 +857,7 @@ tkigraph <- function() {
       } else {
         l
       }
-    } else if (vcount(graph) < 300 && is.connected(graph)) {
+    } else if (vcount(graph) < 300 && is_connected(graph)) {
       l_kk(graph)
     } else if (vcount(graph) < 1000) {
       l_fr(graph)
@@ -956,7 +956,7 @@ tkigraph <- function() {
     if (ncol(df) > 2) {
       colnames(df) <- c("from", "to", "weight")
     }
-    graphs[[gnos]] <- g_df(df, directed=is.directed(graphs[[gnos]]))
+    graphs[[gnos]] <- g_df(df, directed=is_directed(graphs[[gnos]]))
     assign("graphs", graphs, .tkigraph.env)
   }
   invisible(NULL)
@@ -1096,7 +1096,7 @@ tkigraph <- function() {
   graphs <- get("graphs", .tkigraph.env)
 
   for (i in gnos) {
-    if (is.directed(graphs[[i]])) {
+    if (is_directed(graphs[[i]])) {
       indeg <- degree(graphs[[i]], mode="in")
       outdeg <- degree(graphs[[i]], mode="out")
       g <- g_degseq(out.deg=outdeg, in.deg=indeg)
@@ -1383,7 +1383,7 @@ tkigraph <- function() {
     } else if (mode=="path") {
       dia[i] <- mean_distance(graphs[[ gnos[i] ]], directed=FALSE)
     }
-    isconn[i] <- is.connected(graphs[[ gnos[i] ]])
+    isconn[i] <- is_connected(graphs[[ gnos[i] ]])
   }
 
   value <- data.frame( gnos, isconn, dia)
@@ -1626,16 +1626,16 @@ tkigraph <- function() {
     co <- matrix( c(0,1, 1,1, 0,0, 1,0), ncol=2, byrow=TRUE)
   }
 
-  if (read$size == 3 && is.directed(graphs[[gnos]])) {
+  if (read$size == 3 && is_directed(graphs[[gnos]])) {
     no <- 16
     rows <- cols <- 4
-  } else if (read$size == 3 && !is.directed(graphs[[gnos]])) {
+  } else if (read$size == 3 && !is_directed(graphs[[gnos]])) {
     no <- 4
     rows <- cols <- 2
-  } else if (read$size == 4 && is.directed(graphs[[gnos]])) {
+  } else if (read$size == 4 && is_directed(graphs[[gnos]])) {
     no <- 216
     rows <- cols <- 15
-  } else if (read$size == 4 && !is.directed(graphs[[gnos]])) {
+  } else if (read$size == 4 && !is_directed(graphs[[gnos]])) {
     no <- 11
     rows <- 4
     cols <- 3
@@ -1650,7 +1650,7 @@ tkigraph <- function() {
   layout.show(rows*cols)
   for (i in seq(no)) {
     g <- g_iso_class(read$size, i-1,
-                         directed=is.directed(graphs[[gnos]]))
+                         directed=is_directed(graphs[[gnos]]))
     par(mai=c(0,0,0,0), mar=c(0,0,0,0))
     par(cex=2)
     plot(g, layout=co, vertex.color="red", vertex.label=NA, frame=TRUE,
@@ -1668,7 +1668,7 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
 
-  if (!is.connected(graph)) {
+  if (!is_connected(graph)) {
     .tkigraph.error("Graph is not connected")
     return()
   }
@@ -1800,7 +1800,7 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
 
-  if (!is.connected(graph)) {
+  if (!is_connected(graph)) {
     .tkigraph.error("Graph is not connected")
     return()
   }

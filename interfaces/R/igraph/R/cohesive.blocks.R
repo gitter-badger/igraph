@@ -111,7 +111,7 @@
 #' plot_hierarchy max_cohesion
 #' @param graph For \code{cohesive_blocks} a graph object of class
 #' \code{igraph}. It must be undirected and simple. (See
-#' \code{\link{is.simple}}.)
+#' \code{\link{is_simple}}.)
 #' 
 #' For \code{g_blocks} and \code{exportPajek} the same graph must be
 #' supplied whose cohesive block structure is given in the \code{blocks}
@@ -239,7 +239,7 @@
 cohesive_blocks <- function(graph, labels=TRUE) {
 
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
 
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   # Function call

@@ -5,7 +5,7 @@ get.graph.list <- function(input_file) {
   E <- new.env()
   load(input_file, envir=E)
   g <- get(ls(E), envir=E)
-  if (is.igraph(g)) {
+  if (is_igraph(g)) {
     g <- list(g)
     names(g) <- strsplit(basename(input_file), ".", fixed=TRUE)[[1]][1]
   }
@@ -84,15 +84,15 @@ r.check <- function(input_file, tags, netnames, netno, meta) {
   r <- length(ls(env)) == 1
   if (r) {
     G <- get(ls(env), envir=env)
-    r <- r && (is.igraph(G) || is.list(G))
-    if (r && !is.igraph(G)) { r <- r && all(sapply(G, is.igraph)) }
+    r <- r && (is_igraph(G) || is.list(G))
+    if (r && !is_igraph(G)) { r <- r && all(sapply(G, is_igraph)) }
   }
   if (! (res$`File contains proper data` <- r) ) {
     return(print_check(res))
   }
 
   ## Number of vertices and edges
-  if (is.igraph(G)) {
+  if (is_igraph(G)) {
     G <- list(G)
   } else {
     G <- G[strsplit(netnames, ";")[[1]]]
@@ -102,10 +102,10 @@ r.check <- function(input_file, tags, netnames, netno, meta) {
   
   ## Tags
   if ('directed' %in% tags) {
-    res$`Tags, directed` <- any(sapply(G, is.directed))
+    res$`Tags, directed` <- any(sapply(G, is_directed))
   }
   if ('undirected' %in% tags) {
-    res$`Tags, undirected` <- any(!sapply(G, is.directed))
+    res$`Tags, undirected` <- any(!sapply(G, is_directed))
   }
   if ('weighted' %in% tags) {
     res$`Tags, weighted` <- any(sapply(G, function(x)

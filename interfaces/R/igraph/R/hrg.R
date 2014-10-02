@@ -21,7 +21,7 @@
 
 hrg.fit <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(hrg)) { 
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), 
                 vertices=c()) 
@@ -36,7 +36,7 @@ hrg.fit <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   res <- .Call("R_igraph_hrg_fit", graph, hrg, start, steps,
                PACKAGE="igraph")
   
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
 
@@ -47,7 +47,7 @@ hrg.fit <- function(graph, hrg=NULL, start=FALSE, steps=0) {
 hrg.consensus <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) {
   
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
 
   if (is.null(hrg)) {
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
@@ -66,7 +66,7 @@ hrg.consensus <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) {
   class(res$consensus) <- "igraphHRGConsensus"
   class(res$hrg) <- "igraphHRG"
 
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$hrg$names <- V(graph)$name
     res$consensus$names <- V(graph)$name
   }
@@ -78,7 +78,7 @@ hrg.predict <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
                         num.bins=25) {
   
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(hrg)) { 
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), 
                 vertices=c()) 
@@ -274,7 +274,7 @@ as.hclust.igraphHRG <- function(x, ...) {
   res  
 }
 
-asPhylo.igraphHRG <- function(x, ...) {
+as_phylo.igraphHRG <- function(x, ...) {
   require(ape, quietly=TRUE)
 
   ovc <- length(x$left)+1L
@@ -397,7 +397,7 @@ hrgPlotDendrogram <- function(x, ...) {
 hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
                          edge.color=NULL, use.edge.length=FALSE, ...) {
   vc <- length(x$left)+1
-  phy <- asPhylo(x)
+  phy <- as_phylo(x)
   br <- seq(0,1,length=length(colbar)) ; br[1] <- -1
   cc <- as.integer(cut(x$prob[phy$edge[,1] - vc], breaks=br))
   if (is.null(edge.color)) { edge.color <- colbar[cc] }

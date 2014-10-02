@@ -25,7 +25,7 @@
 ###################################################################
 
 V <- function(graph) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   vc <- vcount(graph)
@@ -38,7 +38,7 @@ V <- function(graph) {
 }
 
 E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -276,7 +276,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
   graph <- get(".igraph.graph", parent.frame())
   f <- as.igraph.vs(graph, f)-1
   t <- as.igraph.vs(graph, t)-1
-  if (is.directed(graph)) {
+  if (is_directed(graph)) {
     from %in% f & to %in% t
   } else {
     (from %in% f & to %in% t) | (to %in% f & from %in% t)
@@ -289,7 +289,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
   graph <- get(".igraph.graph", parent.frame())
   value <- as.igraph.vs(graph, value)-1
   t <- as.igraph.vs(graph, t)-1
-  if (is.directed(graph)) {
+  if (is_directed(graph)) {
     from %in% value & to %in% t
   } else {
     (from %in% value & to %in% t) | (to %in% value & from %in% t)
@@ -351,7 +351,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
 }
 
 "V<-" <- function(x, value) {
-  if (!is.igraph(x)) {
+  if (!is_igraph(x)) {
     stop("Not a graph object")
   }
   if (! "name"  %in% names(attributes(value)) ||
@@ -363,7 +363,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
 }
 
 "E<-" <- function(x, path=NULL, P=NULL, directed=NULL, value) {
-  if (!is.igraph(x)) {
+  if (!is_igraph(x)) {
     stop("Not a graph object")
   }
   if (! "name"  %in% names(attributes(value)) ||
@@ -387,7 +387,7 @@ print.igraph.vs <- function(x, ...) {
 print.igraph.es <- function(x, ...) {
   cat("Edge sequence:\n")
   graph <- get("graph", attr(x, "env"))
-  if (is.directed(graph)) {
+  if (is_directed(graph)) {
     arrow <- "->"
   } else {
     arrow <- "--"

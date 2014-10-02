@@ -1,6 +1,8 @@
-\name{is.degree.sequence}
+\name{is_degseq}
 \alias{is.degree.sequence}
+\alias{is_degseq}
 \alias{is.graphical.degree.sequence}
+\alias{is_graphical}
 \concept{Degree sequence}
 \title{Degree sequences of graphs}
 \description{
@@ -9,8 +11,8 @@
   simple graph.
 }
 \usage{
-is.degree.sequence (out.deg, in.deg = NULL)
-is.graphical.degree.sequence (out.deg, in.deg = NULL)
+is_degseq (out.deg, in.deg = NULL)
+is_graphical (out.deg, in.deg = NULL)
 }
 \arguments{
   \item{out.deg}{Integer vector, the degree sequence for undirected
@@ -20,7 +22,7 @@ is.graphical.degree.sequence (out.deg, in.deg = NULL)
     in-degrees.}
 }
 \details{
-  \code{is.degree.sequence} checks whether the given vertex degrees (in-
+  \code{is_degseq} checks whether the given vertex degrees (in-
   and out-degrees for directed graphs) can be realized by a graph. Note
   that the graph does not have to be simple, it may contain loop and
   multiple edges. For undirected graphs, it also checks whether the sum
@@ -49,7 +51,7 @@ is.graphical.degree.sequence (out.deg, in.deg = NULL)
 }
 \examples{
 g <- g_np(100, 2/100)
-is.degree.sequence(degree(g))
-is.graphical.degree.sequence(degree(g))
+is_degseq(degree(g))
+is_graphical(degree(g))
 }
 \keyword{graphs}

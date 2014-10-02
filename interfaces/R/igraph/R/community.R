@@ -75,14 +75,14 @@
 #' connects two different communities, according to the (best) membership
 #' vector, as returned by \code{membership()}.
 #' 
-#' \code{is.hierarchical} checks whether a hierarchical algorithm was used to
+#' \code{is_hierarchical} checks whether a hierarchical algorithm was used to
 #' find the community structure. Some functions only make sense for
 #' hierarchical methods (e.g. \code{merges}, \code{cut_at} and
 #' \code{as.dendrogram}).
 #' 
 #' \code{merges} returns the merge matrix for hierarchical methods. An error
 #' message is given, if a non-hierarchical method was used to find the
-#' community structure. You can check this by calling \code{is.hierarchical} on
+#' community structure. You can check this by calling \code{is_hierarchical} on
 #' the \code{communities} object.
 #' 
 #' \code{cut_at} cuts the merge tree of a hierarchical community finding method,
@@ -98,7 +98,7 @@
 #' \code{as.hclust} is similar to \code{as.dendrogram}, but converts a
 #' hierarchical community structure to a \code{hclust} object.
 #' 
-#' \code{asPhylo} converts a hierarchical community structure to a \code{phylo}
+#' \code{as_phylo} converts a hierarchical community structure to a \code{phylo}
 #' object, you will need the \code{ape} package for this.
 #' 
 #' \code{show_trace} works (currently) only for communities found by the leading
@@ -127,11 +127,11 @@
 #' is.hierarchical print.communities plot.communities length.communities
 #' as.dendrogram.communities as.hclust.communities code_len
 #' asPhylo asPhylo.communities showtrace code.length create.communities
-#' show_trace
+#' as_phylo as_phylo.communities show_trace is_hierarchical
 #' @param communities,x,object A \code{communities} object, the result of an
 #' igraph community detection function.
 #' @param graph An igraph graph object, corresponding to \code{communities}.
-#' @param full Logical scalar, if \code{TRUE}, then \code{is.hierarchical} only
+#' @param full Logical scalar, if \code{TRUE}, then \code{is_hierarchical} only
 #' returns \code{TRUE} for fully hierarchical algorithms. The \sQuote{leading
 #' eigenvector} algorithm is hierarchical, it gives a hierarchy of groups, but
 #' not a full dendrogram with all vertices, so it is not fully hierarchical.
@@ -191,7 +191,7 @@
 #' 
 #' \code{crossing} returns a logical vector.
 #' 
-#' \code{is.hierarchical} returns a logical scalar.
+#' \code{is_hierarchical} returns a logical scalar.
 #' 
 #' \code{merges} returns a two-column numeric matrix.
 #' 
@@ -394,7 +394,7 @@ modularity <- function(x, ...)
 
 modularity.igraph <- function(x, membership, weights=NULL, ...) {
   # Argument checks
-  if (!is.igraph(x)) { stop("Not a graph object") }
+  if (!is_igraph(x)) { stop("Not a graph object") }
   membership <- as.numeric(membership)
   if (!is.null(weights)) weights <- as.numeric(weights)
 
@@ -421,7 +421,7 @@ modularity.communities <- function(x, ...) {
 
 modularity_matrix <- function(graph, membership, weights=NULL) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   membership <- as.numeric(membership)-1
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
@@ -492,7 +492,7 @@ code_len <- function(communities) {
 
 #' @rdname communities
 
-is.hierarchical <- function(communities, full=FALSE) {
+is_hierarchical <- function(communities, full=FALSE) {
   alg <- algorithm(communities)
   if (alg %in% c("walktrap", "edge betweenness","fast greedy") ||
       (alg == "leading eigenvector" && !full)) {
@@ -529,7 +529,7 @@ complete.dend <- function(comm, use.modularity) {
 
 as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
                                       ...) {
-  if (!is.hierarchical(object, full=TRUE)) {
+  if (!is_hierarchical(object, full=TRUE)) {
     stop("Not a fully hierarchical community structure")
   }
 
@@ -621,14 +621,14 @@ as.hclust.communities <- function(x, hang=-1, use.modularity=FALSE,
 
 #' @rdname communities
 
-asPhylo <- function(x, ...)
-  UseMethod("asPhylo")
+as_phylo <- function(x, ...)
+  UseMethod("as_phylo")
 
 #' @rdname communities
 
-asPhylo.communities <- function(x, use.modularity=FALSE, ...) {
+as_phylo.communities <- function(x, use.modularity=FALSE, ...) {
 
-  if (!is.hierarchical(x, full=TRUE)) {
+  if (!is_hierarchical(x, full=TRUE)) {
     stop("Not a fully hierarchical community structure")
   }
 
@@ -687,7 +687,7 @@ cut_at <- function(communities, no, steps) {
   if (!inherits(communities, "communities")) {
     stop("Not a community structure")
   }
-  if (!is.hierarchical(communities)) {
+  if (!is_hierarchical(communities)) {
     stop("Not a fully hierarchical communitity structure")
   }
 
@@ -888,7 +888,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
                                 gamma=1.0, implementation=c("orig", "neg"),
                                 gamma.minus=1.0) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -918,7 +918,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
     res$algorithm  <- "spinglass"
     res$vcount     <- vcount(graph)
     res$membership <- res$membership + 1
-    if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+    if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
       res$names <- vertex_attr(graph, "name")
     }
     class(res) <- "communities"
@@ -980,7 +980,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 cluster_walktrap <- function(graph, weights=E(graph)$weight, steps=4,
                                merges=TRUE, modularity=TRUE,
                                membership=TRUE) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object!")
   }
 
@@ -996,7 +996,7 @@ cluster_walktrap <- function(graph, weights=E(graph)$weight, steps=4,
   res <- .Call("R_igraph_walktrap_community", graph, weights, as.numeric(steps),
         as.logical(merges), as.logical(modularity), as.logical(membership),
         PACKAGE="igraph")
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
 
@@ -1091,7 +1091,7 @@ cluster_edge_betweenness <- function(graph, weights=E(graph)$weight,
                                        merges=TRUE, bridges=TRUE,
                                        modularity=TRUE,
                                        membership=TRUE) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object!")
   }
 
@@ -1106,7 +1106,7 @@ cluster_edge_betweenness <- function(graph, weights=E(graph)$weight,
                as.logical(merges), as.logical(bridges),
                as.logical(modularity), as.logical(membership),
                PACKAGE="igraph")
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
@@ -1165,7 +1165,7 @@ cluster_edge_betweenness <- function(graph, weights=E(graph)$weight,
 cluster_fast_greedy <- function(graph, merges=TRUE, modularity=TRUE,
                                  membership=TRUE,
                                  weights=E(graph)$weight) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -1177,7 +1177,7 @@ cluster_fast_greedy <- function(graph, merges=TRUE, modularity=TRUE,
   res <- .Call("R_igraph_community_fastgreedy", graph, as.logical(merges),
                as.logical(modularity), as.logical(membership), weights,
                PACKAGE="igraph")
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$algorithm <- "fast greedy"
@@ -1287,7 +1287,7 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
                                           env=parent.frame()){
 
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   steps <- as.integer(steps)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
@@ -1306,7 +1306,7 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
                weights, options, start, callback, extra, env,
                environment(igraph.i.levc.arp),
                PACKAGE="igraph")
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$algorithm <- "leading eigenvector"
@@ -1372,7 +1372,7 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
 cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
                                         fixed=NULL) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
@@ -1388,7 +1388,7 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
   # Function call
   res <- .Call("R_igraph_community_label_propagation", graph, weights, initial, fixed,
         PACKAGE="igraph")
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
@@ -1453,7 +1453,7 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' 
 cluster_louvain <- function(graph, weights=NULL) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
@@ -1467,7 +1467,7 @@ cluster_louvain <- function(graph, weights=NULL) {
   # Function call
   res <- .Call("R_igraph_community_multilevel", graph, weights,
         PACKAGE="igraph")
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
@@ -1538,7 +1538,7 @@ cluster_louvain <- function(graph, weights=NULL) {
 #' 
 cluster_optimal <- function(graph, weights=NULL) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1552,7 +1552,7 @@ cluster_optimal <- function(graph, weights=NULL) {
   # Function call
   res <- .Call("R_igraph_community_optimal_modularity", graph, weights,
                PACKAGE="igraph")
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
@@ -1614,7 +1614,7 @@ cluster_infomap <- function(graph, e.weights=NULL, v.weights=NULL,
                               nb.trials=10, modularity=TRUE) {
   
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) { 
     e.weights <- E(graph)$weight 
   } 
@@ -1639,7 +1639,7 @@ cluster_infomap <- function(graph, e.weights=NULL, v.weights=NULL,
                v.weights, nb.trials,
                PACKAGE="igraph")
 
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
@@ -1791,7 +1791,7 @@ dendPlotPhylo <- function(communities, colbar=rainbow(length(communities)),
                           edge.color="#AAAAAAFF",
                           edge.lty=c(1,2), ...) {
   
-  phy <- asPhylo(communities, use.modularity=use.modularity)
+  phy <- as_phylo(communities, use.modularity=use.modularity)
 
   getedges <- function(tip) {
     repeat {      

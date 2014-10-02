@@ -58,7 +58,7 @@
 `[.igraph` <- function(x, i, j, ..., from, to,
                        sparse=getIgraphOpt("sparsematrices"),
                        edges=FALSE, drop=TRUE,
-                       attr=if (is.weighted(x)) "weight" else NULL) {
+                       attr=if (is_weighted(x)) "weight" else NULL) {
   ## TODO: make it faster, don't need the whole matrix usually
 
   ################################################################
@@ -141,7 +141,7 @@
 }
 
 `[<-.igraph` <- function(x, i, j, ..., from, to,
-                         attr=if (is.weighted(x)) "weight" else NULL,
+                         attr=if (is_weighted(x)) "weight" else NULL,
                          value) {
   ## TODO: rewrite this in C to make it faster
 

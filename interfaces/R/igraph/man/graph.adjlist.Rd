@@ -58,6 +58,6 @@ graph.isomorphic(g, g2)
 ecount(g2)
 g3 <- g_adj_list(al, mode="all", duplicate=FALSE)
 ecount(g3)
-is.multiple(g3)
+is_multiple(g3)
 }
 \keyword{graphs}

@@ -20,7 +20,7 @@ max_cardinality(graph)
   visited. Ties are broken randomly.
 
   The algorithm provides a simple basis for deciding whether a graph is
-  chordal, see References below, and also \code{\link{is.chordal}}.
+  chordal, see References below, and also \code{\link{is_chordal}}.
 }
 \value{A list with two components:
   \item{alpha}{Numeric vector. The vertices ordered according to the maximum cardinality
@@ -32,19 +32,19 @@ max_cardinality(graph)
   of hypergraphs, and selectively reduce acyclic hypergraphs.
   \emph{SIAM Journal of Computation} 13, 566--579.}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{ \code{\link{is.chordal}} }
+\seealso{ \code{\link{is_chordal}} }
 \examples{
 ## The examples from the Tarjan-Yannakakis paper
 g1 <- g_formula(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
                 E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,
                 I-A:H)
 max_cardinality(g1)
-is.chordal(g1, fillin=TRUE)
+is_chordal(g1, fillin=TRUE)
 
 g2 <- g_formula(A-B:E, B-A:E:F:D, C-E:D:G, D-B:F:E:C:G,
                 E-A:B:C:D:F, F-B:D:E, G-C:D:H:I, H-G:I:J,
                 I-G:H:J, J-H:I)
 max_cardinality(g2)
-is.chordal(g2, fillin=TRUE)
+is_chordal(g2, fillin=TRUE)
 }
 \keyword{graphs}

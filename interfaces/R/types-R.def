@@ -1,9 +1,9 @@
 
 GRAPH:
-    INCONV: if (!is.igraph(%I%)) { stop("Not a graph object") }
+    INCONV: if (!is_igraph(%I%)) { stop("Not a graph object") }
 
 GRAPH_OR_0:    
-    INCONV: if (!is.null(graph) && !is.igraph(%I%)) { stop("Not a graph object") }
+    INCONV: if (!is.null(graph) && !is_igraph(%I%)) { stop("Not a graph object") }
 
 INTEGER:
     INCONV: %I% <- as.integer(%I%)
@@ -28,13 +28,13 @@ VECTOR:
 
 VERTEXINDEX:
     OUTCONV: 
-        OUT:  if (getIgraphOpt("add.vertex.names") && is.named(%I1%)) { \
+        OUT:  if (getIgraphOpt("add.vertex.names") && is_named(%I1%)) { \
                 names(%I%) <- vertex_attr(%I1%, "name", %I2%) \
               }
 
 VERTEXINDEX_OR_0:
     OUTCONV: 
-        OUT:  if (getIgraphOpt("add.vertex.names") && is.named(%I1%)) { \
+        OUT:  if (getIgraphOpt("add.vertex.names") && is_named(%I1%)) { \
                 names(%I%) <- vertex_attr(%I1%, "name", %I2%) \
               }
 

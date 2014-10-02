@@ -1,6 +1,8 @@
 \name{graph.matching}
 \alias{is.matching}
+\alias{is_matching}
 \alias{is.maximal.matching}
+\alias{is_max_matching}
 \alias{maximum.bipartite.matching}
 \alias{max_bip_match}
 \concept{Matching}
@@ -12,8 +14,8 @@
   vertices. A matching is maximal if it is not a proper subset of any
   other matching.}
 \usage{
-is.matching(graph, matching, types = NULL)
-is.maximal.matching(graph, matching, types = NULL)
+is_matching(graph, matching, types = NULL)
+is_max_matching(graph, matching, types = NULL)
 max_bip_match(graph, types = NULL, weights = NULL,
        eps = .Machine$double.eps)
 }
@@ -38,14 +40,14 @@ max_bip_match(graph, types = NULL, weights = NULL,
     with no  weights, this argument is ignored.}
 }
 \details{
-  \code{is.matching} checks a matching vector and verifies whether its
+  \code{is_matching} checks a matching vector and verifies whether its
   length matches the number of vertices in the given graph, its values
   are between zero (inclusive) and the number of vertices (inclusive),
   and whether there exists a corresponding edge in the graph for every
   matched vertex pair. For bipartite graphs, it also verifies whether
   the matched vertices are in different parts of the graph.
 
-  \code{is.maximal.matching} checks whether a matching is maximal.
+  \code{is_max_matching} checks whether a matching is maximal.
   A matching is maximal if and only if there exists no unmatched vertex
   in a graph such that one of its neighbors is also unmatched.
 
@@ -66,7 +68,7 @@ max_bip_match(graph, types = NULL, weights = NULL,
   graph.
 }
 \value{
-  \code{is.matching} and \code{is.maximal.matching} return a logical
+  \code{is_matching} and \code{is_max_matching} return a logical
   scalar.
 
   \code{max_bip_match} returns a list with components:
@@ -86,12 +88,12 @@ g <- g_formula( a-b-c-d-e-f )
 m1 <- c("b", "a", "d", "c", "f", "e")   # maximal matching
 m2 <- c("b", "a", "d", "c", NA, NA)     # non-maximal matching
 m3 <- c("b", "c", "d", "c", NA, NA)     # not a matching
-is.matching(g, m1)
-is.matching(g, m2)
-is.matching(g, m3)
-is.maximal.matching(g, m1)
-is.maximal.matching(g, m2)
-is.maximal.matching(g, m3)
+is_matching(g, m1)
+is_matching(g, m2)
+is_matching(g, m3)
+is_max_matching(g, m1)
+is_max_matching(g, m2)
+is_max_matching(g, m3)
 
 V(g)$type <- c(FALSE,TRUE)
 str(g, v=TRUE)

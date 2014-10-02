@@ -59,7 +59,7 @@
 #' 
 stochastic <- function(graph, column.wise=FALSE,
                            sparse=getIgraphOpt("sparsematrices")) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
  
@@ -83,7 +83,7 @@ stochastic <- function(graph, column.wise=FALSE,
                  PACKAGE="igraph")
   }
 
-  if (getIgraphOpt("add.vertex.names") && is.named(graph)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph)) {
     rownames(res) <- colnames(res) <- V(graph)$name
   }
 
@@ -597,7 +597,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
                   epairs=FALSE, stat.prob=FALSE) {
 
   ## Argument checks
-  if (!is.null(graph))  { stopifnot(is.igraph(graph)) }
+  if (!is.null(graph))  { stopifnot(is_igraph(graph)) }
   if (!is.null(matrix)) { stopifnot(is.matrix(matrix)) }
   if (!is.null(sparsemat)) { stopifnot(inherits(sparsemat, "Matrix")) }
 

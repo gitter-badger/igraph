@@ -188,8 +188,8 @@ g2
 pause()
 
 ### Is this object an igraph graph?
-is.igraph(g)
-is.igraph(1:10)
+is_igraph(g)
+is_igraph(1:10)
 
 pause()
 
@@ -201,8 +201,8 @@ ecount(g)
 pause()
 
 ### Is the graph directed?
-is.directed(g)
-is.directed(g2)
+is_directed(g)
+is_directed(g2)
 
 pause()
 
@@ -220,14 +220,14 @@ pause()
 g <- graph( c(1,2,1,2, 1,3, 2,3, 4,5), n=5 )
 g
 
-is.simple(g)
-is.multiple(g)
+is_simple(g)
+which_multiple(g)
 
 pause()
 
 ### Remove multiple edges
 g <- simplify(g)
-is.simple(g)
+is_simple(g)
 
 pause()
 
@@ -235,14 +235,14 @@ pause()
 g <- graph( c(1,1,1,2, 1,3, 2,3, 4,5), n=5 )
 g
 
-is.simple(g)
-is.loop(g)
+is_simple(g)
+which_loop(g)
 
 pause()
 
 ### Remove loop edges
 g <- simplify(g)
-is.simple(g)
+is_simple(g)
 
 pause()
 

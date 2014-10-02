@@ -19,6 +19,6 @@ test_that("min_size_sep works", {
                     John    - Gery:Russ:Michael)
   camp <- simplify(camp)
   sep <- lapply(min_size_sep(camp), function(x) V(camp)[x])
-  expect_that(all(sapply(sep, is.minimal.separator, graph=camp)), is_true())
+  expect_that(all(sapply(sep, is_min_separator, graph=camp)), is_true())
 
 })

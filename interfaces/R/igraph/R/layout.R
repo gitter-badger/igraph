@@ -43,7 +43,7 @@
 #' @keywords graphs
 
 l_random <- function(graph, dim=2) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (dim==2) {
@@ -91,7 +91,7 @@ l_random <- function(graph, dim=2) {
 #' plot(karate, layout = coords)
 
 l_circle <- function(graph, order=V(graph)) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   order <- as.igraph.vs(graph, order) - 1L
@@ -121,7 +121,7 @@ l_circle <- function(graph, order=V(graph)) {
 #' @keywords graphs
 
 l_sphere <- function(graph) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
@@ -177,7 +177,7 @@ l_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
                             mass=30, spring.length=0, spring.constant=1,
                             max.sa.movement=5) {
   
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (!is.null(start)) {
@@ -230,7 +230,7 @@ l_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
                        repulserad=area * vcount(graph),
                        cellsize=sqrt(sqrt(area)), root=NULL) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (is.null(root)) {
@@ -306,7 +306,7 @@ l_tree <- function(graph, root=numeric(), circular=FALSE,
                                     rootlevel=numeric(), mode="out",
                                     flip.y=TRUE) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   root <- as.igraph.vs(graph, root)-1
@@ -373,7 +373,7 @@ l_tree <- function(graph, root=numeric(), circular=FALSE,
 
 l_merge <- function(graphs, layouts, method="dla") {
 
-  if (!all(sapply(graphs, is.igraph))) {
+  if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
   }
   if (method == "dla") {
@@ -452,7 +452,7 @@ l_norm <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
 
 l_comps <- function(graph, layout=l_kk, ...) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   
@@ -554,7 +554,7 @@ l_drl <- function(graph, use.seed = FALSE,
                        fixed=NULL,
                        dim=2)
 {
-    if (!is.igraph(graph)) {
+    if (!is_igraph(graph)) {
         stop("Not a graph object")
     }
     if (dim != 2 && dim != 3) {
@@ -956,7 +956,7 @@ l_auto <- function(graph, dim=2, ...) {
                             maxiter=100, weights=NULL,
                             attributes=c("default", "all", "none")) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(layers)) layers <- as.numeric(layers)-1
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
@@ -1024,7 +1024,7 @@ l_auto <- function(graph, dim=2, ...) {
     if ("arrow.mode" %in% edge_attr_names(graph)) {
       E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- E(graph)$arrow.mode
     } else {
-      E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- is.directed(graph) * 2
+      E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- is_directed(graph) * 2
     }
     if ("arrow.size" %in% edge_attr_names(graph)) {
       E(res$extd_graph)$arrow.size <- 0
@@ -1103,7 +1103,7 @@ l_mds <- function(graph, dist=NULL, dim=2,
                        options=arpack_defaults) {
   
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(dist)) dist <- structure(as.double(dist), dim=dim(dist))
   dim <- as.integer(dim)
 
@@ -1193,7 +1193,7 @@ l_fr <- function(graph, coords=NULL, dim=2,
                             coolexp, maxdelta, area, repulserad) {
 
                                         # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
   }
@@ -1312,7 +1312,7 @@ l_kk <- function(graph, coords=NULL, dim=2,
                                 miny=NULL, maxy=NULL, minz=NULL, maxz=NULL,
                                 niter, sigma, initemp, coolexp) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
   }
@@ -1411,7 +1411,7 @@ l_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
                        temp.init=sqrt(vcount(graph))) {
   
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
     use.seed <- TRUE
@@ -1544,7 +1544,7 @@ l_dh <- function(graph, coords=NULL, maxiter=10,
            weight.node.edge.dist=0.2 * (1-density(graph))) {
   
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
     use.seed <- TRUE
@@ -1573,7 +1573,7 @@ l_dh <- function(graph, coords=NULL, maxiter=10,
 
 l_grid <- function(graph, width = 0, height = 0, dim = 2) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   width <- as.integer(width)
   dim <- as.integer(dim)
   stopifnot(dim == 2 || dim == 3)
@@ -1596,7 +1596,7 @@ layout.grid.3d <- function(graph, width=0, height=0) {
   .Deprecated("l_grid", msg = paste0("layout.grid.3d is deprecated from\n",
       "igraph 0.8.0, please use l_grid instead"))
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   width <- as.integer(width)
   height <- as.integer(height)
 

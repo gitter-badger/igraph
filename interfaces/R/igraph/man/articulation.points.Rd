@@ -24,7 +24,7 @@ articulation_points(graph)
 %\references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{\code{\link{biconn_comps}}, \code{\link{comps}},
-  \code{\link{is.connected}}, \code{\link{vertex_conn}}}
+  \code{\link{is_connected}}, \code{\link{vertex_conn}}}
 \examples{
 g <- disjoint_union( g_full(5), g_full(5) )
 clu <- comps(g)$membership

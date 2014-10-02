@@ -45,7 +45,7 @@ igraph_neighbors:
 
 igraph_is_directed:
         PARAMS: GRAPH graph
-        NAME-R: is.directed
+        NAME-R: is_directed
         RETURN: BOOLEAN
         IGNORE: RR, RC, RNamespace
 
@@ -601,11 +601,11 @@ igraph_is_loop:
 
 igraph_is_dag:
         PARAMS: GRAPH graph, OUT BOOLEANPTR res
-        NAME-R: is.dag
+        NAME-R: is_dag
 
 igraph_is_simple:
         PARAMS: GRAPH graph, OUT BOOLEANPTR res
-        NAME-R: is.simple
+        NAME-R: is_simple
 
 igraph_is_multiple:
         PARAMS: GRAPH graph, OUT VECTOR_BOOL res, EDGESET es=ALL
@@ -682,7 +682,7 @@ igraph_unfold_tree:
 igraph_is_mutual:
         PARAMS: GRAPH graph, OUT VECTOR_BOOL res, EDGESET es=ALL
         DEPS: es ON graph
-        NAME-R: is.mutual
+        NAME-R: which_mutual
 
 igraph_maximum_cardinality_search:
         PARAMS: GRAPH graph, OUT VECTORM1 alpha, OUT VECTORM1_OR_0 alpham1
@@ -692,7 +692,7 @@ igraph_is_chordal:
         PARAMS: GRAPH graph, VECTORM1_OR_0 alpha=NULL, VECTORM1_OR_0 alpham1=NULL, \
                 OUT BOOLEANPTR_OR_0 chordal, OUT VECTORM1_OR_0 fillin, \
                 OUT GRAPH_OR_0 newgraph
-        NAME-R: is.chordal
+        NAME-R: is_chordal
         IGNORE: RR, RC
 
 igraph_avg_nearest_neighbor_degree:
@@ -804,11 +804,11 @@ igraph_diversity:
 
 igraph_is_degree_sequence:
         PARAMS: VECTOR out_deg, VECTOR_OR_0 in_deg=NULL, OUT BOOLEANPTR res
-        NAME-R: is.degree.sequence
+        NAME-R: is_degseq
 
 igraph_is_graphical_degree_sequence:
         PARAMS: VECTOR out_deg, VECTOR_OR_0 in_deg=NULL, OUT BOOLEANPTR res
-        NAME-R: is.graphical.degree.sequence
+        NAME-R: is_graphical
 
 #######################################
 # Visitors
@@ -1665,12 +1665,12 @@ igraph_all_st_mincuts:
 igraph_is_separator:
         PARAMS: GRAPH graph, VERTEXSET candidate, OUT BOOLEANPTR res
         DEPS: candidate ON graph
-        NAME-R: is.separator
+        NAME-R: is_separator
 
 igraph_is_minimal_separator:
         PARAMS: GRAPH graph, VERTEXSET candidate, OUT BOOLEANPTR res
         DEPS: candidate ON graph
-        NAME-R: is.minimal.separator
+        NAME-R: is_min_separator
 
 igraph_all_minimal_st_separators:
         PARAMS: GRAPH graph, OUT VERTEXSETLIST separators
@@ -1882,14 +1882,14 @@ igraph_is_matching:
        PARAMS: GRAPH graph, BIPARTITE_TYPES_OR_0 types=NULL, \
                VECTOR_LONG_M1 matching, OUT BOOLEANPTR res
        DEPS: types ON graph, matching ON graph
-       NAME-R: is.matching
+       NAME-R: is_matching
        IGNORE: RR
 
 igraph_is_maximal_matching:
        PARAMS: GRAPH graph, BIPARTITE_TYPES_OR_0 types=NULL, \
                VECTOR_LONG_M1 matching, OUT BOOLEANPTR res
        DEPS: types ON graph
-       NAME-R: is.maximal.matching
+       NAME-R: is_max_matching
        IGNORE: RR
 
 igraph_maximum_bipartite_matching:

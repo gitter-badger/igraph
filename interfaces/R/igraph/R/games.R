@@ -113,7 +113,7 @@ g_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
                                      "psumtree-multiple", "bag"),
                     start.graph=NULL) {
 
-  if (!is.null(start.graph) && !is.igraph(start.graph)) {
+  if (!is.null(start.graph) && !is_igraph(start.graph)) {
     stop("`start.graph' not an `igraph' object")
   }
   
@@ -386,7 +386,7 @@ random.graph.game <- erdos.renyi.game
 #' ## The simple generator
 #' g <- g_degseq(rep(2,100))
 #' degree(g)
-#' is.simple(g)   # sometimes TRUE, but can be FALSE
+#' is_simple(g)   # sometimes TRUE, but can be FALSE
 #' g2 <- g_degseq(1:10, 10:1)
 #' degree(g2, mode="out")
 #' degree(g2, mode="in")
@@ -394,7 +394,7 @@ random.graph.game <- erdos.renyi.game
 #' ## The vl generator
 #' g3 <- g_degseq(rep(2,100), method="vl")
 #' degree(g3)
-#' is.simple(g3)  # always TRUE
+#' is_simple(g3)  # always TRUE
 #' 
 #' ## Exponential degree distribution
 #' ## Note, that we correct the degree sequence if its sum is odd
@@ -855,7 +855,7 @@ g_pref_asym <- function(nodes, types,
 }
 
 connect <- function(graph, order, mode=c("all", "out", "in", "total")) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
@@ -894,7 +894,7 @@ connect <- function(graph, order, mode=c("all", "out", "in", "total")) {
 #' mean_distance(g)
 #' 
 rewire.edges <- function(graph, prob, loops=FALSE, multiple=FALSE) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )

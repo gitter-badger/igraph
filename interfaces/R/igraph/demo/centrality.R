@@ -110,12 +110,12 @@ pause()
 ## pause()
 
 ## ### Is it a simple graph?
-## is.simple(jg)
+## is_simple(jg)
 
 ## pause()
 
 ## ### Is it connected?
-## is.connected(jg)
+## is_connected(jg)
 
 ## pause()
 

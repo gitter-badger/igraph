@@ -152,7 +152,7 @@ i.get.arrow.mode <- function(graph, arrow.mode=NULL) {
   }
 
   if (is.null(arrow.mode)) {
-    if (is.directed(graph)) {
+    if (is_directed(graph)) {
       arrow.mode <- 2
     } else {
       arrow.mode <- 0

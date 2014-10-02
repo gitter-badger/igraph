@@ -161,7 +161,7 @@ read_graph <- function(file, format=c("edgelist", "pajek", "ncol", "lgl",
 write_graph <- function(graph, file, format=c("edgelist", "pajek", "ncol", "lgl",
                                        "graphml", "dimacs", "gml", "dot", "leda"), ...) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (!is.character(file) || length(grep("://", file, fixed=TRUE)) > 0 ||

@@ -48,15 +48,15 @@
 
 .print.header <- function(object) {
 
-  if (!is.igraph(object)) {
+  if (!is_igraph(object)) {
     stop("Not a graph object")
   }
 
   title <- paste(sep="", "IGRAPH ",
-                 c("U","D")[is.directed(object)+1],
-                 c("-","N")[is.named(object)+1],
-                 c("-","W")[is.weighted(object)+1],
-                 c("-","B")[is.bipartite(object)+1], " ",
+                 c("U","D")[is_directed(object)+1],
+                 c("-","N")[is_named(object)+1],
+                 c("-","W")[is_weighted(object)+1],
+                 c("-","B")[is_bipartite(object)+1], " ",
                  vcount(object), " ", ecount(object), " -- ")
   w <- getOption("width")
   if (nchar(title) < w && "name" %in% graph_attr_names(object)) {
@@ -129,8 +129,8 @@
   ec <- ecount(x)
   list <- edge_attr_names(x)
   list <- list[list!="name"]
-  arrow <- ifelse(is.directed(x), "->", "--")
-  if (is.named(x)) {
+  arrow <- ifelse(is_directed(x), "->", "--")
+  if (is_named(x)) {
     cat("+ edges (vertex names) and their attributes:\n")
   } else {
     cat("+ edges and their attributes:\n")
@@ -192,9 +192,9 @@
 
 .print.edges.compressed <- function(x, names) {
   ## TODO: getOption("max.print")
-  if (is.named(x)) cat("+ edges (vertex names):\n") else cat("+ edges:\n")
+  if (is_named(x)) cat("+ edges (vertex names):\n") else cat("+ edges:\n")
   el <- edgelist(x, names=names)
-  arrow <- c("--", "->")[is.directed(x)+1]
+  arrow <- c("--", "->")[is_directed(x)+1]
   edges <- paste(sep="", format(el[,1]), arrow, format(el[,2]))
   print(edges, quote=FALSE)
 }
@@ -203,7 +203,7 @@
   ## TODO: getOption("max.print")
   cat("+ edges:\n")
   vc <- vcount(x)
-  arrow <- c(" -- ", " -> ")[is.directed(x)+1]
+  arrow <- c(" -- ", " -> ")[is_directed(x)+1]
   al <- adj_list(x, mode="out")
   w <- nchar(max(which(degree(x, mode="in") != 0)))
   mpl <- trunc((getOption("width")-nchar(arrow)-nchar(vc)) / (w+1))
@@ -242,7 +242,7 @@
   ## TODO getOption("max.print")
   cat("+ edges (vertex names):\n")
 
-  arrow <- c(" -- ", " -> ")[is.directed(x)+1]
+  arrow <- c(" -- ", " -> ")[is_directed(x)+1]
   vn <- V(x)$name
 
   al <- adj_list(x, mode="out")
@@ -329,7 +329,7 @@ print.igraph <- function(x, full=getIgraphOpt("print.full"),
                 edge.attributes=getIgraphOpt("print.edge.attributes"),
                 names=TRUE, ...) {
   
-  if (!is.igraph(x)) {
+  if (!is_igraph(x)) {
     stop("Not a graph object")
   }
 
@@ -343,7 +343,7 @@ print.igraph <- function(x, full=getIgraphOpt("print.full"),
       .print.edges.edgelist(x, names)
     } else if (median(degree(x, mode="out")) < 3) {
       .print.edges.compressed(x, names)
-    } else if (is.named(x)) {
+    } else if (is_named(x)) {
       .print.edges.adjlist.named(x)
     } else {
       .print.edges.adjlist(x)
@@ -358,15 +358,15 @@ print.igraph <- function(x, full=getIgraphOpt("print.full"),
 
 summary.igraph <- function(object, ...) {
 
-  if (!is.igraph(object)) {
+  if (!is_igraph(object)) {
     stop("Not a graph object")
   }
 
   title <- paste(sep="", "IGRAPH ",
-                 c("U","D")[is.directed(object)+1],
-                 c("-","N")[is.named(object)+1],
-                 c("-","W")[is.weighted(object)+1],
-                 c("-","B")[is.bipartite(object)+1], " ",
+                 c("U","D")[is_directed(object)+1],
+                 c("-","N")[is_named(object)+1],
+                 c("-","W")[is_weighted(object)+1],
+                 c("-","B")[is_bipartite(object)+1], " ",
                  vcount(object), " ", ecount(object), " -- ")
   w <- getOption("width")
   if (nchar(title) < w && "name" %in% graph_attr_names(object)) {

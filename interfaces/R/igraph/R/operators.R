@@ -104,9 +104,9 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 disjoint_union <- function(...) {
   
   graphs <- unlist(recursive=FALSE, lapply(list(...), function(l) {
-    if (is.igraph(l)) list(l) else l
+    if (is_igraph(l)) list(l) else l
   } ))
-  if (!all(sapply(graphs, is.igraph))) {
+  if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
   }
   
@@ -174,17 +174,17 @@ disjoint_union <- function(...) {
                                                 keep.all.vertices) {
 
   graphs <- unlist(recursive=FALSE, lapply(list(...), function(l) {
-    if (is.igraph(l)) list(l) else l
+    if (is_igraph(l)) list(l) else l
   } ))
-  if (!all(sapply(graphs, is.igraph))) {
+  if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
   }
   if (byname != "auto" && !is.logical(byname)) {
     stop("`bynam' must be \"auto\", or logical")
   }
-  nonamed <- sum(sapply(graphs, is.named))
+  nonamed <- sum(sapply(graphs, is_named))
   if (byname == "auto") {
-    byname <- all(sapply(graphs, is.named))
+    byname <- all(sapply(graphs, is_named))
     if (nonamed != 0 && nonamed != length(graphs)) {
       warning("Some, but not all graphs are named, not using vertex names")
     }
@@ -423,13 +423,13 @@ graph.intersection <- function(..., byname="auto",
 #' 
 difference <- function(big, small, byname="auto") {
 
-  if (!is.igraph(big) || !is.igraph(small)) {
+  if (!is_igraph(big) || !is_igraph(small)) {
     stop("argument is not a graph")
   }
   if (byname != "auto" && !is.logical(byname)) {
     stop("`bynam' must be \"auto\", or logical")
   }
-  nonamed <- is.named(big) + is.named(small)
+  nonamed <- is_named(big) + is_named(small)
   if (byname == "auto") {
     byname <- nonamed == 2
     if (nonamed == 1) {
@@ -503,7 +503,7 @@ difference <- function(big, small, byname="auto") {
 #' 
 complementer <- function(graph, loops=FALSE) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
@@ -574,14 +574,14 @@ complementer <- function(graph, loops=FALSE) {
 #' 
 compose <- function(g1, g2, byname="auto") {
 
-  if (!is.igraph(g1) || !is.igraph(g2)) {
+  if (!is_igraph(g1) || !is_igraph(g2)) {
     stop("Not a graph object")
   }
 
   if (byname != "auto" && !is.logical(byname)) {
     stop("`byname' must be \"auto\", or logical")
   }
-  nonamed <- is.named(g1) + is.named(g2)
+  nonamed <- is_named(g1) + is_named(g2)
   if (byname == "auto") {
     byname <- nonamed == 2
     if (nonamed == 1) {
@@ -658,15 +658,15 @@ path <- function(...) {
 }
 
 `+.igraph` <- function(e1, e2) {
-  if (!is.igraph(e1) && is.igraph(e2)) {
+  if (!is_igraph(e1) && is_igraph(e2)) {
     tmp <- e1
     e1 <- e2
     e2 <- tmp
   }
-  if (is.igraph(e2) && is.named(e1) && is.named(e2)) {
+  if (is_igraph(e2) && is_named(e1) && is_named(e2)) {
     ## Union of graphs
     res <- union(e1, e2)
-  } else if (is.igraph(e2)) {
+  } else if (is_igraph(e2)) {
     ## Disjoint union of graphs
     res <- disjoint_union(e1,e2)
 
@@ -739,7 +739,7 @@ path <- function(...) {
   if (missing(e2)) {
     stop("Non-numeric argument to negation operator")
   }
-  if (is.igraph(e2)) {
+  if (is_igraph(e2)) {
     res <- difference(e1, e2)
   } else if ("igraph.vertex" %in% class(e2)) {
     res <- delete_vertices(e1, unlist(e2, recursive=FALSE))

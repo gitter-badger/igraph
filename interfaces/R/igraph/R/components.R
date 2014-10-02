@@ -24,7 +24,7 @@
 ###################################################################
 
 count_comps <- function(graph, mode=c("weak", "strong")) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
@@ -43,7 +43,7 @@ count_comps <- function(graph, mode=c("weak", "strong")) {
 
 comp_dist <- function(graph, cumulative=FALSE, mul.size=FALSE,
                                  ...) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   
@@ -62,8 +62,8 @@ comp_dist <- function(graph, cumulative=FALSE, mul.size=FALSE,
   res
 }
 
-is.connected <- function(graph, mode=c("weak", "strong")) {
-  if (!is.igraph(graph)) {
+is_connected <- function(graph, mode=c("weak", "strong")) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
@@ -95,7 +95,7 @@ is.connected <- function(graph, mode=c("weak", "strong")) {
 #' isolate vertices.
 #' @return A list of graph objects.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{is.connected}} to decide whether a graph is connected,
+#' @seealso \code{\link{is_connected}} to decide whether a graph is connected,
 #' \code{\link{comps}} to calculate the connected components of a graph.
 #' @keywords graphs
 #' @examples
@@ -107,7 +107,7 @@ is.connected <- function(graph, mode=c("weak", "strong")) {
 #' 
 decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
                       min.vertices=0) {
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)

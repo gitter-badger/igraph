@@ -24,8 +24,8 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                        vertex.color2, edge.color1,
                                        edge.color2) {
   # Argument checks
-  if (!is.igraph(graph1)) { stop("Not a graph object") }
-  if (!is.igraph(graph2)) { stop("Not a graph object") }
+  if (!is_igraph(graph1)) { stop("Not a graph object") }
+  if (!is_igraph(graph2)) { stop("Not a graph object") }
   if (missing(vertex.color1)) { 
     if ("color" %in% vertex_attr_names(graph1)) { 
       vertex.color1 <- V(graph1)$color 
@@ -75,7 +75,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
   
   res <- lapply(res, "+", 1)
 
-  if (getIgraphOpt("add.vertex.names") && is.named(graph2)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph2)) {
     for (i in seq_along(res)) {
       names(res[[i]]) <- V(graph2)$name[ res[[i]] ]
     }
@@ -87,8 +87,8 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                           vertex.color2, edge.color1,
                                           edge.color2) {
   # Argument checks
-  if (!is.igraph(graph1)) { stop("Not a graph object") }
-  if (!is.igraph(graph2)) { stop("Not a graph object") }
+  if (!is_igraph(graph1)) { stop("Not a graph object") }
+  if (!is_igraph(graph2)) { stop("Not a graph object") }
   if (missing(vertex.color1)) { 
     if ("color" %in% vertex_attr_names(graph1)) { 
       vertex.color1 <- V(graph1)$color 
@@ -138,7 +138,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 
   res <- lapply(res, "+", 1)
 
-  if (getIgraphOpt("add.vertex.names") && is.named(graph2)) {
+  if (getIgraphOpt("add.vertex.names") && is_named(graph2)) {
     for (i in seq_along(res)) {
       names(res[[i]]) <- V(graph2)$name[ res[[i]] ]
     }
@@ -148,7 +148,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)-1
 
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
@@ -162,8 +162,8 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
                                     induced=FALSE, map=TRUE, all.maps=FALSE,
                                     time.limit=Inf) {
   # Argument checks
-  if (!is.igraph(pattern)) { stop("Not a graph object") }
-  if (!is.igraph(target)) { stop("Not a graph object") }
+  if (!is_igraph(pattern)) { stop("Not a graph object") }
+  if (!is_igraph(target)) { stop("Not a graph object") }
   induced <- as.logical(induced)
   if (time.limit==Inf) {
     time.limit <- 0L
@@ -190,13 +190,13 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
 
   if (map) {
     res$map <- res$map + 1
-    if (getIgraphOpt("add.vertex.names") && is.named(target)) {
+    if (getIgraphOpt("add.vertex.names") && is_named(target)) {
       names(res$map) <- V(target)$name[res$map]
     }
   }
   if (all.maps) {
     res$maps <- lapply(res$maps, function(x) x + 1)
-    if (getIgraphOpt("add.vertex.names") && is.named(target)) {
+    if (getIgraphOpt("add.vertex.names") && is_named(target)) {
       for (i in seq_along(res$maps)) {
         names(res$maps[[i]]) <- V(target)$name[ res$maps[[i]] ]
       }

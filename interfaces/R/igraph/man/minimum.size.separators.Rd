@@ -37,7 +37,7 @@ min_size_sep (graph)
 }
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{
-  \code{\link{is.separator}}
+  \code{\link{is_separator}}
 }
 \examples{
 # The graph from the Moody-White paper

@@ -1,7 +1,7 @@
 
-context("is.chordal")
+context("is_chordal")
 
-test_that("is.chordal works", {
+test_that("is_chordal works", {
 
   library(igraph)
 
@@ -14,7 +14,7 @@ test_that("is.chordal works", {
   expect_that(mc, equals(list(alpha=c(9,4,6,8,3,5,7,2,1),
                               alpham1=c(9,8,5,2,6,3,7,4,1))))
 
-  ic <- is.chordal(g1, fillin=TRUE)
+  ic <- is_chordal(g1, fillin=TRUE)
   expect_that(ic$chordal, equals(FALSE))
   expect_that(unique(sort(ic$fillin)), equals(c(1,2,5,6,7,8)))
   expect_that(ic$newgraph, equals(NULL))
@@ -27,7 +27,7 @@ test_that("is.chordal works", {
   expect_that(mc2, equals(list(alpha=c(10,8,9,6,7,5,4,2,3,1),
                                alpham1=c(10,8,9,7,6,4,5,2,3,1))))
   
-  ic2 <- is.chordal(g2, fillin=TRUE)
+  ic2 <- is_chordal(g2, fillin=TRUE)
   expect_that(ic2, equals(list(chordal=TRUE, fillin=numeric(),
                                newgraph=NULL)))
 })

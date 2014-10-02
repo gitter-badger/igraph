@@ -7,17 +7,17 @@ test_that("g_pa works", {
   g <- g_pa(100, m=2)
   expect_that(ecount(g), equals(197))
   expect_that(vcount(g), equals(100))
-  expect_that(is.simple(g), is_true())
+  expect_that(is_simple(g), is_true())
 
   g2 <- g_pa(100, m=2, algorithm="psumtree-multiple")
   expect_that(ecount(g2), equals(198))
   expect_that(vcount(g2), equals(100))
-  expect_that(is.simple(g2), is_false())
+  expect_that(is_simple(g2), is_false())
 
   g3 <- g_pa(100, m=2, algorithm="bag")
   expect_that(ecount(g3), equals(198))
   expect_that(vcount(g3), equals(100))
-  expect_that(is.simple(g3), is_false())
+  expect_that(is_simple(g3), is_false())
 })
 
 test_that("g_pa can start from a graph", {

@@ -24,10 +24,10 @@
 \method{[}{igraph}(x, i, j, \dots, from, to,
                    sparse=getIgraphOpt("sparsematrices"),
                    edges=FALSE, drop=TRUE,
-                   attr=if (is.weighted(x)) "weight" else NULL)
+                   attr=if (is_weighted(x)) "weight" else NULL)
 \method{[[}{igraph}(x, i, j, \dots, directed=TRUE, edges=FALSE, exact=TRUE)
 \method{[}{igraph}(x, i, j, \dots, from, to,
-                   attr=if (is.weighted(x)) "weight" else NULL) <- value 
+                   attr=if (is_weighted(x)) "weight" else NULL) <- value 
 
 \method{+}{igraph}(e1, e2)
 \method{-}{igraph}(e1, e2)

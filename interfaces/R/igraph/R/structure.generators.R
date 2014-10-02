@@ -1235,7 +1235,7 @@ g_chordal_ring <- function(n, w) {
 #' 
 g_line <- function(graph) {
 
-  if (!is.igraph(graph)) {
+  if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
@@ -1531,10 +1531,10 @@ g_full_bip <- function(n1, n2, directed=FALSE,
 #' using the \code{edges} vector and finally it adds the \code{types} vector as
 #' a vertex attribute called \code{type}.
 #' 
-#' \code{is.bipartite} checks whether the graph is bipartite or not. It just
+#' \code{is_bipartite} checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called \code{type}.
 #' 
-#' @aliases g_bip graph.bipartite is.bipartite
+#' @aliases g_bip graph.bipartite is.bipartite is_bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #' boolean. The length of the vector gives the number of vertices in the graph.
 #' @param edges A vector giving the edges of the graph, the same way as for the
@@ -1548,7 +1548,7 @@ g_full_bip <- function(n1, n2, directed=FALSE,
 #' @return \code{g_bip} returns a bipartite igraph graph. In other
 #' words, an igraph graph that has a vertex attribute named \code{type}.
 #' 
-#' \code{is.bipartite} returns a logical scalar.
+#' \code{is_bipartite} returns a logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph}} to create one-mode networks
 #' @keywords graphs

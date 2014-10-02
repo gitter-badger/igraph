@@ -6,7 +6,7 @@ test_that("mean_distance works", {
 
   apl <- function(graph) {
     sp <- distances(graph, mode="out")
-    if (is.directed(graph)) {
+    if (is_directed(graph)) {
       diag(sp) <- NA
     } else {
       sp[lower.tri(sp, diag=TRUE)] <- NA

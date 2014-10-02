@@ -1,7 +1,7 @@
 
-context("is.bipartite")
+context("is_bipartite")
 
-test_that("is.bipartite works", {
+test_that("is_bipartite works", {
 
   library(igraph)
 
