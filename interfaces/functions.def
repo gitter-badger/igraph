@@ -671,6 +671,7 @@ igraph_arpack_rnsolve:
 igraph_arpack_unpack_complex:
          PARAMS: INOUT MATRIX vectors, INOUT MATRIX values, INTEGER nev
          NAME-R: arpack.unpack.complex
+         IGNORE: RNamespace
 
 igraph_unfold_tree:
         PARAMS: GRAPH graph, OUT GRAPH tree, NEIMODE mode=ALL, VECTOR roots,\

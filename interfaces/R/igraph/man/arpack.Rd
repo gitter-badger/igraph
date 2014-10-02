@@ -3,7 +3,6 @@
 \alias{arpack-options}
 \alias{igraph.arpack.default}
 \alias{arpack_defaults}
-\alias{arpack.unpack.complex}
 \concept{Eigenvalues}
 \concept{Eigenvectors}
 \concept{ARPACK}
@@ -13,7 +12,6 @@
 \usage{
 arpack(func, extra = NULL, sym = FALSE, options = arpack_defaults, 
     env = parent.frame(), complex=!sym)
-arpack.unpack.complex(vectors, values, nev)
 }
 \arguments{
   \item{func}{The function to perform the matrix-vector
@@ -34,7 +32,6 @@ arpack.unpack.complex(vectors, values, nev)
     problems (these only have real eigenvectors/values), but only
     non-symmetric ones. If you have a non-symmetric problem, but you're
     sure that the results will be real, then supply \code{FALSE} here.
-    The conversion is done by calling \code{arpack.unpack.complex}.
   }
   \item{vectors}{Eigenvectors, as returned by ARPACK.}
   \item{values}{Eigenvalues, as returned by ARPACK}
@@ -190,11 +187,6 @@ arpack.unpack.complex(vectors, values, nev)
     }
   }
   Please see the ARPACK documentation for additional details.
-
-  \code{arpack.unpack.complex} is a (semi-)internal function that
-  converts the output of the non-symmetric ARPACK solver to a more
-  readable format. It is called internally by \code{arpack}.
-  
 }
 \value{
   A named list with the following members:
