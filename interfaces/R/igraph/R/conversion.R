@@ -348,7 +348,7 @@ igraph.from.graphNEL <- function(graphNEL, name=TRUE, weight=TRUE,
     })
   }
   mode <- if (edgemode(graphNEL)=="directed") "out" else "all"
-  g <- g_adj_list(al, mode=mode, duplicate=TRUE)
+  g <- graph_from_adj_list(al, mode=mode, duplicate=TRUE)
   if (name) {
     V(g)$name <- nodes(graphNEL)
   }

@@ -161,7 +161,7 @@ igraph_lcf_vector:
 igraph_adjlist:
         PARAMS: OUT GRAPH graph, ADJLIST adjlist, NEIMODE mode=OUT, \
                 BOOLEAN duplicate=True
-        NAME-R: g_adj_list
+        NAME-R: graph_from_adj_list
 
 igraph_full_bipartite:
         PARAMS: OUT GRAPH graph, OUT VECTOR_BOOL_OR_0 types, INTEGER n1, \

@@ -83,7 +83,7 @@ bk4 <- function(graph, min=0, max=Inf) {
 test_that("Maximal cliques work", {
   library(igraph)
   set.seed(42)
-  G <- sample_gnp(1000, 1000, type="gnm")
+  G <- sample_gnm(1000, 1000)
   cli <- full_graph(10)
   for (i in 1:10) {
     G <- permute(G, sample(vcount(G)))

@@ -391,6 +391,7 @@ export(eigen_defaults)
 
 export(farthest_vertices)
 
+export(graph_from_adj_list)
 export(graph_from_adjacency_matrix)
 export(graph_atlas)
 export(bipartite_graph)

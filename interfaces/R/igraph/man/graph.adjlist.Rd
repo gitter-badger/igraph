@@ -1,13 +1,13 @@
 \name{Graphs from adjacency lists}
 \alias{graph.adjlist}
-\alias{g_adj_list}
+\alias{graph_from_adj_list}
 \title{Create graphs from adjacency lists}
 \description{An adjacency list is a list of numeric vectors, containing
   the neighbor vertices for each vertex. This function creates an igraph
   graph object from such a list.
 }
 \usage{
-g_adj_list(adjlist, mode = c("out", "in", "all", "total"),
+graph_from_adj_list(adjlist, mode = c("out", "in", "all", "total"),
               duplicate = TRUE)
 }
 \arguments{
@@ -22,7 +22,7 @@ g_adj_list(adjlist, mode = c("out", "in", "all", "total"),
   \item{duplicate}{Logical scalar. For undirected graphs it gives
     whether edges are included in the list twice. E.g. if it is
     \code{TRUE} then for an undirected \code{{A,B}} edge
-    \code{g_adj_list} expects \code{A} included in the neighbors of
+    \code{graph_from_adj_list} expects \code{A} included in the neighbors of
     \code{B} and \code{B} to be included in the neighbors of \code{A}.
 
     This argument is ignored if \code{mode} is \code{out} or \code{in}.
@@ -35,7 +35,7 @@ g_adj_list(adjlist, mode = c("out", "in", "all", "total"),
 
   The idea is that you convert your graph to an adjacency list by
   \code{\link{as_adj_list}}, do your modifications to the graphs and
-  finally create again an igraph graph by calling \code{g_adj_list}.
+  finally create again an igraph graph by calling \code{graph_from_adj_list}.
 }
 \value{
   An igraph graph object.
@@ -47,16 +47,16 @@ g_adj_list(adjlist, mode = c("out", "in", "all", "total"),
 ## Directed
 g <- ring(10, dir=TRUE)
 al <- as_adj_list(g, mode="out")
-g2 <- g_adj_list(al)
+g2 <- graph_from_adj_list(al)
 graph.isomorphic(g, g2)
 
 ## Undirected
 g <- ring(10)
 al <- as_adj_list(g)
-g2 <- g_adj_list(al, mode="all")
+g2 <- graph_from_adj_list(al, mode="all")
 graph.isomorphic(g, g2)
 ecount(g2)
-g3 <- g_adj_list(al, mode="all", duplicate=FALSE)
+g3 <- graph_from_adj_list(al, mode="all", duplicate=FALSE)
 ecount(g3)
 is_multiple(g3)
 }
