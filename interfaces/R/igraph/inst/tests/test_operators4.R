@@ -77,9 +77,9 @@ test_that("union of unnamed graphs works", {
   expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight_1", "weight_2")))
 
-  df1 <- data_frame(g)
+  df1 <- as_data_frame(g)
   df1 <- df1[ order(df1$from, df1$to), c(1,2,3,5,4,6)]
-  df2 <- merge(data_frame(g1), data_frame(g2),
+  df2 <- merge(as_data_frame(g1), as_data_frame(g2),
                by=c("from", "to"), all=TRUE)
   rownames(df1) <- seq_len(nrow(df1))
   colnames(df2) <- c("from", "to", "weight_1", "b1", "weight_2", "b2")
@@ -116,7 +116,7 @@ test_that("union of named graphs works", {
   expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight_1", "weight_2")))
   
-  df1 <- data_frame(g, what="both")
+  df1 <- as_data_frame(g, what="both")
 
   g.v <- read.table(stringsAsFactors=FALSE, textConnection("
   a1 a2 name
@@ -187,7 +187,7 @@ test_that("intersection of named graphs works", {
   expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight_1", "weight_2")))
 
-  df1 <- data_frame(g, what="both")
+  df1 <- as_data_frame(g, what="both")
 
   g.e <- read.table(stringsAsFactors=FALSE, textConnection("
   from to weight_1 weight_2 b1 b2
@@ -221,7 +221,7 @@ j 10 20    j
 
   gg <- graph.intersection(g1, g2, keep.all.vertices=TRUE)
 
-  df2 <- data_frame(gg, what="both")
+  df2 <- as_data_frame(gg, what="both")
 
   rownames(df2$edges) <- rownames(df2$edges)
   expect_that(df2$edges, equals(g.e))
@@ -258,7 +258,7 @@ test_that("difference of named graphs works", {
   sg <- ring(4)
   V(sg)$name <- letters[c(1,2,3,11)]
 
-  df1 <- data_frame(g - sg, what="both")
+  df1 <- as_data_frame(g - sg, what="both")
 
   t1.e <- read.table(stringsAsFactors=FALSE,
                                            textConnection("
@@ -311,7 +311,7 @@ test_that("compose works for named graphs", {
   E(g2)$foo <- letters[seq_len(ecount(g2))]
 
   g <- compose(g1, g2)
-  df <- data_frame(g, what="both")
+  df <- as_data_frame(g, what="both")
 
   df.v <- read.table(stringsAsFactors=FALSE, textConnection("
   bar1 foo_1 foo_2 bar2 name
@@ -363,9 +363,9 @@ test_that("intersection of non-named graphs keeps attributes properly", {
     D
   }
 
-  df <- rn(data_frame(g))
-  df2 <- rn(data_frame(g2))
-  dfi <- rn(data_frame(gi))
+  df <- rn(as_data_frame(g))
+  df2 <- rn(as_data_frame(g2))
+  dfi <- rn(as_data_frame(gi))
 
   expect_that(df[rownames(dfi), ], is_equivalent_to(dfi[, 1:3]))
   expect_that(df2[rownames(dfi), ], is_equivalent_to(dfi[, c(1,2,4)]))
@@ -388,9 +388,9 @@ test_that("union of non-named graphs keeps attributes properly", {
     D
   }
 
-  df <- rn(data_frame(g))
-  df2 <- rn(data_frame(g2))
-  dfu <- rn(data_frame(gu))
+  df <- rn(as_data_frame(g))
+  df2 <- rn(as_data_frame(g2))
+  dfu <- rn(as_data_frame(gu))
 
   expect_that(dfu[rownames(df), 1:3], is_equivalent_to(df))
   expect_that(dfu[rownames(df2), c(1,2,4)], is_equivalent_to(df2))
