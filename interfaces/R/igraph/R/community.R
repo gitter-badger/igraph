@@ -1033,8 +1033,7 @@ cluster_walktrap <- function(graph, weights=E(graph)$weight, steps=4,
 #' \code{edge.betweeness.community} returns various information collected
 #' throught the run of the algorithm. See the return value down here.
 #' 
-#' @aliases edge.betweenness.community edge.betweenness.community.merges
-#'   cluster_edge_betweenness
+#' @aliases edge.betweenness.community cluster_edge_betweenness
 #' @param graph The graph to analyze.
 #' @param weights The edge weights. Supply \code{NULL} to omit edge weights. By
 #' default the \sQuote{\code{weight}} edge attribute is used, if it is present.
@@ -1119,19 +1118,6 @@ cluster_edge_betweenness <- function(graph, weights=E(graph)$weight,
   class(res) <- "communities"
   res
 }
-
-edge.betweenness.community.merges <- function(graph, edges) {
-  
-  if (!is.igraph(graph)) {
-    stop("Not a graph object!")
-  }
-
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_community_eb_get_merges", graph, as.numeric(edges),
-        PACKAGE="igraph")
-}
-
-
 
 #' Community structure via greedy optimization of modularity
 #' 
