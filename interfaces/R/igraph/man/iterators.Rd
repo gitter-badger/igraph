@@ -71,7 +71,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
     V(g)$number <- sample(1:100, vcount(g), replace=TRUE)
     V(g)$color <- "grey"
     V(g)[ number < 50 ]$color <- "red"
-    plot(g, layout=l_circle, vertex.color=V(g)$color,
+    plot(g, layout=layout_in_circle, vertex.color=V(g)$color,
          vertex.label=V(g)$number)
   }
 
@@ -83,7 +83,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
     E(g)$weight <- runif(ecount(g))
     E(g)$width <- 1
     E(g)[ weight >= 0.5 ]$width <- 3
-    plot(g, layout=l_circle, edge.width=E(g)$width, edge.color="black")
+    plot(g, layout=layout_in_circle, edge.width=E(g)$width, edge.color="black")
   }
 
   It is important to note that, whenever we use iterators to assign new
@@ -93,7 +93,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
   \preformatted{
     g <- g_ring(10)
     V(g)$color <- c("black", "red")
-    plot(g, layout=l_circle)
+    plot(g, layout=layout_in_circle)
   }
 
   For the recycling, the standard R rules apply and a warning is given
@@ -189,7 +189,7 @@ E(graph, P=NULL, path=NULL, directed=TRUE)
 \examples{
 # mean degree of vertices in the largest cluster in a random graph
 g <- erdos.renyi.game(100, 2/100)
-c <- comps(g)
+c <- components(g)
 vsl <- which(which.max(c$csize)==c$membership)
 mean(degree(g, vsl))
 
@@ -197,7 +197,7 @@ mean(degree(g, vsl))
 V(g)$color <- "green"
 V(g)[vsl]$color <- "red"
 \dontrun{plot(g, vertex.size=3, labels=NA, vertex.color="a:color",
-              layout=l_fr)}
+              layout=layout_with_fr)}
 
 # the longest geodesic within the largest cluster
 long <- numeric()

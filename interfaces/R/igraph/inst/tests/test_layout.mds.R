@@ -1,7 +1,7 @@
 
-context("l_mds")
+context("layout_with_mds")
 
-test_that("l_mds works", {
+test_that("layout_with_mds works", {
 
   library(igraph)
 
@@ -19,7 +19,7 @@ test_that("l_mds works", {
     ei$vectors[,1:2] * rep(va, each=nrow(sp))
   }
 
-  expect_that(mymds(g), equals(l_mds(g)))
+  expect_that(mymds(g), equals(layout_with_mds(g)))
 
   ## plot(g, layout=ll)
 
@@ -27,13 +27,13 @@ test_that("l_mds works", {
 
   set.seed(42)
   g <- g_ring(10) + g_ring(3)
-  expect_that(ncol(l_mds(g)), equals(2))
+  expect_that(ncol(layout_with_mds(g)), equals(2))
   
   ## Small stress test
 
   for (i in 1:10) {
     g <- g_np(100, 2/100)
-    l <- l_mds(g)
+    l <- layout_with_mds(g)
     expect_that(ncol(l), equals(2))
   }
 

@@ -12,13 +12,13 @@ test_that("operators work", {
   gu <- union(g1, g2)
   expect_that(vcount(gu), equals(11))
   expect_that(ecount(gu), equals(20))
-  expect_that(o(rbind(edgelist(g1), edgelist(g2))),
-              equals(o(edgelist(gu))))
+  expect_that(o(rbind(as_edgelist(g1), as_edgelist(g2))),
+              equals(o(as_edgelist(gu))))
 
   gdu <- disjoint_union(g1, g2)
-  expect_that(o(edgelist(gdu)),
-              equals(o(rbind(edgelist(g1),
-                             edgelist(g2)+vcount(g1)))))
+  expect_that(o(as_edgelist(gdu)),
+              equals(o(rbind(as_edgelist(g1),
+                             as_edgelist(g2)+vcount(g1)))))
 
 ####
 

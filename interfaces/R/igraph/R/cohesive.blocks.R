@@ -361,7 +361,7 @@ plot.cohesiveBlocks <- function(x, y,
 #' @rdname cohesive_blocks
 
 plot_hierarchy <- function(blocks,
-                          layout=l_tree(hierarchy(blocks),
+                          layout=layout_as_tree(hierarchy(blocks),
                             root=1), ...) {
   plot(hierarchy(blocks), layout=layout, ...)
 }

@@ -120,22 +120,22 @@ pause()
 ## pause()
 
 ## ### How many components?
-## count_comps(jg)
+## count_components(jg)
 
 ## pause()
 
 ## ### How big are these?
-## table(comps(jg)$csize)
+## table(components(jg)$csize)
 
 ## pause()
 
 ## ### In-degree distribution
-## plot(degree_dist(jg, mode="in"), log="xy")
+## plot(degree_distribution(jg, mode="in"), log="xy")
 
 ## pause()
 
 ## ### Out-degree distribution
-## plot(degree_dist(jg, mode="out"), log="xy")
+## plot(degree_distribution(jg, mode="out"), log="xy")
 
 ## pause()
 

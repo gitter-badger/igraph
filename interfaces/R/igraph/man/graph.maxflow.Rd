@@ -111,8 +111,8 @@ min_cut(graph, source=NULL, target=NULL, capacity=NULL,
   the ACM}, 44 585-591, 1997.
 }
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{distances}}, \code{\link{edge_conn}},
-  \code{\link{vertex_conn}}}
+\seealso{\code{\link{distances}}, \code{\link{edge_connectivity}},
+  \code{\link{vertex_connectivity}}}
 \examples{
 E <- rbind( c(1,3,3), c(3,4,1), c(4,2,2), c(1,5,1), c(5,6,2), c(6,2,10))
 colnames(E) <- c("from", "to", "capacity")

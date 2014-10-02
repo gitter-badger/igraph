@@ -149,7 +149,7 @@
   mp <- getOption("max.print")
   if (mp >= ec) {
     omitted.edges <- 0
-    el <- edgelist(x, names=names)
+    el <- as_edgelist(x, names=names)
   } else {
     omitted.edges <- ec-mp
     el <- get.edges(x, seq_len(mp))
@@ -193,7 +193,7 @@
 .print.edges.compressed <- function(x, names) {
   ## TODO: getOption("max.print")
   if (is_named(x)) cat("+ edges (vertex names):\n") else cat("+ edges:\n")
-  el <- edgelist(x, names=names)
+  el <- as_edgelist(x, names=names)
   arrow <- c("--", "->")[is_directed(x)+1]
   edges <- paste(sep="", format(el[,1]), arrow, format(el[,2]))
   print(edges, quote=FALSE)
@@ -204,7 +204,7 @@
   cat("+ edges:\n")
   vc <- vcount(x)
   arrow <- c(" -- ", " -> ")[is_directed(x)+1]
-  al <- adj_list(x, mode="out")
+  al <- as_adj_list(x, mode="out")
   w <- nchar(max(which(degree(x, mode="in") != 0)))
   mpl <- trunc((getOption("width")-nchar(arrow)-nchar(vc)) / (w+1))
   if (any(sapply(al, length) > mpl)) {
@@ -245,7 +245,7 @@
   arrow <- c(" -- ", " -> ")[is_directed(x)+1]
   vn <- V(x)$name
 
-  al <- adj_list(x, mode="out")
+  al <- as_adj_list(x, mode="out")
   alstr <- sapply(al, function(x) { paste(collapse=", ", vn[x]) })
   alstr <- paste(sep="", format(vn), arrow, alstr)
   alstr <- strwrap(alstr, exdent=max(nchar(vn))+nchar(arrow))

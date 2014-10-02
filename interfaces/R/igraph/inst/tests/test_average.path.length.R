@@ -16,7 +16,7 @@ test_that("mean_distance works", {
   }
 
   giant.component <- function(graph, mode="weak") {
-    clu <- comps(graph, mode=mode)
+    clu <- components(graph, mode=mode)
     induced_subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
   

@@ -8,7 +8,7 @@ test_that("g_kautz works", {
   expect_that(g$m, equals(2))
   expect_that(g$n, equals(3))
 
-  el <- edgelist(g)
+  el <- as_edgelist(g)
   el <- el[order(el[,1], el[,2]),]
   expect_that(el, equals(
     structure(c(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 

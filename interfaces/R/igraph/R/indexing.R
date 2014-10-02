@@ -98,20 +98,20 @@
     }
     res
   } else if (missing(i) && missing(j)) {
-    adj(x, sparse=sparse, attr=attr, edges=edges)
+    as_adj(x, sparse=sparse, attr=attr, edges=edges)
   } else if (missing(j)) {
-    adj(x, sparse=sparse, attr=attr, edges=edges)[i,,drop=drop]
+    as_adj(x, sparse=sparse, attr=attr, edges=edges)[i,,drop=drop]
   } else if (missing(i)) {
-    adj(x, sparse=sparse, attr=attr, edges=edges)[,j,drop=drop]
+    as_adj(x, sparse=sparse, attr=attr, edges=edges)[,j,drop=drop]
   } else {
-    adj(x, sparse=sparse, attr=attr, edges=edges)[i,j,drop=drop]
+    as_adj(x, sparse=sparse, attr=attr, edges=edges)[i,j,drop=drop]
   }
 }
 
 `[[.igraph` <- function(x, i, j, ..., directed=TRUE,
                         edges=FALSE, exact=TRUE) {
   ## TODO: make it faster, don't need the whole list usually
-  getfun <- if (edges) adj_edge_list else adj_list
+  getfun <- if (edges) as_adj_edge_list else as_adj_list
   if (missing(i) && missing(j)) {
     mode <- if (directed) "out" else "all"
     getfun(x, mode=mode)
@@ -128,7 +128,7 @@
     if (!edges) {
       lapply(getfun(x, mode=mode)[i], intersect, j)
     } else {
-      ee <- adj_edge_list(x, mode=mode)[i]
+      ee <- as_adj_edge_list(x, mode=mode)[i]
       lapply(seq_along(i), function(yy) {
         from <- i[yy]
         el <- get.edges(x, ee[[yy]])

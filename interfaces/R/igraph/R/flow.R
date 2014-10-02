@@ -75,7 +75,7 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' The vertex connectivity of two vertices (\code{source} and \code{target}) in
 #' a directed graph is the minimum number of vertices needed to remove from the
 #' graph to eliminate all (directed) paths from \code{source} to \code{target}.
-#' \code{vertex_conn} calculates this quantity if both the
+#' \code{vertex_connectivity} calculates this quantity if both the
 #' \code{source} and \code{target} arguments are given and they're not
 #' \code{NULL}.
 #' 
@@ -83,7 +83,7 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' (ordered) pairs of vertices in the graph. In other words this is the minimum
 #' number of vertices needed to remove to make the graph not strongly
 #' connected. (If the graph is not strongly connected then this is zero.)
-#' \code{vertex_conn} calculates this quantitty if neither the
+#' \code{vertex_connectivity} calculates this quantitty if neither the
 #' \code{source} nor \code{target} arguments are given. (Ie. they are both
 #' \code{NULL}.)
 #' 
@@ -99,15 +99,15 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' \code{cohesion}.
 #' 
 #' These three functions essentially calculate the same measure(s), more
-#' precisely \code{vertex_conn} is the most general, the other two are
+#' precisely \code{vertex_connectivity} is the most general, the other two are
 #' included only for the ease of using more descriptive function names.
 #' 
-#' @aliases vertex.connectivity vertex.disjoint.paths cohesion vertex_conn
+#' @aliases vertex.connectivity vertex.disjoint.paths cohesion vertex_connectivity
 #'   vertex_disjoint_paths graph.cohesion
 #' @param graph,x The input graph.
-#' @param source The id of the source vertex, for \code{vertex_conn} it
+#' @param source The id of the source vertex, for \code{vertex_connectivity} it
 #' can be \code{NULL}, see details below.
-#' @param target The id of the target vertex, for \code{vertex_conn} it
+#' @param target The id of the target vertex, for \code{vertex_connectivity} it
 #' can be \code{NULL}, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
 #' and also the degree of the vertices. If the graph is not (strongly)
@@ -119,7 +119,7 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' @param ... Ignored.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{max_flow}}, \code{\link{edge_conn}},
+#' @seealso \code{\link{max_flow}}, \code{\link{edge_connectivity}},
 #' \code{\link{edge_disjoint_paths}}, \code{\link{adhesion}}
 #' @references White, Douglas R and Frank Harary 2001. The Cohesiveness of
 #' Blocks In Social Networks: Node Connectivity and Conditional Density.
@@ -131,8 +131,8 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' g <- delete_edges(g, E(g)[ 100 %--% 1 ])
 #' g2 <- barabasi.game(100, m=5)
 #' g2 <- delete_edges(g2, E(g2)[ 100 %--% 1])
-#' vertex_conn(g, 100, 1)
-#' vertex_conn(g2, 100, 1)
+#' vertex_connectivity(g, 100, 1)
+#' vertex_connectivity(g2, 100, 1)
 #' vertex_disjoint_paths(g2, 100, 1)
 #' 
 #' g <- g_np(50, 5/50)
@@ -140,7 +140,7 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' g <- induced_subgraph(g, subcomponent(g, 1))
 #' cohesion(g)
 #' 
-vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
+vertex_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -170,11 +170,11 @@ vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' The edge connectivity of a pair of vertices (\code{source} and
 #' \code{target}) is the minimum number of edges needed to remove to eliminate
 #' all (directed) paths from \code{source} to \code{target}.
-#' \code{edge_conn} calculates this quantity if both the \code{source}
+#' \code{edge_connectivity} calculates this quantity if both the \code{source}
 #' and \code{target} arguments are given (and not \code{NULL}).
 #' 
 #' The edge connectivity of a graph is the minimum of the edge connectivity of
-#' every (ordered) pair of vertices in the graph.  \code{edge_conn}
+#' every (ordered) pair of vertices in the graph.  \code{edge_connectivity}
 #' calculates this quantity if neither the \code{source} nor the \code{target}
 #' arguments are given (ie. they are both \code{NULL}).
 #' 
@@ -187,15 +187,15 @@ vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' connectivity of the graph.
 #' 
 #' The three functions documented on this page calculate similar properties,
-#' more precisely the most general is \code{edge_conn}, the others are
+#' more precisely the most general is \code{edge_connectivity}, the others are
 #' included only for having more descriptive function names.
 #' 
 #' @aliases edge.connectivity edge_disjoint_paths graph.adhesion adhesion
-#'   edge_conn edge.disjoint.paths
+#'   edge_connectivity edge.disjoint.paths
 #' @param graph The input graph.
-#' @param source The id of the source vertex, for \code{edge_conn} it
+#' @param source The id of the source vertex, for \code{edge_connectivity} it
 #' can be \code{NULL}, see details below.
-#' @param target The id of the target vertex, for \code{edge_conn} it
+#' @param target The id of the target vertex, for \code{edge_connectivity} it
 #' can be \code{NULL}, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
 #' and also the degree of the vertices. If the graph is not (strongly)
@@ -206,7 +206,7 @@ vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' thanks Peter.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{max_flow}}, \code{\link{vertex_conn}},
+#' @seealso \code{\link{max_flow}}, \code{\link{vertex_connectivity}},
 #' \code{\link{vertex_disjoint_paths}}, \code{\link{cohesion}}
 #' @references Douglas R. White and Frank Harary: The cohesiveness of blocks in
 #' social networks: node connectivity and conditional density, TODO: citation
@@ -215,8 +215,8 @@ vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' 
 #' g <- barabasi.game(100, m=1)
 #' g2 <- barabasi.game(100, m=5)
-#' edge_conn(g, 100, 1)
-#' edge_conn(g2, 100, 1)
+#' edge_connectivity(g, 100, 1)
+#' edge_connectivity(g2, 100, 1)
 #' edge_disjoint_paths(g2, 100, 1)
 #' 
 #' g <- g_np(50, 5/50)
@@ -224,7 +224,7 @@ vertex_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' g <- induced_subgraph(g, subcomponent(g, 1))
 #' adhesion(g)
 #' 
-edge_conn <- function(graph, source=NULL, target=NULL, checks=TRUE) {
+edge_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -279,7 +279,7 @@ adhesion <- function(graph, checks=TRUE) {
         PACKAGE="igraph")
 }
 
-#' @rdname vertex_conn
+#' @rdname vertex_connectivity
 #' @method cohesion igraph
 
 cohesion.igraph <- function(x, checks=TRUE, ...) {

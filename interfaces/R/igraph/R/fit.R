@@ -28,7 +28,7 @@
 
 #' Fitting a power-law distribution function to discrete data
 #' 
-#' \code{pl_fit} fits a power-law distribution to a data set.
+#' \code{fit_power_law} fits a power-law distribution to a data set.
 #' 
 #' This function fits a power-law distribution to a vector containing samples
 #' from a distribution (that is assumed to follow a power-law of course). In a
@@ -40,7 +40,7 @@
 #' \eqn{\alpha}{alpha} if \eqn{x_{min}}{xmin} is given, or to determine
 #' \eqn{x_{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 #' 
-#' \code{pl_fit} provides two maximum likelihood implementations.  If
+#' \code{fit_power_law} provides two maximum likelihood implementations.  If
 #' the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
 #' optimization (see \link[stats4]{mle}) algorithm is applied.  The additional
 #' arguments are passed to the mle function, so it is possible to change the
@@ -113,15 +113,15 @@
 #' # This should approximately yield the correct exponent 3
 #' g <- barabasi.game(1000) # increase this number to have a better estimate
 #' d <- degree(g, mode="in")
-#' fit1 <- pl_fit(d+1, 10)
-#' fit2 <- pl_fit(d+1, 10, implementation="R.mle")
+#' fit1 <- fit_power_law(d+1, 10)
+#' fit2 <- fit_power_law(d+1, 10, implementation="R.mle")
 #' 
 #' fit1$alpha
 #' coef(fit2)
 #' fit1$logLik
 #' logLik(fit2)
 #' 
-pl_fit <- function(x, xmin=NULL, start=2, force.continuous=FALSE,
+fit_power_law <- function(x, xmin=NULL, start=2, force.continuous=FALSE,
                           implementation=c("plfit", "R.mle"), ...) {
 
   implementation <- igraph.match.arg(implementation)

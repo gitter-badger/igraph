@@ -82,7 +82,7 @@ write.graph.fromraw <- function(buffer, file) {
 #' \code{http} or \code{ftp} connection. It can also be a character string with
 #' the file name or URI.
 #' @param format Character constant giving the file format. Right now
-#' \code{edgelist}, \code{pajek}, \code{graphml}, \code{gml}, \code{ncol},
+#' \code{as_edgelist}, \code{pajek}, \code{graphml}, \code{gml}, \code{ncol},
 #' \code{lgl}, \code{dimacs} and \code{graphdb} are supported, the default is
 #' \code{edgelist}. As of igraph 0.4 this argument is case insensitive.
 #' @param \dots Additional arguments, see below.

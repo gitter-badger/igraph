@@ -23,11 +23,11 @@ articulation_points(graph)
   of the input graph.}
 %\references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{biconn_comps}}, \code{\link{comps}},
-  \code{\link{is_connected}}, \code{\link{vertex_conn}}}
+\seealso{\code{\link{biconnected_components}}, \code{\link{components}},
+  \code{\link{is_connected}}, \code{\link{vertex_connectivity}}}
 \examples{
 g <- disjoint_union( g_full(5), g_full(5) )
-clu <- comps(g)$membership
+clu <- components(g)$membership
 g <- add_edges(g, c(match(1, clu), match(2, clu)) )
 articulation_points(g)
 }

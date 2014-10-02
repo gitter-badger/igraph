@@ -141,7 +141,7 @@ assign(".next", 1, .tkplot.env)
 #' ## Saving a tkplot() to a file programatically
 #' g <- g_star(10, center=10) %u% g_ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
-#' lay <- l_auto(g)
+#' lay <- layout_nicely(g)
 #' 
 #' id <- tkplot(g, layout=lay)
 #' canvas <- tk_canvas(id)
@@ -156,7 +156,7 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' canvas <- tk_canvas(id)
 #' padding <- 20
-#' coords <- l_norm(l_circle(g), 0+padding, 450-padding,
+#' coords <- norm_coords(layout_in_circle(g), 0+padding, 450-padding,
 #'                       50+padding, 500-padding)
 #' tk_set_coords(id, coords)
 #' 
@@ -524,12 +524,12 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
 }
 
 .tkplot.addlayout("random",
-                  list(name="Random", f=l_random, params=list()))
+                  list(name="Random", f=layout_randomly, params=list()))
 .tkplot.addlayout("circle",
-                  list(name="Circle", f=l_circle, params=list()))
+                  list(name="Circle", f=layout_in_circle, params=list()))
 .tkplot.addlayout("fruchterman.reingold",
                   list(name="Fruchterman-Reingold",
-                       f=l_fr,
+                       f=layout_with_fr,
                        params=list(
                          niter=list(name="Number of iterations",
                            type="numeric",
@@ -553,7 +553,7 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
                   )
 .tkplot.addlayout("kamada.kawai",
                   list(name="Kamada-Kawai",
-                       f=l_kk,
+                       f=layout_with_kk,
                        params=list(
                          niter=list(name="Number of iterations",
                            type="numeric",
@@ -569,7 +569,7 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
                   )
 .tkplot.addlayout("reingold.tilford",
                   list(names="Reingold-Tilford",
-                       f=l_tree,
+                       f=layout_as_tree,
                        params=list(
                          root=list(name="Root vertex",
                            type="numeric",
@@ -983,7 +983,7 @@ tk_canvas <- function(tkp.id) {
 .tkplot.create.edges <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   n <- ecount(tkp$graph)
-  edgematrix <- edgelist(tkp$graph, names=FALSE)
+  edgematrix <- as_edgelist(tkp$graph, names=FALSE)
   mapply(function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
          edgematrix[,1],
          edgematrix[,2], 1:nrow(edgematrix))

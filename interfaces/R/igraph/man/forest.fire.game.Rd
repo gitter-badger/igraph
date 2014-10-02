@@ -70,8 +70,8 @@ g_forestfire (nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 }
 \examples{
 g <- g_forestfire(10000, fw.prob=0.37, bw.factor=0.32/0.37)
-dd1 <- degree_dist(g, mode="in")
-dd2 <- degree_dist(g, mode="out")
+dd1 <- degree_distribution(g, mode="in")
+dd2 <- degree_distribution(g, mode="out")
 if (interactive()) {
   plot(seq(along=dd1)-1, dd1, log="xy")
   points(seq(along=dd2)-1, dd2, col=2, pch=2)

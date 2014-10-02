@@ -1,13 +1,13 @@
-\name{canon_perm}
+\name{canonical_permutation}
 \alias{canonical.permutation}
-\alias{canon_perm}
+\alias{canonical_permutation}
 \concept{Canonical permutation}
 \concept{BLISS}
 \title{Canonical permutation of a graph}
 \description{The canonical permutation brings every isomorphic graphs
   into the same (labeled) graph.}
 \usage{
-canon_perm(graph, sh="fm")
+canonical_permutation(graph, sh="fm")
 }
 \arguments{
   \item{graph}{The input graph, treated as undirected.}
@@ -15,7 +15,7 @@ canon_perm(graph, sh="fm")
     algorithm. See details for possible values.}
 }
 \details{
-  \code{canon_perm} computes a permutation which brings the
+  \code{canonical_permutation} computes a permutation which brings the
   graph into canonical form, as defined by the BLISS algorithm.
   All isomorphic graphs have the same canonical form.
 
@@ -71,17 +71,17 @@ canon_perm(graph, sh="fm")
 \examples{
 ## Calculate the canonical form of a random graph
 g1 <- g_nm(10, 20)
-cp1 <- canon_perm(g1)
+cp1 <- canonical_permutation(g1)
 cf1 <- permute(g1, cp1$labeling)
 
 ## Do the same with a random permutation of it
 g2 <- permute(g1, sample(vcount(g1)))
-cp2 <- canon_perm(g2)
+cp2 <- canonical_permutation(g2)
 cf2 <- permute(g2, cp2$labeling)
 
 ## Check that they are the same
-el1 <- edgelist(cf1)
-el2 <- edgelist(cf2)
+el1 <- as_edgelist(cf1)
+el2 <- as_edgelist(cf2)
 el1 <- el1[ order(el1[,1], el1[,2]), ]
 el2 <- el2[ order(el2[,1], el2[,2]), ]
 all(el1 == el2)

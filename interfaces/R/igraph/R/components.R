@@ -23,7 +23,7 @@
 # Connected components, subgraphs, kinda
 ###################################################################
 
-count_comps <- function(graph, mode=c("weak", "strong")) {
+count_components <- function(graph, mode=c("weak", "strong")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -35,19 +35,19 @@ count_comps <- function(graph, mode=c("weak", "strong")) {
         PACKAGE="igraph")
 }
 
-#' @rdname comps
+#' @rdname components
 #' @param cumulative Logical, if TRUE the cumulative distirubution (relative
 #' frequency) is calculated.
 #' @param mul.size Logical. If TRUE the relative frequencies will be multiplied
 #' by the cluster sizes.
 
-comp_dist <- function(graph, cumulative=FALSE, mul.size=FALSE,
+component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
                                  ...) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   
-  cs <- comps(graph, ...)$csize;
+  cs <- components(graph, ...)$csize;
   hi <- hist(cs, -1:max(cs), plot=FALSE)$density
   if (mul.size) {
     hi <- hi*1:max(cs)
@@ -96,14 +96,14 @@ is_connected <- function(graph, mode=c("weak", "strong")) {
 #' @return A list of graph objects.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{is_connected}} to decide whether a graph is connected,
-#' \code{\link{comps}} to calculate the connected components of a graph.
+#' \code{\link{components}} to calculate the connected components of a graph.
 #' @keywords graphs
 #' @examples
 #' 
 #' # the diameter of each component in a random graph
 #' g <- g_np(1000, 1/1000)
-#' comps <- decompose(g, min.vertices=2)
-#' sapply(comps, diameter)
+#' components <- decompose(g, min.vertices=2)
+#' sapply(components, diameter)
 #' 
 decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
                       min.vertices=0) {

@@ -58,7 +58,7 @@ pause()
 
 ### Plot it as a dendrogram, looks better if the 'ape' package is installed
 
-dend_plot(hrg)
+plot_dendrogram(hrg)
 
 pause()
 
@@ -77,7 +77,7 @@ pause()
 ### Fit HRG
 
 ghrg <- hrg.fit(g)
-dend_plot(ghrg)
+plot_dendrogram(ghrg)
 
 pause()
 
@@ -98,7 +98,7 @@ pause()
 ### Add some the top 5 predicted edges to the graph, colored red
 
 E(g)$color <- "grey"
-lay <- l_auto(g)
+lay <- layout_nicely(g)
 g2 <- add_edges(g, t(pred$edges[1:5,]), color="red")
 plot(g2, layout=lay)
 

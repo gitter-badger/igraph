@@ -372,7 +372,7 @@ igraph_closeness_estimate:
                 NEIMODE mode=OUT, REAL cutoff, EDGEWEIGHTS weights=NULL, \
                 BOOLEAN normalized=False
         DEPS: vids ON graph, weights ON graph, res ON graph vids
-        NAME-R: closeness_estimate
+        NAME-R: estimate_closeness
         IGNORE: RR
 
 igraph_shortest_paths:
@@ -451,7 +451,7 @@ igraph_betweenness_estimate:
                 BOOLEAN directed=True, REAL cutoff, EDGEWEIGHTS weights=NULL, \
                 BOOLEAN nobigint=True
         DEPS: vids ON graph, weights ON graph, res ON graph vids
-        NAME-R: betweenness_estimate
+        NAME-R: estimate_betweenness
         FLAGS: PROGRESS
         IGNORE: RR
 
@@ -466,7 +466,7 @@ igraph_edge_betweenness_estimate:
         PARAMS: GRAPH graph, OUT VECTOR res, BOOLEAN directed=True, \
                 REAL cutoff, EDGEWEIGHTS weights=NULL
         DEPS: weights ON graph
-        NAME-R: edge_betweenness_estimate
+        NAME-R: estimate_edge_betweenness
         IGNORE: RR
 
 igraph_pagerank_old:
@@ -841,7 +841,7 @@ igraph_bipartite_projection_size:
                 OUT INTEGERPTR vcount1, OUT INTEGERPTR ecount1, \
                 OUT INTEGERPTR vcount2, OUT INTEGERPTR ecount2
         DEPS: types ON graph
-        NAME-R: bip_proj_size
+        NAME-R: bipartite_projection_size
 
 igraph_bipartite_projection:
         PARAMS: GRAPH graph, BIPARTITE_TYPES types=NULL, \
@@ -868,12 +868,12 @@ igraph_get_incidence:
         PARAMS: GRAPH graph, BIPARTITE_TYPES types=NULL, OUT MATRIX res, \
                 OUT VECTOR_OR_0 row_ids, OUT VECTOR_OR_0 col_ids
         DEPS: types ON graph
-        NAME-R: incidence
+        NAME-R: as_incidence_matrix
         IGNORE: RR
 
 igraph_is_bipartite:
         PARAMS: GRAPH graph, OUT BOOLEANPTR res, OUT VECTOR_BOOL_OR_0 type
-        NAME-R: bip_map
+        NAME-R: bipartite_mapping
 
 igraph_bipartite_game_gnp:
         PARAMS: OUT GRAPH graph, OUT VECTOR_BOOL_OR_0 types, \
@@ -897,7 +897,7 @@ igraph_laplacian:
                 EDGEWEIGHTS weights=NULL
         DEPS: weights ON graph
         IGNORE: RR, RC
-        NAME-R: laplacian
+        NAME-R: laplacian_matrix
 
 #######################################
 # Components
@@ -931,7 +931,7 @@ igraph_biconnected_components:
                 OUT VERTEXSET articulation_points
         DEPS: tree_edges ON graph, component_edges ON graph, \
               components ON graph
-        NAME-R: biconn_comps
+        NAME-R: biconnected_components
 
 #######################################
 # Cliques
@@ -956,7 +956,7 @@ igraph_maximal_cliques:
 igraph_maximal_cliques_count:
         PARAMS: GRAPH graph, OUT INTEGERPTR no, INTEGER min_size=0, \
                 INTEGER max_size=0
-        NAME-R: num_max_cliques
+        NAME-R: count_max_cliques
         IGNORE: RR, RC
 
 igraph_maximal_cliques_file:
@@ -1005,7 +1005,7 @@ igraph_layout_star:
         PARAMS: GRAPH graph, OUT MATRIX res, VERTEX center=V(graph)[1], \
                 VECTORM1_OR_0 order=NULL
         DEPS: center ON graph
-        NAME-R: l_star
+        NAME-R: layout_as_star
 
 igraph_layout_grid:
         PARAMS: GRAPH graph, OUT MATRIX res, INTEGER width=0
@@ -1136,7 +1136,7 @@ igraph_layout_bipartite:
         PARAMS: GRAPH graph, BIPARTITE_TYPES types=NULL, OUT MATRIX res, \
                 REAL hgap=1, REAL vgap=1, INTEGER maxiter=100
         DEPS: types ON graph
-        NAME-R: l_bip
+        NAME-R: layout_as_bipartite
 
 igraph_layout_gem:
         PARAMS: GRAPH graph, INOUT MATRIX res=matrix(), \
@@ -1397,7 +1397,7 @@ igraph_to_undirected:
 
 igraph_get_stochastic:
         PARAMS: GRAPH graph, OUT MATRIX res, BOOLEAN column_wise=False
-        NAME-R: stochastic
+        NAME-R: stochastic_matrix
         IGNORE: RR
 
 igraph_get_stochastic_sparsemat:
@@ -1675,12 +1675,12 @@ igraph_is_minimal_separator:
 igraph_all_minimal_st_separators:
         PARAMS: GRAPH graph, OUT VERTEXSETLIST separators
         DEPS: separators ON graph
-        NAME-R: min_st_sep
+        NAME-R: min_st_separators
 
 igraph_minimum_size_separators:
         PARAMS: GRAPH graph, OUT VERTEXSETLIST separators
         DEPS: separators ON graph
-        NAME-R: min_size_sep
+        NAME-R: min_separators
 
 igraph_cohesive_blocks:
         PARAMS: GRAPH graph, OUT VERTEXSETLIST blocks, \
@@ -1784,7 +1784,7 @@ igraph_isomorphic_34:
 
 igraph_canonical_permutation:
         PARAMS: GRAPH graph, OUT VECTORM1 labeling, BLISSSH sh="fm", OUT BLISSINFO info
-        NAME-R: canon_perm
+        NAME-R: canonical_permutation
 
 igraph_permute_vertices:
         PARAMS: GRAPH graph, OUT GRAPH res, VECTORM1 permutation
@@ -1899,7 +1899,7 @@ igraph_maximum_bipartite_matching:
                OUT VECTOR_LONG_M1 matching, \
                EDGEWEIGHTS weights=NULL, REAL eps=.Machine$double.eps
        DEPS: types ON graph, weights ON graph
-       NAME-R: max_bip_match
+       NAME-R: max_bipartite_match
        IGNORE: RR
 
 #######################################
@@ -1912,7 +1912,7 @@ igraph_eigen_adjacency:
                INOUT ARPACKOPT options=arpack_defaults, \
                NULL storage, OUT VECTOR values, OUT MATRIX vectors, \
                NULL cmplxvalues, NULL cmplxvectors
-       NAME-R: adj_eigen
+       NAME-R: spectrum
 
 #######################################
 # Fitting power laws

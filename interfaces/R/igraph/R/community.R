@@ -209,7 +209,7 @@
 #' 
 #' \code{create.communities} returns a \code{communities} object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso See \code{\link{dend_plot}} for plotting community structure
+#' @seealso See \code{\link{plot_dendrogram}} for plotting community structure
 #' dendrograms.
 #' 
 #' See \code{\link{compare}} for comparing two community structures
@@ -474,7 +474,7 @@ merges <- function(communities) {
 
 crossing <- function(communities, graph) {
   m <- membership(communities)
-  el <- edgelist(graph, names=FALSE)
+  el <- as_edgelist(graph, names=FALSE)
   m1 <- m[el[,1]]
   m2 <- m[el[,2]]
   res <- m1 != m2
@@ -862,7 +862,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' 
 #' Changes to the original function for including the possibility of negative
 #' ties were implemented by Vincent Traag (\url{http://www.traag.net/}).
-#' @seealso \code{\link{communities}}, \code{\link{comps}}
+#' @seealso \code{\link{communities}}, \code{\link{components}}
 #' @references J. Reichardt and S. Bornholdt: Statistical Mechanics of
 #' Community Detection, \emph{Phys. Rev. E}, 74, 016110 (2006),
 #' \url{http://arxiv.org/abs/cond-mat/0603718}
@@ -1668,11 +1668,11 @@ plot.communities <- function(x, y,
 
 
 
-#' @rdname dend_plot.communities
+#' @rdname plot_dendrogram.communities
 #' @aliases dendPlot
 
-dend_plot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
-  UseMethod("dend_plot")
+plot_dendrogram <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
+  UseMethod("plot_dendrogram")
 
 
 
@@ -1680,7 +1680,7 @@ dend_plot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' 
 #' Plot a hierarchical community structure as a dendrogram.
 #' 
-#' \code{dend_plot} supports three different plotting functions, selected via
+#' \code{plot_dendrogram} supports three different plotting functions, selected via
 #' the \code{mode} argument. By default the plotting function is taken from the
 #' \code{dend.plot.type} igraph option, and it has for possible values:
 #' \itemize{ \item \code{auto} Choose automatically between the plotting
@@ -1693,7 +1693,7 @@ dend_plot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' 
 #' The different plotting functions take different sets of arguments. When
 #' using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
-#' \preformatted{ dend_plot(x, mode="phylo", colbar = rainbow(11, start=0.7,
+#' \preformatted{ plot_dendrogram(x, mode="phylo", colbar = rainbow(11, start=0.7,
 #' end=0.1), edge.color = NULL, use.edge.length = FALSE, \dots) } The extra
 #' arguments not documented above: \itemize{ \item \code{colbar} Color bar for
 #' the edges.  \item \code{edge.color} Edge colors. If \code{NULL}, then the
@@ -1702,7 +1702,7 @@ dend_plot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' \code{plot.phylo}.  }
 #' 
 #' The syntax for \code{plot.hclust} (\code{mode="hclust"}): \preformatted{
-#' dend_plot(x, mode="hclust", rect = 0, colbar = rainbow(rect), hang = 0.01,
+#' plot_dendrogram(x, mode="hclust", rect = 0, colbar = rainbow(rect), hang = 0.01,
 #' ann = FALSE, main = "", sub = "", xlab = "", ylab = "", \dots) } The extra
 #' arguments not documented above: \itemize{ \item \code{rect} A numeric
 #' scalar, the number of groups to mark on the dendrogram. The dendrogram is
@@ -1721,7 +1721,7 @@ dend_plot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' to pass to \code{plot.hclust}.  }
 #' 
 #' The syntax for \code{plot.dendrogram} (\code{mode="dendrogram"}):
-#' \preformatted{ dend_plot(x, \dots) } The extra arguments are simply passed to
+#' \preformatted{ plot_dendrogram(x, \dots) } The extra arguments are simply passed to
 #' \code{as.dendrogram}.
 #' 
 #' @param x An object containing the community structure of a graph. See
@@ -1739,9 +1739,9 @@ dend_plot <- function(x, mode=getIgraphOpt("dend.plot.type"), ...)
 #' 
 #' karate <- graph.famous("Zachary")
 #' fc <- cluster_fast_greedy(karate)
-#' dend_plot(fc)
+#' plot_dendrogram(fc)
 #' 
-dend_plot.communities <- function(x, 
+plot_dendrogram.communities <- function(x, 
                                  mode=getIgraphOpt("dend.plot.type"), ...,
                                  use.modularity=FALSE) {  
   mode <- igraph.match.arg(mode, c("auto", "phylo", "hclust", "dendrogram"))

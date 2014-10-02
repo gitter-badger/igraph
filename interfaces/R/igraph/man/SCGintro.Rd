@@ -125,8 +125,8 @@
   useful information. 
  
   These steps can also be carried out independently: (1) Use
-  \code{\link{adj}}, \code{\link{laplacian}} or
-  \code{\link{stochastic}} to compute a matrix \eqn{M}. (2) Work
+  \code{\link{as_adj}}, \code{\link{laplacian_matrix}} or
+  \code{\link{stochastic_matrix}} to compute a matrix \eqn{M}. (2) Work
   out some prescribed eigenpairs of \eqn{M} e.g. by 
   means of \code{eigen} or \code{arpack}. (3) Invoke one the four
   algorithms of the function \code{\link{scg_group}} to get a

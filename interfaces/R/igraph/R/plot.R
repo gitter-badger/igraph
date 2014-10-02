@@ -70,7 +70,7 @@
 #' @examples
 #' 
 #' g <- g_ring(10)
-#' \dontrun{plot(g, layout=l_kk, vertex.color="green")}
+#' \dontrun{plot(g, layout=layout_with_kk, vertex.color="green")}
 #' 
 plot.igraph <- function(x, 
                        # SPECIFIC: #####################################
@@ -136,7 +136,7 @@ plot.igraph <- function(x,
   maxv <- max(vertex.size)
   if (rescale) {
     # norm layout to (-1, 1)
-    layout <- l_norm(layout, -1, 1, -1, 1)
+    layout <- norm_coords(layout, -1, 1, -1, 1)
     xlim <- c(xlim[1]-margin[2]-maxv, xlim[2]+margin[4]+maxv)
     ylim <- c(ylim[1]-margin[1]-maxv, ylim[2]+margin[3]+maxv)
   }
@@ -173,7 +173,7 @@ plot.igraph <- function(x,
 
   ################################################################
   ## calculate position of arrow-heads
-  el <- edgelist(graph, names=FALSE)
+  el <- as_edgelist(graph, names=FALSE)
   loops.e <- which(el[,1] == el[,2])
   nonloops.e <- which(el[,1] != el[,2])
   loops.v <- el[,1] [loops.e]
@@ -418,7 +418,7 @@ plot.igraph <- function(x,
 #' 
 #' \dontrun{
 #' g <- g_lattice( c(5,5,5) )
-#' coords <- l_fr(g, dim=3)
+#' coords <- layout_with_fr(g, dim=3)
 #' rglplot(g, layout=coords)
 #' }
 #' 
@@ -618,11 +618,11 @@ rglplot.igraph <- function(x, ...) {
   # norm layout to (-1, 1)
   if (ncol(layout)==2) { layout <- cbind(layout, 0) }
   if (rescale) {
-    layout <- l_norm(layout, -1, 1, -1, 1, -1, 1)
+    layout <- norm_coords(layout, -1, 1, -1, 1, -1, 1)
   }
   
   # add the edges, the loops are handled separately
-  el <- edgelist(graph, names=FALSE)
+  el <- as_edgelist(graph, names=FALSE)
   
   # It is faster this way
   par3d(skipRedraw=TRUE)

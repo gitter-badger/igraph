@@ -7,7 +7,7 @@ test_that("add_vertices works", {
   g2 <- add_vertices(g, (nv <- 4))
   expect_that(vcount(g2), equals(vcount(g) + nv))
   expect_that(ecount(g2), equals(ecount(g)))
-  expect_that(edgelist(g2), equals(edgelist(g)))
+  expect_that(as_edgelist(g2), equals(as_edgelist(g)))
 })
 
 test_that("add_vertices handles attributes properly", {

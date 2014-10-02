@@ -1,6 +1,6 @@
-\name{bip_map}
+\name{bipartite_mapping}
 \alias{bipartite.mapping}
-\alias{bip_map}
+\alias{bipartite_mapping}
 \concept{Bipartite graph}
 \concept{Two-mode network}
 \title{Decide whether a graph is bipartite}
@@ -8,7 +8,7 @@
   be mapped to two vertex types in a way that no vertices of the same
   type are connected.}
 \usage{
-bip_map(graph)
+bipartite_mapping(graph)
 }
 \arguments{
   \item{graph}{The input graph.}
@@ -43,15 +43,15 @@ bip_map(graph)
 \examples{
 ## A ring has just one loop, so it is fine
 g <- g_ring(10)
-bip_map(g)
+bipartite_mapping(g)
 
 ## A star is fine, too
 g2 <- g_star(10)
-bip_map(g2)
+bipartite_mapping(g2)
 
 ## A graph containing a triangle is not fine
 g3 <- g_ring(10)
 g3 <- add_edges(g3, c(1,3))
-bip_map(g3)
+bipartite_mapping(g3)
 }
 \keyword{graphs}

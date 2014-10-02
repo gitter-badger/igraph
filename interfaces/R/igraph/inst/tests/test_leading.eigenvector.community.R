@@ -54,7 +54,7 @@ test_that("cluster_leading_eigen works", {
   }
 
   g <- graph.famous("Zachary")
-  A <- adj(g, sparse=FALSE)
+  A <- as_adj(g, sparse=FALSE)
   ec <- ecount(g)
   deg <- degree(g)
   lc <- cluster_leading_eigen(g, callback=f)

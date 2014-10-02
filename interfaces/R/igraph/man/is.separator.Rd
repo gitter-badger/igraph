@@ -38,7 +38,7 @@ is_min_separator(graph, candidate)
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{
-  \code{\link{min_size_sep}} lists all vertex separator of
+  \code{\link{min_separators}} lists all vertex separator of
   minimum size.
 }
 \examples{
@@ -57,7 +57,7 @@ mw4 <- induced_subgraph(mw, as.character(c(7,8,11,14)))
 mw5 <- induced_subgraph(mw, as.character(1:7))
 
 check.sep <- function(G) {
-  sep <- min_size_sep(G)
+  sep <- min_separators(G)
   sapply(sep, is_min_separator, graph=G)
 }
 

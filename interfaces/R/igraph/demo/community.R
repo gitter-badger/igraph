@@ -15,7 +15,7 @@ perfect
 pause()
 
 ### Plot it with community (=component) colors
-plot(mod, vertex.color=perfect, layout=l_fr)
+plot(mod, vertex.color=perfect, layout=layout_with_fr)
 
 pause()
 
@@ -36,7 +36,7 @@ pause()
 
 ### A real little network, Zachary's karate club data
 karate <- graph.famous("Zachary")
-karate$layout <- l_kk(karate, niter=1000)
+karate$layout <- layout_with_kk(karate, niter=1000)
 
 pause()
 
@@ -78,7 +78,7 @@ if (require(Matrix)) {
 } else {
   myimage <- image
 }
-A <- adj(G)
+A <- as_adj(G)
 myimage(A)
 
 pause()
@@ -144,7 +144,7 @@ pause()
 
 ### Plot everything
 layout(rbind(1:3, 4:6))
-coords <- l_kk(karate)
+coords <- layout_with_kk(karate)
 lapply(seq_along(communities), function(x) {
   m <- modularity(communities[[x]])
   par(mar=c(1,1,3,1))

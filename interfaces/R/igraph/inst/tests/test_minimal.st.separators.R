@@ -1,11 +1,11 @@
 
-context("min_st_sep")
+context("min_st_separators")
 
-test_that("min_st_sep works", {
+test_that("min_st_separators works", {
 
   library(igraph)
   g <- graph.famous("Zachary")
-  msts <- min_st_sep(g)
+  msts <- min_st_separators(g)
   is <- sapply(msts, is_separator, graph=g)
   expect_that(unique(is), equals(TRUE))
 

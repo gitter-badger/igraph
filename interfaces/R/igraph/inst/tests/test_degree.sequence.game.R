@@ -5,7 +5,7 @@ test_that("g_degseq works", {
   library(igraph)
 
   gc <- function(graph) {
-    clu <- comps(graph)
+    clu <- components(graph)
     induced_subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
 

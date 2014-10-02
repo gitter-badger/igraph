@@ -116,10 +116,10 @@ test_that("Counting maximal cliques works", {
   set.seed(42)
   G <- g_np(100, .5)
 
-  cl1  <- num_max_cliques(G, min=8)
+  cl1  <- count_max_cliques(G, min=8)
           
-  c1 <- num_max_cliques(G, min=8, subset=1:13)
-  c2 <- num_max_cliques(G, min=8, subset=14:100)
+  c1 <- count_max_cliques(G, min=8, subset=1:13)
+  c2 <- count_max_cliques(G, min=8, subset=14:100)
   cl2 <- c1+c2
   
   expect_that(cl1, is_identical_to(cl2))

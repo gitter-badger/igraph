@@ -9,13 +9,13 @@ test_that("Weighted indexing does not remove edges", {
   expect_that("weight" %in% edge_attr_names(g), is_true())
   expect_that(E(g)$weight, equals(c(0, rep(NA, 9))))
 
-  el <- edgelist(g)
+  el <- as_edgelist(g)
   g[from=el[,1], to=el[,2], attr="sim"] <- rep(0:1, length=ecount(g))
   expect_that("sim" %in% edge_attr_names(g), is_true())
   expect_that(E(g)$sim, equals(rep(0:1, 5)))
 
   V(g)$name <- letters[seq_len(vcount(g))]
-  el <- edgelist(g)
+  el <- as_edgelist(g)
   g[from=el[,1], to=el[,2], attr="sim"] <- rep(1:0, length=ecount(g))
   expect_that(E(g)$sim, equals(rep(1:0, 5)))
 })

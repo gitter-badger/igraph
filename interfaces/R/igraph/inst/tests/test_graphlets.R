@@ -149,7 +149,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu=NULL) {
 
   ## Create edge-clique list from this, it is useful to have the edge list
   ## of the graph at hand
-  el <- edgelist(graph, names=FALSE)
+  el <- as_edgelist(graph, names=FALSE)
   ecl <- vector(length=ecount(graph), mode="list")
   for (i in 1:ecount(graph)) {
     edge <- el[i,]

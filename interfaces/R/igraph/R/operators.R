@@ -419,7 +419,7 @@ graph.intersection <- function(..., byname="auto",
 #' V(sstar)$name <- letters[c(1,3,5,7,9,11)]
 #' G <- wheel %m% sstar
 #' str(G)
-#' plot(G, layout=l_auto(wheel))
+#' plot(G, layout=layout_nicely(wheel))
 #' 
 difference <- function(big, small, byname="auto") {
 

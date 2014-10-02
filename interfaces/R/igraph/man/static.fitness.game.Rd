@@ -68,7 +68,7 @@ g_fitness (no.of.edges, fitness.out, fitness.in,
 \examples{
 N <- 10000
 g <- g_fitness(5*N, sample((1:50)^-2, N, replace=TRUE))
-degree_dist(g)
-\dontrun{plot(degree_dist(g, cumulative=TRUE), log="xy")}
+degree_distribution(g)
+\dontrun{plot(degree_distribution(g, cumulative=TRUE), log="xy")}
 }
 \keyword{graphs}

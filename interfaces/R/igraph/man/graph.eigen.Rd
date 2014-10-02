@@ -1,6 +1,6 @@
-\name{adj_eigen}
+\name{spectrum}
 \alias{graph.eigen}
-\alias{adj_eigen}
+\alias{spectrum}
 \alias{igraph.eigen.default}
 \alias{eigen_defaults}
 \concept{Eigenvalues}
@@ -11,7 +11,7 @@
   sparse) graph.
 }
 \usage{
-adj_eigen (graph, algorithm = c("arpack", "auto", "lapack", "comp_auto", 
+spectrum (graph, algorithm = c("arpack", "auto", "lapack", "comp_auto", 
     "comp_lapack", "comp_arpack"), which = list(),
     options = arpack_defaults)
 eigen_defaults
@@ -64,20 +64,20 @@ eigen_defaults
 }
 % \references{}
 \author{ Gabor Csardi \email{csardi.gabor@gmail.com} }
-\seealso{\code{\link{adj}} to create a (sparse) adjacency
+\seealso{\code{\link{as_adj}} to create a (sparse) adjacency
   matrix.}
 \examples{
 ## Small example graph, leading eigenvector by default
 kite <- graph.famous("Krackhardt_kite")
-adj_eigen(kite)[c("values", "vectors")]
+spectrum(kite)[c("values", "vectors")]
 
 ## Double check
-eigen(adj(kite, sparse=FALSE))$vectors[,1]
+eigen(as_adj(kite, sparse=FALSE))$vectors[,1]
 
 ## Should be the same as 'eigen_centrality' (but rescaled)
-cor(eigen_centrality(kite)$vector, adj_eigen(kite)$vectors)
+cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
 
 ## Smallest eigenvalues
-adj_eigen(kite, which=list(pos="SM", howmany=2))$values
+spectrum(kite, which=list(pos="SM", howmany=2))$values
 }
 \keyword{graphs}

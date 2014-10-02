@@ -37,7 +37,7 @@
 #' cliques are always maximal, but a maximal clique is not neccessarily the
 #' largest.
 #' 
-#' \code{num_max_cliques} counts the maximal cliques.
+#' \code{count_max_cliques} counts the maximal cliques.
 #' 
 #' \code{clique_num} calculates the size of the largest clique(s).
 #' 
@@ -46,7 +46,7 @@
 #' complementer graph.
 #' 
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
-#' clique.number clique_num largest.cliques num_max_cliques max_cliques
+#' clique.number clique_num largest.cliques count_max_cliques max_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #' undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
@@ -61,7 +61,7 @@
 #' argument is not \code{NULL}. The output is written to the specified file in
 #' this case.
 #' 
-#' \code{clique_num} and \code{num_max_cliques} return an integer
+#' \code{clique_num} and \code{count_max_cliques} return an integer
 #' scalar.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -164,7 +164,7 @@ max_cliques <- function(graph, min=NULL, max=NULL,
   }
 }
 
-num_max_cliques <- function(graph, min=NULL, max=NULL,
+count_max_cliques <- function(graph, min=NULL, max=NULL,
                                   subset=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

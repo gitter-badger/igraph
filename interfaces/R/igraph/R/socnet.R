@@ -583,9 +583,9 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
   if ("weight" %in% graph_attr_names(graph)) {
-    tab <- adj(graph, attr="weight", names=FALSE, sparse=FALSE)
+    tab <- as_adj(graph, attr="weight", names=FALSE, sparse=FALSE)
   } else {
-    tab <- adj(graph, names=FALSE, sparse=FALSE)
+    tab <- as_adj(graph, names=FALSE, sparse=FALSE)
   }
   filename <- tkgetSaveFile(initialfile="graph.adj",
                             defaultextension="adj",
@@ -602,7 +602,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  el <- edgelist(graph)
+  el <- as_edgelist(graph)
   if ("weight" %in% edge_attr_names(graph)) {
     el <- cbind(el, E(graph)$weight)
   }
@@ -637,10 +637,10 @@ tkigraph <- function() {
     return()
   }
   graphs <- get("graphs", .tkigraph.env)
-  el <- edgelist(graphs[[gnos]])
+  el <- as_edgelist(graphs[[gnos]])
   el <- data.frame(from=el[,1], to=el[,2])
 #  if (any(V(graphs[[gnos]])$name != seq(length=vcount(graphs[[gnos]])))) {
-#    el2 <- edgelist(graphs[[gnos]], names=FALSE)
+#    el2 <- as_edgelist(graphs[[gnos]], names=FALSE)
 #    el <- cbind(el, el2)
 #  }
   if ("weight" %in% edge_attr_names(graphs[[gnos]])) {
@@ -858,17 +858,17 @@ tkigraph <- function() {
         l
       }
     } else if (vcount(graph) < 300 && is_connected(graph)) {
-      l_kk(graph)
+      layout_with_kk(graph)
     } else if (vcount(graph) < 1000) {
-      l_fr(graph)
+      layout_with_fr(graph)
     } else {
-      l_circle(graph)
+      layout_in_circle(graph)
     }
   }
   
-  layouts <- list(layout.default, l_kk,
-                  l_fr,
-                  l_tree, l_circle, l_random)
+  layouts <- list(layout.default, layout_with_kk,
+                  layout_with_fr,
+                  layout_as_tree, layout_in_circle, layout_randomly)
 
   if (read$vertex.size < 10) {
     label.dist <- 0.4
@@ -943,7 +943,7 @@ tkigraph <- function() {
     .tkigraph.add.graph(g)
   } else {
     graphs <- get("graphs", .tkigraph.env)
-    df <- edgelist(graphs[[gnos]])
+    df <- as_edgelist(graphs[[gnos]])
     colnames <- c("from", "to")    
     if ("weight" %in% edge_attr_names(graphs[[gnos]])) {
       df <- cbind(df, E(g)$weight)
@@ -973,7 +973,7 @@ tkigraph <- function() {
                                   "Undirected"), default="2"))
   read$mode <- c("out", "in", "undirected")[read$mode+1]
   g <- g_tree(n=read$n, children=read$b, mode=read$mode)
-  lay <- l_tree(g, root=1, mode="all")
+  lay <- layout_as_tree(g, root=1, mode="all")
   g <- set_graph_attr(g, "layout", lay)
   g <- set_graph_attr(g, "name", "Regular tree")
   .tkigraph.add.graph(g)
@@ -984,7 +984,7 @@ tkigraph <- function() {
                               n=list(name="Vertices", type="numeric",
                                 default=100, min=0))
   g <- g_ring(n=read$n)
-  g <- set_graph_attr(g, "layout", l_circle)
+  g <- set_graph_attr(g, "layout", layout_in_circle)
   g <- set_graph_attr(g, "name", "Regular ring")
   .tkigraph.add.graph(g)
 }
@@ -1124,7 +1124,7 @@ tkigraph <- function() {
                            p=read$p)
   g <- set_graph_attr(g, "name", "Watts-Strogatz small-world graph")
   if (read$dim == 1) { 
-    g <- set_graph_attr(g, "layout", l_circle)
+    g <- set_graph_attr(g, "layout", layout_in_circle)
   }
   .tkigraph.add.graph(g)
 }
@@ -1207,7 +1207,7 @@ tkigraph <- function() {
       .tkigraph.error("Degrees are too small for a power-law fit")
       return()
     }
-    fit <- pl_fit(deg, xmin=10)
+    fit <- fit_power_law(deg, xmin=10)
     lines(0:max(deg), (0:max(deg))^(-coef(fit)), col="red")
     legend("topright", c(paste("exponent:", round(coef(fit), 2)),
                          paste("standard error:", round(sqrt(vcov(fit)), 2))),
@@ -1310,7 +1310,7 @@ tkigraph <- function() {
   }
   graphs <- get("graphs", .tkigraph.env)
   ebtw <- edge_betweenness(graphs[[gnos]])
-  el <- edgelist(graphs[[gnos]])
+  el <- as_edgelist(graphs[[gnos]])
   value <- data.frame(E(graphs[[gnos]])$name, el[,1], el[,2], ebtw)
   colnames(value) <- c("Edge", "From", "To", "Betweenness")
   value <- value[ order(value[,4], decreasing=TRUE), ]
@@ -1424,7 +1424,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  comm <- comps(graph)
+  comm <- components(graph)
   members <- sapply(sapply(seq(along=comm$csize),
                            function(i) which(comm$membership==i)),
                     paste, collapse=", ")
@@ -1440,7 +1440,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  comm <- comps(graph)
+  comm <- components(graph)
   value <- data.frame("Vertex"=seq(along=comm$membership),
                  "Component"=comm$membership)
   .tkigraph.showData(value, title=paste("Components of graph #", gnos))
@@ -1453,7 +1453,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  cs <- comps(graph)$csize
+  cs <- components(graph)$csize
   value <- data.frame(seq(along=cs), cs)
   colnames(value) <- c("Cluster #", "Size")
 
@@ -1495,7 +1495,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  clu <- comps(graph)
+  clu <- components(graph)
   colbar <- rainbow(length(clu$csize)*2)
   vertex.color <- colbar[ clu$membership ]
   .tkigraph.plot(gnos=gnos, simple=simple, vertex.color=vertex.color)
@@ -1508,7 +1508,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  clu <- comps(graph)
+  clu <- components(graph)
   v <- which(clu$membership == which.max(clu$csize))
   g <- induced_subgraph(graph, v)
   .tkigraph.add.graph(g)
@@ -1543,7 +1543,7 @@ tkigraph <- function() {
   read <- .tkigraph.dialogbox(TITLE="Graph from component",
                               comp=list(name="Component id", type="numeric",
                                 default=1, min=1))
-  clu <- comps(graph)
+  clu <- components(graph)
   if (read$comp<1 || read$comp > length(clu$csize)) {
     .tkigraph.error("Invalid component id")
     return()

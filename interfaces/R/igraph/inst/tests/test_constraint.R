@@ -9,7 +9,7 @@ test_that("constraint works", {
       stop("Not a graph object")
     }
     idx <- degree(graph) != 0
-    A <- adj(graph, attr=attr, sparse=FALSE)
+    A <- as_adj(graph, attr=attr, sparse=FALSE)
     A <- A[idx, idx]
     n <- sum(idx)
     

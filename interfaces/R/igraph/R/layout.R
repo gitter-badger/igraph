@@ -42,7 +42,7 @@
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 
-l_random <- function(graph, dim=2) {
+layout_randomly <- function(graph, dim=2) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -83,14 +83,14 @@ l_random <- function(graph, dim=2) {
 #' library(igraphdata)
 #' data(karate)
 #' karate_groups <- cluster_optimal(karate)
-#' coords <- l_circle(karate, order =
+#' coords <- layout_in_circle(karate, order =
 #'           order(membership(karate_groups)))
 #' V(karate)$label <- sub("Actor ", "", V(karate)$name)
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
 
-l_circle <- function(graph, order=V(graph)) {
+layout_in_circle <- function(graph, order=V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -107,7 +107,7 @@ l_circle <- function(graph, order=V(graph)) {
 #' Place vertices on a sphere, approximately uniformly, in the order of their
 #' vertex ids.
 #' 
-#' \code{l_sphere} places the vertices (approximately) uniformly on the
+#' \code{layout_on_sphere} places the vertices (approximately) uniformly on the
 #' surface of a sphere, this is thus a 3d layout. It is not clear however what
 #' \dQuote{uniformly on a sphere} means.
 #' 
@@ -120,7 +120,7 @@ l_circle <- function(graph, order=V(graph)) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 
-l_sphere <- function(graph) {
+layout_on_sphere <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -136,7 +136,7 @@ l_sphere <- function(graph) {
 #' A force-directed layout algorithm, that scales relatively well to large
 #' graphs.
 #' 
-#' \code{l_graphopt} is a port of the graphopt layout algorithm by Michael
+#' \code{layout_with_graphopt} is a port of the graphopt layout algorithm by Michael
 #' Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for
 #' layers was removed (might be added later) and a code was a bit reorganized
 #' to avoid some unneccessary steps is the node charge (see below) is zero.
@@ -173,7 +173,7 @@ l_sphere <- function(graph) {
 #' wrapped by Gabor Csardi \email{csardi.gabor@@gmail.com}.
 #' @keywords graphs
 
-l_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
+layout_with_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
                             mass=30, spring.length=0, spring.constant=1,
                             max.sa.movement=5) {
   
@@ -202,7 +202,7 @@ l_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
 #' 
 #' A layout generator for larger graphs.
 #' 
-#' \code{l_lgl} is for large connected graphs, it is similar to the layout
+#' \code{layout_with_lgl} is for large connected graphs, it is similar to the layout
 #' generator of the Large Graph Layout software
 #' (\url{http://lgl.sourceforge.net/}).
 #'
@@ -225,7 +225,7 @@ l_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
 #' @return A numeric matrix with two columns and as many rows as vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
-l_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
+layout_with_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
                        area=vcount(graph)^2, coolexp=1.5,
                        repulserad=area * vcount(graph),
                        cellsize=sqrt(sqrt(area)), root=NULL) {
@@ -293,16 +293,16 @@ l_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
 #' @examples
 #' 
 #' tree <- g_tree(20, 3)
-#' plot(tree, layout=l_tree)
-#' plot(tree, layout=l_tree(tree, flip.y=FALSE))
-#' plot(tree, layout=l_tree(tree, circular=TRUE))
+#' plot(tree, layout=layout_as_tree)
+#' plot(tree, layout=layout_as_tree(tree, flip.y=FALSE))
+#' plot(tree, layout=layout_as_tree(tree, circular=TRUE))
 #' 
 #' tree2 <- g_tree(10, 3) + g_tree(10, 2)
-#' plot(tree2, layout=l_tree)
-#' plot(tree2, layout=l_tree(tree2, root=c(1,11),
+#' plot(tree2, layout=layout_as_tree)
+#' plot(tree2, layout=layout_as_tree(tree2, root=c(1,11),
 #'                                            rootlevel=c(2,1)))
 #' 
-l_tree <- function(graph, root=numeric(), circular=FALSE,
+layout_as_tree <- function(graph, root=numeric(), circular=FALSE,
                                     rootlevel=numeric(), mode="out",
                                     flip.y=TRUE) {
 
@@ -329,7 +329,7 @@ l_tree <- function(graph, root=numeric(), circular=FALSE,
 #' 
 #' Place several graphs on the same layout
 #' 
-#' \code{l_merge} takes a list of graphs and a list of coordinates and
+#' \code{merge_coords} takes a list of graphs and a list of coordinates and
 #' places the graphs in a common layout. The method to use is chosen via the
 #' \code{method} parameter, although right now only the \code{dla} method is
 #' implemented.
@@ -342,10 +342,10 @@ l_tree <- function(graph, root=numeric(), circular=FALSE,
 #' conducted until the graph walks into the larger graphs already placed or
 #' walks too far from the center of the layout.
 #' 
-#' The \code{l_comps} function disassembles the graph first into
+#' The \code{layout_components} function disassembles the graph first into
 #' maximal connected components and calls the supplied \code{layout} function
 #' for each component separately. Finally it merges the layouts via calling
-#' \code{l_merge}.
+#' \code{merge_coords}.
 #' 
 #' @aliases layout.merge piecewise.layout
 #' @param graphs A list of graph objects.
@@ -366,12 +366,12 @@ l_tree <- function(graph, root=numeric(), circular=FALSE,
 #' # create 20 scale-free graphs and place them in a common layout
 #' graphs <- lapply(sample(5:20, 20, replace=TRUE),
 #'           barabasi.game, directed=FALSE)
-#' layouts <- lapply(graphs, l_kk)
-#' lay <- l_merge(graphs, layouts)
+#' layouts <- lapply(graphs, layout_with_kk)
+#' lay <- merge_coords(graphs, layouts)
 #' g <- disjoint_union(graphs)
 #' \dontrun{plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")}
 
-l_merge <- function(graphs, layouts, method="dla") {
+merge_coords <- function(graphs, layouts, method="dla") {
 
   if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
@@ -393,7 +393,7 @@ l_merge <- function(graphs, layouts, method="dla") {
 #' 
 #' Rescale coordinates linearly to be within given bounds.
 #' 
-#' \code{l_norm} normalizes a layout, it linearly transforms each
+#' \code{norm_coords} normalizes a layout, it linearly transforms each
 #' coordinate separately to fit into the given limits.
 #'
 #' @aliases layout.norm
@@ -409,7 +409,7 @@ l_merge <- function(graphs, layouts, method="dla") {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 
-l_norm <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
+norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
                           zmin=-1, zmax=1) {
 
   if (!is.matrix(layout)) {
@@ -446,11 +446,11 @@ l_norm <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
   (v-vr[1]) * fac + min
 }
 
-#' @rdname l_merge
+#' @rdname merge_coords
 #' @aliases piecewise.layout
 #' @param graph The input graph.
 
-l_comps <- function(graph, layout=l_kk, ...) {
+layout_components <- function(graph, layout=layout_with_kk, ...) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -460,7 +460,7 @@ l_comps <- function(graph, layout=l_kk, ...) {
   gl <- decompose(graph)
   ll <- lapply(gl, layout, ...)
   
-  l <- l_merge(gl, ll)
+  l <- merge_coords(gl, ll)
   l[ unlist(sapply(gl, vertex_attr, "id")), ] <- l[]
   l
 }
@@ -542,12 +542,12 @@ l_comps <- function(graph, layout=l_kk, ...) {
 #' @examples
 #' 
 #' g <- as.undirected(g_pa(100, m=1))
-#' l <- l_drl(g, options=list(simmer.attraction=0))
+#' l <- layout_with_drl(g, options=list(simmer.attraction=0))
 #' \dontrun{
 #' plot(g, layout=l, vertex.size=3, vertex.label=NA)
 #' }
 #' 
-l_drl <- function(graph, use.seed = FALSE,
+layout_with_drl <- function(graph, use.seed = FALSE,
                        seed=matrix(runif(vcount(graph)*2), ncol=2),
                        options=igraph.drl.default,
                        weights=E(graph)$weight,
@@ -719,7 +719,7 @@ igraph.drl.final <- list(edge.cut=32/40,
 #' This function tries to choose an appropriate graph layout algorithm for the
 #' graph, automatically, based on a simple algorithm. See details below.
 #' 
-#' \code{l_auto} tries to choose an appropriate layout function for the
+#' \code{layout_nicely} tries to choose an appropriate layout function for the
 #' supplied graph, and uses that to generate the layout. The current
 #' implementation works like this: \enumerate{ \item If the graph has a graph
 #' attribute called \sQuote{layout}, then this is used. If this attribute is an
@@ -728,8 +728,8 @@ igraph.drl.final <- list(edge.cut=32/40,
 #' \sQuote{y}, then these are used as coordinates. If the graph has an
 #' additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
 #' if the graph is connected and has less than 1000 vertices, the Kamada-Kawai
-#' layout is used, by calling \code{l_kk}.  \item Otherwise the
-#' DrL layout is used, \code{l_drl} is called.  }
+#' layout is used, by calling \code{layout_with_kk}.  \item Otherwise the
+#' DrL layout is used, \code{layout_with_drl} is called.  }
 #'
 #' @aliases layout.auto
 #' @param graph The input graph
@@ -740,7 +740,7 @@ igraph.drl.final <- list(edge.cut=32/40,
 #' @seealso \code{\link{plot.igraph}}
 #' @keywords graphs
 
-l_auto <- function(graph, dim=2, ...) {
+layout_nicely <- function(graph, dim=2, ...) {
 
   ## 1. If there is a 'layout' graph attribute, we just use that.
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
@@ -765,10 +765,10 @@ l_auto <- function(graph, dim=2, ...) {
     }
 
   } else if (vcount(graph) < 1000) {
-    l_kk(graph, dim=dim, ...)
+    layout_with_kk(graph, dim=dim, ...)
 
   } else {
-    l_drl(graph, dim=dim, ...)
+    layout_with_drl(graph, dim=dim, ...)
   }
   
 }
@@ -883,7 +883,7 @@ l_auto <- function(graph, dim=2, ...) {
 #' E(DC)$arrow.size <- 0.5
 #' 
 #' ## Create a similar layout using the predefined layers
-#' lay1 <-  l_sugiyama(DC, layers=apply(sapply(layers,
+#' lay1 <-  layout_with_sugiyama(DC, layers=apply(sapply(layers,
 #'                         function(x) V(DC)$name %in% x), 1, which))
 #' 
 #' ## Simple plot, not very nice
@@ -895,7 +895,7 @@ l_auto <- function(graph, dim=2, ...) {
 #' 
 #' ## The same with automatic layer calculation
 #' ## Keep vertex/edge attributes in the extended graph
-#' lay2 <-  l_sugiyama(DC, attributes="all")
+#' lay2 <-  layout_with_sugiyama(DC, attributes="all")
 #' plot(lay2$extd_graph, vertex.label.cex=0.5)
 #' 
 #' ## Another example, from the following paper:
@@ -939,12 +939,12 @@ l_auto <- function(graph, dim=2, ...) {
 #'                 12, 6, c(29,21), c(25,22), c(11,8,15), 16, 27, c(13,19),
 #'                 c(9, 20), c(4, 28), 7 )
 #' 
-#' layex <-  l_sugiyama(ex, layers=apply(sapply(layers,
+#' layex <-  layout_with_sugiyama(ex, layers=apply(sapply(layers,
 #'                         function(x) V(ex)$name %in% as.character(x)),
 #'                         1, which))
 #' 
 #' origvert <- c(rep(TRUE, vcount(ex)), rep(FALSE, nrow(layex$layout.dummy)))
-#' realedge <- edgelist(layex$extd_graph)[,2] <= vcount(ex)
+#' realedge <- as_edgelist(layex$extd_graph)[,2] <= vcount(ex)
 #' plot(layex$extd_graph, vertex.label.cex=0.5,
 #'      edge.arrow.size=.5, 
 #'      vertex.size=ifelse(origvert, 5, 0),
@@ -952,7 +952,7 @@ l_auto <- function(graph, dim=2, ...) {
 #'      vertex.label=ifelse(origvert, V(ex)$name, ""),
 #'      edge.arrow.mode=ifelse(realedge, 2, 0))
 #' 
- l_sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
+ layout_with_sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
                             maxiter=100, weights=NULL,
                             attributes=c("default", "all", "none")) {
   # Argument checks
@@ -1019,7 +1019,7 @@ l_auto <- function(graph, dim=2, ...) {
       V(res$extd_graph)$color <- head(V(graph)$color, 1)
       V(res$extd_graph)$color[ !V(res$extd_graph)$dummy ] <- V(graph)$color
     }
-    eetar <- edgelist(res$extd_graph, names=FALSE)[,2]
+    eetar <- as_edgelist(res$extd_graph, names=FALSE)[,2]
     E(res$extd_graph)$arrow.mode <- 0
     if ("arrow.mode" %in% edge_attr_names(graph)) {
       E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- E(graph)$arrow.mode
@@ -1065,7 +1065,7 @@ l_auto <- function(graph, dim=2, ...) {
 #' Multidimensional scaling of some distance matrix defined on the vertices of
 #' a graph.
 #' 
-#' \code{l_mds} uses metric multidimensional scaling for generating the
+#' \code{layout_with_mds} uses metric multidimensional scaling for generating the
 #' coordinates. Multidimensional scaling aims to place points from a higher
 #' dimensional space in a (typically) 2 dimensional plane, so that the distance
 #' between the points are kept as much as this is possible.
@@ -1074,15 +1074,15 @@ l_auto <- function(graph, dim=2, ...) {
 #' nodes, but the user can override this via the \code{dist} argument.
 #' 
 #' This function generates the layout separately for each graph component and
-#' then merges them via \code{\link{l_merge}}.
+#' then merges them via \code{\link{merge_coords}}.
 #'
 #' @aliases layout.mds
 #' @param graph The input graph.
 #' @param dist The distance matrix for the multidimensional scaling.  If
 #' \code{NULL} (the default), then the unweighted shortest path matrix is used.
-#' @param dim \code{l_mds} supports dimensions up to the number of nodes
+#' @param dim \code{layout_with_mds} supports dimensions up to the number of nodes
 #' minus one, but only if the graph is connected; for unconnected graphs, the
-#' only possible values is 2. This is because \code{l_merge} only works in
+#' only possible values is 2. This is because \code{merge_coords} only works in
 #' 2D.
 #' @param options This is currently ignored, as ARPACK is not used any more for
 #' solving the eigenproblem
@@ -1096,10 +1096,10 @@ l_auto <- function(graph, dim=2, ...) {
 #' @examples
 #' 
 #' g <- g_np(100, 2/100)
-#' l <- l_mds(g)
+#' l <- layout_with_mds(g)
 #' plot(g, layout=l, vertex.label=NA, vertex.size=3)
 
-l_mds <- function(graph, dist=NULL, dim=2,
+layout_with_mds <- function(graph, dist=NULL, dim=2,
                        options=arpack_defaults) {
   
   # Argument checks
@@ -1162,7 +1162,7 @@ l_mds <- function(graph, dist=NULL, dim=2,
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #' vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{l_drl}}, \code{\link{l_kk}} for
+#' @seealso \code{\link{layout_with_drl}}, \code{\link{layout_with_kk}} for
 #' other layout algorithms.
 #' @references Fruchterman, T.M.J. and Reingold, E.M. (1991). Graph Drawing by
 #' Force-directed Placement. \emph{Software - Practice and Experience},
@@ -1175,7 +1175,7 @@ l_mds <- function(graph, dist=NULL, dim=2,
 #' minC <- rep(-Inf, vcount(g))
 #' maxC <- rep(Inf, vcount(g))
 #' minC[1] <- maxC[1] <- 0
-#' co <- l_fr(g, minx=minC, maxx=maxC,
+#' co <- layout_with_fr(g, minx=minC, maxx=maxC,
 #'                                   miny=minC, maxy=maxC)
 #' co[1,]
 #' plot(g, layout=co, vertex.size=30, edge.arrow.size=0.2,
@@ -1185,7 +1185,7 @@ l_mds <- function(graph, dist=NULL, dim=2,
 #' axis(1)
 #' axis(2)
 #' 
-l_fr <- function(graph, coords=NULL, dim=2,
+layout_with_fr <- function(graph, coords=NULL, dim=2,
                             niter=500, start.temp=sqrt(vcount(graph)),
                             grid=c("auto", "grid", "nogrid"), weights=NULL,
                             minx=NULL, maxx=NULL, miny=NULL, maxy=NULL,
@@ -1294,7 +1294,7 @@ l_fr <- function(graph, coords=NULL, dim=2,
 #' many rows as the number of vertices, the x, y and potentially z coordinates
 #' of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{l_drl}}, \code{\link{plot.igraph}},
+#' @seealso \code{\link{layout_with_drl}}, \code{\link{plot.igraph}},
 #' \code{\link{tkplot}}
 #' @references Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 #' Undirected Graphs. \emph{Information Processing Letters}, 31/1, 7--15, 1989.
@@ -1303,9 +1303,9 @@ l_fr <- function(graph, coords=NULL, dim=2,
 #' 
 #' g <- g_ring(10)
 #' E(g)$weight <- rep(1:2, length.out=ecount(g))
-#' plot(g, layout=l_kk, edge.label=E(g)$weight)
+#' plot(g, layout=layout_with_kk, edge.label=E(g)$weight)
 #' 
-l_kk <- function(graph, coords=NULL, dim=2,
+layout_with_kk <- function(graph, coords=NULL, dim=2,
                                 maxiter=50*vcount(graph),
                                 epsilon=0.0, kkconst=vcount(graph),
                                 weights=NULL, minx=NULL, maxx=NULL,
@@ -1394,7 +1394,7 @@ l_kk <- function(graph, coords=NULL, dim=2,
 #' @return A numeric matrix with two columns, and as many rows as the number of
 #' vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{l_fr}},
+#' @seealso \code{\link{layout_with_fr}},
 #' \code{\link{plot.igraph}}, \code{\link{tkplot}}
 #' @references Arne Frick, Andreas Ludwig, Heiko Mehldau: A Fast Adaptive
 #' Layout Algorithm for Undirected Graphs, \emph{Proc. Graph Drawing 1994},
@@ -1404,9 +1404,9 @@ l_kk <- function(graph, coords=NULL, dim=2,
 #' 
 #' set.seed(42)
 #' g <- g_ring(10)
-#' plot(g, layout=l_gem)
+#' plot(g, layout=layout_with_gem)
 #' 
-l_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
+layout_with_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
                        temp.max=vcount(graph), temp.min=1/10,
                        temp.init=sqrt(vcount(graph))) {
   
@@ -1479,8 +1479,8 @@ l_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #' vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{l_fr}},
-#' \code{\link{l_kk}} for other layout algorithms.
+#' @seealso \code{\link{layout_with_fr}},
+#' \code{\link{layout_with_kk}} for other layout algorithms.
 #' @references Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 #' Annealing. \emph{ACM Transactions on Graphics} 15(4), pp. 301-331, 1996.
 #' @examples
@@ -1489,54 +1489,54 @@ l_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' ## Figures from the paper
 #' g_1b <- g_star(19, mode="undirected") + path(c(2:19, 2)) +
 #'   path(c(seq(2, 18, by=2), 2))
-#' plot(g_1b, layout=l_dh)
+#' plot(g_1b, layout=layout_with_dh)
 #' 
 #' g_2 <- g_lattice(c(8, 3)) + edges(1,8, 9,16, 17,24)
-#' plot(g_2, layout=l_dh)
+#' plot(g_2, layout=layout_with_dh)
 #' 
 #' g_3 <- g_empty(n=70)
-#' plot(g_3, layout=l_dh)
+#' plot(g_3, layout=layout_with_dh)
 #' 
 #' g_4 <- g_empty(n=70, directed=FALSE) + edges(1:70)
-#' plot(g_4, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_4, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_5a <- g_ring(24)
-#' plot(g_5a, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_5a, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_5b <- g_ring(40)
-#' plot(g_5b, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_5b, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_6 <- g_lattice(c(2,2,2))
-#' plot(g_6, layout=l_dh)
+#' plot(g_6, layout=layout_with_dh)
 #' 
 #' g_7 <- g_formula(1:3:5 -- 2:4:6)
-#' plot(g_7, layout=l_dh, vertex.label=V(g_7)$name)
+#' plot(g_7, layout=layout_with_dh, vertex.label=V(g_7)$name)
 #' 
 #' g_8 <- g_ring(5) + g_ring(10) + g_ring(5) +
 #'   edges(1,6, 2,8, 3, 10, 4,12, 5,14,
 #'         7,16, 9,17, 11,18, 13,19, 15,20)
-#' plot(g_8, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_8, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_9 <- g_lattice(c(3,2,2))
-#' plot(g_9, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_9, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_10 <- g_lattice(c(6,6))
-#' plot(g_10, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_10, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_11a <- g_tree(31, 2, mode="undirected")
-#' plot(g_11a, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_11a, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_11b <- g_tree(21, 4, mode="undirected")
-#' plot(g_11b, layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_11b, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
 #' g_12 <- g_empty(n=37, directed=FALSE) +
 #'   path(1:5,10,22,31,37:33,27,16,6,1) + path(6,7,11,9,10) + path(16:22) +
 #'   path(27:31) + path(2,7,18,28,34) + path(3,8,11,19,29,32,35) +
 #'   path(4,9,20,30,36) + path(1,7,12,14,19,24,26,30,37) +
 #'   path(5,9,13,15,19,23,25,28,33) + path(3,12,16,25,35,26,22,13,3)
-#' plot(g_12,  layout=l_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_12,  layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 
-l_dh <- function(graph, coords=NULL, maxiter=10,
+layout_with_dh <- function(graph, coords=NULL, maxiter=10,
            fineiter=max(10, log2(vcount(graph))), cool.fact=0.75,
            weight.node.dist=1.0, weight.border=0.0,
            weight.edge.lengths=density(graph) / 10,
@@ -1571,7 +1571,7 @@ l_dh <- function(graph, coords=NULL, maxiter=10,
   res
 }
 
-l_grid <- function(graph, width = 0, height = 0, dim = 2) {
+layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   width <- as.integer(width)
@@ -1593,8 +1593,8 @@ l_grid <- function(graph, width = 0, height = 0, dim = 2) {
 }
 
 layout.grid.3d <- function(graph, width=0, height=0) {
-  .Deprecated("l_grid", msg = paste0("layout.grid.3d is deprecated from\n",
-      "igraph 0.8.0, please use l_grid instead"))
+  .Deprecated("layout_on_grid", msg = paste0("layout.grid.3d is deprecated from\n",
+      "igraph 0.8.0, please use layout_on_grid instead"))
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   width <- as.integer(width)

@@ -341,7 +341,7 @@ g <- g + path(letters[1:10], letters[1], color="grey")
 
 # Add some extra random edges
 g <- g + edges(sample(V(g), 10, replace=TRUE), color="red")
-g$layout <- l_circle
+g$layout <- layout_in_circle
 if (interactive()) {
   plot(g)
 }

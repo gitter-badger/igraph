@@ -1,12 +1,12 @@
 
-context("bip_proj")
+context("bipartite_projection")
 
-test_that("bip_proj works", {
+test_that("bipartite_projection works", {
   library(igraph)
   set.seed(42)
 
   g <- g_full_bip(10,5)
-  proj <- bip_proj(g)
+  proj <- bipartite_projection(g)
   expect_that(graph.isomorphic(proj[[1]], g_full(10)), is_true())
   expect_that(graph.isomorphic(proj[[2]], g_full(5)), is_true())
 
@@ -21,7 +21,7 @@ test_that("bip_proj works", {
   expect_that(as.matrix(g2[6:8,6:8]), is_equivalent_to(matrix(0, 3, 3)))  
     
   g2$name <- "Event network"
-  proj2 <- bip_proj(g2)
+  proj2 <- bipartite_projection(g2)
   expect_that(as.matrix(proj2[[1]][]),
               is_equivalent_to(cbind(c(0,2,0,2,2), c(2,0,1,2,2),
                                      c(0,1,0,0,0), c(2,2,0,0,2),
@@ -29,21 +29,21 @@ test_that("bip_proj works", {
   expect_that(as.matrix(proj2[[2]][]),
               is_equivalent_to(cbind(c(0,4,1), c(4,0,1), c(1,1,0))))
   
-  bs <- bip_proj_size(g2)
+  bs <- bipartite_projection_size(g2)
   expect_that(bs$vcount1, equals(vcount(proj2[[1]])))
   expect_that(bs$ecount1, equals(ecount(proj2[[1]])))
   expect_that(bs$vcount2, equals(vcount(proj2[[2]])))
   expect_that(bs$ecount2, equals(ecount(proj2[[2]])))
 })
 
-test_that("bip_proj can calculate only one projection", {
+test_that("bipartite_projection can calculate only one projection", {
   library(igraph)
   set.seed(42)
 
   g <- g_np_bip(5, 10, p=.3)
-  proj <- bip_proj(g)
-  proj1 <- bip_proj(g, which="false")
-  proj2 <- bip_proj(g, which="true")
+  proj <- bipartite_projection(g)
+  proj1 <- bipartite_projection(g, which="false")
+  proj2 <- bipartite_projection(g, which="true")
 
   expect_that(graph.isomorphic(proj$proj1, proj1), is_true())
   expect_that(graph.isomorphic(proj$proj2, proj2), is_true())
@@ -54,17 +54,17 @@ test_that("bip_proj can calculate only one projection", {
 
 })
 
-test_that("bip_proj removes 'type' attribute if requested", {
+test_that("bipartite_projection removes 'type' attribute if requested", {
 
   library(igraph)
   g <- g_full_bip(10,5)
-  proj <- bip_proj(g)
-  proj1 <- bip_proj(g, which="true")
-  proj2 <- bip_proj(g, which="false")
+  proj <- bipartite_projection(g)
+  proj1 <- bipartite_projection(g, which="true")
+  proj2 <- bipartite_projection(g, which="false")
 
-  proj3 <- bip_proj(g, remove.type=FALSE)
-  proj4 <- bip_proj(g, which="true", remove.type=FALSE)
-  proj5 <- bip_proj(g, which="false", remove.type=FALSE)
+  proj3 <- bipartite_projection(g, remove.type=FALSE)
+  proj4 <- bipartite_projection(g, which="true", remove.type=FALSE)
+  proj5 <- bipartite_projection(g, which="false", remove.type=FALSE)
 
   expect_that("type" %in% vertex_attr_names(proj[[1]]), is_false())
   expect_that("type" %in% vertex_attr_names(proj[[2]]), is_false())
@@ -77,14 +77,14 @@ test_that("bip_proj removes 'type' attribute if requested", {
   expect_that("type" %in% vertex_attr_names(proj5), is_true())
 })
 
-test_that("bip_proj breaks for non-bipartite graphs (#543)", {
+test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {
 
   library(igraph)
   g <- g_formula(A-0, B-1, A-1, 0-1)
   V(g)$type <- V(g)$name %in% LETTERS
 
-  expect_that(bip_proj_size(g),
+  expect_that(bipartite_projection_size(g),
           throws_error("Non-bipartite edge found in bipartite projection"))
-  expect_that(bip_proj(g),
+  expect_that(bipartite_projection(g),
           throws_error("Non-bipartite edge found in bipartite projection"))
 })

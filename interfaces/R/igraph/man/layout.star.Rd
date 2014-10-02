@@ -1,5 +1,5 @@
-\name{l_star}
-\alias{l_star}
+\name{layout_as_star}
+\alias{layout_as_star}
 \alias{layout.star}
 \concept{Graph layout}
 \title{Generate coordinates to place the vertices of a graph in a
@@ -9,7 +9,7 @@
   circle and the rest of the vertices equidistantly on the perimeter.
 }
 \usage{
-l_star(graph, center = V(graph)[1], order = NULL)
+layout_as_star(graph, center = V(graph)[1], order = NULL)
 }
 \arguments{
   \item{graph}{The graph to layout.}
@@ -32,6 +32,6 @@ l_star(graph, center = V(graph)[1], order = NULL)
   ring graphs.}
 \examples{
 g <- g_star(10)
-l_star(g)
+layout_as_star(g)
 }
 \keyword{graphs}

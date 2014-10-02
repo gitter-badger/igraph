@@ -271,7 +271,7 @@ pause()
 g4 <- add_vertices(g3, 3)
 print(g4, v=T)
 igraph.options(print.vertex.attributes=TRUE, 
-               plot.layout=l_fr)
+               plot.layout=layout_with_fr)
 g4
 plot(g4)                      
 
@@ -293,7 +293,7 @@ pause()
 g2 <- g_formula(Alice -+ Bob:Cecil:Daniel, 
                 Cecil:Daniel +-+ Eugene:Gordon )
 print(g2, v=T)
-plot(g2, layout=l_kk, vertex.label=V(g2)$name)
+plot(g2, layout=layout_with_kk, vertex.label=V(g2)$name)
 
 pause()
 

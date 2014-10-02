@@ -298,7 +298,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' 
 #' Plot a hierarchical random graph as a dendrogram.
 #' 
-#' \code{dend_plot} supports three different plotting functions, selected via
+#' \code{plot_dendrogram} supports three different plotting functions, selected via
 #' the \code{mode} argument. By default the plotting function is taken from the
 #' \code{dend.plot.type} igraph option, and it has for possible values:
 #' \itemize{ \item \code{auto} Choose automatically between the plotting
@@ -311,7 +311,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' 
 #' The different plotting functions take different sets of arguments. When
 #' using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
-#' \preformatted{ dend_plot(x, mode="phylo", colbar = rainbow(11, start=0.7,
+#' \preformatted{ plot_dendrogram(x, mode="phylo", colbar = rainbow(11, start=0.7,
 #' end=0.1), edge.color = NULL, use.edge.length = FALSE, \dots) } The extra
 #' arguments not documented above: \itemize{ \item \code{colbar} Color bar for
 #' the edges.  \item \code{edge.color} Edge colors. If \code{NULL}, then the
@@ -320,7 +320,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' \code{plot.phylo}.  }
 #' 
 #' The syntax for \code{plot.hclust} (\code{mode="hclust"}): \preformatted{
-#' dend_plot(x, mode="hclust", rect = 0, colbar = rainbow(rect), hang = 0.01,
+#' plot_dendrogram(x, mode="hclust", rect = 0, colbar = rainbow(rect), hang = 0.01,
 #' ann = FALSE, main = "", sub = "", xlab = "", ylab = "", \dots) } The extra
 #' arguments not documented above: \itemize{ \item \code{rect} A numeric
 #' scalar, the number of groups to mark on the dendrogram. The dendrogram is
@@ -339,7 +339,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' to pass to \code{plot.hclust}.  }
 #' 
 #' The syntax for \code{plot.dendrogram} (\code{mode="dendrogram"}):
-#' \preformatted{ dend_plot(x, \dots) } The extra arguments are simply passed to
+#' \preformatted{ plot_dendrogram(x, \dots) } The extra arguments are simply passed to
 #' \code{as.dendrogram}.
 #' 
 #' @param x An \code{igraphHRG}, a hierarchical random graph, as returned by
@@ -355,9 +355,9 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' 
 #' g <- g_full(5) + g_full(5)
 #' hrg <- hrg.fit(g)
-#' dend_plot(hrg)
+#' plot_dendrogram(hrg)
 #' 
-dend_plot.igraphHRG <- function(x, mode=getIgraphOpt("dend.plot.type"), ...) {
+plot_dendrogram.igraphHRG <- function(x, mode=getIgraphOpt("dend.plot.type"), ...) {
 
   if (mode=="auto") {
     value <- tryCatch(suppressWarnings(library("ape", character.only=TRUE,

@@ -17,7 +17,7 @@ permute(graph, permutation)
 \details{
   This function creates a new graph from the input graph by permuting
   its vertices according to the specified mapping. Call this function
-  with the output of \code{\link{canon_perm}} to create
+  with the output of \code{\link{canonical_permutation}} to create
   the canonical form of a graph.
 
   \code{permute} keeps all graph, vertex and edge attributes of
@@ -26,7 +26,7 @@ permute(graph, permutation)
 \value{A new graph object.}
 %\references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{canon_perm}}}
+\seealso{\code{\link{canonical_permutation}}}
 \examples{
 # Random permutation of a random graph
 g <- g_nm(20, 50)

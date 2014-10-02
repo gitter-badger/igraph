@@ -10,7 +10,7 @@ test_that("g_adj_matrix works", {
               c(0,1,0,1),
               c(1,0,0,1))
   g1 <- g_adj_matrix(M1)
-  el1 <- edgelist(g1)
+  el1 <- as_edgelist(g1)
   expect_that(el1[order(el1[,1], el1[,2]),],
               equals(structure(c(1, 1, 2, 3, 3, 4, 4, 3, 4, 1, 2, 4,
                                  1, 4), .Dim = c(7L, 2L))))
@@ -20,7 +20,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,1),
               c(1,0,1,0))
   g2 <- g_adj_matrix(M2, mode="undirected")
-  el2 <- edgelist(g2)
+  el2 <- as_edgelist(g2)
   expect_that(el2[order(el2[,1], el2[,2]),],
               equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4),
                                .Dim = c(4L, 2L))))
@@ -30,7 +30,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,0),
               c(1,0,1,0))
   g3 <- g_adj_matrix(M3, mode="min")
-  el3 <- edgelist(g3)
+  el3 <- as_edgelist(g3)
   expect_that(el3[order(el3[,1], el3[,2]),],
               equals(structure(c(1, 1, 1, 2, 3, 4), .Dim=c(3L, 2L))))
 
@@ -39,7 +39,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,0),
               c(1,0,1,0))
   g4 <- g_adj_matrix(M4, mode="max")
-  el4 <- edgelist(g4)
+  el4 <- as_edgelist(g4)
   expect_that(el4[order(el4[,1], el4[,2]),],
               equals(structure(c(1, 1, 1, 1, 3,
                                  2, 3, 4, 4, 4), .Dim=c(5L, 2L))))
@@ -49,7 +49,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,0),
               c(1,0,1,0))
   g5 <- g_adj_matrix(M5, mode="upper")
-  el5 <- edgelist(g5)
+  el5 <- as_edgelist(g5)
   expect_that(el5[order(el5[,1], el5[,2]),],
               equals(structure(c(1, 1, 1, 1, 2, 3, 4, 4), .Dim=c(4L, 2L))))
 
@@ -58,7 +58,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,0),
               c(1,0,1,0))
   g6 <- g_adj_matrix(M6, mode="lower")
-  el6 <- edgelist(g6)
+  el6 <- as_edgelist(g6)
   expect_that(el6[order(el6[,1], el6[,2]),],
               equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4), .Dim=c(4L, 2L))))
 
@@ -67,7 +67,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,0),
               c(1,0,1,0))
   g7 <- g_adj_matrix(M7, mode="plus")
-  el7 <- edgelist(g7)
+  el7 <- as_edgelist(g7)
   expect_that(el7[order(el7[,1], el7[,2]),],
               equals(structure(c(1, 1, 1, 1, 1, 1, 1, 3, 2, 2, 3, 3,
                                  4, 4, 4, 4), .Dim = c(8L, 2L))))
@@ -77,7 +77,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,0),
               c(1,0,2,0))
   g8 <- g_adj_matrix(M8, mode="directed", weighted=TRUE)
-  el8 <- cbind(edgelist(g8), E(g8)$weight)
+  el8 <- cbind(as_edgelist(g8), E(g8)$weight)
   expect_that(el8[order(el8[,1], el8[,2]),],
               equals(structure(c(1, 1, 1, 2, 3, 4, 4, 2, 3, 4, 1, 1,
                                  1, 3, 1, 1, 0.5, 1, 1, 1, 2), .Dim =
@@ -88,7 +88,7 @@ test_that("g_adj_matrix works", {
               c(1,0,0,2),
               c(3,0,2,0))
   g9 <- g_adj_matrix(M9, mode="undirected", weighted=TRUE)
-  el9 <- cbind(edgelist(g9), E(g9)$weight)
+  el9 <- cbind(as_edgelist(g9), E(g9)$weight)
   expect_that(el9[order(el9[,1], el9[,2]),],
               equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4, 1, 1, 3, 2),
                                .Dim = c(4L, 3L))))
@@ -98,7 +98,7 @@ test_that("g_adj_matrix works", {
                c(1,0,0,0),
                c(1,0,2,0))
   g10 <- g_adj_matrix(M10, mode="max", weighted=TRUE)
-  el10 <- cbind(edgelist(g10), E(g10)$weight)
+  el10 <- cbind(as_edgelist(g10), E(g10)$weight)
   expect_that(el10[order(el10[,1], el10[,2]),],
               equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4, 1, 1, 1, 2),
                                .Dim = c(4L, 3L))))
@@ -108,7 +108,7 @@ test_that("g_adj_matrix works", {
                c(1,0,0,0),
                c(1,0,2,0))
   g11 <- g_adj_matrix(M11, mode="min", weighted=TRUE)
-  el11 <- cbind(edgelist(g11), E(g11)$weight)
+  el11 <- cbind(as_edgelist(g11), E(g11)$weight)
   expect_that(el11[order(el11[,1], el11[,2]),],
               equals(structure(c(1, 1, 1, 2, 3, 4, 1, 1, 0.5), .Dim =
                                c(3L, 3L))))
@@ -118,7 +118,7 @@ test_that("g_adj_matrix works", {
                c(1,0,0,0),
                c(1,0,2,0))
   g12 <- g_adj_matrix(M12, mode="lower", weighted=TRUE)
-  el12 <- cbind(edgelist(g12), E(g12)$weight)
+  el12 <- cbind(as_edgelist(g12), E(g12)$weight)
   expect_that(el12[order(el12[,1], el12[,2]),],
               equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4, 1, 1, 1, 2),
                                .Dim = c(4L, 3L))))
@@ -128,7 +128,7 @@ test_that("g_adj_matrix works", {
                c(1,0,0,0),
                c(1,0,2,0))
   g13 <- g_adj_matrix(M13, mode="upper", weighted=TRUE)
-  el13 <- cbind(edgelist(g13), E(g13)$weight)
+  el13 <- cbind(as_edgelist(g13), E(g13)$weight)
   expect_that(el13[order(el13[,1], el13[,2]),],
               equals(structure(c(1, 1, 1, 2, 3, 4, 1, 1, 0.5), .Dim =
                                c(3L, 3L))))
@@ -138,7 +138,7 @@ test_that("g_adj_matrix works", {
                c(1,0,0,0),
                c(1,0,2,0))
   g14 <- g_adj_matrix(M14, mode="plus", weighted=TRUE)
-  el14 <- cbind(edgelist(g14), E(g14)$weight)
+  el14 <- cbind(as_edgelist(g14), E(g14)$weight)
   expect_that(el14[order(el14[,1], el14[,2]),],
               equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4, 2, 2, 1.5,
                                  2), .Dim = c(4L, 3L))))

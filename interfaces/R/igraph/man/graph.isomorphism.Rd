@@ -74,10 +74,10 @@ g_iso_class(size, number, directed=TRUE)
   \item{directed}{Whether to create a directed graph.}
   \item{sh1}{Character constant, the heuristics to use in the BLISS
     algorithm, for \code{graph1}. See the \code{sh} argument of
-    \code{\link{canon_perm}} for possible values.}
+    \code{\link{canonical_permutation}} for possible values.}
   \item{sh2}{Character constant, the heuristics to use in the BLISS
     algorithm, for \code{graph2}. See the \code{sh} argument of
-    \code{\link{canon_perm}} for possible values.}
+    \code{\link{canonical_permutation}} for possible values.}
   \item{vids}{Numeric vector, the vertex ids of vertices to form the
     induced subgraph for determining the isomorphism class.}
   \item{pattern}{The smaller graph, it might be directed or
@@ -122,7 +122,7 @@ g_iso_class(size, number, directed=TRUE)
 
   \code{igraph.isomorphic.bliss} uses the BLISS algorithm by Junttila
   and Kaski, and it works for undirected graphs. For both graphs the
-  \code{\link{canon_perm}} and then the
+  \code{\link{canonical_permutation}} and then the
   \code{\link{permute}} function is called to transfer them
   into canonical form; finally the canonical forms are compared.
 
@@ -189,13 +189,13 @@ g_iso_class(size, number, directed=TRUE)
     vector otherwise.}
   \item{info1}{Some information about the canonical form calculation
     for \code{graph1}. A named list, see the return value of
-    \code{\link{canon_perm}} for details. Note that if the
+    \code{\link{canonical_permutation}} for details. Note that if the
 		two graphs have different number of vertices or edges, then the
 		BLISS algorithm is not run at all, and the contents of \code{info1}
 		is incorrect.}
   \item{info2}{Some information about the canonical form calculation
     for \code{graph2}. A named list, see the return value of
-    \code{\link{canon_perm}} for details. Note that if the
+    \code{\link{canonical_permutation}} for details. Note that if the
 		two graphs have different number of vertices or edges, then the
 		BLISS algorithm is not run at all, and the contents of \code{info2}
 		is incorrect.}

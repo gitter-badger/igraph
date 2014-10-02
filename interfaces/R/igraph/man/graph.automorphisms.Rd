@@ -49,7 +49,7 @@ automorphisms(graph, sh="fm")
 \author{ Tommi Juntilla (\url{http://users.ics.aalto.fi/tjunttil/)}
   for BLISS and Gabor Csardi \email{csardi.gabor@gmail.com} for the
   igraph glue code and this manual page.} 
-\seealso{\code{\link{canon_perm}}, \code{\link{permute}}}
+\seealso{\code{\link{canonical_permutation}}, \code{\link{permute}}}
 \examples{
 ## A ring has n*2 automorphisms, you can "turn" it by 0-9 vertices
 ## and each of these graphs can be "flipped"

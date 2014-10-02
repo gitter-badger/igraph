@@ -26,7 +26,7 @@ graphlet_basis <- function(graph, weights=NULL) {
 graphlet_proj <- function(graph, weights=NULL, cliques, niter=1000,
                               Mu=rep(1, length(cliques))) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is.igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -60,7 +60,7 @@ function() {
     E(g)$color <- "black"
     plot.new()
     layout(matrix(1:6, nrow=2, byrow=TRUE))
-    co <- l_kk(g)
+    co <- layout_with_kk(g)
     par(mar=c(1,1,1,1))
     plot(g, layout=co)
     for (i in 1:length(gl$Bc)) {

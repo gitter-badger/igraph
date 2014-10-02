@@ -16,7 +16,7 @@ pause()
 
 ### Create a layout that is used from now on
 
-karate$layout <- l_auto(karate)
+karate$layout <- layout_nicely(karate)
 plot(karate)
 
 pause()

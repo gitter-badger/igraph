@@ -42,14 +42,14 @@
 #' @return A regular matrix or a matrix of class \code{Matrix} if a
 #' \code{sparse} argument was \code{TRUE}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{adj}}
+#' @seealso \code{\link{as_adj}}
 #' @keywords graphs
 #' @examples
 #' 
 #' library(Matrix)
 #' ## g is a large sparse graph
 #' g <- barabasi.game(n = 10^5, power = 2, directed = FALSE)
-#' W <- stochastic(g, sparse=TRUE)
+#' W <- stochastic_matrix(g, sparse=TRUE)
 #' 
 #' ## a dense matrix here would probably not fit in the memory
 #' class(W)
@@ -57,7 +57,7 @@
 #' ## may not be exactly 1, due to numerical errors
 #' max(abs(rowSums(W))-1)
 #' 
-stochastic <- function(graph, column.wise=FALSE,
+stochastic_matrix <- function(graph, column.wise=FALSE,
                            sparse=getIgraphOpt("sparsematrices")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -302,7 +302,7 @@ scg_group <- function(V, nt,
 #' 
 #' ## use L and R to coarse-grain the graph Laplacian
 #' lr <- scg_semi_proj(memb, mtype="laplacian")
-#' L <- laplacian(g)
+#' L <- laplacian_matrix(g)
 #' Lt <- lr$L %*% L %*% t(lr$R)
 #' ## or better lr$L %*% tcrossprod(L,lr$R)
 #' rowSums(Lt)
@@ -464,7 +464,7 @@ scg_semi_proj <- function(groups,
 #' cg <- scg(g, 1, 3, algo="exact_scg")
 #' 
 #' #plot the result
-#' layout <- l_kk(g)
+#' layout <- layout_with_kk(g)
 #' nt <- vcount(cg$Xt)
 #' col <- rainbow(nt)
 #' vsize <- table(cg$groups)
@@ -475,7 +475,7 @@ scg_semi_proj <- function(groups,
 #' 		vertex.label = NA, layout = layout)
 #' plot(cg$Xt, edge.width = ewidth, edge.label = ewidth, 
 #' 	vertex.color = col, vertex.size = 20*vsize/max(vsize),
-#' 	vertex.label=NA, layout = l_kk)
+#' 	vertex.label=NA, layout = layout_with_kk)
 #' par(op)
 #' 
 #' ## SCG of real-world network
@@ -490,7 +490,7 @@ scg_semi_proj <- function(groups,
 #' ## are the eigenvalues well-preserved?
 #' gt <- cg$Xt
 #' nt <- vcount(gt)
-#' Lt <- laplacian(gt)
+#' Lt <- laplacian_matrix(gt)
 #' evalt <- eigen(Lt, only.values=TRUE)$values[nt-(1:9)]
 #' res <- cbind(interv, cg$values, evalt)
 #' res <- round(res,5)
@@ -499,17 +499,17 @@ scg_semi_proj <- function(groups,
 #' print(res)
 #' 
 #' ## use SCG to get the communities
-#' com <- scg(laplacian(immuno), ev=n-c(1,2), nt=2)$groups
+#' com <- scg(laplacian_matrix(immuno), ev=n-c(1,2), nt=2)$groups
 #' col <- rainbow(max(com))
-#' layout <- l_auto(immuno)
+#' layout <- layout_nicely(immuno)
 #' 
 #' plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
 #'                 vertex.label=NA)
 #' 
 #' ## display the coarse-grained graph
 #' gt <- simplify(as.undirected(gt))
-#' layout.cg <- l_kk(gt)
-#' com.cg <- scg(laplacian(gt), nt-c(1,2), 2)$groups
+#' layout.cg <- layout_with_kk(gt)
+#' com.cg <- scg(laplacian_matrix(gt), nt-c(1,2), 2)$groups
 #' vsize <- sqrt(as.vector(table(cg$groups)))
 #' 
 #' op <- par(mfrow=c(1,2))

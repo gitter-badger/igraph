@@ -316,7 +316,7 @@
       means curvature 0.5, \code{FALSE} means curvature zero.
 
       By default the vector specifying the curvatire is calculated via a
-      call to the \code{\link{make_curves}} function. This function makes
+      call to the \code{\link{curve_multiple}} function. This function makes
       sure that multiple edges are curved and are all visible. This
       parameter is ignored for loop edges. 
       
@@ -382,7 +382,7 @@
       actual coordinates. The function should return a matrix with two
       or three columns. For the 2D plots the third column is ignored.
 
-      The default value is \code{l_auto}, a smart function that
+      The default value is \code{layout_nicely}, a smart function that
       chooses a layouter based on the graph.}
     \item{margin}{The amount of empty space below, over, at the left and
       right of the plot, it is a numeric vector of length four. Usually
@@ -435,33 +435,33 @@
 
 # plotting a simple ring graph, all default parameters, except the layout
 g <- g_ring(10)
-g$layout <- l_circle
+g$layout <- layout_in_circle
 plot(g)
 tkplot(g)
 rglplot(g)
 
 # plotting a random graph, set the parameters in the command arguments
 g <- barabasi.game(100)
-plot(g, layout=l_fr, vertex.size=4,
+plot(g, layout=layout_with_fr, vertex.size=4,
      vertex.label.dist=0.5, vertex.color="red", edge.arrow.size=0.5)
 
 # plot a random graph, different color for each component
 g <- g_np(100, 1/100)
-comps <- comps(g)$membership
+comps <- components(g)$membership
 colbar <- rainbow(max(comps)+1)
 V(g)$color <- colbar[comps+1]
-plot(g, layout=l_fr, vertex.size=5, vertex.label=NA)
+plot(g, layout=layout_with_fr, vertex.size=5, vertex.label=NA)
 
 # plot communities in a graph
 g <- g_full(5) \%du\% g_full(5) \%du\% g_full(5)
 g <- add_edges(g, c(1,6, 1,11, 6,11))
 com <- cluster_spinglass(g, spins=5)
 V(g)$color <- com$membership+1
-g <- set_graph_attr(g, "layout", l_kk(g))
+g <- set_graph_attr(g, "layout", layout_with_kk(g))
 plot(g, vertex.label.dist=1.5)
 
 # draw a bunch of trees, fix layout
-igraph.options(plot.layout=l_tree)
+igraph.options(plot.layout=layout_as_tree)
 plot(g_tree(20, 2))
 plot(g_tree(50, 3), vertex.size=3, vertex.label=NA)
 tkplot(g_tree(50, 2, mode="undirected"), vertex.size=10,

@@ -53,7 +53,7 @@ st_min_cuts(graph, source, target, capacity = NULL)
 }
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{
-  \code{\link{st_cuts}}, \code{\link{min_size_sep}}
+  \code{\link{st_cuts}}, \code{\link{min_separators}}
 }
 \examples{
 # A difficult graph, from the Provan-Shier paper

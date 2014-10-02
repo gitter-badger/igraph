@@ -112,7 +112,7 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
 #' cor(degree(g), sc)
 #' 
 subgraph_centrality <- function(graph, diag=FALSE) {
-  A <- adj(graph)
+  A <- as_adj(graph)
   if (!diag) { diag(A) <- 0 }
   eig <- eigen(A)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))

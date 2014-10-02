@@ -104,7 +104,7 @@
 #' @examples
 #' 
 #' g <- g_pa(10000)
-#' degree_dist(g)
+#' degree_distribution(g)
 #' 
 
 g_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
@@ -199,7 +199,7 @@ g_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
 #' @examples
 #' 
 #' g <- g_np(1000, 1/1000)
-#' degree_dist(g)
+#' degree_distribution(g)
 
 g_np <- function(n, p, directed = FALSE, loops = FALSE) {
 
@@ -244,7 +244,7 @@ g_np <- function(n, p, directed = FALSE, loops = FALSE) {
 #' @examples
 #' 
 #' g <- g_nm(1000, 1000)
-#' degree_dist(g)
+#' degree_distribution(g)
 
 g_nm <- function(n, m, directed = FALSE, loops = FALSE) {
 
@@ -307,7 +307,7 @@ g_nm <- function(n, m, directed = FALSE, loops = FALSE) {
 #' @examples
 #' 
 #' g <- erdos.renyi.game(1000, 1/1000)
-#' degree_dist(g)
+#' degree_distribution(g)
 #' 
 erdos.renyi.game <- function(n, p.or.m, type=c("gnp", "gnm"),
                              directed=FALSE, loops=FALSE, ...) {
@@ -790,11 +790,11 @@ g_grg <- function(nodes, radius, torus=FALSE, coords=FALSE) {
 #' 
 #' pf <- matrix( c(1, 0, 0, 1), nr=2)
 #' g <- g_pref(20, 2, pref.matrix=pf)
-#' \dontrun{tkplot(g, layout=l_fr)}
+#' \dontrun{tkplot(g, layout=layout_with_fr)}
 #' 
 #' pf <- matrix( c(0, 1, 0, 0), nr=2)
 #' g <- g_pref_asym(20, 2, pref.matrix=pf)
-#' \dontrun{tkplot(g, layout=l_circle)}
+#' \dontrun{tkplot(g, layout=layout_in_circle)}
 #' 
 g_pref <- function(nodes, types, type.dist=rep(1, types),
                             fixed.sizes=FALSE,

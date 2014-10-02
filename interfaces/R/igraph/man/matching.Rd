@@ -4,7 +4,7 @@
 \alias{is.maximal.matching}
 \alias{is_max_matching}
 \alias{maximum.bipartite.matching}
-\alias{max_bip_match}
+\alias{max_bipartite_match}
 \concept{Matching}
 \concept{Maximal matching}
 \concept{Maximum bipartite matching}
@@ -16,7 +16,7 @@
 \usage{
 is_matching(graph, matching, types = NULL)
 is_max_matching(graph, matching, types = NULL)
-max_bip_match(graph, types = NULL, weights = NULL,
+max_bipartite_match(graph, types = NULL, weights = NULL,
        eps = .Machine$double.eps)
 }
 \arguments{
@@ -51,7 +51,7 @@ max_bip_match(graph, types = NULL, weights = NULL,
   A matching is maximal if and only if there exists no unmatched vertex
   in a graph such that one of its neighbors is also unmatched.
 
-  \code{max_bip_match} calculates a maximum matching in a
+  \code{max_bipartite_match} calculates a maximum matching in a
   bipartite graph. A matching in a bipartite graph is a partial
   assignment of vertices of the first kind to vertices of the second
   kind such that each vertex of the first kind is matched to at most one
@@ -71,7 +71,7 @@ max_bip_match(graph, types = NULL, weights = NULL,
   \code{is_matching} and \code{is_max_matching} return a logical
   scalar.
 
-  \code{max_bip_match} returns a list with components:
+  \code{max_bipartite_match} returns a list with components:
   \item{matching_size}{The size of the matching, i.e. the number of
     edges connecting the matched vertices.}
   \item{matching_weight}{The weights of the matching, if the graph was
@@ -97,11 +97,11 @@ is_max_matching(g, m3)
 
 V(g)$type <- c(FALSE,TRUE)
 str(g, v=TRUE)
-max_bip_match(g)
+max_bipartite_match(g)
 
 g2 <- g_formula( a-b-c-d-e-f-g )
 V(g2)$type <- rep(c(FALSE,TRUE), length=vcount(g2))
 str(g2, v=TRUE)
-max_bip_match(g2)
+max_bipartite_match(g2)
 }
 \keyword{graphs}

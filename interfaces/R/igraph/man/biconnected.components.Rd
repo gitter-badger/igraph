@@ -1,11 +1,11 @@
-\name{biconn_comps}
+\name{biconnected_components}
 \alias{biconnected.components}
-\alias{biconn_comps}
+\alias{biconnected_components}
 \concept{Biconnected component}
 \title{Biconnected components}
 \description{Finding the biconnected components of a graph}
 \usage{
-biconn_comps(graph)
+biconnected_components(graph)
 }
 \arguments{
   \item{graph}{The input graph. It is treated as an undirected graph,
@@ -38,12 +38,12 @@ biconn_comps(graph)
 }
 %\references
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{articulation_points}}, \code{\link{comps}},
-  \code{\link{is_connected}}, \code{\link{vertex_conn}}}
+\seealso{\code{\link{articulation_points}}, \code{\link{components}},
+  \code{\link{is_connected}}, \code{\link{vertex_connectivity}}}
 \examples{
 g <- disjoint_union( g_full(5), g_full(5) )
-clu <- comps(g)$membership
+clu <- components(g)$membership
 g <- add_edges(g, c(which(clu==1), which(clu==2)))
-bc <- biconn_comps(g)
+bc <- biconnected_components(g)
 }
 \keyword{graphs}

@@ -9,7 +9,7 @@ test_that("assortativity works", {
   assR <- function(graph) { 
     indeg <- degree(graph, mode="in")
     outdeg <- degree(graph, mode="out")
-    el <- edgelist(graph, names=FALSE)
+    el <- as_edgelist(graph, names=FALSE)
     J <- outdeg[el[,1]]-1
     K <- indeg[el[,2]]-1
     num <- sum(J*K) - sum(J)*sum(K)/ecount(graph)
@@ -44,7 +44,7 @@ test_that("nominal assortativity works", {
   o <- simplify(o)
   an <- assortativity_nominal(o, V(o)$value+1)
 
-  el <- edgelist(o, names=FALSE)
+  el <- as_edgelist(o, names=FALSE)
   etm <- matrix(0, nr=max(V(o)$value)+1, nc=max(V(o)$value)+1)
   for (e in 1:nrow(el)) {
     t1 <- V(o)$value[ el[e,1] ]+1

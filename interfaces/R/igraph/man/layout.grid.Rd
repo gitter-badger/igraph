@@ -1,5 +1,5 @@
-\name{l_grid}
-\alias{l_grid}
+\name{layout_on_grid}
+\alias{layout_on_grid}
 \alias{layout.grid}
 \alias{layout.grid.3d}
 \concept{Graph layout}
@@ -7,7 +7,7 @@
 \description{This layout places vertices on a rectangulat grid, in two
   or three dimensions.}
 \usage{
-l_grid (graph, width = 0, height = 0, dim = 2)
+layout_on_grid (graph, width = 0, height = 0, dim = 2)
 }
 \arguments{
   \item{graph}{The input graph.}
@@ -34,14 +34,14 @@ l_grid (graph, width = 0, height = 0, dim = 2)
 \seealso{ \code{\link{layout}} for other layout generators }
 \examples{
 g <- g_lattice( c(3,3) )
-l_grid(g)
+layout_on_grid(g)
 
 g2 <- g_lattice( c(3,3,3) )
-l_grid(g2, dim = 3)
+layout_on_grid(g2, dim = 3)
 
 \dontrun{
-plot(g, layout=l_grid)
-rglplot(g, layout=l_grid(g, dim = 3))
+plot(g, layout=layout_on_grid)
+rglplot(g, layout=layout_on_grid(g, dim = 3))
 }
 }
 \keyword{graphs}
