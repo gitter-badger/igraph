@@ -53,7 +53,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(100, 3/100)
+#' g <- sample_gnp(100, 3/100)
 #' g_mst <- mst(g)
 #' 
 mst <- function(graph, weights=NULL,

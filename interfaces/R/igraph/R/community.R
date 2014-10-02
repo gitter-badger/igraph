@@ -385,7 +385,7 @@ modularity <- function(x, ...)
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
+#' g <- full_graph(5) %du% full_graph(5) %du% full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' wtc <- cluster_walktrap(g)
 #' modularity(wtc)
@@ -875,7 +875,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' @keywords graphs
 #' @examples
 #' 
-#'   g <- g_np(10, 5/10) %du% g_np(9, 5/9)
+#'   g <- sample_gnp(10, 5/10) %du% sample_gnp(9, 5/9)
 #'   g <- add_edges(g, c(1, 12))
 #'   g <- induced_subgraph(g, subcomponent(g, 1))
 #'   cluster_spinglass(g, spins=2)
@@ -973,7 +973,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
+#' g <- full_graph(5) %du% full_graph(5) %du% full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' cluster_walktrap(g)
 #' 
@@ -1080,7 +1080,7 @@ cluster_walktrap <- function(graph, weights=E(graph)$weight, steps=4,
 #' g <- barabasi.game(100,m=2)
 #' eb <- cluster_edge_betweenness(g)
 #' 
-#' g <- g_full(10) %du% g_full(10)
+#' g <- full_graph(10) %du% full_graph(10)
 #' g <- add_edges(g, c(1,11))
 #' eb <- cluster_edge_betweenness(g)
 #' eb
@@ -1156,7 +1156,7 @@ cluster_edge_betweenness <- function(graph, weights=E(graph)$weight,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
+#' g <- full_graph(5) %du% full_graph(5) %du% full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' fc <- cluster_fast_greedy(g)
 #' membership(fc)
@@ -1273,7 +1273,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
+#' g <- full_graph(5) %du% full_graph(5) %du% full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' lec <- cluster_leading_eigen(g)
 #' lec
@@ -1365,7 +1365,7 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
 #' @keywords graphs
 #' @examples
 #' 
-#'   g <- g_np(10, 5/10) %du% g_np(9, 5/9)
+#'   g <- sample_gnp(10, 5/10) %du% sample_gnp(9, 5/9)
 #'   g <- add_edges(g, c(1, 12))
 #'   cluster_label_prop(g)
 #' 
@@ -1447,7 +1447,7 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' @examples
 #' 
 #' # This is so simple that we will have only one level
-#' g <- g_full(5) %du% g_full(5) %du% g_full(5)
+#' g <- full_graph(5) %du% full_graph(5) %du% full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' cluster_louvain(g)
 #' 

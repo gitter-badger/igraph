@@ -135,7 +135,7 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' vertex_connectivity(g2, 100, 1)
 #' vertex_disjoint_paths(g2, 100, 1)
 #' 
-#' g <- g_np(50, 5/50)
+#' g <- sample_gnp(50, 5/50)
 #' g <- as.directed(g)
 #' g <- induced_subgraph(g, subcomponent(g, 1))
 #' cohesion(g)
@@ -219,7 +219,7 @@ vertex_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 #' edge_connectivity(g2, 100, 1)
 #' edge_disjoint_paths(g2, 100, 1)
 #' 
-#' g <- g_np(50, 5/50)
+#' g <- sample_gnp(50, 5/50)
 #' g <- as.directed(g)
 #' g <- induced_subgraph(g, subcomponent(g, 1))
 #' adhesion(g)

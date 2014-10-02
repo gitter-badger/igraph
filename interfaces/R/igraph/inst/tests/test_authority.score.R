@@ -21,18 +21,18 @@ test_that("authority score works", {
     expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
   }
 
-  g1 <- g_pa(100, m=10)
+  g1 <- sample_pa(100, m=10)
   ashs(g1)
   ashs(g1, as=FALSE)
 
-  g2 <- g_np(100, 2/100)
+  g2 <- sample_gnp(100, 2/100)
   ashs(g2)
   ashs(g2, as=FALSE)
 })
 
 test_that("authority scores of a ring are all one", {
   library(igraph)
-  g3 <- g_ring(100)
+  g3 <- ring(100)
   expect_that(authority_score(g3)$vector, equals(rep(1, vcount(g3))))
   expect_that(hub_score(g3)$vector, equals(rep(1, vcount(g3))))
 })
@@ -56,14 +56,14 @@ test_that("authority_score survives stress test", {
   }
 
   for (i in 1:100) {
-    G <- g_nm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample(1:20, 1))
     as <- authority_score(G)
     M <- as_adj(G)
     is.good(t(M) %*% M, as$vector, as$value)
   }
 
   for (i in 1:100) {
-    G <- g_nm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample(1:20, 1))
     hs <- hub_score(G)
     M <- as_adj(G)
     is.good(M %*% t(M), hs$vector, hs$value)

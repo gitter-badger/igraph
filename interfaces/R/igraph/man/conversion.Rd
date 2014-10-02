@@ -72,9 +72,9 @@ as_edgelist(graph, names=TRUE)
 }
 % \references{}
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{g_adj_matrix}}, \code{\link{read_graph}}}
+\seealso{\code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}}
 \examples{
-g <- g_np(10, 2/10)
+g <- sample_gnp(10, 2/10)
 as_edgelist(g)
 as_adj(g)
 V(g)$name <- letters[1:vcount(g)]

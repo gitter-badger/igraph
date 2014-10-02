@@ -5,8 +5,8 @@ test_that("iso_class works", {
 
   library(igraph)
 
-  g1 <- g_iso_class(3, 10)
-  g2 <- g_iso_class(3, 11)
+  g1 <- graph_from_iso_class(3, 10)
+  g2 <- graph_from_iso_class(3, 11)
   expect_that(iso_class(g1), equals(10))
   expect_that(iso_class(g2), equals(11))
 

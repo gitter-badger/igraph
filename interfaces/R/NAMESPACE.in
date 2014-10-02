@@ -391,51 +391,51 @@ export(eigen_defaults)
 
 export(farthest_vertices)
 
-export(g_adj_matrix)                    # graph_from_adjacency_matrix
-export(g_atlas)                         # graph_atlas
-export(g_bip)                           # bipartite
-export(g_blocks)                        # graph_from_cohesive_blocks
-export(g_chordal_ring)                  # chordal_ring
-export(g_cit_types)                     # sample_cit_types
-export(g_cit_cit_types)                 # sample_cit_cit_types
-export(g_de_bruijn)                     # de_bruijn_graph
-export(g_degseq)                        # sample_degseq
-export(g_df)                            # graph_from_data_frame
-export(g_edgelist)                      # graph_from_edgelist
-export(g_ego)                           # ego
-export(g_empty)                         # empty
-export(g_fitness)                       # sample_fitness
-export(g_forestfire)                    # sample_forestfire
-export(g_formula)                       # graph_from_formula
-export(g_full)                          # full_graph
-export(g_full_bip)                      # full_bipartite_graph
-export(g_full_cit)                      # full_citation_graph
-export(g_graphdb)                       # graphdb
-export(g_grg)                           # sample_grg
-export(g_growing)                       # sample_growing
-export(g_incidence)                     # igraph_from_incidence_matrix
-export(g_islands)                       # sample_islands
-export(g_iso_class)                     # graph_from_iso_class
-export(g_k_reg)                         # sample_k_regular
-export(g_kautz)                         # kautz_graph
-export(g_last_cit)                      # sample_last_cit
-export(g_lattice)                       # lattice
-export(g_lcf)                           # graph_from_lcf
-export(g_line)                          # line_graph
-export(g_nm)                            # sample_gnm
-export(g_np)                            # sample_gnp
-export(g_np_bip)                        # sample_bipartite
-export(g_pa)                            # sample_pa
-export(g_pa_age)                        # sample_pa_age
-export(g_pref)                          # sample_pref
-export(g_pref_asym)                     # sample_asym_pref
-export(g_ring)                          # ring
-export(g_sbm)                           # sample_sbm
-export(g_smallworld)                    # sample_smallworld
-export(g_star)                          # _star
-export(g_traits)                        # sample_traits
-export(g_traits_callaway)               # sample_traits_callaway
-export(g_tree)                          # tree
+export(graph_from_adjacency_matrix)
+export(graph_atlas)
+export(bipartite_graph)
+export(graphs_from_cohesive_blocks)
+export(chordal_ring)
+export(sample_cit_types)
+export(sample_cit_cit_types)
+export(de_bruijn_graph)
+export(sample_degseq)
+export(graph_from_data_frame)
+export(graph_from_edgelist)
+export(ego_graph)
+export(empty_graph)
+export(sample_fitness)
+export(sample_forestfire)
+export(graph_from_formula)
+export(full_graph)
+export(full_bipartite_graph)
+export(full_citation_graph)
+export(graph_from_graphdb)
+export(sample_grg)
+export(sample_growing)
+export(graph_from_incidence_matrix)
+export(sample_islands)
+export(graph_from_iso_class)
+export(sample_k_regular)
+export(kautz_graph)
+export(sample_last_cit)
+export(lattice)
+export(graph_from_lcf)
+export(line_graph)
+export(sample_gnm)
+export(sample_gnp)
+export(sample_bipartite)
+export(sample_pa)
+export(sample_pa_age)
+export(sample_pref)
+export(sample_asym_pref)
+export(ring)
+export(sample_sbm)
+export(sample_smallworld)
+export(star)
+export(sample_traits)
+export(sample_traits_callaway)
+export(tree)
 export(graph_attr)
 export(graph_attr_names)
 export(graphlet_basis)

@@ -14,7 +14,7 @@
 \section{Igraph graphs}{
   Igraph graphs have a class \sQuote{\code{igraph}}. They are printed to
   the screen in a special format, here is an example, a ring graph
-  created using \code{\link{g_ring}}: \preformatted{    IGRAPH U--- 10 10 -- Ring graph
+  created using \code{\link{ring}}: \preformatted{    IGRAPH U--- 10 10 -- Ring graph
     + attr: name (g/c), mutual (g/x), circular (g/x)  }
   The \sQuote{\code{IGRAPH}} denotes that this is an igraph graph. Then
   come four bits that denote the kind of the graph: the first is
@@ -51,21 +51,21 @@
   \sQuote{games}.
 
   To create small graphs with a given structure probably the
-  \code{\link{g_formula}} function is easiest. It uses R's formula
+  \code{\link{graph_from_formula}} function is easiest. It uses R's formula
   interface, its manual page contains many examples. Another option is
   \code{\link{graph}}, which takes numeric vertex ids directly.
   \code{\link{graph.atlas}} creates graph from the Graph Atlas,
   \code{\link{graph.famous}} can create some special graphs.
 
-  To create graphs from field data, \code{\link{g_edgelist}},
-  \code{\link{g_df}} and \code{\link{g_adj_matrix}} are
+  To create graphs from field data, \code{\link{graph_from_edgelist}},
+  \code{\link{graph_from_data_frame}} and \code{\link{graph_from_adjacency_matrix}} are
   probably the best choices.
 
   The igraph package includes some classic random graphs like the
-  Erdos-Renyi GNP and GNM graphs (\code{\link{g_np}}, \code{\link{g_nm}}) and
+  Erdos-Renyi GNP and GNM graphs (\code{\link{sample_gnp}}, \code{\link{sample_gnm}}) and
   some recent  popular models, like preferential attachment
-  (\code{\link{g_pa}}) and the small-world model
-  (\code{\link{g_smallworld}}). 
+  (\code{\link{sample_pa}}) and the small-world model
+  (\code{\link{sample_smallworld}}). 
 }
 \section{Vertex and edge IDs}{
   Vertices and edges have numerical vertex ids in igraph. Vertex ids are

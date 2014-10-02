@@ -1,7 +1,7 @@
 
-context("g_df")
+context("graph_from_data_frame")
 
-test_that("g_df works", {
+test_that("graph_from_data_frame works", {
 
   library(igraph) ; igraph.options(print.full=TRUE)
 
@@ -17,7 +17,7 @@ test_that("g_df works", {
                           same.dept=c(FALSE,FALSE,TRUE,FALSE,FALSE,TRUE),
                           friendship=c(4,5,5,2,1,1), advice=c(4,5,5,4,2,3),
                           stringsAsFactors=FALSE)
-  g <- g_df(relations, directed=TRUE, vertices=actors)
+  g <- graph_from_data_frame(relations, directed=TRUE, vertices=actors)
 
   df <- data_frame(g, what="both")
   expect_that(df$vertices, is_equivalent_to(actors))
@@ -25,12 +25,12 @@ test_that("g_df works", {
 
 })
 
-test_that("g_df works on matrices", {
+test_that("graph_from_data_frame works on matrices", {
 
   library(igraph)
 
   el <- cbind(1:5,5:1,weight=1:5)
-  g <- g_df(el)
+  g <- graph_from_data_frame(el)
   g <- delete_vertex_attr(g, "name")
   el2 <- data_frame(g)
   expect_that(as.data.frame(el), is_equivalent_to(el2))

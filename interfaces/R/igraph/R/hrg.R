@@ -117,7 +117,7 @@ hrg.predict <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_full(5) + g_full(5)
+#' g <- full_graph(5) + full_graph(5)
 #' hrg <- hrg.fit(g)
 #' as.igraph(hrg)
 #' 
@@ -353,7 +353,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_full(5) + g_full(5)
+#' g <- full_graph(5) + full_graph(5)
 #' hrg <- hrg.fit(g)
 #' plot_dendrogram(hrg)
 #' 

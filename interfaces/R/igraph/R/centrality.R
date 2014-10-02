@@ -107,7 +107,7 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_pa(100, m=4, dir=FALSE)
+#' g <- sample_pa(100, m=4, dir=FALSE)
 #' sc <- subgraph_centrality(g)
 #' cor(degree(g), sc)
 #' 

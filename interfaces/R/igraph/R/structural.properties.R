@@ -58,14 +58,14 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' g2 <- delete_edges(g, c(1,2,1,10))
 #' diameter(g2, unconnected=TRUE)
 #' diameter(g2, unconnected=FALSE)
 #' 
 #' ## Weighted diameter
 #' set.seed(1)
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' E(g)$weight <- sample(seq_len(ecount(g)))
 #' diameter(g)
 #' get.diameter(g)
@@ -181,9 +181,9 @@ mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' degree(g)
-#' g2 <- g_np(1000, 10/1000)
+#' g2 <- sample_gnp(1000, 10/1000)
 #' degree_distribution(g2)
 #' 
 degree <- function(graph, v=V(graph),
@@ -347,7 +347,7 @@ degree_distribution <- function(graph, cumulative=FALSE, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' distances(g)
 #' get.shortest.paths(g, 5)
 #' get.all.shortest.paths(g, 1, 6:8)
@@ -357,7 +357,7 @@ degree_distribution <- function(graph, cumulative=FALSE, ...) {
 #'              c(1,2,0, 1,3,2, 1,4,1, 2,3,0, 2,5,5, 2,6,2, 3,2,1, 3,4,1,
 #'                3,7,1, 4,3,0, 4,7,2, 5,6,2, 5,8,8, 6,3,2, 6,7,1, 6,9,1,
 #'                6,10,3, 8,6,1, 8,9,1, 9,10,4) )
-#' g2 <- add_edges(g_empty(10), t(el[,1:2]), weight=el[,3])
+#' g2 <- add_edges(empty_graph(10), t(el[,1:2]), weight=el[,3])
 #' distances(g2, mode="out")
 #' 
 distances <- function(graph, v=V(graph), to=V(graph),
@@ -536,7 +536,7 @@ get.all.shortest.paths <- function(graph, from,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(100, 1/200)
+#' g <- sample_gnp(100, 1/200)
 #' subcomponent(g, 1, "in")
 #' subcomponent(g, 1, "out")
 #' subcomponent(g, 1, "all")
@@ -584,7 +584,7 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' g2 <- induced_subgraph(g, 1:7)
 #' g3 <- subgraph.edges(g, 1:5, 1:5)
 #' 
@@ -744,7 +744,7 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(10, 3/10)
+#' g <- sample_gnp(10, 3/10)
 #' betweenness(g)
 #' edge_betweenness(g)
 #' 
@@ -855,20 +855,20 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' transitivity(g)
-#' g2 <- g_np(1000, 10/1000)
+#' g2 <- sample_gnp(1000, 10/1000)
 #' transitivity(g2)   # this is about 10/1000
 #' 
 #' # Weighted version, the figure from the Barrat paper
-#' gw <- g_formula(A-B:C:D:E, B-C:D, C-D)
+#' gw <- graph_from_formula(A-B:C:D:E, B-C:D, C-D)
 #' E(gw)$weight <- 1
 #' E(gw)[ V(gw)[name == "A"] %--% V(gw)[name == "E" ] ]$weight <- 5
 #' transitivity(gw, vids="A", type="local")
 #' transitivity(gw, vids="A", type="weighted")
 #' 
 #' # Weighted reduces to "local" if weights are the same
-#' gw2 <- g_np(1000, 10/1000)
+#' gw2 <- sample_gnp(1000, 10/1000)
 #' E(gw2)$weight <- 1
 #' t1 <- transitivity(gw2, type="local")
 #' t2 <- transitivity(gw2, type="weighted")
@@ -1083,7 +1083,7 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(20, 5/20)
+#' g <- sample_gnp(20, 5/20)
 #' constraint(g)
 #' 
 constraint <- function(graph, nodes=V(graph), weights=NULL) {
@@ -1139,7 +1139,7 @@ constraint <- function(graph, nodes=V(graph), weights=NULL) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(20, 5/20, directed=TRUE)
+#' g <- sample_gnp(20, 5/20, directed=TRUE)
 #' reciprocity(g)
 #' 
 reciprocity <- function(graph, ignore.loops=TRUE,
@@ -1175,11 +1175,11 @@ reciprocity <- function(graph, ignore.loops=TRUE,
 #' @return A new graph object.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_degseq}}
+#' @seealso \code{\link{sample_degseq}}
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(20)
+#' g <- ring(20)
 #' g2 <- rewire(g, niter=3)
 #' 
 rewire <- function(graph, mode=c("simple", "loops"), niter=100) {
@@ -1567,9 +1567,9 @@ alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
 #' @keywords graphs
 #' @examples
 #' 
-#' g1 <- g_empty(n=10)
-#' g2 <- g_full(n=10)
-#' g3 <- g_np(n=10, 0.4)
+#' g1 <- empty_graph(n=10)
+#' g2 <- full_graph(n=10)
+#' g3 <- sample_gnp(n=10, 0.4)
 #' 
 #' # loop edges
 #' g <- graph( c(1,2, 2,2, 2,3) )
@@ -1622,14 +1622,14 @@ ego_size <- function(graph, order, nodes=V(graph),
 #' \code{ego} calculates the neighborhoods of the given vertices with
 #' the given order parameter.
 #' 
-#' \code{g_ego} is creates (sub)graphs from all neighborhoods of
+#' \code{ego_graph} is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves
 #' the vertex, edge and graph attributes.
 #' 
 #' \code{connect} creates a new graph by connecting each vertex to
 #' all other vertices in its neighborhood.
 #' 
-#' @aliases neighborhood neighborhood.size graph.neighborhood g_ego
+#' @aliases neighborhood neighborhood.size graph.neighborhood ego_graph
 #' connect.neighborhood connect ego_size ego
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood.
@@ -1646,7 +1646,7 @@ ego_size <- function(graph, order, nodes=V(graph),
 #' 
 #' \code{ego} returns with a list of integer vectors.
 #' 
-#' \code{g_ego} returns with a list of graphs.
+#' \code{ego_graph} returns with a list of graphs.
 #' 
 #' \code{connect} returns with a new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
@@ -1654,7 +1654,7 @@ ego_size <- function(graph, order, nodes=V(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' ego_size(g, 0, 1:3)
 #' ego_size(g, 1, 1:3)
 #' ego_size(g, 2, 1:3)
@@ -1664,10 +1664,10 @@ ego_size <- function(graph, order, nodes=V(graph),
 #' 
 #' # attributes are preserved
 #' V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
-#' g_ego(g, 2, 1:3)
+#' ego_graph(g, 2, 1:3)
 #' 
 #' # connecting to the neighborhood
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' g <- connect(g, 2)
 #' 
 ego <- function(graph, order, nodes=V(graph),
@@ -1691,7 +1691,7 @@ ego <- function(graph, order, nodes=V(graph),
 
 #' @rdname ego
 
-g_ego <- function(graph, order, nodes=V(graph),
+ego_graph <- function(graph, order, nodes=V(graph),
                   mode=c("all", "out", "in"), mindist=0) {
 
   if (!is_igraph(graph)) {
@@ -1741,7 +1741,7 @@ g_ego <- function(graph, order, nodes=V(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' g <- add_edges(g, c(1,2, 2,3, 1,3))
 #' coreness(g) 		# small core triangle in a ring
 #' 
@@ -1834,15 +1834,15 @@ topo_sort <- function(graph, mode=c("out", "all", "in")) {
 #' @examples
 #' 
 #' # No circle in a tree
-#' g <- g_tree(1000, 3)
+#' g <- tree(1000, 3)
 #' girth(g)
 #' 
 #' # The worst case running time is for a ring
-#' g <- g_ring(100)
+#' g <- ring(100)
 #' girth(g)
 #' 
 #' # What about a random graph?
-#' g <- g_np(1000, 1/1000)
+#' g <- sample_gnp(1000, 1/1000)
 #' girth(g)
 #' 
 girth <- function(graph, circle=TRUE) {
@@ -2015,7 +2015,7 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' @examples
 #' 
 #' ## Two rings
-#' bfs(g_ring(10) %du% g_ring(10), root=1, "out",
+#' bfs(ring(10) %du% ring(10), root=1, "out",
 #'           order=TRUE, rank=TRUE, father=TRUE, pred=TRUE,
 #'           succ=TRUE, dist=TRUE)
 #' 
@@ -2024,7 +2024,7 @@ count_multiple <- function(graph, eids=E(graph)) {
 #'   print(data)
 #'   FALSE
 #' }
-#' tmp <- bfs(g_ring(10) %du% g_ring(10), root=1, "out",
+#' tmp <- bfs(ring(10) %du% ring(10), root=1, "out",
 #'                  callback=f)
 #' 
 #' ## How to use a callback to stop the search
@@ -2032,7 +2032,7 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' f <- function(graph, data, extra) {
 #'  data['succ'] == -1
 #' }
-#' bfs(g_ring(10) %du% g_ring(10), root=1, callback=f)
+#' bfs(ring(10) %du% ring(10), root=1, callback=f)
 #' 
 #' 
 bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
@@ -2133,7 +2133,7 @@ bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #' @examples
 #' 
 #' ## A graph with two separate trees
-#' dfs(g_tree(10) %du% g_tree(10), root=1, "out",
+#' dfs(tree(10) %du% tree(10), root=1, "out",
 #'           TRUE, TRUE, TRUE, TRUE)
 #' 
 #' ## How to use a callback
@@ -2145,14 +2145,14 @@ bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #'   cat("out:", paste(collapse=", ", data), "\n")
 #'   FALSE
 #' }
-#' tmp <- dfs(g_tree(10), root=1, "out",
+#' tmp <- dfs(tree(10), root=1, "out",
 #'                  in.callback=f.in, out.callback=f.out)
 #' 
 #' ## Terminate after the first component, using a callback
 #' f.out <- function(graph, data, extra) {
 #'  data['vid'] == 1
 #' }
-#' tmp <- dfs(g_tree(10) %du% g_tree(10), root=1,
+#' tmp <- dfs(tree(10) %du% tree(10), root=1,
 #'                  out.callback=f.out)
 #' 
 #' 
@@ -2281,7 +2281,7 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(20, 1/20)
+#' g <- sample_gnp(20, 1/20)
 #' clu <- components(g)
 #' groups(clu)
 #' 
@@ -2329,7 +2329,7 @@ components <- function(graph, mode=c("weak", "strong")) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_tree(10) %du% g_tree(10)
+#' g <- tree(10) %du% tree(10)
 #' V(g)$id <- seq_len(vcount(g))-1
 #' roots <- sapply(decompose(g), function(x) {
 #'             V(x)$id[ topo_sort(x)[1]+1 ] })
@@ -2393,8 +2393,8 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
-#' g2 <- g_star(10)
+#' g <- ring(10)
+#' g2 <- star(10)
 #' closeness(g)
 #' closeness(g2, mode="in")
 #' closeness(g2, mode="out")
@@ -2492,7 +2492,7 @@ estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' laplacian_matrix(g)
 #' laplacian_matrix(g, norm=TRUE)
 #' laplacian_matrix(g, norm=TRUE, sparse=FALSE)

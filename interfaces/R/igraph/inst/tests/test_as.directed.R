@@ -4,7 +4,7 @@ context("as.directed")
 test_that("as.directed works", {
   library(igraph)
   
-  g <- g_np(100, 2/100)
+  g <- sample_gnp(100, 2/100)
   g2 <- as.directed(g, mode="mutual")
   g3 <- as.directed(g, mode="arbitrary")
 
@@ -17,7 +17,7 @@ test_that("as.directed works", {
 
 test_that("as.directed keeps attributes", {
   library(igraph)
-  g <- g_formula( A-B-C, D-A, E )
+  g <- graph_from_formula( A-B-C, D-A, E )
   g$name <- "Small graph"
   g2 <- as.directed(g, mode="mutual")
   g3 <- as.directed(g, mode="arbitrary")

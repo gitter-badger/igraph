@@ -1,5 +1,5 @@
-\name{g_forestfire}
-\alias{g_forestfire}
+\name{sample_forestfire}
+\alias{sample_forestfire}
 \alias{forest.fire.game}
 \concept{Random graph model}
 \concept{Forest fire model}
@@ -7,7 +7,7 @@
 \description{This is a growing network model, which resembles of how the
   forest fire spreads by igniting trees close by.}
 \usage{
-g_forestfire (nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
+sample_forestfire (nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 }
 \arguments{
   \item{nodes}{The number of vertices in the graph.}
@@ -69,7 +69,7 @@ g_forestfire (nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
   model.
 }
 \examples{
-g <- g_forestfire(10000, fw.prob=0.37, bw.factor=0.32/0.37)
+g <- sample_forestfire(10000, fw.prob=0.37, bw.factor=0.32/0.37)
 dd1 <- degree_distribution(g, mode="in")
 dd2 <- degree_distribution(g, mode="out")
 if (interactive()) {

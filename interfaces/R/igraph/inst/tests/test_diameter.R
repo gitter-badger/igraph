@@ -12,18 +12,18 @@ test_that("diameter works", {
 
 #### Undirected
   
-  g <- gc(g_np(30, 3/30))
+  g <- gc(sample_gnp(30, 3/30))
   sp <- distances(g)
   expect_that(max(sp), equals(diameter(g)))
 
-  g <- gc(g_np(100, 1/100))
+  g <- gc(sample_gnp(100, 1/100))
   sp <- distances(g)
   sp[sp==Inf] <- NA
   expect_that(max(sp, na.rm=TRUE), equals(diameter(g)))
 
 #### Directed
 
-  g <- g_np(30, 3/30, dir=TRUE)
+  g <- sample_gnp(30, 3/30, dir=TRUE)
   sp <- distances(g, mode="out")
   sp[sp==Inf] <- NA
   expect_that(max(sp, na.rm=TRUE), equals(diameter(g, unconnected=TRUE)))
@@ -37,7 +37,7 @@ test_that("diameter works", {
 
 #### Bug #680538
 
-  g <- g_tree(30, mode="undirected")
+  g <- tree(30, mode="undirected")
   E(g)$weight <- 2
   expect_that(diameter(g, unconnected=FALSE), equals(16))
 })

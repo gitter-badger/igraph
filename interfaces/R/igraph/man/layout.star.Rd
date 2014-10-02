@@ -28,10 +28,10 @@ layout_as_star(graph, center = V(graph)[1], order = NULL)
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \seealso{\code{\link{layout}} and \code{\link{layout.drl}} for other
   layout algorithms, \code{\link{plot.igraph}} and \code{\link{tkplot}}
-  on how to plot graphs and \code{\link{g_star}} on how to create
+  on how to plot graphs and \code{\link{star}} on how to create
   ring graphs.}
 \examples{
-g <- g_star(10)
+g <- star(10)
 layout_as_star(g)
 }
 \keyword{graphs}

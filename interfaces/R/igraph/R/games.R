@@ -51,14 +51,14 @@
 #' will be used, it should be a positive integer constant and \code{m} edges
 #' will be added in each time step.
 #' 
-#' \code{g_pa} generates a directed graph by default, set
+#' \code{sample_pa} generates a directed graph by default, set
 #' \code{directed} to \code{FALSE} to generate an undirected graph. Note that
 #' even if an undirected graph is generated \eqn{k_i}{k[i]} denotes the number
 #' of adjacent edges not initiated by the vertex itself and not the total (in-
 #' + out-) degree of the vertex, unless the \code{out.pref} argument is set to
 #' \code{TRUE}.
 #' 
-#' @aliases g_pa barabasi.game ba.game
+#' @aliases sample_pa barabasi.game ba.game
 #' @param n Number of vertices.
 #' @param power The power of the preferential attachment, the default is one,
 #' ie. linear preferential attachment.
@@ -97,17 +97,17 @@
 #' \code{start.graph}.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_np}}
+#' @seealso \code{\link{sample_gnp}}
 #' @references Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in
 #' random networks \emph{Science}, 286 509--512.
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_pa(10000)
+#' g <- sample_pa(10000)
 #' degree_distribution(g)
 #' 
 
-g_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
+sample_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
                     out.pref=FALSE, zero.appeal=1,
                     directed=TRUE, algorithm=c("psumtree",
                                      "psumtree-multiple", "bag"),
@@ -192,16 +192,16 @@ g_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_nm}}, \code{\link{g_pa}}
+#' @seealso \code{\link{sample_gnm}}, \code{\link{sample_pa}}
 #' @references Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
 #' Mathematicae} 6, 290--297 (1959).
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(1000, 1/1000)
+#' g <- sample_gnp(1000, 1/1000)
 #' degree_distribution(g)
 
-g_np <- function(n, p, directed = FALSE, loops = FALSE) {
+sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 
   type <- "gnp"
   type1 <- switch(type, "gnp"=0, "gnm"=1)
@@ -237,16 +237,16 @@ g_np <- function(n, p, directed = FALSE, loops = FALSE) {
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_np}}, \code{\link{g_pa}}
+#' @seealso \code{\link{sample_gnp}}, \code{\link{sample_pa}}
 #' @references Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
 #' Mathematicae} 6, 290--297 (1959).
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_nm(1000, 1000)
+#' g <- sample_gnm(1000, 1000)
 #' degree_distribution(g)
 
-g_nm <- function(n, m, directed = FALSE, loops = FALSE) {
+sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 
   type <- "gnm"
   type1 <- switch(type, "gnp"=0, "gnm"=1)
@@ -284,8 +284,8 @@ g_nm <- function(n, m, directed = FALSE, loops = FALSE) {
 #' @section Deprecated:
 #'
 #' Since igraph version 0.8.0, both \code{erdos.renyi.game} and
-#' \code{random.graph.game} are deprecated, and \code{\link{g_np}} and
-#' \code{\link{g_nm}} should be used instead.
+#' \code{random.graph.game} are deprecated, and \code{\link{sample_gnp}} and
+#' \code{\link{sample_gnm}} should be used instead.
 #' 
 #' @aliases erdos.renyi.game random.graph.game
 #' @param n The number of vertices in the graph.
@@ -300,7 +300,7 @@ g_nm <- function(n, m, directed = FALSE, loops = FALSE) {
 #' @param \dots Additional arguments, ignored.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_pa}}
+#' @seealso \code{\link{sample_pa}}
 #' @references Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
 #' Mathematicae} 6, 290--297 (1959).
 #' @keywords graphs
@@ -337,7 +337,7 @@ random.graph.game <- erdos.renyi.game
 #' Generate random graphs with a given degree sequence
 #' 
 #' It is often useful to create a graph with given vertex degrees. This is
-#' exactly what \code{g_degseq} does.
+#' exactly what \code{sample_degseq} does.
 #' 
 #' The \dQuote{simple} method connects the out-stubs of the edges (undirected
 #' graphs) or the out-stubs and in-stubs (directed graphs) together. This way
@@ -378,21 +378,21 @@ random.graph.game <- erdos.renyi.game
 #' @param \dots Additional arguments, these are used as graph attributes.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_np}}, \code{\link{g_pa}},
+#' @seealso \code{\link{sample_gnp}}, \code{\link{sample_pa}},
 #' \code{\link{simplify}} to get rid of the multiple and/or loops edges.
 #' @keywords graphs
 #' @examples
 #' 
 #' ## The simple generator
-#' g <- g_degseq(rep(2,100))
+#' g <- sample_degseq(rep(2,100))
 #' degree(g)
 #' is_simple(g)   # sometimes TRUE, but can be FALSE
-#' g2 <- g_degseq(1:10, 10:1)
+#' g2 <- sample_degseq(1:10, 10:1)
 #' degree(g2, mode="out")
 #' degree(g2, mode="in")
 #' 
 #' ## The vl generator
-#' g3 <- g_degseq(rep(2,100), method="vl")
+#' g3 <- sample_degseq(rep(2,100), method="vl")
 #' degree(g3)
 #' is_simple(g3)  # always TRUE
 #' 
@@ -400,17 +400,17 @@ random.graph.game <- erdos.renyi.game
 #' ## Note, that we correct the degree sequence if its sum is odd
 #' degs <- sample(1:100, 100, replace=TRUE, prob=exp(-0.5*(1:100)))
 #' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
-#' g4 <- g_degseq(degs, method="vl")
+#' g4 <- sample_degseq(degs, method="vl")
 #' all(degree(g4) == degs)
 #' 
 #' ## Power-law degree distribution
 #' ## Note, that we correct the degree sequence if its sum is odd
 #' degs <- sample(1:100, 100, replace=TRUE, prob=(1:100)^-2)
 #' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
-#' g5 <- g_degseq(degs, method="vl")
+#' g5 <- sample_degseq(degs, method="vl")
 #' all(degree(g5) == degs)
 #' 
-g_degseq <- function(out.deg, in.deg=NULL,
+sample_degseq <- function(out.deg, in.deg=NULL,
                                  method=c("simple", "vl",
                                    "simple.no.multiple"),
                                  ...) {
@@ -448,14 +448,14 @@ g_degseq <- function(out.deg, in.deg=NULL,
 #' each time step the added edges are originating from the new vertex.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_pa}}, \code{\link{g_np}}
+#' @seealso \code{\link{sample_pa}}, \code{\link{sample_gnp}}
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_growing(500, citation=FALSE)
-#' g2 <- g_growing(500, citation=TRUE)
+#' g <- sample_growing(500, citation=FALSE)
+#' g2 <- sample_growing(500, citation=TRUE)
 #' 
-g_growing <- function(n, m=1, directed=TRUE, citation=FALSE) {
+sample_growing <- function(n, m=1, directed=TRUE, citation=FALSE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_growing_random_game", as.numeric(n), as.numeric(m),
                as.logical(directed), as.logical(citation),
@@ -522,7 +522,7 @@ g_growing <- function(n, m=1, directed=TRUE, citation=FALSE) {
 #' 
 #' This function might generate graphs with multiple edges.
 #' 
-#' @aliases g_pa_age aging.prefatt.game aging.barabasi.game aging.ba.game
+#' @aliases sample_pa_age aging.prefatt.game aging.barabasi.game aging.ba.game
 #' @param n The number of vertices in the graph.
 #' @param pa.exp The preferantial attachment exponent, see the details below.
 #' @param aging.exp The exponent of the aging, usually a non-positive number,
@@ -554,19 +554,19 @@ g_growing <- function(n, m=1, directed=TRUE, citation=FALSE) {
 #' attachment. See also details below.
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_pa}}, \code{\link{g_np}}
+#' @seealso \code{\link{sample_pa}}, \code{\link{sample_gnp}}
 #' @keywords graphs
 #' @examples
 #' 
 #' # The maximum degree for graph with different aging exponents
-#' g1 <- g_pa_age(10000, pa.exp=1, aging.exp=0, aging.bin=1000)
-#' g2 <- g_pa_age(10000, pa.exp=1, aging.exp=-1,   aging.bin=1000)
-#' g3 <- g_pa_age(10000, pa.exp=1, aging.exp=-3,   aging.bin=1000)
+#' g1 <- sample_pa_age(10000, pa.exp=1, aging.exp=0, aging.bin=1000)
+#' g2 <- sample_pa_age(10000, pa.exp=1, aging.exp=-1,   aging.bin=1000)
+#' g3 <- sample_pa_age(10000, pa.exp=1, aging.exp=-3,   aging.bin=1000)
 #' max(degree(g1))
 #' max(degree(g2))
 #' max(degree(g3))
 
-g_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
+sample_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
                                out.dist=NULL, out.seq=NULL,
                                out.pref=FALSE, directed=TRUE,
                                zero.deg.appeal=1, zero.age.appeal=0,
@@ -657,7 +657,7 @@ g_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
   res
 }
 
-g_traits_callaway <- function(nodes, types, edge.per.step=1,
+sample_traits_callaway <- function(nodes, types, edge.per.step=1,
                                  type.dist=rep(1, types),
                                  pref.matrix=matrix(1, types, types),
                                  directed=FALSE) {
@@ -679,7 +679,7 @@ g_traits_callaway <- function(nodes, types, edge.per.step=1,
   res
 }
 
-g_traits <- function(nodes, types, k=1, type.dist=rep(1, types),
+sample_traits <- function(nodes, types, k=1, type.dist=rep(1, types),
                                pref.matrix=matrix(1, types, types),
                                directed=FALSE) {
 
@@ -721,14 +721,14 @@ g_traits <- function(nodes, types, k=1, type.dist=rep(1, types),
 #' attributes \sQuote{\code{x}} and \sQuote{\code{y}}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, first version was
 #' written by Keith Briggs (\url{http://keithbriggs.info/}).
-#' @seealso \code{\link{g_np}}
+#' @seealso \code{\link{sample_gnp}}
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_grg(1000, 0.05, torus=FALSE)
-#' g2 <- g_grg(1000, 0.05, torus=TRUE)
+#' g <- sample_grg(1000, 0.05, torus=FALSE)
+#' g2 <- sample_grg(1000, 0.05, torus=TRUE)
 #' 
-g_grg <- function(nodes, radius, torus=FALSE, coords=FALSE) {
+sample_grg <- function(nodes, radius, torus=FALSE, coords=FALSE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_grg_game", as.double(nodes), as.double(radius),
                as.logical(torus), as.logical(coords),
@@ -752,20 +752,20 @@ g_grg <- function(nodes, radius, torus=FALSE, coords=FALSE) {
 #' Generation of random graphs based on different vertex types.
 #' 
 #' Both models generate random graphs with given vertex types. For
-#' \code{g_pref} the probability that two vertices will be connected
+#' \code{sample_pref} the probability that two vertices will be connected
 #' depends on their type and is given by the \sQuote{pref.matrix} argument.
 #' This matrix should be symmetric to make sense but this is not checked. The
 #' distribution of the different vertes types is given by the
 #' \sQuote{type.dist} vector.
 #' 
-#' For \code{g_pref_asym} each vertex has an in-type and an
+#' For \code{sample_asym_pref} each vertex has an in-type and an
 #' out-type and a directed graph is created. The probability that a directed
 #' edge is realized from a vertex with a given out-type to a vertex with a
 #' given in-type is given in the \sQuote{pref.matrix} argument, which can be
 #' asymmetric. The joint distribution for the in- and out-types is given in the
 #' \sQuote{type.dist.matrix} argument.
 #' 
-#' @aliases g_pref g_pref_asym preference.game asymmetric.preference.game
+#' @aliases sample_pref sample_asym_pref preference.game asymmetric.preference.game
 #' @param nodes The number of vertices in the graphs.
 #' @param types The number of different vertex types.
 #' @param type.dist The distribution of the vertex types, a numeric vector of
@@ -783,20 +783,20 @@ g_grg <- function(nodes, radius, torus=FALSE, coords=FALSE) {
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
-#' @seealso \code{\link{g_traits}}.
-#' \code{\link{g_traits_callaway}}
+#' @seealso \code{\link{sample_traits}}.
+#' \code{\link{sample_traits_callaway}}
 #' @keywords graphs
 #' @examples
 #' 
 #' pf <- matrix( c(1, 0, 0, 1), nr=2)
-#' g <- g_pref(20, 2, pref.matrix=pf)
+#' g <- sample_pref(20, 2, pref.matrix=pf)
 #' \dontrun{tkplot(g, layout=layout_with_fr)}
 #' 
 #' pf <- matrix( c(0, 1, 0, 0), nr=2)
-#' g <- g_pref_asym(20, 2, pref.matrix=pf)
+#' g <- sample_asym_pref(20, 2, pref.matrix=pf)
 #' \dontrun{tkplot(g, layout=layout_in_circle)}
 #' 
-g_pref <- function(nodes, types, type.dist=rep(1, types),
+sample_pref <- function(nodes, types, type.dist=rep(1, types),
                             fixed.sizes=FALSE,
                             pref.matrix=matrix(1, types, types),
                             directed=FALSE, loops=FALSE) {
@@ -824,9 +824,9 @@ g_pref <- function(nodes, types, type.dist=rep(1, types),
   res[[1]]
 }
 
-#' @rdname g_pref
+#' @rdname sample_pref
 
-g_pref_asym <- function(nodes, types,
+sample_asym_pref <- function(nodes, types,
                         type.dist.matrix=matrix(1, types,types),
                         pref.matrix=matrix(1, types, types),
                         loops=FALSE) {
@@ -888,7 +888,7 @@ connect <- function(graph, order, mode=c("all", "out", "in", "total")) {
 #' @examples
 #' 
 #' # Some random shortcuts shorten the distances on a lattice
-#' g <- g_lattice( length=100, dim=1, nei=5 )
+#' g <- lattice( length=100, dim=1, nei=5 )
 #' mean_distance(g)
 #' g <- rewire.edges( g, prob=0.05 )
 #' mean_distance(g)
@@ -928,17 +928,17 @@ rewire.edges <- function(graph, prob, loops=FALSE, multiple=FALSE) {
 #' generated graph.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_lattice}}, \code{\link{rewire.edges}}
+#' @seealso \code{\link{lattice}}, \code{\link{rewire.edges}}
 #' @references Duncan J Watts and Steven H Strogatz: Collective dynamics of
 #' \sQuote{small world} networks, Nature 393, 440-442, 1998.
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_smallworld(1, 100, 5, 0.05)
+#' g <- sample_smallworld(1, 100, 5, 0.05)
 #' mean_distance(g)
 #' transitivity(g, type="average")
 #' 
-g_smallworld <- function(dim, size, nei, p, loops=FALSE,
+sample_smallworld <- function(dim, size, nei, p, loops=FALSE,
                                 multiple=FALSE) {
   
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
@@ -958,7 +958,7 @@ g_smallworld <- function(dim, size, nei, p, loops=FALSE,
   res
 }
 
-g_last_cit <- function(n, edges=1, agebins=n/7100, pref=(1:(agebins+1))^-3,
+sample_last_cit <- function(n, edges=1, agebins=n/7100, pref=(1:(agebins+1))^-3,
                        directed=TRUE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_lastcit_game", as.numeric(n), as.numeric(edges),
@@ -973,7 +973,7 @@ g_last_cit <- function(n, edges=1, agebins=n/7100, pref=(1:(agebins+1))^-3,
   res
 }
 
-g_cit_types <- function(n, edges=1, types=rep(0, n),
+sample_cit_types <- function(n, edges=1, types=rep(0, n),
                             pref=rep(1, length(types)),
                             directed=TRUE, attr=TRUE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
@@ -990,7 +990,7 @@ g_cit_types <- function(n, edges=1, types=rep(0, n),
   res
 }
 
-g_cit_cit_types <- function(n, edges=1, types=rep(0, n),
+sample_cit_cit_types <- function(n, edges=1, types=rep(0, n),
                                    pref=matrix(1, nrow=length(types),
                                      ncol=length(types)),
                                    directed=TRUE, attr=TRUE) {
@@ -1041,23 +1041,23 @@ g_cit_cit_types <- function(n, edges=1, types=rep(0, n),
 #' is ignored for undirected graphs.
 #' @return A bipartite igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_np}} for the unipartite version.
+#' @seealso \code{\link{sample_gnp}} for the unipartite version.
 #' @keywords graphs
 #' @examples
 #' 
 #' ## empty graph
-#' g_np_bip(10, 5, p=0)
+#' sample_bipartite(10, 5, p=0)
 #' 
 #' ## full graph
-#' g_np_bip(10, 5, p=1)
+#' sample_bipartite(10, 5, p=1)
 #' 
 #' ## random bipartite graph
-#' g_np_bip(10, 5, p=.1)
+#' sample_bipartite(10, 5, p=.1)
 #' 
 #' ## directed bipartite graph, G(n,m)
-#' g_np_bip(10, 5, type="Gnm", m=20, directed=TRUE, mode="all")
+#' sample_bipartite(10, 5, type="Gnm", m=20, directed=TRUE, mode="all")
 #' 
-g_np_bip <- function(n1, n2, type=c("gnp", "gnm"), p, m,
+sample_bipartite <- function(n1, n2, type=c("gnp", "gnm"), p, m,
                      directed=FALSE, mode=c("out", "in", "all")) {
   
   n1 <- as.integer(n1)

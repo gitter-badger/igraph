@@ -6,7 +6,7 @@ test_that("merge_coords works", {
   library(igraph)
   set.seed(42)
 
-  g <- list(g_ring(10), g_ring(5))
+  g <- list(ring(10), ring(5))
   l <- lapply(g, layout_with_mds)
   l
 
@@ -19,7 +19,7 @@ test_that("merge_coords works", {
 
   ## Stress test
   for (i in 1:10) {
-    g <- g_np(100, 2/100)
+    g <- sample_gnp(100, 2/100)
     l <- layout_with_mds(g)
     expect_that(dim(l), equals(c(vcount(g), 2)))
   }

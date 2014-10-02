@@ -70,7 +70,7 @@ canonical_permutation(graph, sh="fm")
   possibly based on canonical labels.}
 \examples{
 ## Calculate the canonical form of a random graph
-g1 <- g_nm(10, 20)
+g1 <- sample_gnm(10, 20)
 cp1 <- canonical_permutation(g1)
 cf1 <- permute(g1, cp1$labeling)
 

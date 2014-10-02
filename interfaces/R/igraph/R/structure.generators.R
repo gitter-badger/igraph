@@ -54,10 +54,10 @@ graph <- function(edges, n=max(edges), directed=TRUE ) {
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' g_empty(n = 10)
-#' g_empty(n = 5, directed = FALSE)
+#' empty_graph(n = 10)
+#' empty_graph(n = 5, directed = FALSE)
 
-g_empty <- function(n=0, directed=TRUE) {
+empty_graph <- function(n=0, directed=TRUE) {
   # Argument checks
   n <- as.integer(n)
   directed <- as.logical(directed)
@@ -76,7 +76,7 @@ g_empty <- function(n=0, directed=TRUE) {
 #' quickly, it works for both directed and undirected graphs.
 #'
 #' @details
-#' \code{g_formula} is very handy for creating small graphs quickly.
+#' \code{graph_from_formula} is very handy for creating small graphs quickly.
 #' You need to supply one or more R expressions giving the structure of
 #' the graph. The expressions consist of vertex names and edge
 #' operators. An edge operator is a sequence of \sQuote{\code{-}} and
@@ -91,42 +91,42 @@ g_empty <- function(n=0, directed=TRUE) {
 #'
 #' Let us see some simple examples. Without arguments the function
 #' creates an empty graph:
-#' \preformatted{  g_formula()
+#' \preformatted{  graph_from_formula()
 #' }
 #'
 #' A simple undirected graph with two vertices called \sQuote{A} and
 #' \sQuote{B} and one edge only:
-#' \preformatted{  g_formula(A-B)
+#' \preformatted{  graph_from_formula(A-B)
 #' }
 #'
 #' Remember that the length of the edges does not matter, so we could
 #' have written the following, this creates the same graph:
-#' \preformatted{  g_formula( A-----B )
+#' \preformatted{  graph_from_formula( A-----B )
 #' }
 #'
 #' If you have many disconnected components in the graph, separate them
 #' with commas. You can also give isolate vertices.
-#' \preformatted{  g_formula( A--B, C--D, E--F, G--H, I, J, K )
+#' \preformatted{  graph_from_formula( A--B, C--D, E--F, G--H, I, J, K )
 #' }
 #'
 #' The \sQuote{\code{:}} operator can be used to define vertex sets. If
 #' an edge operator connects two vertex sets then every vertex from the
 #' first set will be connected to every vertex in the second set. The
 #' following form creates a full graph, including loop edges:
-#' \preformatted{  g_formula( A:B:C:D -- A:B:C:D )
+#' \preformatted{  graph_from_formula( A:B:C:D -- A:B:C:D )
 #' }
 #'
 #' In directed graphs, edges will be created only if the edge operator
 #' includes a arrow head (\sQuote{+}) \emph{at the end} of the edge:
-#' \preformatted{  g_formula( A -+ B -+ C )
-#'   g_formula( A +- B -+ C )
-#'   g_formula( A +- B -- C )
+#' \preformatted{  graph_from_formula( A -+ B -+ C )
+#'   graph_from_formula( A +- B -+ C )
+#'   graph_from_formula( A +- B -- C )
 #' }
 #' Thus in the third example no edge is created between vertices \code{B}
 #' and \code{C}.
 #'
 #' Mutual edges can be also created with a simple edge operator:
-#' \preformatted{  g_formula( A +-+ B +---+ C ++ D + E)
+#' \preformatted{  graph_from_formula( A +-+ B +---+ C ++ D + E)
 #' }
 #' Note again that the length of the edge operators is arbitrary,
 #' \sQuote{\code{+}}, \sQuote{\code{++}} and \sQuote{\code{+-----+}} have
@@ -134,7 +134,7 @@ g_empty <- function(n=0, directed=TRUE) {
 #'
 #' If the vertex names include spaces or other special characters then
 #' you need to quote them:
-#' \preformatted{  g_formula( "this is" +- "a silly" -+ "graph here" )
+#' \preformatted{  graph_from_formula( "this is" +- "a silly" -+ "graph here" )
 #' }
 #' You can include any character in the vertex names this way, even
 #' \sQuote{+} and \sQuote{-} characters.
@@ -153,34 +153,34 @@ g_empty <- function(n=0, directed=TRUE) {
 #' @export
 #' @examples
 #' # A simple undirected graph
-#' g <- g_formula( Alice-Bob-Cecil-Alice, Daniel-Cecil-Eugene,
+#' g <- graph_from_formula( Alice-Bob-Cecil-Alice, Daniel-Cecil-Eugene,
 #'                      Cecil-Gordon )
 #' g
 #'
 #' # Another undirected graph, ":" notation
-#' g2 <- g_formula( Alice-Bob:Cecil:Daniel, Cecil:Daniel-Eugene:Gordon )
+#' g2 <- graph_from_formula( Alice-Bob:Cecil:Daniel, Cecil:Daniel-Eugene:Gordon )
 #' g2
 #'
 #' # A directed graph
-#' g3 <- g_formula( Alice +-+ Bob --+ Cecil +-- Daniel,
+#' g3 <- graph_from_formula( Alice +-+ Bob --+ Cecil +-- Daniel,
 #'                      Eugene --+ Gordon:Helen )
 #' g3
 #'
 #' # A graph with isolate vertices
-#' g4 <- g_formula( Alice -- Bob -- Daniel, Cecil:Gordon, Helen )
+#' g4 <- graph_from_formula( Alice -- Bob -- Daniel, Cecil:Gordon, Helen )
 #' g4
 #' V(g4)$name
 #'
 #' # "Arrows" can be arbitrarily long
-#' g5 <- g_formula( Alice +---------+ Bob )
+#' g5 <- graph_from_formula( Alice +---------+ Bob )
 #' g5
 #'
 #' # Special vertex names
-#' g6 <- g_formula( "+" -- "-", "*" -- "/", "%%" -- "%/%" )
+#' g6 <- graph_from_formula( "+" -- "-", "*" -- "/", "%%" -- "%/%" )
 #' g6
 #'
 
-g_formula <- function(..., simplify=TRUE) {
+graph_from_formula <- function(..., simplify=TRUE) {
   mf <- as.list(match.call())[-1]
 
   ## In case 'simplify' is given
@@ -458,7 +458,7 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
   }
 
   if (!is.null(weighted)) {
-    res <- g_empty(n=vc, directed=(mode=="directed"))
+    res <- empty_graph(n=vc, directed=(mode=="directed"))
     weight <- list(el[,3])
     names(weight) <- weighted
     res <- add_edges(res, edges=t(as.matrix(el[,1:2])), attr=weight)
@@ -473,13 +473,13 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
 
 #' Create graphs from adjacency matrices
 #' 
-#' \code{g_adj_matrix} is a flexible function for creating \code{igraph}
+#' \code{graph_from_adjacency_matrix} is a flexible function for creating \code{igraph}
 #' graphs from adjacency matrices.
 #' 
 #' The order of the vertices are preserved, i.e. the vertex corresponding to
 #' the first row will be vertex 0 in the graph, etc.
 #' 
-#' \code{g_adj_matrix} operates in two main modes, depending on the
+#' \code{graph_from_adjacency_matrix} operates in two main modes, depending on the
 #' \code{weighted} argument.
 #' 
 #' If this argument is \code{NULL} then an unweighted graph is created and an
@@ -548,52 +548,52 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
 #' former is ignored.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \link{graph} and \code{\link{g_formula}} for other ways to
+#' @seealso \link{graph} and \code{\link{graph_from_formula}} for other ways to
 #' create graphs.
 #' @keywords graphs
 #' @examples
 #' 
 #' adjm <- matrix(sample(0:1, 100, replace=TRUE, prob=c(0.9,0.1)), nc=10)
-#' g1 <- g_adj_matrix( adjm )
+#' g1 <- graph_from_adjacency_matrix( adjm )
 #' adjm <- matrix(sample(0:5, 100, replace=TRUE,
 #'                       prob=c(0.9,0.02,0.02,0.02,0.02,0.02)), nc=10)
-#' g2 <- g_adj_matrix(adjm, weighted=TRUE)
+#' g2 <- graph_from_adjacency_matrix(adjm, weighted=TRUE)
 #' E(g2)$weight
 #' 
 #' ## various modes for weighted graphs, with some tests
 #' nzs <- function(x) sort(x [x!=0])
 #' adjm <- matrix(runif(100), 10)
 #' adjm[ adjm<0.5 ] <- 0
-#' g3 <- g_adj_matrix((adjm + t(adjm))/2, weighted=TRUE,
+#' g3 <- graph_from_adjacency_matrix((adjm + t(adjm))/2, weighted=TRUE,
 #'                       mode="undirected") 
 #' 
-#' g4 <- g_adj_matrix(adjm, weighted=TRUE, mode="max")
+#' g4 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="max")
 #' all(nzs(pmax(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g4)$weight))
 #' 
-#' g5 <- g_adj_matrix(adjm, weighted=TRUE, mode="min")
+#' g5 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="min")
 #' all(nzs(pmin(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g5)$weight))
 #' 
-#' g6 <- g_adj_matrix(adjm, weighted=TRUE, mode="upper")
+#' g6 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="upper")
 #' all(nzs(adjm[upper.tri(adjm)]) == sort(E(g6)$weight))
 #' 
-#' g7 <- g_adj_matrix(adjm, weighted=TRUE, mode="lower")
+#' g7 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="lower")
 #' all(nzs(adjm[lower.tri(adjm)]) == sort(E(g7)$weight))
 #' 
-#' g8 <- g_adj_matrix(adjm, weighted=TRUE, mode="plus")
+#' g8 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="plus")
 #' d2 <- function(x) { diag(x) <- diag(x)/2; x }
 #' all(nzs((d2(adjm+t(adjm)))[lower.tri(adjm)]) == sort(E(g8)$weight))
 #' 
-#' g9 <- g_adj_matrix(adjm, weighted=TRUE, mode="plus", diag=FALSE)
+#' g9 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="plus", diag=FALSE)
 #' d0 <- function(x) { diag(x) <- 0 }
 #' all(nzs((d0(adjm+t(adjm)))[lower.tri(adjm)]) == sort(E(g9)$weight))
 #' 
 #' ## row/column names
 #' rownames(adjm) <- sample(letters, nrow(adjm))
 #' colnames(adjm) <- seq(ncol(adjm))
-#' g10 <- g_adj_matrix(adjm, weighted=TRUE, add.rownames="code")
+#' g10 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, add.rownames="code")
 #' summary(g10)
 #' 
-g_adj_matrix <- function(adjmatrix, mode=c("directed", "undirected", "max",
+graph_from_adjacency_matrix <- function(adjmatrix, mode=c("directed", "undirected", "max",
                                          "min", "upper", "lower", "plus"),
                             weighted=NULL, diag=TRUE,
                             add.colnames=NULL, add.rownames=NA) {
@@ -650,7 +650,7 @@ g_adj_matrix <- function(adjmatrix, mode=c("directed", "undirected", "max",
 
 #' Create a star graph, a tree with n vertices and n - 1 leaves
 #'
-#' \code{g_star} creates a star graph, in this every single vertex is
+#' \code{star} creates a star graph, in this every single vertex is
 #' connected to the center vertex and nobody else.
 #'
 #' @aliases graph.star
@@ -667,10 +667,10 @@ g_adj_matrix <- function(adjmatrix, mode=c("directed", "undirected", "max",
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' g_star(10, mode = "out")
-#' g_star(5, mode = "undirected")
+#' star(10, mode = "out")
+#' star(5, mode = "undirected")
 
-g_star <- function(n, mode=c("in", "out", "mutual", "undirected"),
+star <- function(n, mode=c("in", "out", "mutual", "undirected"),
                    center=1 ) {
 
   mode <- igraph.match.arg(mode)
@@ -700,10 +700,10 @@ g_star <- function(n, mode=c("in", "out", "mutual", "undirected"),
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' g_full(5)
-#' str(g_full(4, directed = TRUE))
+#' full_graph(5)
+#' str(full_graph(4, directed = TRUE))
 
-g_full <- function(n, directed=FALSE, loops=FALSE) {
+full_graph <- function(n, directed=FALSE, loops=FALSE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_full", as.numeric(n), as.logical(directed),
                as.logical(loops),
@@ -721,7 +721,7 @@ g_full <- function(n, directed=FALSE, loops=FALSE) {
 
 #' Create a lattice graph
 #'
-#' \code{g_lattice} is a flexible function, it can create lattices of
+#' \code{lattice} is a flexible function, it can create lattices of
 #' arbitrary dimensions, periodic or unperiodic ones. It has two
 #' forms. In the first form you only supply \code{dimvector}, but not
 #' \code{length} and \code{dim}. In the second form you omit
@@ -747,10 +747,10 @@ g_full <- function(n, directed=FALSE, loops=FALSE) {
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' g_lattice(c(5, 5, 5))
-#' g_lattice(length = 5, dim = 3)
+#' lattice(c(5, 5, 5))
+#' lattice(length = 5, dim = 3)
 
-g_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
+lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                           nei = 1, directed = FALSE, mutual = FALSE,
                           circular=FALSE, ...) {
 
@@ -784,7 +784,7 @@ g_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 ##   nei <- as.numeric(nei)
 
 ##   n <- prod(dimvector)
-##   res <- g_empty(n=n, directed=directed, ...)
+##   res <- empty_graph(n=n, directed=directed, ...)
 ##   res <- add_edges(res, .Call("REST_create_lattice", dimvector, n,
 ##                               circular, mutual, PACKAGE="igraph"))
 
@@ -819,9 +819,9 @@ g_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case
-#' of \code{\link{g_lattice}}.
+#' of \code{\link{lattice}}.
 #'
-#' @aliases g_ring graph.ring
+#' @aliases ring graph.ring
 #' @param n Number of vertices.
 #' @param directed Whether the graph is directed.
 #' @param mutual Whether directed edges are mutual. It is ignored in
@@ -834,10 +834,10 @@ g_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' str(g_ring(10))
-#' str(g_ring(10, directed = TRUE, mutual = TRUE))
+#' str(ring(10))
+#' str(ring(10, directed = TRUE, mutual = TRUE))
 
-g_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
+ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_ring", as.numeric(n), as.logical(directed),
                as.logical(mutual), as.logical(circular),
@@ -874,10 +874,10 @@ g_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' g_tree(10, 2)
-#' g_tree(10, 3, mode = "undirected")
+#' tree(10, 2)
+#' tree(10, 3, mode = "undirected")
 
-g_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
+tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
 
   mode <- igraph.match.arg(mode)
   mode1 <- switch(mode, "out"=0, "in"=1, "undirected"=2);
@@ -900,7 +900,7 @@ g_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
 
 #' Create a graph from the Graph Atlas
 #'
-#' \code{g_atlas} creates graphs from the book
+#' \code{graph_atlas} creates graphs from the book
 #' \sQuote{An Atlas of Graphs} by
 #' Roland C. Read and Robin J. Wilson. The atlas contains all undirected
 #' graphs with up to seven vertices, numbered from 0 up to 1252. The
@@ -924,11 +924,11 @@ g_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
 #' @export
 #' @examples
 #' ## Some randomly picked graphs from the atlas
-#' g_atlas(sample(0:1252, 1))
-#' g_atlas(sample(0:1252, 1))
+#' graph_atlas(sample(0:1252, 1))
+#' graph_atlas(sample(0:1252, 1))
 
 
-g_atlas <- function(n) {
+graph_atlas <- function(n) {
 
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_atlas", as.numeric(n),
@@ -951,7 +951,7 @@ g_atlas <- function(n) {
 #' This function creates an igraph graph from one or two data frames containing
 #' the (symbolic) edge list and edge/vertex attributes.
 #' 
-#' \code{g_df} creates igraph graphs from one or two data frames.
+#' \code{graph_from_data_frame} creates igraph graphs from one or two data frames.
 #' It has two modes of operatation, depending whether the \code{vertices}
 #' argument is \code{NULL} or not.
 #' 
@@ -990,7 +990,7 @@ g_atlas <- function(n) {
 #' If the \code{what} argument is \code{both}, then both vertex and edge data
 #' is returned, in a list with named entries \code{vertices} and \code{edges}.
 #' 
-#' @aliases g_df graph.data.frame data_frame get.data.frame
+#' @aliases graph_from_data_frame graph.data.frame data_frame get.data.frame
 #' @param d A data frame containing a symbolic edge list in the first two
 #' columns. Additional columns are considered as edge attributes.  Since
 #' version 0.7 this argument is coerced to a data frame with
@@ -999,10 +999,10 @@ g_atlas <- function(n) {
 #' @param vertices A data frame with vertex metadata, or \code{NULL}. See
 #' details below. Since version 0.7 this argument is coerced to a data frame
 #' with \code{as.data.frame}, if not \code{NULL}.
-#' @return An igraph graph object for \code{g_df}, and either a
+#' @return An igraph graph object for \code{graph_from_data_frame}, and either a
 #' data frame or a list of two data frames named \code{edges} and
 #' \code{vertices} for \code{as.data.frame}.
-#' @note For \code{g_df} \code{NA} elements in the first two
+#' @note For \code{graph_from_data_frame} \code{NA} elements in the first two
 #' columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
 #' the graph. This means that all \code{NA}s will correspond to a single
 #' vertex.
@@ -1012,7 +1012,7 @@ g_atlas <- function(n) {
 #' touched. In other words, vertex names (=the first column) cannot be
 #' \code{NA}, but other vertex attributes can.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_formula}}
+#' @seealso \code{\link{graph_from_formula}}
 #' for another way to create graphs, \code{\link{read.table}} to read in tables
 #' from files.
 #' @keywords graphs
@@ -1029,14 +1029,14 @@ g_atlas <- function(n) {
 #'                         to=c("Alice", "Bob", "Alice", "Alice", "Bob", "Alice"),
 #'                         same.dept=c(FALSE,FALSE,TRUE,FALSE,FALSE,TRUE),
 #'                         friendship=c(4,5,5,2,1,1), advice=c(4,5,5,4,2,3))
-#' g <- g_df(relations, directed=TRUE, vertices=actors)
+#' g <- graph_from_data_frame(relations, directed=TRUE, vertices=actors)
 #' print(g, e=TRUE, v=TRUE)
 #' 
 #' ## The opposite operation
 #' data_frame(g, what="vertices")
 #' data_frame(g, what="edges")
 #' 
-g_df <- function(d, directed=TRUE, vertices=NULL) {
+graph_from_data_frame <- function(d, directed=TRUE, vertices=NULL) {
 
   d <- as.data.frame(d)
   if (!is.null(vertices)) { vertices <- as.data.frame(vertices) }
@@ -1072,7 +1072,7 @@ g_df <- function(d, directed=TRUE, vertices=NULL) {
   }
 
   # create graph
-  g <- g_empty(n=0, directed=directed)
+  g <- empty_graph(n=0, directed=directed)
 
   # vertex attributes
   attrs <- list(name=names)
@@ -1115,7 +1115,7 @@ g_df <- function(d, directed=TRUE, vertices=NULL) {
 
 #' Create a graph from an edge list matrix
 #'
-#' \code{g_edgelist} creates a graph from an edge list. Its argument
+#' \code{graph_from_edgelist} creates a graph from an edge list. Its argument
 #' is a two-column matrix, each row defines one edge. If it is
 #' a numeric matrix then its elements are interpreted as vertex ids. If
 #' it is a character matrix then it is interpreted as symbolic vertex
@@ -1132,19 +1132,19 @@ g_df <- function(d, directed=TRUE, vertices=NULL) {
 #' @export
 #' @examples
 #' el <- matrix( c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
-#' g_edgelist(el)
+#' graph_from_edgelist(el)
 #'
 #' # Create a ring by hand
-#' g_edgelist(cbind(1:10, c(2:10, 1)))
+#' graph_from_edgelist(cbind(1:10, c(2:10, 1)))
 
-g_edgelist <- function(el, directed=TRUE) {
+graph_from_edgelist <- function(el, directed=TRUE) {
 
   if (!is.matrix(el) || ncol(el) != 2) {
-    stop("g_edgelist expects a matrix with two columns")
+    stop("graph_from_edgelist expects a matrix with two columns")
   }
 
   if (nrow(el) == 0) {
-    res <- g_empty(directed=directed)
+    res <- empty_graph(directed=directed)
   } else {
     if (is.character(el)) {
       ## symbolic edge list
@@ -1165,7 +1165,7 @@ g_edgelist <- function(el, directed=TRUE) {
 
 #' Create an extended chordal ring graph
 #'
-#' \code{g_chordal_ring} creates an extended chordal ring.
+#' \code{chordal_ring} creates an extended chordal ring.
 #' An extended chordal ring is regular graph, each node has the same
 #' degree. It can be obtained from a simple ring by adding some extra
 #' edges specified by a matrix. Let p denote the number of columns in
@@ -1186,10 +1186,10 @@ g_edgelist <- function(el, directed=TRUE) {
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' chord <- g_chordal_ring(15,
+#' chord <- chordal_ring(15,
 #'     matrix(c(3, 12, 4, 7, 8, 11), nr = 2))
 
-g_chordal_ring <- function(n, w) {
+chordal_ring <- function(n, w) {
 
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_extended_chordal_ring", as.numeric(n),
@@ -1228,12 +1228,12 @@ g_chordal_ring <- function(n, w) {
 #' @examples
 #' 
 #' # generate the first De-Bruijn graphs
-#' g <- g_full(2, directed=TRUE, loops=TRUE)
-#' g_line(g)
-#' g_line(g_line(g))
-#' g_line(g_line(g_line(g)))
+#' g <- full_graph(2, directed=TRUE, loops=TRUE)
+#' line_graph(g)
+#' line_graph(line_graph(g))
+#' line_graph(line_graph(line_graph(g)))
 #' 
-g_line <- function(graph) {
+line_graph <- function(graph) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -1274,16 +1274,16 @@ g_line <- function(graph) {
 #' @param n Integer scalar, the length of the labels. See details below.
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>
-#' @seealso \code{\link{g_kautz}}, \code{\link{g_line}}
+#' @seealso \code{\link{kautz_graph}}, \code{\link{line_graph}}
 #' @keywords graphs
 #' @examples
 #' 
 #' # de Bruijn graphs can be created recursively by line graphs as well 
-#' g <- g_de_bruijn(2,1)
-#' g_de_bruijn(2,2)
-#' g_line(g)
+#' g <- de_bruijn_graph(2,1)
+#' de_bruijn_graph(2,2)
+#' line_graph(g)
 #' 
-g_de_bruijn <- function(m, n) {
+de_bruijn_graph <- function(m, n) {
 
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_de_bruijn", as.numeric(m), as.numeric(n),
@@ -1318,14 +1318,14 @@ g_de_bruijn <- function(m, n) {
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>, the first version in R was
 #' written by Vincent Matossian.
-#' @seealso \code{\link{g_de_bruijn}}, \code{\link{g_line}}
+#' @seealso \code{\link{de_bruijn_graph}}, \code{\link{line_graph}}
 #' @keywords graphs
 #' @examples
 #' 
-#' g_line(g_kautz(2,1))
-#' g_kautz(2,2)
+#' line_graph(kautz_graph(2,1))
+#' kautz_graph(2,2)
 #' 
-g_kautz <- function(m, n) {
+kautz_graph <- function(m, n) {
 
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   res <- .Call("R_igraph_kautz", as.numeric(m), as.numeric(n),
@@ -1486,16 +1486,16 @@ graph.famous <- function(name) {
 #' ignored for undirected graphs.x
 #' @return An igraph graph, with the \sQuote{\code{type}} vertex attribute set.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_full}} for creating one-mode full graphs
+#' @seealso \code{\link{full_graph}} for creating one-mode full graphs
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_full_bip(2, 3)
-#' g2 <- g_full_bip(2, 3, dir=TRUE)
-#' g3 <- g_full_bip(2, 3, dir=TRUE, mode="in")
-#' g4 <- g_full_bip(2, 3, dir=TRUE, mode="all")
+#' g <- full_bipartite_graph(2, 3)
+#' g2 <- full_bipartite_graph(2, 3, dir=TRUE)
+#' g3 <- full_bipartite_graph(2, 3, dir=TRUE, mode="in")
+#' g4 <- full_bipartite_graph(2, 3, dir=TRUE, mode="all")
 #' 
-g_full_bip <- function(n1, n2, directed=FALSE,
+full_bipartite_graph <- function(n1, n2, directed=FALSE,
                        mode=c("all", "out", "in")) {
 
   n1 <- as.integer(n1)
@@ -1526,7 +1526,7 @@ g_full_bip <- function(n1, n2, directed=FALSE,
 #' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 #' for vertices of the second kind.
 #' 
-#' \code{g_bip} basically does three things. First it checks tha
+#' \code{bipartite_graph} basically does three things. First it checks tha
 #' \code{edges} vector against the vertex \code{types}. Then it creates a graph
 #' using the \code{edges} vector and finally it adds the \code{types} vector as
 #' a vertex attribute called \code{type}.
@@ -1534,7 +1534,7 @@ g_full_bip <- function(n1, n2, directed=FALSE,
 #' \code{is_bipartite} checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called \code{type}.
 #' 
-#' @aliases g_bip graph.bipartite is.bipartite is_bipartite
+#' @aliases bipartite_graph graph.bipartite is.bipartite is_bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #' boolean. The length of the vector gives the number of vertices in the graph.
 #' @param edges A vector giving the edges of the graph, the same way as for the
@@ -1545,7 +1545,7 @@ g_full_bip <- function(n1, n2, directed=FALSE,
 #' that by default undirected graphs are created, as this is more common for
 #' bipartite graphs.
 #' @param graph The input graph.
-#' @return \code{g_bip} returns a bipartite igraph graph. In other
+#' @return \code{bipartite_graph} returns a bipartite igraph graph. In other
 #' words, an igraph graph that has a vertex attribute named \code{type}.
 #' 
 #' \code{is_bipartite} returns a logical scalar.
@@ -1554,10 +1554,10 @@ g_full_bip <- function(n1, n2, directed=FALSE,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_bip( rep(0:1,length=10), c(1:10))
+#' g <- bipartite_graph( rep(0:1,length=10), c(1:10))
 #' print(g, v=TRUE)
 #' 
-g_bip <- function(types, edges, directed=FALSE) {
+bipartite_graph <- function(types, edges, directed=FALSE) {
 
   types <- as.logical(types)
   edges <- as.numeric(edges)-1
@@ -1594,7 +1594,7 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
       el <- rbind(el, el[,c(2,1,3)])
     }
 
-    res <- g_empty(n=n1+n2, directed=directed)
+    res <- empty_graph(n=n1+n2, directed=directed)
     weight <- list(el[,3])
     names(weight) <- weighted
     res <- add_edges(res, edges=t(as.matrix(el[,1:2])), attr=weight)
@@ -1665,7 +1665,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
         }
       }
     }
-    res <- g_empty(n=n1+n2, directed=directed)
+    res <- empty_graph(n=n1+n2, directed=directed)
     weight <- list(weight)
     names(weight) <- weighted
     res <- add_edges(res, edges, attr=weight)
@@ -1690,14 +1690,14 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 
 #' Create graphs from an incidence matrix
 #' 
-#' \code{g_incidence} creates a bipartite igraph graph from an incidence
+#' \code{graph_from_incidence_matrix} creates a bipartite igraph graph from an incidence
 #' matrix.
 #' 
 #' Bipartite graphs have a \sQuote{\code{type}} vertex attribute in igraph,
 #' this is boolean and \code{FALSE} for the vertices of the first kind and
 #' \code{TRUE} for vertices of the second kind.
 #' 
-#' \code{g_incidence} can operate in two modes, depending on the
+#' \code{graph_from_incidence_matrix} can operate in two modes, depending on the
 #' \code{multiple} argument. If it is \code{FALSE} then a single edge is
 #' created for every non-zero element in the incidence matrix. If
 #' \code{multiple} is \code{TRUE}, then the matrix elements are rounded up to
@@ -1725,7 +1725,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #' weighted graph is created and the name of the edge attribute will be
 #' \sQuote{\code{weight}}.
 #' @param add.names A character constant, \code{NA} or \code{NULL}.
-#' \code{g_incidence} can add the row and column names of the incidence
+#' \code{graph_from_incidence_matrix} can add the row and column names of the incidence
 #' matrix as vertex attributes. If this argument is \code{NULL} (the default)
 #' and the incidence matrix has both row and column names, then these are added
 #' as the \sQuote{\code{name}} vertex attribute. If you want a different vertex
@@ -1735,7 +1735,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #' @return A bipartite igraph graph. In other words, an igraph graph that has a
 #' vertex attribute \code{type}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_bip}} for another way to create bipartite
+#' @seealso \code{\link{bipartite_graph}} for another way to create bipartite
 #' graphs
 #' @keywords graphs
 #' @examples
@@ -1743,9 +1743,9 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #' inc <- matrix(sample(0:1, 15, repl=TRUE), 3, 5)
 #' colnames(inc) <- letters[1:5]
 #' rownames(inc) <- LETTERS[1:3]
-#' g_incidence(inc)
+#' graph_from_incidence_matrix(inc)
 #' 
-g_incidence <- function(incidence, directed=FALSE,
+graph_from_incidence_matrix <- function(incidence, directed=FALSE,
                             mode=c("all", "out", "in", "total"),
                             multiple=FALSE, weighted=NULL,
                             add.names=NULL) {
@@ -1786,7 +1786,7 @@ g_incidence <- function(incidence, directed=FALSE,
 
 #' Create a complete (full) citation graph
 #'
-#' \code{g_full_cit} creates a full citation graph. This is a
+#' \code{full_citation_graph} creates a full citation graph. This is a
 #' directed graph, where every \code{i->j} edge is present if and only if
 #' \eqn{j<i}. If \code{directed=FALSE} then the graph is just a full graph.
 #'
@@ -1798,9 +1798,9 @@ g_incidence <- function(incidence, directed=FALSE,
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' str(g_full_cit(10))
+#' str(full_citation_graph(10))
 
-g_full_cit <- function(n, directed=TRUE) {
+full_citation_graph <- function(n, directed=TRUE) {
   # Argument checks
   n <- as.integer(n)
   directed <- as.logical(directed)

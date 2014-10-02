@@ -33,7 +33,7 @@ dyad_census(graph)
   \code{\link{triad_census}} for the same classification, but with triples.
 }
 \examples{
-g <- g_pa(100)
+g <- sample_pa(100)
 dyad_census(g)
 }
 \keyword{graphs}

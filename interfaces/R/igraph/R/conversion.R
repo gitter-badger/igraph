@@ -208,13 +208,13 @@ as_edgelist <- function(graph, names=TRUE) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' as.directed(g, "mutual")
-#' g2 <- g_star(10)
+#' g2 <- star(10)
 #' as.undirected(g)
 #' 
 #' # Combining edge attributes
-#' g3 <- g_ring(10, directed=TRUE, mutual=TRUE)
+#' g3 <- ring(10, directed=TRUE, mutual=TRUE)
 #' E(g3)$weight <- seq_len(ecount(g3))
 #' ug3 <- as.undirected(g3)
 #' print(ug3, e=TRUE)
@@ -293,7 +293,7 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' as_adj_list(g)
 #' as_adj_edge_list(g)
 #' 
@@ -596,11 +596,11 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' created, you will need the \code{Matrix} package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{g_incidence}} for the opposite operation.
+#' @seealso \code{\link{graph_from_incidence_matrix}} for the opposite operation.
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_bip( c(0,1,0,1,0,0), c(1,2,2,3,3,4) )
+#' g <- bipartite_graph( c(0,1,0,1,0,0), c(1,2,2,3,3,4) )
 #' as_incidence_matrix(g)
 #' 
 as_incidence_matrix <- function(graph, types=NULL, attr=NULL,
@@ -626,7 +626,7 @@ as_incidence_matrix <- function(graph, types=NULL, attr=NULL,
   }
 }
 
-#' @rdname g_df
+#' @rdname graph_from_data_frame
 #' @param x An igraph object.
 #' @param what Character constant, whether to return info about vertices,
 #' edges, or both. The default is \sQuote{edges}.

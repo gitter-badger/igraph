@@ -6,7 +6,7 @@ test_that("motif finding works", {
   library(igraph)
   set.seed(123)
 
-  b <- g_np(10000, 4/10000, directed=TRUE)
+  b <- sample_gnp(10000, 4/10000, directed=TRUE)
 
   mno <- count_motifs(b)
 
@@ -27,7 +27,7 @@ test_that("motif finding works", {
 ######################
 
   set.seed(123)
-  b <- g_np(10000, 4/10000, directed=TRUE)
+  b <- sample_gnp(10000, 4/10000, directed=TRUE)
 
   m <- motifs(b)
 

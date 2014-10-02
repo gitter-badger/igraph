@@ -4,7 +4,7 @@ context("biconnected_components")
 test_that("biconnected_components works", {
   library(igraph)
 
-  g <- g_full(5) + g_full(5)
+  g <- full_graph(5) + full_graph(5)
   clu <- components(g)$membership
   g <- add_edges(g, c(match(1,clu), match(2,clu)) )
 

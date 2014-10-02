@@ -213,7 +213,7 @@ g3 -> g1 g2}
 
 \dontrun{
 ## A graph with two dense groups
-g <- g_np(10, p=1/2) + g_np(10, p=1/2)
+g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
 hrg <- hrg.fit(g)
 hrg
 
@@ -221,7 +221,7 @@ hrg
 hrg.consensus(g, hrg=hrg, start=TRUE)
 
 ## Prediction of missing edges
-g2 <- g_full(4) + (g_full(4) - path(1,2))
+g2 <- full_graph(4) + (full_graph(4) - path(1,2))
 hrg.predict(g2)
 }
 }

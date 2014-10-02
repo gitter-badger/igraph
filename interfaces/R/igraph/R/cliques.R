@@ -73,13 +73,13 @@
 #' @examples
 #' 
 #' # this usually contains cliques of size six
-#' g <- g_np(100, 0.3)
+#' g <- sample_gnp(100, 0.3)
 #' clique_num(g)
 #' cliques(g, min=6)
 #' largest_cliques(g)
 #' 
 #' # To have a bit less maximal cliques, about 100-200 usually
-#' g <- g_np(100, 0.03)
+#' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
 #' 
 #' 
@@ -251,7 +251,7 @@ clique_num <- function(graph) {
 #' 
 #' # A quite dense graph
 #' set.seed(42)
-#' g <- g_np(100, 0.9)
+#' g <- sample_gnp(100, 0.9)
 #' ivs_size(g)
 #' ivs(g, min=ivs_size(g))
 #' largest_ivs(g)

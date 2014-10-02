@@ -1,9 +1,9 @@
 
-context("g_kautz")
+context("kautz_graph")
 
-test_that("g_kautz works", {
+test_that("kautz_graph works", {
   library(igraph)
-  g <- g_kautz(2,3)
+  g <- kautz_graph(2,3)
   expect_that(g$name, equals("Kautz graph 2-3"))
   expect_that(g$m, equals(2))
   expect_that(g$n, equals(3))

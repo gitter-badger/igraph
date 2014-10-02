@@ -256,7 +256,7 @@ print(g, v=T)
 pause()
 
 ### Create undirected example graph
-g2 <- g_formula(Alice-Bob:Cecil:Daniel, 
+g2 <- graph_from_formula(Alice-Bob:Cecil:Daniel, 
                 Cecil:Daniel-Eugene:Gordon )
 print(g2, v=T)
 
@@ -290,7 +290,7 @@ g4
 pause()
 
 ### Edge sequences, first create a directed example graph
-g2 <- g_formula(Alice -+ Bob:Cecil:Daniel, 
+g2 <- graph_from_formula(Alice -+ Bob:Cecil:Daniel, 
                 Cecil:Daniel +-+ Eugene:Gordon )
 print(g2, v=T)
 plot(g2, layout=layout_with_kk, vertex.label=V(g2)$name)

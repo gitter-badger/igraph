@@ -84,7 +84,7 @@ function() {
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
   
-  g <- g_adj_matrix(D1 + D2 + D3, mode="undirected", weighted=TRUE)
+  g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode="undirected", weighted=TRUE)
   gl <- graphlets(g, iter=1000)
 
   fitandplot(g, gl)

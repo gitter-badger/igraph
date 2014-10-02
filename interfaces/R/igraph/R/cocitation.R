@@ -50,7 +50,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' cocitation(g)
 #' bibcoupling(g)
 #' 

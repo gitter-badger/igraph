@@ -51,7 +51,7 @@ triad_census(graph)
 \seealso{\code{\link{dyad_census}} for classifying binary relationships,
   \code{\link{motifs}} for the underlying implementation.}
 \examples{
-g <- g_nm(15, 45, directed = TRUE)
+g <- sample_gnm(15, 45, directed = TRUE)
 triad_census(g)
 }
 \keyword{graphs}

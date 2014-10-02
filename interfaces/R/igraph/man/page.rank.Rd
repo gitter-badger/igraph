@@ -117,14 +117,14 @@ page_rank_old (graph, vids = V(graph), directed = TRUE, niter = 1000,
 \seealso{Other centrality scores: \code{\link{closeness}},
   \code{\link{betweenness}}, \code{\link{degree}}}
 \examples{
-g <- g_np(20, 5/20, directed=TRUE)
+g <- sample_gnp(20, 5/20, directed=TRUE)
 page_rank(g)$vector
 
-g2 <- g_star(10)
+g2 <- star(10)
 page_rank(g2)$vector
 
 # Personalized PageRank
-g3 <- g_ring(10)
+g3 <- ring(10)
 page_rank(g3)$vector
 reset <- seq(vcount(g3))
 page_rank(g3, personalized=reset)$vector

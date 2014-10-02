@@ -101,9 +101,9 @@ assortativity_degree (graph, directed = TRUE)
 % \seealso{}
 \examples{
 # random network, close to zero
-assortativity_degree(g_np(10000, 3/10000))
+assortativity_degree(sample_gnp(10000, 3/10000))
 
 # BA model, tends to be dissortative
-assortativity_degree(g_pa(10000, m=4))
+assortativity_degree(sample_pa(10000, m=4))
 }
 \keyword{graphs}

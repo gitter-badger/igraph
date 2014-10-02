@@ -62,7 +62,7 @@ test_that("cluster_leading_eigen works", {
   ## Stress-test
 
   for (i in 1:100) {
-    g <- g_np(20, sample(5:40, 1), type="gnm")
+    g <- sample_gnp(20, sample(5:40, 1), type="gnm")
     lec1 <- cluster_leading_eigen(g)
     lec2 <- cluster_leading_eigen(g)
     expect_that(membership(lec1), equals(membership(lec2)))

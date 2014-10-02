@@ -134,12 +134,12 @@ assign(".next", 1, .tkplot.env)
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' \dontrun{tkplot(g)}
 #' 
 #' \dontrun{
 #' ## Saving a tkplot() to a file programatically
-#' g <- g_star(10, center=10) %u% g_ring(9, directed=TRUE)
+#' g <- star(10, center=10) %u% ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
 #' lay <- layout_nicely(g)
 #' 
@@ -151,8 +151,8 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' \dontrun{
 #' ## Setting the coordinates and adding a title label
-#' g <- g_ring(10)
-#' id <- tkplot(g_ring(10), canvas.width=450, canvas.height=500)
+#' g <- ring(10)
+#' id <- tkplot(ring(10), canvas.width=450, canvas.height=500)
 #' 
 #' canvas <- tk_canvas(id)
 #' padding <- 20

@@ -10,7 +10,7 @@ pause <- function() {
 pause()
 
 ### Create a star-like graph
-t1 <- g_formula(A-B:C:D:E)
+t1 <- graph_from_formula(A-B:C:D:E)
 t1
 
 pause()
@@ -57,7 +57,7 @@ plot(ring, vertex.label=NA, main="Ring graph")
 pause()
 
 ### Watts-Strogatz model
-ws1 <- g_smallworld(1, 50, 3, p=0)
+ws1 <- sample_smallworld(1, 50, 3, p=0)
 ws1$layout <- layout_in_circle
 V(ws1)$size <- 3
 E(ws1)$curved <- 1
@@ -90,7 +90,7 @@ pause()
 
 ### Function to test regular graph with given size
 try.ring.pl <- function(n) {
-  g <- g_smallworld(1, n, 3, p=0)
+  g <- sample_smallworld(1, n, 3, p=0)
   mean_distance(g)
 }
 try.ring.pl(10)
@@ -106,7 +106,7 @@ plot(ring.size, ring.pl, type="b")
 pause()
 
 ### Path lengths, random graph
-rg <- g_nm(50, 50 * 3)
+rg <- sample_gnm(50, 50 * 3)
 rg$layout <- layout_in_circle
 V(rg)$size <- 3
 plot(rg, vertex.label=NA, main="Random graph")
@@ -116,7 +116,7 @@ pause()
 
 ### Path length of random graphs
 try.random.pl <- function(n) {
-  g <- g_nm(n, n*3)
+  g <- sample_gnm(n, n*3)
   mean_distance(g)
 }
 try.random.pl(100)
@@ -141,7 +141,7 @@ transitivity(rg, type="localaverage")
 pause()
 
 ### Rewiring
-ws2 <- g_smallworld(1, 50, 3, p=0.1)
+ws2 <- sample_smallworld(1, 50, 3, p=0.1)
 ws2$layout <- layout_in_circle
 V(ws2)$size <- 3
 plot(ws2, vertex.label=NA)
@@ -151,7 +151,7 @@ pause()
 
 ### Path lengths in randomized lattices
 try.rr.pl <- function(n, p) {
-  g <- g_smallworld(1, n, 3, p=p)
+  g <- sample_smallworld(1, n, 3, p=p)
   mean_distance(g)
 }
 rr.pl.0.1 <- sapply(ring.size, try.rr.pl, p=0.1)
@@ -166,7 +166,7 @@ pause()
 
 ### Create the graph in the Watts-Strogatz paper
 ws.paper <- function(p, n=1000) {
-  g <- g_smallworld(1, n, 10, p=p)
+  g <- sample_smallworld(1, n, 10, p=p)
   tr <- transitivity(g, type="localaverage")
   pl <- mean_distance(g)
   c(tr, pl)

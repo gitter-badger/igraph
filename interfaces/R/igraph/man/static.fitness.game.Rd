@@ -1,5 +1,5 @@
-\name{g_fitness}
-\alias{g_fitness}
+\name{sample_fitness}
+\alias{sample_fitness}
 \alias{static.fitness.game}
 \concept{Random graph model}
 \title{Random graphs from vertex fitness scores}
@@ -8,7 +8,7 @@
   proportional to node fitness scores.
 }
 \usage{
-g_fitness (no.of.edges, fitness.out, fitness.in,
+sample_fitness (no.of.edges, fitness.out, fitness.in,
                      loops = FALSE, multiple = FALSE) 
 
 }
@@ -51,12 +51,12 @@ g_fitness (no.of.edges, fitness.out, fitness.in,
   It can be shown that the \emph{expected} degree of each vertex will be
   proportional to its fitness, although the actual, observed degree will not
   be. If you need to generate a graph with an exact degree sequence, consider
-  \code{\link{g_degseq}} instead.
+  \code{\link{sample_degseq}} instead.
   
   This model is commonly used to generate static scale-free networks. To
   achieve this, you have to draw the fitness scores from the desired power-law
   distribution. Alternatively, you may use
-  \code{\link{g_fitness_pl}} which generates the fitnesses for
+  \code{\link{sample_fitness_pl}} which generates the fitnesses for
   you with a given exponent.
 }
 \value{An igraph graph, directed or undirected.}
@@ -67,7 +67,7 @@ g_fitness (no.of.edges, fitness.out, fitness.in,
 \author{Tamas Nepusz \email{ntamas@gmail.com}}
 \examples{
 N <- 10000
-g <- g_fitness(5*N, sample((1:50)^-2, N, replace=TRUE))
+g <- sample_fitness(5*N, sample((1:50)^-2, N, replace=TRUE))
 degree_distribution(g)
 \dontrun{plot(degree_distribution(g, cumulative=TRUE), log="xy")}
 }

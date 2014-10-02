@@ -3,8 +3,8 @@ context("Bug 1032819")
 
 test_that("VF2 isomorphism considers colors", {
   library(igraph)
-  g <- g_full(3)
-  path <- g_ring(3, circular=F)
+  g <- full_graph(3)
+  path <- ring(3, circular=F)
   V(g)$color <- c(1,1,2)
   V(path)$color <- c(1,2,1)
   n <- graph.count.subisomorphisms.vf2(g, path)

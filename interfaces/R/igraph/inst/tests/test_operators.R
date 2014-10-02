@@ -7,8 +7,8 @@ test_that("operators work", {
 
   o <- function(x) x[order(x[,1], x[,2]),]
 
-  g1 <- g_ring(10)
-  g2 <- g_star(11, center=11, mode="undirected")
+  g1 <- ring(10)
+  g2 <- star(11, center=11, mode="undirected")
   gu <- union(g1, g2)
   expect_that(vcount(gu), equals(11))
   expect_that(ecount(gu), equals(20))

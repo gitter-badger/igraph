@@ -70,7 +70,7 @@ unless you really mean to do so.}
 % \seealso{}
 \examples{
 #Generate some test data
-g <- g_ring(10, directed=FALSE)
+g <- ring(10, directed=FALSE)
 #Compute eigenvector centrality scores
 eigen_centrality(g)
 }

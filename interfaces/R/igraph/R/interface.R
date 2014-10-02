@@ -199,7 +199,7 @@ get.edges <- function(graph, es) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' ei <- get.edge.ids(g, c(1,2, 4,5))
 #' E(g)[ei]
 #' 

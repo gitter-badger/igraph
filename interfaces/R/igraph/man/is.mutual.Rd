@@ -31,7 +31,7 @@ which_mutual(graph, es = E(graph))
 \seealso{ \code{\link{reciprocity}}, \code{\link{dyad_census}} if you
   just want some statistics about mutual edges.}
 \examples{
-g <- g_nm(10, 50, directed=TRUE)
+g <- sample_gnm(10, 50, directed=TRUE)
 reciprocity(g)
 dyad_census(g)
 which_mutual(g)

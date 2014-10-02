@@ -123,7 +123,7 @@ igraph.shape.noplot (coords, v = NULL, params)
 #################################################################
 # all vertex shapes, minus "raster", that might not be available
 shapes <- setdiff(vertex.shapes(), "")
-g <- g_ring(length(shapes))
+g <- ring(length(shapes))
 set.seed(42)
 plot(g, vertex.shape=shapes, vertex.label=shapes, vertex.label.dist=1,
      vertex.size=15, vertex.size2=15,
@@ -237,7 +237,7 @@ if (loadIfYouCan("XML") && loadIfYouCan("png") &&
   edges <- edges3[ edges3[,1] \%in\% c(ego$name, ego$similar) &
                    edges3[,2] \%in\% c(ego$name, ego$similar), ]
 
-  musnet <- simplify(g_df(edges, dir=FALSE,
+  musnet <- simplify(graph_from_data_frame(edges, dir=FALSE,
                      vertices=data.frame(name=c(ego$name, ego$similar))))
   str(musnet)
   

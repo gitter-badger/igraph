@@ -1,7 +1,7 @@
 
-context("g_smallworld")
+context("sample_smallworld")
 
-test_that("g_smallworld works", {
+test_that("sample_smallworld works", {
 
   library(igraph)
 
@@ -9,7 +9,7 @@ test_that("g_smallworld works", {
     p <- runif(1)
     d <- sample(1:3, 1)
     nei <- sample(2:5, 1)
-    g <- g_smallworld(d, 10, nei, p, loops=FALSE)
+    g <- sample_smallworld(d, 10, nei, p, loops=FALSE)
     expect_that(any(which_loop(g)), is_false())
   }
 

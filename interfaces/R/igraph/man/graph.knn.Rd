@@ -43,21 +43,21 @@ knn(graph, vids=V(graph), weights=NULL)
 \author{Gabor Csardi \email{csardi.gabor@gmail.com}}
 \examples{
 # Some trivial ones
-g <- g_ring(10)
+g <- ring(10)
 knn(g)
-g2 <- g_star(10)
+g2 <- star(10)
 knn(g2)
 
 # A scale-free one, try to plot 'knnk'
-g3 <- g_pa(1000, m=5)
+g3 <- sample_pa(1000, m=5)
 knn(g3)
 
 # A random graph
-g4 <- g_np(1000, p=5/1000)
+g4 <- sample_gnp(1000, p=5/1000)
 knn(g4)
 
 # A weighted graph
-g5 <- g_star(10)
+g5 <- star(10)
 E(g5)$weight <- seq(ecount(g5))
 knn(g5)
 }

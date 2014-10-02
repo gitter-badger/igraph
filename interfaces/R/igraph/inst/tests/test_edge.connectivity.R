@@ -10,7 +10,7 @@ test_that("edge_connectivity works", {
     induced_subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
 
-  g <- gc(g_np(30, 8/30))
+  g <- gc(sample_gnp(30, 8/30))
   ec <- edge_connectivity(g)
   ecST <- Inf
   for (j in 1:(vcount(g)-1)) {
@@ -23,7 +23,7 @@ test_that("edge_connectivity works", {
 
 ####
 
-  kite <- g_formula(Andre    - Beverly:Carol:Diane:Fernando,
+  kite <- graph_from_formula(Andre    - Beverly:Carol:Diane:Fernando,
                     Beverly  - Andre:Diane:Ed:Garth,
                     Carol    - Andre:Diane:Fernando,
                     Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,

@@ -8,7 +8,7 @@ pause <- function() {
 }
 
 ### Traditional approaches: degree, closeness, betweenness
-g <- g_formula(Andre----Beverly:Diane:Fernando:Carol,
+g <- graph_from_formula(Andre----Beverly:Diane:Fernando:Carol,
                Beverly--Andre:Diane:Garth:Ed,
                Carol----Andre:Diane:Fernando,
                Diane----Andre:Carol:Fernando:Garth:Ed:Beverly,
@@ -157,13 +157,13 @@ pause()
 ## pause()
 
 ## ### Transitivity of a random graph of the same size
-## g <- g_nm(vcount(jg), ecount(jg))
+## g <- sample_gnm(vcount(jg), ecount(jg))
 ## transitivity(g)
 
 ## pause()
 
 ## ### Transitivity of a random graph with the same degree distribution
-## g <- g_degseq(degree(jg, mode="out"), degree(jg, mode="in"),
+## g <- sample_degseq(degree(jg, mode="out"), degree(jg, mode="in"),
 ##                           method="simple")
 ## transitivity(g)
 

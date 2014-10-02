@@ -116,10 +116,10 @@ min_cut(graph, source=NULL, target=NULL, capacity=NULL,
 \examples{
 E <- rbind( c(1,3,3), c(3,4,1), c(4,2,2), c(1,5,1), c(5,6,2), c(6,2,10))
 colnames(E) <- c("from", "to", "capacity")
-g1 <- g_df(as.data.frame(E))
+g1 <- graph_from_data_frame(as.data.frame(E))
 max_flow(g1, source=V(g1)["1"], target=V(g1)["2"])
 
-g <- g_ring(100)
+g <- ring(100)
 min_cut(g, capacity=rep(1,vcount(g)))
 min_cut(g, value.only=FALSE, capacity=rep(1,vcount(g)))
 

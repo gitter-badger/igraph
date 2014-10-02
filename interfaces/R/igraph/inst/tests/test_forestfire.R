@@ -1,7 +1,7 @@
 
-context("g_forestfire")
+context("sample_forestfire")
 
-test_that("g_forestfire works", {
+test_that("sample_forestfire works", {
   
   library(igraph)
   set.seed(42)
@@ -11,7 +11,7 @@ test_that("g_forestfire works", {
                dense=c(0.38, 0.38/0.37))
 
   N <- 5000
-  G <- lapply(pars, function(x) g_forestfire(N, fw=x[1], bw=x[2]))
+  G <- lapply(pars, function(x) sample_forestfire(N, fw=x[1], bw=x[2]))
   
   xv <- log(2:N)
   

@@ -32,14 +32,14 @@ strength (graph, vids = V(graph), mode = c("all", "out", "in", "total"),
 \author{ Gabor Csardi \email{csardi.gabor@gmail.com} }
 \seealso{\code{\link{degree}} for the unweighted version.}
 \examples{
-g <- g_star(10)
+g <- star(10)
 E(g)$weight <- seq(ecount(g))
 strength(g)
 strength(g, mode="out")
 strength(g, mode="in")
 
 # No weights, a warning is given
-g <- g_ring(10)
+g <- ring(10)
 strength(g)
 }
 \keyword{graphs}

@@ -155,7 +155,7 @@ read_graph <- function(file, format=c("edgelist", "pajek", "ncol", "lgl",
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' \dontrun{write_graph(g, "/tmp/g.txt", "edgelist")}
 #' 
 write_graph <- function(graph, file, format=c("edgelist", "pajek", "ncol", "lgl",
@@ -447,7 +447,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' This function downloads a graph from a database created for the evaluation
 #' of graph isomorphism testing algothitms.
 #' 
-#' \code{g_graphdb} reads a graph from the graph database from an FTP or
+#' \code{graph_from_graphdb} reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
 #' 
 #' If the \code{url} argument is specified then it should the complete path to
@@ -495,17 +495,17 @@ write.graph.dot <- function(graph, file, ...) {
 #' @examples
 #' 
 #' \dontrun{
-#' g <- g_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
+#' g <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
 #'   which=10, compressed=TRUE)
-#' g2 <- g_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
+#' g2 <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
 #'   which=10, compressed=TRUE)
 #' graph.isomorphic.vf2(g, g2)	% should be TRUE
-#' g3 <- g_graphdb(url=paste(sep="/",
+#' g3 <- graph_from_graphdb(url=paste(sep="/",
 #'                               "http://cneurocvs.rmki.kfki.hu",
 #'                               "graphdb/gzip/iso/bvg/b06m",
 #'                               "iso_b06m_m200.A09.gz"))
 #' }
-g_graphdb <- function(url=NULL,
+graph_from_graphdb <- function(url=NULL,
                           prefix="iso", type="r001", nodes=NULL, pair="A", which=0,
                           base="http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
                           compressed=TRUE, directed=TRUE) {

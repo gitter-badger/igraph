@@ -47,17 +47,17 @@
 #' \code{cohesiveBlocks} object. They are returned in a list of numeric
 #' vectors, each containing vertex ids.
 #' 
-#' The function \code{g_blocks} is similar, but returns the blocks as
+#' The function \code{graphs_from_cohesive_blocks} is similar, but returns the blocks as
 #' (induced) subgraphs of the input graph. The various (graph, vertex and edge)
 #' attributes are kept in the subgraph.
 #' 
 #' The function \code{cohesion} returns a numeric vector, the cohesion of the
 #' different blocks. The order of the blocks is the same as for the
-#' \code{blocks} and \code{g_blocks} functions.
+#' \code{blocks} and \code{graphs_from_cohesive_blocks} functions.
 #' 
 #' The block hierarchy can be queried using the \code{hierarchy} function. It
 #' returns an igraph graph, its vertex ids are ordered according the order of
-#' the blocks in the \code{blocks} and \code{g_blocks}, \code{cohesion},
+#' the blocks in the \code{blocks} and \code{graphs_from_cohesive_blocks}, \code{cohesion},
 #' etc. functions.
 #' 
 #' \code{parent} gives the parent vertex of each block, in the block hierarchy,
@@ -105,7 +105,7 @@
 #' The generic function \code{plot} plots the graph, showing one or more
 #' cohesive blocks in it.
 #' 
-#' @aliases cohesive.blocks cohesiveBlocks blocks g_blocks blockGraphs
+#' @aliases cohesive.blocks cohesiveBlocks blocks graphs_from_cohesive_blocks blockGraphs
 #' hierarchy parent plotHierarchy exportPajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' plot_hierarchy max_cohesion
@@ -113,7 +113,7 @@
 #' \code{igraph}. It must be undirected and simple. (See
 #' \code{\link{is_simple}}.)
 #' 
-#' For \code{g_blocks} and \code{exportPajek} the same graph must be
+#' For \code{graphs_from_cohesive_blocks} and \code{exportPajek} the same graph must be
 #' supplied whose cohesive block structure is given in the \code{blocks}
 #' argument.
 #' @param labels Logical scalar, whether to add the vertex labels to the result
@@ -158,7 +158,7 @@
 #' 
 #' \code{blocks} returns a list of numeric vectors, containing vertex ids.
 #' 
-#' \code{g_blocks} returns a list of igraph graphs, corresponding to the
+#' \code{graphs_from_cohesive_blocks} returns a list of igraph graphs, corresponding to the
 #' cohesive blocks.
 #' 
 #' \code{cohesion} returns a numeric vector, the cohesion of each block.
@@ -191,7 +191,7 @@
 #' @examples
 #' 
 #' ## The graph from the Moody-White paper
-#' mw <- g_formula(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
+#' mw <- graph_from_formula(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
 #'                 5-6:7:21, 6-7, 7-8:11:14:19, 8-9:11:14, 9-10,
 #'                 10-12:13, 11-12:14, 12-16, 13-16, 14-15, 15-16,
 #'                 17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
@@ -215,7 +215,7 @@
 #' }
 #' 
 #' ## The science camp network
-#' camp <- g_formula(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
+#' camp <- graph_from_formula(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
 #'                   Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
 #'                   Holly   - Carol:Pat:Pam:Jennie:Bill,
 #'                   Bill    - Pauline:Michael:Lee:Holly,
@@ -267,7 +267,7 @@ blocks <- function(blocks) {
 
 #' @rdname cohesive_blocks
 
-g_blocks <- function(blocks, graph) {
+graphs_from_cohesive_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced_subgraph, graph=graph)
 }
 

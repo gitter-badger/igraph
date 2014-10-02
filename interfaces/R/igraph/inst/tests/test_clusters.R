@@ -11,7 +11,7 @@ test_that("components works", {
   }
   
   rg <- function(n) {
-    gc(g_np(n, 1/n))
+    gc(sample_gnp(n, 1/n))
   }
   
   G <- lapply(1:30, function(x) rg(sample(100, 1)))
@@ -28,7 +28,7 @@ test_that("components works", {
 test_that("components names results", {
   library(igraph)
 
-  g <- g_ring(10) + g_full(5)
+  g <- ring(10) + full_graph(5)
   V(g)$name <- letters[1:15]
 
   clu <- components(g)
@@ -38,7 +38,7 @@ test_that("components names results", {
 test_that("groups works", {
   library(igraph)
 
-  g <- g_ring(10) + g_full(5)
+  g <- ring(10) + full_graph(5)
   gr <- groups(components(g))
 
   expect_that(gr, equals(structure(list(`1` = 1:10, `2` = 11:15), .Dim = 2L,

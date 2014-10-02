@@ -94,7 +94,7 @@ sir(graph, beta, gamma, no.sim=100)
 }
 \seealso{\code{\link{plot.sir}} to conveniently plot the results}
 \examples{
-g <- g_nm(100, 100)
+g <- sample_gnm(100, 100)
 sm <- sir(g, beta=5, gamma=1)
 plot(sm)
 }

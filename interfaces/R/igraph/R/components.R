@@ -101,7 +101,7 @@ is_connected <- function(graph, mode=c("weak", "strong")) {
 #' @examples
 #' 
 #' # the diameter of each component in a random graph
-#' g <- g_np(1000, 1/1000)
+#' g <- sample_gnp(1000, 1/1000)
 #' components <- decompose(g, min.vertices=2)
 #' sapply(components, diameter)
 #' 

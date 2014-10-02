@@ -1,6 +1,6 @@
 \name{graph.lcf}
 \alias{graph.lcf}
-\alias{g_lcf}
+\alias{graph_from_lcf}
 \concept{LCF notation}
 \title{Creating a graph from LCF notation}
 \description{LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for
@@ -10,7 +10,7 @@
   the shifts should be performed. See
   \url{http://mathworld.wolfram.com/LCFNotation.html} for details.}
 \usage{
-g_lcf(n, shifts, repeats)
+graph_from_lcf(n, shifts, repeats)
 }
 \arguments{
   \item{n}{Integer, the number of vertices in the graph.}
@@ -25,7 +25,7 @@ g_lcf(n, shifts, repeats)
 }
 \examples{
 # This is the Franklin graph:
-g1 <- g_lcf(12, c(5,-5), 6)
+g1 <- graph_from_lcf(12, c(5,-5), 6)
 g2 <- graph.famous("Franklin")
 graph.isomorphic.vf2(g1, g2)
 }

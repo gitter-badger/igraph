@@ -69,7 +69,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' \dontrun{plot(g, layout=layout_with_kk, vertex.color="green")}
 #' 
 plot.igraph <- function(x, 
@@ -417,7 +417,7 @@ plot.igraph <- function(x,
 #' @examples
 #' 
 #' \dontrun{
-#' g <- g_lattice( c(5,5,5) )
+#' g <- lattice( c(5,5,5) )
 #' coords <- layout_with_fr(g, dim=3)
 #' rglplot(g, layout=coords)
 #' }

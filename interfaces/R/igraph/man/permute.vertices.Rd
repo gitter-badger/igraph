@@ -29,7 +29,7 @@ permute(graph, permutation)
 \seealso{\code{\link{canonical_permutation}}}
 \examples{
 # Random permutation of a random graph
-g <- g_nm(20, 50)
+g <- sample_gnm(20, 50)
 g2 <- permute(g, sample(vcount(g)))
 graph.isomorphic(g, g2)
 

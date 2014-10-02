@@ -5,7 +5,7 @@ test_that("eigen_centrality works", {
 
   library(igraph)
 
-  kite <- g_formula(Andre    - Beverly:Carol:Diane:Fernando,
+  kite <- graph_from_formula(Andre    - Beverly:Carol:Diane:Fernando,
                     Beverly  - Andre:Diane:Ed:Garth,
                     Carol    - Andre:Diane:Fernando,
                     Diane    - Andre:Beverly:Carol:Ed:Fernando:Garth,
@@ -38,7 +38,7 @@ test_that("eigen_centrality works", {
   }
 
   for (i in 1:1000) {
-    G <- g_nm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample(1:20, 1))
     ev <- eigen_centrality(G)
     expect_that(is.good(as_adj(G, sparse=FALSE), ev$vector,
                         ev$value), is_true())

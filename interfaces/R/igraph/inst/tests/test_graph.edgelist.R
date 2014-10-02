@@ -1,31 +1,31 @@
 
-context("g_edgelist")
+context("graph_from_edgelist")
 
-test_that("g_edgelist works", {
+test_that("graph_from_edgelist works", {
 
   library(igraph)
 
-  g <- g_np(50, 5/50)
+  g <- sample_gnp(50, 5/50)
   el <- as_edgelist(g)
-  g2 <- g_edgelist(el, dir=FALSE)
+  g2 <- graph_from_edgelist(el, dir=FALSE)
   expect_that(graph.isomorphic(g, g2), is_true())
 
 ####
 
-  g <- g_np(50, 5/50, dir=TRUE)
+  g <- sample_gnp(50, 5/50, dir=TRUE)
   el <- as_edgelist(g)
-  g2 <- g_edgelist(el, dir=TRUE)
+  g2 <- graph_from_edgelist(el, dir=TRUE)
   expect_that(graph.isomorphic(g, g2), is_true())
 
 ####
 
-  g <- g_np(26, 5/26, dir=TRUE)
+  g <- sample_gnp(26, 5/26, dir=TRUE)
   el <- as_edgelist(g)
   n <- letters[1:26]
   names(n) <- 1:26
   mode(el) <- "character"
   el[] <- n[el]
-  g2 <- g_edgelist(el, dir=TRUE)
+  g2 <- graph_from_edgelist(el, dir=TRUE)
   expect_that(graph.isomorphic(g, g2), is_true())
 
 })

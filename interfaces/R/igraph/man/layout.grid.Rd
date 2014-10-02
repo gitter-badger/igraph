@@ -33,10 +33,10 @@ layout_on_grid (graph, width = 0, height = 0, dim = 2)
 \author{ Tamas Nepusz \email{ntamas@gmail.com} }
 \seealso{ \code{\link{layout}} for other layout generators }
 \examples{
-g <- g_lattice( c(3,3) )
+g <- lattice( c(3,3) )
 layout_on_grid(g)
 
-g2 <- g_lattice( c(3,3,3) )
+g2 <- lattice( c(3,3,3) )
 layout_on_grid(g2, dim = 3)
 
 \dontrun{

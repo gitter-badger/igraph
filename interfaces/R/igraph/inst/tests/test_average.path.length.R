@@ -20,15 +20,15 @@ test_that("mean_distance works", {
     induced_subgraph(graph, which(clu$membership==which.max(clu$csize)))
   }
   
-  g <- giant.component(g_np(100, 3/100))
+  g <- giant.component(sample_gnp(100, 3/100))
   expect_that(apl(g), equals(mean_distance(g)))
 
-  g <- giant.component(g_np(100, 6/100, dir=TRUE), mode="strong")
+  g <- giant.component(sample_gnp(100, 6/100, dir=TRUE), mode="strong")
   expect_that(apl(g), equals(mean_distance(g)))
 
-  g <- g_np(100, 2/100)
+  g <- sample_gnp(100, 2/100)
   expect_that(apl(g), equals(mean_distance(g)))
   
-  g <- g_np(100, 4/100, dir=TRUE)
+  g <- sample_gnp(100, 4/100, dir=TRUE)
   expect_that(apl(g), equals(mean_distance(g)))
 })

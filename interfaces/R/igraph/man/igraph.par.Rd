@@ -102,7 +102,7 @@ igraph.par(parid, parvalue = NULL)
 \examples{
 oldval <- getIgraphOpt("verbose")
 igraph.options(verbose=TRUE)
-layout_with_kk(g_ring(10))
+layout_with_kk(ring(10))
 igraph.options(verbose=oldval)
 }
 \keyword{graphs}

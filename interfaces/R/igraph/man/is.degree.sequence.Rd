@@ -50,7 +50,7 @@ is_graphical (out.deg, in.deg = NULL)
   Tamas Nepusz \email{ntamas@gmail.com}
 }
 \examples{
-g <- g_np(100, 2/100)
+g <- sample_gnp(100, 2/100)
 is_degseq(degree(g))
 is_graphical(degree(g))
 }

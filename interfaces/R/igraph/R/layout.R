@@ -292,12 +292,12 @@ layout_with_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
 #' @keywords graphs
 #' @examples
 #' 
-#' tree <- g_tree(20, 3)
+#' tree <- tree(20, 3)
 #' plot(tree, layout=layout_as_tree)
 #' plot(tree, layout=layout_as_tree(tree, flip.y=FALSE))
 #' plot(tree, layout=layout_as_tree(tree, circular=TRUE))
 #' 
-#' tree2 <- g_tree(10, 3) + g_tree(10, 2)
+#' tree2 <- tree(10, 3) + tree(10, 2)
 #' plot(tree2, layout=layout_as_tree)
 #' plot(tree2, layout=layout_as_tree(tree2, root=c(1,11),
 #'                                            rootlevel=c(2,1)))
@@ -541,7 +541,7 @@ layout_components <- function(graph, layout=layout_with_kk, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- as.undirected(g_pa(100, m=1))
+#' g <- as.undirected(sample_pa(100, m=1))
 #' l <- layout_with_drl(g, options=list(simmer.attraction=0))
 #' \dontrun{
 #' plot(g, layout=l, vertex.size=3, vertex.label=NA)
@@ -835,7 +835,7 @@ layout_nicely <- function(graph, dim=2, ...) {
 #' @examples
 #' 
 #' ## Data taken from http://tehnick-8.narod.ru/dc_clients/
-#' DC <- g_formula("DC++" -+
+#' DC <- graph_from_formula("DC++" -+
 #'                 "LinuxDC++":"BCDC++":"EiskaltDC++":"StrongDC++":"DiCe!++",
 #'                 "LinuxDC++" -+ "FreeDC++", "BCDC++" -+ "StrongDC++",
 #'                 "FreeDC++" -+ "BMDC++":"EiskaltDC++",
@@ -904,7 +904,7 @@ layout_nicely <- function(graph, dim=2, ...) {
 #' ## Layered Graph Drawing, Journal of Graph Algorithms and
 #' ## Applications 9, 305--325 (2005).
 #' 
-#' ex <- g_formula( 0 -+ 29: 6: 5:20: 4,
+#' ex <- graph_from_formula( 0 -+ 29: 6: 5:20: 4,
 #'                  1 -+ 12,
 #'                  2 -+ 23: 8,
 #'                  3 -+  4,
@@ -1095,7 +1095,7 @@ layout_nicely <- function(graph, dim=2, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_np(100, 2/100)
+#' g <- sample_gnp(100, 2/100)
 #' l <- layout_with_mds(g)
 #' plot(g, layout=l, vertex.label=NA, vertex.size=3)
 
@@ -1171,7 +1171,7 @@ layout_with_mds <- function(graph, dist=NULL, dim=2,
 #' @examples
 #' 
 #' # Fixing ego
-#' g <- g_pa(20, m=2)
+#' g <- sample_pa(20, m=2)
 #' minC <- rep(-Inf, vcount(g))
 #' maxC <- rep(Inf, vcount(g))
 #' minC[1] <- maxC[1] <- 0
@@ -1301,7 +1301,7 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' E(g)$weight <- rep(1:2, length.out=ecount(g))
 #' plot(g, layout=layout_with_kk, edge.label=E(g)$weight)
 #' 
@@ -1403,7 +1403,7 @@ layout_with_kk <- function(graph, coords=NULL, dim=2,
 #' @examples
 #' 
 #' set.seed(42)
-#' g <- g_ring(10)
+#' g <- ring(10)
 #' plot(g, layout=layout_with_gem)
 #' 
 layout_with_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
@@ -1487,49 +1487,49 @@ layout_with_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' 
 #' set.seed(42)
 #' ## Figures from the paper
-#' g_1b <- g_star(19, mode="undirected") + path(c(2:19, 2)) +
+#' g_1b <- star(19, mode="undirected") + path(c(2:19, 2)) +
 #'   path(c(seq(2, 18, by=2), 2))
 #' plot(g_1b, layout=layout_with_dh)
 #' 
-#' g_2 <- g_lattice(c(8, 3)) + edges(1,8, 9,16, 17,24)
+#' g_2 <- lattice(c(8, 3)) + edges(1,8, 9,16, 17,24)
 #' plot(g_2, layout=layout_with_dh)
 #' 
-#' g_3 <- g_empty(n=70)
+#' g_3 <- empty_graph(n=70)
 #' plot(g_3, layout=layout_with_dh)
 #' 
-#' g_4 <- g_empty(n=70, directed=FALSE) + edges(1:70)
+#' g_4 <- empty_graph(n=70, directed=FALSE) + edges(1:70)
 #' plot(g_4, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_5a <- g_ring(24)
+#' g_5a <- ring(24)
 #' plot(g_5a, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_5b <- g_ring(40)
+#' g_5b <- ring(40)
 #' plot(g_5b, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_6 <- g_lattice(c(2,2,2))
+#' g_6 <- lattice(c(2,2,2))
 #' plot(g_6, layout=layout_with_dh)
 #' 
-#' g_7 <- g_formula(1:3:5 -- 2:4:6)
+#' g_7 <- graph_from_formula(1:3:5 -- 2:4:6)
 #' plot(g_7, layout=layout_with_dh, vertex.label=V(g_7)$name)
 #' 
-#' g_8 <- g_ring(5) + g_ring(10) + g_ring(5) +
+#' g_8 <- ring(5) + ring(10) + ring(5) +
 #'   edges(1,6, 2,8, 3, 10, 4,12, 5,14,
 #'         7,16, 9,17, 11,18, 13,19, 15,20)
 #' plot(g_8, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_9 <- g_lattice(c(3,2,2))
+#' g_9 <- lattice(c(3,2,2))
 #' plot(g_9, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_10 <- g_lattice(c(6,6))
+#' g_10 <- lattice(c(6,6))
 #' plot(g_10, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_11a <- g_tree(31, 2, mode="undirected")
+#' g_11a <- tree(31, 2, mode="undirected")
 #' plot(g_11a, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_11b <- g_tree(21, 4, mode="undirected")
+#' g_11b <- tree(21, 4, mode="undirected")
 #' plot(g_11b, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
 #' 
-#' g_12 <- g_empty(n=37, directed=FALSE) +
+#' g_12 <- empty_graph(n=37, directed=FALSE) +
 #'   path(1:5,10,22,31,37:33,27,16,6,1) + path(6,7,11,9,10) + path(16:22) +
 #'   path(27:31) + path(2,7,18,28,34) + path(3,8,11,19,29,32,35) +
 #'   path(4,9,20,30,36) + path(1,7,12,14,19,24,26,30,37) +

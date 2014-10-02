@@ -7,7 +7,7 @@ test_that("edge names work", {
 
   ## named edges
   igraph.options(print.edge.attributes = TRUE)
-  g <- g_ring(10)
+  g <- ring(10)
   E(g)$name <- letters[1:ecount(g)]
   g2 <- delete_edges(g, c("b", "d", "e"))
   expect_that(as_edgelist(g2),
@@ -15,7 +15,7 @@ test_that("edge names work", {
                                  10, 10), .Dim = c(7L, 2L))))
 
   ## named vertices
-  g <- g_ring(10)
+  g <- ring(10)
   V(g)$name <- letters[1:vcount(g)]
   g3 <- delete_edges(g, c("a|b", "f|g", "c|b"))
   expect_that(as_edgelist(g3),
@@ -25,7 +25,7 @@ test_that("edge names work", {
 
 
   ## no names at all, but select edges based on vertices
-  g <- g_ring(10)
+  g <- ring(10)
   g4 <- delete_edges(g, c("1|2", "8|7", "1|10"))
   expect_that(as_edgelist(g4),
               equals(structure(c(2, 3, 4, 5, 6, 8, 9, 3, 4, 5, 6, 7,
@@ -33,7 +33,7 @@ test_that("edge names work", {
 
 
   ## mix edge names and vertex names
-  g <- g_ring(10)
+  g <- ring(10)
   V(g)$name <- letters[1:vcount(g)]
   E(g)$name <- LETTERS[1:ecount(g)]
   g5 <- delete_edges(g, c("a|b", "F", "j|i"))

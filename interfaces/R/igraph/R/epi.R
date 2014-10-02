@@ -121,7 +121,7 @@ quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- g_nm(100, 100)
+#' g <- sample_gnm(100, 100)
 #' sm <- sir(g, beta=5, gamma=1)
 #' plot(sm)
 #' 

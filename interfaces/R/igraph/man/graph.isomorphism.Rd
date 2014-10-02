@@ -2,7 +2,7 @@
 \alias{graph.isoclass}
 \alias{iso_class}
 \alias{graph.isocreate}
-\alias{g_iso_class}
+\alias{graph_from_iso_class}
 \alias{graph.isomorphic}
 \alias{graph.isomorphic.vf2}
 \alias{graph.count.isomorphisms.vf2}
@@ -50,7 +50,7 @@ graph.subisomorphic.lad (pattern, target, domains = NULL,
 
 iso_class(graph)
 graph.isoclass.subgraph(graph, vids)
-g_iso_class(size, number, directed=TRUE)
+graph_from_iso_class(size, number, directed=TRUE)
 }
 \arguments{
   \item{graph}{A graph object.}
@@ -166,12 +166,12 @@ g_iso_class(size, number, directed=TRUE)
   subgraph of the input graph. Currently it only works for subgraphs
   with 3 or 4 vertices.
   
-  \code{g_iso_class} create a graph from the given isomorphic
+  \code{graph_from_iso_class} create a graph from the given isomorphic
   class. Currently it can handle only graphs with 3 or 4 vertices.
 }
 \note{
   Functions \code{iso_class}, \code{graph.isoclass.subgraph} and
-  \code{g_iso_class} are considered experimental and might be
+  \code{graph_from_iso_class} are considered experimental and might be
   reorganized/rewritten later.
 }
 \value{
@@ -252,7 +252,7 @@ g_iso_class(size, number, directed=TRUE)
   \code{iso_class} and \code{graph.isoclass.subgraph} return a
   non-negative integer number. 
 
-  \code{g_iso_class} returns a graph object.
+  \code{graph_from_iso_class} returns a graph object.
 }
 \references{
   Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -272,8 +272,8 @@ g_iso_class(size, number, directed=TRUE)
 \seealso{\code{\link{motifs}}}
 \examples{
 # create some non-isomorphic graphs
-g1 <- g_iso_class(3, 10)
-g2 <- g_iso_class(3, 11)
+g1 <- graph_from_iso_class(3, 10)
+g2 <- graph_from_iso_class(3, 11)
 iso_class(g1)
 iso_class(g2)
 graph.isomorphic(g1, g2)
@@ -288,8 +288,8 @@ graph.isomorphic.bliss(g1, g2)
 graph.isomorphic.vf2(g1, g2)
 
 # colored graph isomorphism
-g1 <- g_ring(10)
-g2 <- g_ring(10)
+g1 <- ring(10)
+g2 <- ring(10)
 graph.isomorphic.vf2(g1, g2)
 
 V(g1)$color <- rep(1:2, length=vcount(g1))
@@ -309,9 +309,9 @@ graph.isomorphic.vf2(g2, g2, vertex.color1=NULL,
     vertex.color2=NULL)
 
 # The LAD example
-pattern <- g_formula(1:2:3:4:5,
+pattern <- graph_from_formula(1:2:3:4:5,
                      1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1)
-target <- g_formula(1:2:3:4:5:6:7:8:9,
+target <- graph_from_formula(1:2:3:4:5:6:7:8:9,
                     1 - 2:5:7, 2 - 1:5:3, 3 - 2:4, 4 - 3:5:6:8:9,
                     5 - 1:2:4:6:7, 6 - 7:5:4:9, 7 - 1:5:6,
                     8 - 4:9, 9 - 6:4:8)
@@ -322,9 +322,9 @@ graph.subisomorphic.lad(pattern, target, induced=TRUE, all.maps=TRUE)
 graph.subisomorphic.lad(pattern, target, domains=domains, all.maps=TRUE)
 
 # Directed LAD example
-pattern <- g_formula(1:2:3, 1 -+ 2:3)
-uring <- g_ring(10)
-dring <- g_ring(10, directed=TRUE)
+pattern <- graph_from_formula(1:2:3, 1 -+ 2:3)
+uring <- ring(10)
+dring <- ring(10, directed=TRUE)
 graph.subisomorphic.lad(pattern, uring)
 graph.subisomorphic.lad(pattern, dring)
 }

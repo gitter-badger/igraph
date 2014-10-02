@@ -7,7 +7,7 @@ test_that("layout_with_mds works", {
 
   ## A tree
 
-  g <- g_tree(10, 2, "undirected")
+  g <- tree(10, 2, "undirected")
 
   mymds <- function(g) { 
     sp <- distances(g)
@@ -26,13 +26,13 @@ test_that("layout_with_mds works", {
   ## A graph with multiple components, just test that it runs
 
   set.seed(42)
-  g <- g_ring(10) + g_ring(3)
+  g <- ring(10) + ring(3)
   expect_that(ncol(layout_with_mds(g)), equals(2))
   
   ## Small stress test
 
   for (i in 1:10) {
-    g <- g_np(100, 2/100)
+    g <- sample_gnp(100, 2/100)
     l <- layout_with_mds(g)
     expect_that(ncol(l), equals(2))
   }
