@@ -253,6 +253,10 @@ deprecated("multilevel.community", cluster_louvain)
 
 deprecated("neighborhood", ego)
 deprecated("neighborhood.size", ego_size)
+deprecated("nexus.get", nexus_get)
+deprecated("nexus.info", nexus_info)
+deprecated("nexus.list", nexus_list)
+deprecated("nexus.search", nexus_search)
 deprecated("no.clusters", count_components)
 
 deprecated("optimal.community", cluster_optimal)
