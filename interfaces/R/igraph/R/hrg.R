@@ -19,7 +19,7 @@
 #
 ###################################################################
 
-hrg.fit <- function(graph, hrg=NULL, start=FALSE, steps=0) {
+fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(hrg)) { 
@@ -44,7 +44,7 @@ hrg.fit <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   res
 }
 
-hrg.consensus <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) {
+consensus_tree <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) {
   
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -74,7 +74,7 @@ hrg.consensus <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) {
   res
 }
 
-hrg.predict <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
+predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
                         num.bins=25) {
   
   # Argument checks
@@ -106,8 +106,8 @@ hrg.predict <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 #' 
 #' You can use \code{as.igraph} to convert various objects to igraph graphs.
 #' Right now the following objects are supported: \itemize{ \item codeigraphHRG
-#' These objects are created by the \code{\link{hrg.fit}} and
-#' \code{\link{hrg.consensus}} functions.  }
+#' These objects are created by the \code{\link{fit_hrg}} and
+#' \code{\link{consensus_tree}} functions.  }
 #' 
 #' @aliases as.igraph as.igraph.igraphHRG
 #' @param x The object to convert.
@@ -118,7 +118,7 @@ hrg.predict <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 #' @examples
 #' 
 #' g <- full_graph(5) + full_graph(5)
-#' hrg <- hrg.fit(g)
+#' hrg <- fit_hrg(g)
 #' as.igraph(hrg)
 #' 
 as.igraph <- function(x, ...)
@@ -343,7 +343,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' \code{as.dendrogram}.
 #' 
 #' @param x An \code{igraphHRG}, a hierarchical random graph, as returned by
-#' the \code{\link{hrg.fit}} function.
+#' the \code{\link{fit_hrg}} function.
 #' @param mode Which dendrogram plotting function to use. See details below.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #' function.
@@ -354,7 +354,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' @examples
 #' 
 #' g <- full_graph(5) + full_graph(5)
-#' hrg <- hrg.fit(g)
+#' hrg <- fit_hrg(g)
 #' plot_dendrogram(hrg)
 #' 
 plot_dendrogram.igraphHRG <- function(x, mode=getIgraphOpt("dend.plot.type"), ...) {

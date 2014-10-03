@@ -24,7 +24,7 @@ pause()
 
 ### Fit a HRG model to the network
 
-hrg <- hrg.fit(karate)
+hrg <- fit_hrg(karate)
 hrg
 
 pause()
@@ -76,21 +76,21 @@ pause()
 
 ### Fit HRG
 
-ghrg <- hrg.fit(g)
+ghrg <- fit_hrg(g)
 plot_dendrogram(ghrg)
 
 pause()
 
 ### Create a consensus dendrogram from multiple samples, takes longer...
 
-hcons <- hrg.consensus(g)
+hcons <- consensus_tree(g)
 hcons$consensus
 
 pause()
 
 ### Predict missing edges
 
-pred <- hrg.predict(g)
+pred <- predict_edges(g)
 pred
 
 pause()

@@ -168,6 +168,12 @@ deprecated("growing.random.game", sample_growing)
 deprecated("grg.game", sample_grg)
 
 deprecated("has.multiple", any_multiple)
+deprecated("hrg.consensus", consensus_tree)
+deprecated("hrg.create", hrg)
+deprecated("hrg.dendrogram", hrg_tree)
+deprecated("hrg.game", sample_hrg)
+deprecated("hrg.fit", fit_hrg)
+deprecated("hrg.predict", predict_edges)
 deprecated("hub.score", hub_score)
 
 deprecated("igraph.arpack.default", arpack_defaults)

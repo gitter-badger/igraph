@@ -1310,35 +1310,35 @@ igraph_split_join_distance:
 igraph_hrg_fit:
         PARAMS: GRAPH graph, INOUT HRG hrg=Default, BOOLEAN start=False, \
                 INT steps=0
-        NAME-R: hrg.fit
+        NAME-R: fit_hrg
         CLASS-R: igraphHRG
         IGNORE: RR
 
 igraph_hrg_game:
         PARAMS: OUT GRAPH graph, HRG hrg
-        NAME-R: hrg.game
+        NAME-R: sample_hrg
         GATTR-R: name IS Hierarchical random graph model
 
 igraph_hrg_dendrogram:
         PARAMS: OUT GRAPH graph, HRG hrg
-        NAME-R: hrg.dendrogram
+        NAME-R: hrg_tree
 
 igraph_hrg_consensus:
         PARAMS: GRAPH graph, OUT VECTOR parents, OUT VECTOR weights, \
                 INOUT HRG hrg=Default, BOOLEAN start=False, \
                 INT num_samples=10000
-        NAME-R: hrg.consensus
+        NAME-R: consensus_tree
 
 igraph_hrg_predict:
         PARAMS: GRAPH graph, OUT VERTEXSET edges, OUT VECTOR prob, \
                 INOUT HRG hrg=Default, BOOLEAN start=False, \
                 INT num_samples=10000, INT num_bins=25
-        NAME-R: hrg.predict
+        NAME-R: predict_edges
         IGNORE: RR
 
 igraph_hrg_create:
         PARAMS: OUT HRG hrg, GRAPH graph, VECTOR prob
-        NAME-R: hrg.create
+        NAME-R: hrg
         DEPS: prob ON graph
         CLASS-R: igraphHRG
 
