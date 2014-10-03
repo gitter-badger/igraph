@@ -37,8 +37,20 @@ graph_attr <- function(graph, name) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  .Call("R_igraph_mybracket2", graph, 9L, 2L,
-        PACKAGE="igraph")[[as.character(name)]]
+  if (missing(name)) {
+    graph.attributes(graph)
+  } else {
+    .Call("R_igraph_mybracket2", graph, 9L, 2L,
+          PACKAGE="igraph")[[as.character(name)]]
+  }
+}
+
+`graph_attr<-` <- function(graph, name, value) {
+  if (missing(name)) {
+    `graph.attributes<-`(graph, value)
+  } else {
+    set_graph_attr(graph, name, value)
+  }
 }
 
 set_graph_attr <- function(graph, name, value) {
@@ -75,10 +87,22 @@ vertex_attr <- function(graph, name, index=V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  index <- as.igraph.vs(graph, index)  
-  myattr <- .Call("R_igraph_mybracket2", graph, 9L, 3L,
-                  PACKAGE="igraph")[[as.character(name)]]
-  myattr[index]
+  if (missing(name)) {
+    vertex.attributes(graph, index = index)
+  } else {
+    index <- as.igraph.vs(graph, index)
+    myattr <- .Call("R_igraph_mybracket2", graph, 9L, 3L,
+                    PACKAGE="igraph")[[as.character(name)]]
+    myattr[index]
+  }
+}
+
+`vertex_attr<-` <- function(graph, name, index = V(graph), value) {
+  if (missing(name)) {
+    `vertex.attributes<-`(graph, index = index, value = value)
+  } else {
+    set_vertex_attr(graph, name = name, index = index, value = value)
+  }
 }
 
 set_vertex_attr <- function(graph, name, index=V(graph), value) {
@@ -101,14 +125,27 @@ set_vertex_attr <- function(graph, name, index=V(graph), value) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 3L, vattrs, PACKAGE="igraph")
 }
 
-vertex.attributes <- function(graph) {
+vertex.attributes <- function(graph, index = V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  .Call("R_igraph_mybracket2_copy", graph, 9L, 3L, PACKAGE="igraph")  
+
+  if (!missing(index)) {
+    index <- as.igraph.vs(graph, index)
+  }
+
+  res <- .Call("R_igraph_mybracket2_copy", graph, 9L, 3L, PACKAGE="igraph")
+
+  if (!missing(index) &&
+      (length(index) != vcount(graph) || any(index != V(graph)))) {
+    for (i in seq_along(value)) {
+      value[[i]] <- value[[i]][index]
+    }
+  }
+  res
 }
 
-"vertex.attributes<-" <- function(graph, value) {
+"vertex.attributes<-" <- function(graph, index = V(graph), value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -116,10 +153,29 @@ vertex.attributes <- function(graph) {
       any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
-  if ( any(sapply(value, length) != vcount(graph)) ) {
+  if ( any(sapply(value, length) != length(index)) ) {
     stop("Invalid attribute value length, must match number of vertices")
   }
-  
+
+  if (!missing(index)) {
+    index <- as.igraph.vs(graph, index)
+    if (any(duplicated(index)) || anyNA(index)) {
+      stop("Invalid vertices in index")
+    }
+  }
+
+  if (!missing(index) &&
+      (length(index) != vcount(graph) || any(index != V(graph)))) {
+    vs <- V(graph)
+    for (i in seq_along(value)) {
+      tmp <- value[[i]]
+      length(tmp) <- 0
+      length(tmp) <- length(vs)
+      tmp[index] <- value[[i]]
+      value[[i]] <- tmp
+    }
+  }
+
   .Call("R_igraph_mybracket2_set", graph, 9L, 3L, value,
         PACKAGE="igraph")
 }
@@ -128,11 +184,23 @@ edge_attr <- function(graph, name, index=E(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  name <- as.character(name)
-  index <- as.igraph.es(graph, index)
-  myattr <- .Call("R_igraph_mybracket2", graph, 9L, 4L,
-                  PACKAGE="igraph")[[name]]
-  myattr[index]
+  if (missing(name)) {
+    edge.attributes(graph, name)
+  } else {
+    name <- as.character(name)
+    index <- as.igraph.es(graph, index)
+    myattr <- .Call("R_igraph_mybracket2", graph, 9L, 4L,
+                    PACKAGE="igraph")[[name]]
+    myattr[index]
+  }
+}
+
+`edge_attr<-` <- function(graph, name, index = E(graph), value) {
+  if (missing(name)) {
+    `edge.attributes<-`(graph, index = index, value = value)
+  } else {
+    set_edge_attr(graph, name = name, index = index, value = value)
+  }
 }
 
 set_edge_attr <- function(graph, name, index=E(graph), value) {
@@ -155,14 +223,27 @@ set_edge_attr <- function(graph, name, index=E(graph), value) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 4L, eattrs, PACKAGE="igraph")
 }
 
-edge.attributes <- function(graph) {
+edge.attributes <- function(graph, index = E(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  .Call("R_igraph_mybracket2_copy", graph, 9L, 4L, PACKAGE="igraph")  
+
+  if (!missing(index)) {
+    index <- as.igraph.es(graph, index)
+  }
+
+  res <- .Call("R_igraph_mybracket2_copy", graph, 9L, 4L, PACKAGE="igraph")
+
+  if (!missing(index) &&
+      (length(index) != ecount(graph) || any(index != E(graph)))) {
+    for (i in seq_along(value)) {
+      value[[i]] <- value[[i]][index]
+    }
+  }
+  res
 }
 
-"edge.attributes<-" <- function(graph, value) {
+"edge.attributes<-" <- function(graph, index = E(graph), value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -171,8 +252,27 @@ edge.attributes <- function(graph) {
       any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
-  if ( any(sapply(value, length) != ecount(graph)) ) {
+  if ( any(sapply(value, length) != length(index)) ) {
     stop("Invalid attribute value length, must match number of edges")
+  }
+
+  if (!missing(index)) {
+    index <- as.igraph.es(graph, index)
+    if (any(duplicated(index)) || anyNA(index)) {
+      stop("Invalid edges in index")
+    }
+  }
+
+  if (!missing(index) &&
+      (length(index) != ecount(graph) || any(index != E(graph)))) {
+    es <- E(graph)
+    for (i in seq_along(value)) {
+      tmp <- value[[i]]
+      length(tmp) <- 0
+      length(tmp) <- length(es)
+      tmp[index] <- value[[i]]
+      value[[i]] <- tmp
+    }
   }
   
   .Call("R_igraph_mybracket2_set", graph, 9L, 4L, value,

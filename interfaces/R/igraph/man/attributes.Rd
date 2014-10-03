@@ -4,6 +4,7 @@
 \alias{set_graph_attr}
 \alias{get.graph.attribute}
 \alias{graph_attr}
+\alias{graph_attr<-}
 \alias{remove.graph.attribute}
 \alias{delete_graph_attr}
 \alias{list.graph.attributes}
@@ -14,6 +15,7 @@
 \alias{set_vertex_attr}
 \alias{get.vertex.attribute}
 \alias{vertex_attr}
+\alias{vertex_attr<-}
 \alias{remove.vertex.attribute}
 \alias{delete_vertex_attr}
 \alias{list.vertex.attributes}
@@ -24,6 +26,7 @@
 \alias{set_edge_attr}
 \alias{get.edge.attribute}
 \alias{edge_attr}
+\alias{edge_attr<-}
 \alias{remove.edge.attribute}
 \alias{delete_edge_attr}
 \alias{list.edge.attributes}
@@ -99,9 +102,9 @@ edge.attributes(graph)
   assigned graph attributes are listed with
   \code{graph_attr_names}.
 
-  The function \code{graph.attributes} returns all graph attributes in a
-  named list. This function has a counterpart that sets all graph
-  attributes at once, see an example below.
+  If no attribute name is specified, \code{graph_attr} returns all
+  graph attributes. This function also has a counterpart that sets all
+  graph attributes at once, see an example below.
 
   There is a simpler notation for using graph attributes: the
   \sQuote{\code{$}} operator. It can be used both to query and set graph
@@ -114,9 +117,9 @@ edge.attributes(graph)
   \code{edge_attr}, \code{delete_edge_attr} and
   \code{edge_attr_names}.
 
-  Similarly to graph attributes, \code{vertex.attributes} returns all
-  vertex attributes, in a named list, and \code{edge.attributes} returns
-  all edge attributes, in a named list.
+  Similarly to graph attributes, \code{vert_attr} returns all
+  vertex attributes if no attribute name is given, in a named list, and
+  \code{edge_attr} returns all edge attributes, in a named list.
   
   There is however a (syntactically) much simpler way to handle vertex
   and edge attribute by using vertex and edge selectors, it works like this:
@@ -184,12 +187,12 @@ str(g, g=TRUE, v=TRUE, e=TRUE)
 g2 <- empty_graph(10)
 g2
 
-graph.attributes(g2) <- graph.attributes(g)
-vertex.attributes(g2) <- vertex.attributes(g)
-edge.attributes(g2) <- list()
+graph_attr(g2) <- graph_attr(g)
+vertex_attr(g2) <- vertex_attr(g)
+edge_attr(g2) <- list()
 g2
 
-edge.attributes(g2) <- list(weight=numeric())
+edge_attr(g2) <- list(weight=numeric())
 g2
 }
 \keyword{graphs}
