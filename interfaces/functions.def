@@ -1098,17 +1098,17 @@ igraph_layout_graphopt:
 
 igraph_layout_drl:
         PARAMS: GRAPH graph, INOUT MATRIX res, BOOLEAN use_seed=False, \
-                DRL_OPTIONS options=igraph.drl.default, VECTOR_OR_0 weights=NULL, \
+                DRL_OPTIONS options=drl_defaults$default, VECTOR_OR_0 weights=NULL, \
                 VECTOR_BOOL_OR_0 fixed=NULL
-        DEFAULT-R: options=igraph.drl.default
+        DEFAULT-R: options=drl_defaults$default
         NAME-R: layout.drl
         IGNORE: RR
 
 igraph_layout_drl_3d:
         PARAMS: GRAPH graph, INOUT MATRIX res, BOOLEAN use_seed=False, \
-                DRL_OPTIONS options=igraph.drl.default, VECTOR_OR_0 weights=NULL, \
+                DRL_OPTIONS options=drl_defaults$default, VECTOR_OR_0 weights=NULL, \
                 VECTOR_BOOL_OR_0 fixed=NULL
-        DEFAULT-R: options=igraph.drl.default
+        DEFAULT-R: options=drl_defaults$default
         NAME-R: layout.drl
         IGNORE: RR
 

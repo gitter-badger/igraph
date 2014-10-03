@@ -506,12 +506,11 @@ layout_components <- function(graph, layout=layout_with_kk, ...) {
 #' \item{simmer.damping.mult}{Damping, simmer phase.}
 #' 
 #' There are five pre-defined parameter settings as well, these are called
-#' \code{igraph.drl.default}, \code{igraph.drl.coarsen},
-#' \code{igraph.drl.coarsest}, \code{igraph.drl.refine} and
-#' \code{igraph.drl.final}.  }
+#' \code{drl_defaults$default}, \code{drl_defaults$coarsen},
+#' \code{drl_defaults$coarsest}, \code{drl_defaults$refine} and
+#' \code{drl_defaults$final}.  }
 #' 
-#' @aliases layout.drl igraph.drl.default igraph.drl.coarsen
-#' igraph.drl.coarsest igraph.drl.refine igraph.drl.final
+#' @aliases layout.drl drl_defaults
 #' @param graph The input graph, in can be directed or undirected.
 #' @param use.seed Logical scalar, whether to use the coordinates given in the
 #' \code{seed} argument as a starting point.
@@ -549,7 +548,7 @@ layout_components <- function(graph, layout=layout_with_kk, ...) {
 #' 
 layout_with_drl <- function(graph, use.seed = FALSE,
                        seed=matrix(runif(vcount(graph)*2), ncol=2),
-                       options=igraph.drl.default,
+                       options=drl_deaults$default,
                        weights=E(graph)$weight,
                        fixed=NULL,
                        dim=2)
@@ -562,7 +561,7 @@ layout_with_drl <- function(graph, use.seed = FALSE,
     }
     use.seed <- as.logical(use.seed)
     seed <- as.matrix(seed)
-    options.tmp <- igraph.drl.default
+    options.tmp <- drl_defaults$default
     options.tmp[names(options)] <- options
     options <- options.tmp
     if (!is.null(weights)) {
@@ -712,7 +711,13 @@ igraph.drl.final <- list(edge.cut=32/40,
                          simmer.attraction=.5,
                          simmer.damping.mult=0)
 
-
+drl_defaults <- list(
+  coarsen = igraph.drl.coarsen,
+  coarsest = igraph.drl.coarsest,
+  default = igraph.drl.default,
+  final = igraph.drl.final,
+  refine = igraph.drl.refine
+)
 
 #' Choose an appropriate graph layout algorithm automaticall
 #' 
