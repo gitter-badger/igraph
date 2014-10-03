@@ -52,7 +52,6 @@ Collate:
     'plot.shapes.R'
     'pp.R'
     'print.R'
-    'revolver.R'
     'scg.R'
     'socnet.R'
     'sparsedf.R'

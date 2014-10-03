@@ -167,28 +167,6 @@ S3method(groups, communities)
 export(evcent, bonpow, alpha.centrality, subgraph.centrality)
 export(igraph.arpack.default, igraph.eigen.default)
 
-# dynamics measurement
-
-export(revolver.d, revolver.error.d,
-       revolver.ad, revolver.error.ad,
-       revolver.ade, revolver.error.ade,
-       revolver.e, revolver.error.e,
-       revolver.de, revolver.error.de,
-       revolver.l, revolver.error.l,
-       revolver.dl, revolver.error.dl,
-       revolver.el, revolver.error.el,
-       revolver.r, revolver.error.r,
-       revolver.ar, revolver.error.ar,
-       revolver.di, revolver.error.di,
-       revolver.adi, revolver.error.adi,
-       revolver.il, revolver.error.il,
-       revolver.ir, revolver.error.ir,
-       revolver.air, revolver.error.air)
-
-export (revolver.d.d, revolver.p.p)
-
-export (evolver.d)
-
 # isomorphism, motifs
 
 export(graph.isoclass, graph.isomorphic, graph.motifs,
