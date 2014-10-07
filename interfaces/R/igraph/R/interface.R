@@ -105,7 +105,7 @@ delete_vertices <- function(graph, v) {
 # Structure query
 ###################################################################
   
-ecount <- function(graph) {
+gsize <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }

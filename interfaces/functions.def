@@ -29,7 +29,7 @@ igraph_delete_vertices:
 
 igraph_vcount:
         PARAMS: GRAPH graph
-        NAME-R: vcount
+        NAME-R: gorder
         RETURN: INTEGER
 
 igraph_ecount:

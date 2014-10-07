@@ -1,5 +1,7 @@
 \name{structure.info}
+\alias{gorder}
 \alias{vcount}
+\alias{gsize}
 \alias{ecount}
 \alias{neighbors}
 \alias{incident}
@@ -15,7 +17,9 @@
   two vertices are connected by an edge.
 }
 \usage{
+gorder(graph)
 vcount(graph)
+gsize(graph)
 ecount(graph)
 neighbors(graph, v, mode = 1)
 incident(graph, v, mode=c("all", "out", "in", "total"))
@@ -44,9 +48,13 @@ get.edges(graph, es)
 \details{
   These functions provide the basic structural information of a graph.
 
-  \code{vcount} gives the number of vertices in the graph.
+  \code{gorder} gives the order of the graph, the number of vertices.
+  \code{vcount} is an alias of this function. \code{gorder} is available
+  from igraph version 0.8.0.
 
-  \code{ecount} gives the number of edges in the graph.
+  \code{gsize} gives the size of the graph, its number of edges.
+  \code{ecount} is an alias of \code{gsize}, and is available from
+  igraph version 0.8.0.
 
   \code{neighbors} gives the neighbors of a vertex. The vertices
   connected by multiple edges are listed as many times as the number of
@@ -68,7 +76,7 @@ get.edges(graph, es)
   the edge sequence argument. 
 }
 \value{
-  \code{vcount} and \code{ecount} return integer
+  \code{gorder} and \code{gsize} return integer
   constants. \code{neighbors} returns an integer
   vector. \code{is_directed} and \code{is_connected_to} return boolean
   constants. \code{get.edge} returns a numeric vector of length two.
@@ -79,7 +87,9 @@ get.edges(graph, es)
 \seealso{\code{\link{graph}}}
 \examples{
 g <- ring(10)
+gorder(g)
 vcount(g)
+gsize(g)
 ecount(g)
 neighbors(g, 5)
 incident(g, 5)

@@ -94,6 +94,7 @@ deprecated("dendPlot.igraphHRG", plot_dendrogram.igraphHRG)
 deprecated("dominator.tree", dominator_tree)
 deprecated("dyad.census", dyad_census)
 
+deprecated("ecount", gsize)
 deprecated("edge.betweenness", edge_betweenness)
 deprecated("edge.betweenness.community", cluster_edge_betweenness)
 deprecated("edge.betweenness.estimate", estimate_edge_betweenness)
@@ -308,6 +309,7 @@ deprecated("triad.census", triad_census)
 
 deprecated("unfold.tree", unfold_tree)
 
+deprecated("vcount", gorder)
 deprecated("vertex.connectivity", vertex_connectivity)
 deprecated("vertex.disjoint.paths", vertex_disjoint_paths)
 
