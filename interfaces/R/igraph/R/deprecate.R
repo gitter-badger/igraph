@@ -20,6 +20,17 @@
 #
 ###################################################################
 
+#' @include attributes.R auto.R basic.R bipartite.R centrality.R
+#' @include cliques.R cocitation.R cohesive.blocks.R community.R
+#' @include components.R console.R conversion.R decomposition.R demo.R
+#' @include epi.R fit.R flow.R foreign.R games.R glet.R hrg.R indexing.R
+#' @include interface.R iterators.R layout.R minimum.spanning.tree.R
+#' @include motifs.R nexus.R operators.R other.R package.R par.R plot.R
+#' @include plot.common.R plot.shapes.R pp.R print.R scg.R socnet.R
+#' @include sparsedf.R structural.properties.R structure.generators.R
+#' @include structure.info.R test.R tkplot.R topology.R
+NULL
+
 ## For the future, right now, we do not warn or even message
 
 deprecated <- function(old, new) {
