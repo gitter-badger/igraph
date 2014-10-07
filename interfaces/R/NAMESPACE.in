@@ -7,6 +7,10 @@ importFrom(stats, median)
 importFrom(stats, quantile)
 import(methods)
 
+importFrom(ensurer, ensures_that)
+importFrom(ensurer, ensure_that)
+importFrom(magrittr, "%>%")
+
 # The igraph interface
 
 export(add.vertices, delete.edges,
@@ -283,6 +287,7 @@ export(alpha_centrality)
 export(any_multiple)
 export(arpack_defaults)
 export(articulation_points)
+export(as_graph)
 export(as_phylo)
 export(assortativity_degree)
 export(assortativity_nominal)
@@ -478,6 +483,7 @@ export(laplacian_matrix)
 export(largest_cliques)
 export(largest_ivs)
 
+export(make_graph_from)
 export(curve_multiple)
 export(max_bipartite_match)
 export(max_cardinality)
